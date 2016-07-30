@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Theme - Spaceblack/Color Schemes/Spaceblack.tmTheme",
+	"font_face": "Source Code Pro",
+	"font_size": 13,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"tab_size": 4,
+	"theme": "Spaceblack.sublime-theme"
+}
