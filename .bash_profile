@@ -33,10 +33,14 @@ torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
 # PATH and DYLD exports (lots of fixes)
 
 # Homebrew
-export PATH=/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/bin
 
 # fix Brew sbin problems
-export PATH="/usr/local/sbin:$PATH"
+export PATH=$PATH:/usr/local/sbin
+
+# Uncomment to use GNU utils without g prefix
+# PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Virtualenv/VirtualenvWrapper
 source /usr/local/bin/virtualenvwrapper.sh
