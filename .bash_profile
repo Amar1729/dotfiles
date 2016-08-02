@@ -33,10 +33,10 @@ torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
 # PATH and DYLD exports (lots of fixes)
 
 # Homebrew
-export PATH=$PATH:/usr/local/bin
+export PATH=/usr/local/bin:$PATH
 
 # fix Brew sbin problems
-export PATH=$PATH:/usr/local/sbin
+export PATH=/usr/local/sbin:$PATH
 
 # Uncomment to use GNU utils without g prefix
 # PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
