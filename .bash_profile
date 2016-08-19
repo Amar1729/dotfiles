@@ -26,6 +26,9 @@ alias novel="open ~/.terminal_profiles/Novel.terminal"
 # This function doesn't accept wildcards
 torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
 
+# Usually I want to open files in a new window
+alias subl="subl -n"
+
 ################################################################
 #### #### #### ####
 #### #### #### ####
@@ -65,8 +68,9 @@ function frameworkpython {
 
 # path for adb (Android Studio 1.0.xx)
 export PATH=$PATH:$HOME"/Library/Android/sdk/platform-tools"
- 
-if [[ -d /Users/Amar/Desktop/Projects/Coutu ]]; then
+
+# Temporarily stop Geant/Root stuff (can we brew install them?)
+if [[ -d /Users/Amar/Desktop/Projects/Coutu && 0 -eq 1 ]]; then
 	# Path modifications for Geant4
 	export G4INSTALL='/Users/Amar/Desktop/Projects/Coutu/geant4.10.2-install'
 	source $G4INSTALL/bin/geant4.sh
@@ -78,8 +82,9 @@ if [[ -d /Users/Amar/Desktop/Projects/Coutu ]]; then
 	source /Users/Amar/Desktop/Projects/Coutu/root/bin/thisroot.sh
 fi
 
+# Temporarily stop Ubertooth stuff (tbh don't need it after Aug 2016 [triggered o_O])
 # Paths for Ubertooth One dynamic libs (libbtbb and libubertooth)
-if [[ -d /Users/Amar/Ubertooth ]]; then
+if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
     export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/libbtbb-2015-10-R1/build/lib/src
     export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/ubertooth-2015-10-R1/host/build/libubertooth/src
 fi
