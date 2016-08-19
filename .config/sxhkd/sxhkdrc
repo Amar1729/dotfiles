@@ -3,15 +3,23 @@
 #
 
 # terminal emulator
-super + Return
-	urxvt
+# windelicato - mod1 + shift + Return
+mod1 + Return
+	xterm
+#	urxvt
+#	urxvtc
+
+# What is this?
+#mod1 + ctrl + Return
+#	 bspc rule -a urxvtc -o pseudo_tiled=on && urxvtc
 
 # program launcher
-super + space
+# watch out! OS X - Cmd+Space is Sherlock
+mod2 + space
 	dmenu_run
 
 # make sxhkd reload its configuration files:
-super + Escape
+mod1 + Escape
 	pkill -USR1 -x sxhkd
 
 #
@@ -19,23 +27,25 @@ super + Escape
 #
 
 # quit bspwm normally
-super + alt + Escape
+# Watch out! OS X - Cmd+Alt+Esc is force quit applications
+# (just stick with killing xquartz with Cmd+q)
+mod1 + mod2 + Escape
 	bspc quit
 
 # close and kill
-super + {_,shift + }w
+mod1 + {_,shift + }w
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
-super + m
+mod1 + m
 	bspc desktop -l next
 
 # if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-super + y
+mod1 + y
 	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
 
 # swap the current node and the biggest node
-super + g
+mod1 + g
 	bspc node -s biggest
 
 #
@@ -43,11 +53,11 @@ super + g
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+mod1 + {t,shift + t,s,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-super + ctrl + {x,y,z}
+mod1 + ctrl + {x,y,z}
 	bspc node -g {locked,sticky,private}
 
 #
@@ -55,33 +65,35 @@ super + ctrl + {x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
+# Watch out! OS X - Cmd+h is hide
+mod2 + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
+mod1 + {p,b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous node
-super + {_,shift + }c
+# Watch out! OS X - Cmd+c is copy
+mod2 + {_,shift + }c
 	bspc node -f {next,prev}
 
 # focus the next/previous desktop
-super + bracket{left,right}
+mod1 + bracket{left,right}
 	bspc desktop -f {prev,next}
 
 # focus the last node/desktop
-super + {grave,Tab}
+mod1 + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-super + {o,i}
+mod1 + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
+mod1 + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
@@ -89,19 +101,19 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
+mod1 + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-super + ctrl + {1-9}
+mod1 + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-super + ctrl + space
+mod1 + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-super + ctrl + shift + space
+mod1 + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
@@ -109,13 +121,14 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
+mod1 + mod2 + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+mod1 + mod2 + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
+# Watch out! OS X - Cmd+Arrow is bound to Spaces nav
+mod2 + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}

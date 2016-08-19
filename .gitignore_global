@@ -1,0 +1,18 @@
+
+# Amar's global gitignore file
+
+# Mac/editing (tmp) stuff
+.DS_Store
+*~
+*.swp
+
+# Ptyhon
+*.pyc
+env/
+__pycache__/
+
+# Object fileskj
+*.o
+*.dll
+*.so
+
