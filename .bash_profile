@@ -43,11 +43,15 @@ export PATH=/usr/local/sbin:$PATH
 # MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Virtualenv/VirtualenvWrapper
-source /usr/local/bin/virtualenvwrapper.sh
+if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+	source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # OpenCV 3.1.0 Support (Installed view homebrew, bound to Python 2.7)
-export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/Cellar/opencv3/3.1.0/lib:$DYLD_FALLBACK_LIBRARY_PATH 
-export PYTHONPATH=/usr/local/Cellar/opencv3/3.1.0/lib/python2.7/site-packages:$PYTHONPATH
+if [[ -d /usr/local/Cellar/opencv3 ]]; then
+    export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/Cellar/opencv3/3.1.0/lib:$DYLD_FALLBACK_LIBRARY_PATH 
+    export PYTHONPATH=/usr/local/Cellar/opencv3/3.1.0/lib/python2.7/site-packages:$PYTHONPATH
+fi
 
 # For using matplotlib instide virtualenv
 # Inside (env), run: $ frameworkpython
@@ -62,19 +66,23 @@ function frameworkpython {
 # path for adb (Android Studio 1.0.xx)
 export PATH=$PATH:$HOME"/Library/Android/sdk/platform-tools"
  
-# Path modifications for Geant4
-export G4INSTALL='/Users/Amar/Desktop/Projects/Coutu/geant4.10.2-install'
-source $G4INSTALL/bin/geant4.sh
+if [[ -d /Users/Amar/Desktop/Projects/Coutu ]]; then
+	# Path modifications for Geant4
+	export G4INSTALL='/Users/Amar/Desktop/Projects/Coutu/geant4.10.2-install'
+	source $G4INSTALL/bin/geant4.sh
 
-# Path modifications for Root
-export ROOT='/Users/Amar/Desktop/Projects/Coutu/root'
-export PATH=$PATH:"/Users/Amar/Desktop/Projects/Coutu/root/bin"
-export LD_LIBRARY_PATH="/Users/Amar/Desktop/Projects/Coutu/root/lib"
-source /Users/Amar/Desktop/Projects/Coutu/root/bin/thisroot.sh
+	# Path modifications for Root
+	export ROOT='/Users/Amar/Desktop/Projects/Coutu/root'
+	export PATH=$PATH:"/Users/Amar/Desktop/Projects/Coutu/root/bin"
+	export LD_LIBRARY_PATH="/Users/Amar/Desktop/Projects/Coutu/root/lib"
+	source /Users/Amar/Desktop/Projects/Coutu/root/bin/thisroot.sh
+fi
 
 # Paths for Ubertooth One dynamic libs (libbtbb and libubertooth)
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/libbtbb-2015-10-R1/build/lib/src
-export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/ubertooth-2015-10-R1/host/build/libubertooth/src
+if [[ -d /Users/Amar/Ubertooth ]]; then
+    export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/libbtbb-2015-10-R1/build/lib/src
+    export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/ubertooth-2015-10-R1/host/build/libubertooth/src
+fi
 
 #### #### #### ####
 #### #### #### #### End - PATH, DYLD fixes
