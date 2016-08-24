@@ -17,6 +17,7 @@ export PS1="\[\033[1;37m\]\u\[\033[1m\]: \[\033[1;31m\]\W\[\033[0m\] $ "   # whi
 
 # My aliases:
 alias ll="ls -lhFG"
+alias la="ll -a"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"

@@ -26,9 +26,6 @@ alias novel="open ~/.terminal_profiles/Novel.terminal"
 # This function doesn't accept wildcards
 torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
 
-# Usually I want to open files in a new window
-alias subl="subl -n"
-
 ################################################################
 #### #### #### ####
 #### #### #### ####
@@ -46,9 +43,7 @@ export PATH=/usr/local/sbin:$PATH
 # MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Virtualenv/VirtualenvWrapper
-if [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
-	source /usr/local/bin/virtualenvwrapper.sh
-fi
+[[ -r /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
 
 # OpenCV 3.1.0 Support (Installed view homebrew, bound to Python 2.7)
 if [[ -d /usr/local/Cellar/opencv3 ]]; then
@@ -67,7 +62,7 @@ function frameworkpython {
 }
 
 # path for adb (Android Studio 1.0.xx)
-export PATH=$PATH:$HOME"/Library/Android/sdk/platform-tools"
+[[ -d $HOME/Library/Android/sdk/platform-tools ]] && export PATH=$PATH:"$HOME/Library/Android/sdk/platform-tools"
 
 # Temporarily stop Geant/Root stuff (can we brew install them?)
 if [[ -d /Users/Amar/Desktop/Projects/Coutu && 0 -eq 1 ]]; then
