@@ -4,8 +4,8 @@
 # When shell exits, append history
 shopt -s histappend
 
-# Avoid duplicates
-export HISTCONTROL=ignoredups:erasedups
+# Explicitly ignore commands starting with space and duplicates
+export HISTCONTROL=ignorespace:ignoredups:erasedups
 export HISTFILESIZE=100000
 
 # Terminal Profile
