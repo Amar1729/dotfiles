@@ -13,6 +13,8 @@ cd $HOME
 #fi
 
 xrdb ~/.Xresources
+#xrdb ~/.Xres-new
+
 #xset +fp ~/.fonts
     # https://github.com/sunaku/tamzen-font
     #xset +fp ~/.fonts/tamzen-font/bdf/
