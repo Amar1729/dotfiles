@@ -5,7 +5,7 @@
 shopt -s histappend
 
 # Explicitly ignore commands starting with space and duplicates
-export HISTCONTROL=ignorespace:ignoredups:erasedups
+export HISTCONTROL=ignoreboth
 export HISTFILESIZE=100000
 
 # Terminal Profile

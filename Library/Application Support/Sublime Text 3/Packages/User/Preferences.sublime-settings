@@ -7,6 +7,6 @@
 		"Vintage"
 	],
 	"tab_size": 4,
-    "translate_tabs_to_spaces" : false,
-	"theme": "Spaceblack.sublime-theme"
+	"theme": "Spaceblack.sublime-theme",
+	"translate_tabs_to_spaces": false
 }

@@ -1,4 +1,7 @@
-#include "/Users/Amar/.colors/base16/base16-grayscale.dark.xresources"
+!#include "/Users/Amar/.colors/wall-themes/soundboard.dark.xresources"
+
+#include "/Users/Amar/.colors/hybrid"
+!#include "/Users/Amar/.colors/base16/base16-embers.dark.xresources"
 !#include "/Users/Amar/.colors/mikado"
 
 ! #########################################
@@ -11,11 +14,12 @@ urxvt*scrollBar: false
 URxvt*internalBorder:5
 urxvt*visualBell: false
 
-urxvt*perl-lib:			/usr/local/Cellar/rxvt-unicode/9.20/urxvt/perl
+!urxvt*perl-lib:			/usr/local/Cellar/rxvt-unicode/9.20/urxvt/perl
 urxvt*perl-ext-common:		default,matcher,font-size
 urxvt*perl-matcher: 		1
 urxvt*matcher-button: 		3
-urxvt*url-launcher:		/usr/bin/firefox
+!urxvt*url-launcher:		/usr/bin/firefox
+!urxvt*url-launcher:        /Applications/Firefox.app/Contents/MacOS/firefox
 
 ! Font change settings
 !URxvt.iso14755: false
@@ -133,10 +137,10 @@ URxvt.keysym.C-minus:   perl:font-size:decrease
 !urxvt*italicFont: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso10646-1
 !urxvt*bolditalicFont: -xos4-terminus-medium-r-normal--16-160-72-72-c-80-iso10646-1
 
-urxvt*font: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
-urxvt*boldFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
-urxvt*italicFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
-urxvt*bolditalicFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
+!urxvt*font: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
+!urxvt*boldFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
+!urxvt*italicFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
+!urxvt*bolditalicFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
 
 !urxvt*font: xft:monaco:size=9
 !urxvt*boldFont: xft:monaco:size=9
@@ -148,3 +152,14 @@ urxvt*bolditalicFont: -misc-tamsyn-medium-r-normal--14-*-*-*-*-*-*-*
 !xclock*minuteColor: #9a875f
 !xclock*hourColor: #9a875f
 !xclock*secondColor: #9a875f
+
+!xterm.transparency: true
+!xterm.shading: 20
+
+!urxvt*font: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*boldFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*italicFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*bolditalicFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+
+!URxvt.font:     xft:bitstream vera sans mono:size=16:antialias=true
+!URxvt.boldFont: xft:bitstream vera sans mono:bold:size=16:antialias=true
