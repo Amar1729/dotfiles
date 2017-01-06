@@ -4,6 +4,7 @@
 	"font_size": 13,
 	"ignored_packages":
 	[
+		"GitGutter",
 		"Vintage"
 	],
 	"tab_size": 4,

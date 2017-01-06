@@ -1,0 +1,211 @@
+# Amar's khdrc
+
+
+# how to use :
+# Pseudo containers (?)
+
+
+###
+# Emacs mode for non-terminal apps (I'm used to this since it's default behavior for bash)
+###
+
+# remap ctrl+a / ctrl+e -> start/end of line
+lctrl - a         ![HyperTerm,Terminal,iTerm,iTerm2]      :   khd -p "ctrl - left"
+lctrl - e         ![HyperTerm,Terminal,iTerm,iTerm2]      :   khd -p "ctrl - right"
+
+#lalt - delete -> lalt - delete
+lalt - delete -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+
+# enable kwm compatibility mode
+khd kwm on
+
+
+# (from kwm's default)
+# unused (keep for colors? idk)
+#khd mode terminal color 0xddd75f5f
+#khd mode swap color 0xdd458588
+#khd mode info color 0xddcd950c
+
+# set border color for different modes
+khd mode default color 0xddd5c4a1
+#khd mode switcher color 0xddbdd322
+#khd mode switcher color 0xdd449105
+khd mode switcher color 0xdd00d409
+
+khd mode tree prefix on
+#khd mode tree color 0xddfabd2f
+khd mode tree color 0xdd458588
+khd mode tree timeout 1
+khd mode tree restore default
+
+khd mode space prefix on
+khd mode space color 0xddb16286
+khd mode space timeout 1.5
+khd mode space restore default
+
+
+# toggle between modes
+ctrl - s                :   khd -e "mode activate switcher"
+switcher + ctrl - s     :   khd -e "mode activate default"
+#swap + ctrl - s         :   khd -e "mode activate default"
+space + ctrl - s        :   khd -e "mode activate default"
+tree + ctrl - s         :   khd -e "mode activate default"
+
+#switcher - a            :   khd -e "mode activate swap"
+#switcher - d            :   khd -e "mode activate space"
+#switcher - f            :   khd -e "mode activate tree"
+ctrl - d 				 :   khd -e "mode activate space"
+ctrl - f 				 :	 khd -e "mode activate tree"
+
+###
+# Defaults
+###
+
+# Terminal Profiles
+ctrl - n			:	open ~/.terminal_profiles/Zenburn.terminal
+ctrl - q            :   open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
+ctrl - w            :   open ~/.terminal_profiles/Red\ Sands.terminal
+
+# Write email address (bit of a joke)
+cmd - 9					:	khd -w "amar.paul16@gmail.com"
+
+# Rotate Window Tree
+cmd + ctrl - r 			:    kwmc tree rotate 90
+
+# Swap Focused Window
+ctrl + alt - h          :    kwmc window -s west
+ctrl + alt - j          :    kwmc window -s south
+ctrl + alt - k          :    kwmc window -s north
+ctrl + alt - l          :    kwmc window -s east
+ctrl + alt - m          :    kwmc window -s mark
+
+# Mark Window
+cmd + alt + ctrl - m    :   kwmc window -mk focused
+cmd + alt + ctrl - h    :   kwmc window -mk west wrap
+cmd + alt + ctrl - l    :   kwmc window -mk east wrap
+cmd + alt + ctrl - j    :   kwmc window -mk south wrap
+cmd + alt + ctrl - k    :   kwmc window -mk north wrap
+
+# Give Focus to Window (monocle)
+lalt - n    	        :   kwmc window -fm prev
+lalt - m 	            :   kwmc window -fm next
+
+# Modify Container (switch between bsp/monocle splitting of a window)
+lalt - c                :   kwmc window -c type toggle
+
+# Modify Container (size)
+lalt - h                :   kwmc window -c expand 0.05 west
+lalt - j                :   kwmc window -c expand 0.05 south
+lalt - k                :   kwmc window -c expand 0.05 north
+lalt - l                :   kwmc window -c expand 0.05 east
+lalt + shift - h        :   kwmc window -c reduce 0.05 west
+lalt + shift - j        :   kwmc window -c reduce 0.05 south
+lalt + shift - k        :   kwmc window -c reduce 0.05 north
+lalt + shift - l        :   kwmc window -c reduce 0.05 east
+
+
+###
+# switcher mode
+###
+
+# Reload Config
+switcher - r 			:   khd -e "reload"
+
+# Give Focus to Window (bsp or tiling)
+switcher - h            :   kwmc window -f west
+switcher - l            :   kwmc window -f east
+switcher - j            :   kwmc window -f south
+switcher - k            :   kwmc window -f north
+
+# Give Focus to Window (monocle)
+switcher - n            :   kwmc window -fm prev
+switcher - m            :   kwmc window -fm next
+
+# Mark Window
+switcher - i 			:	kwmc window -mk focused
+
+# Swap Focused Window With Marked Window
+switcher - o 			:    kwmc window -s mark
+
+# Detach Focused Window And Reinsert At Marked Window
+switcher - p 			:    kwmc window -m mark
+
+# Give Focus to Screen
+# I use builtin Mac gesture control for screen mgmt
+#switcher - 1            :   kwmc space -fExperimental 1
+#switcher - 2            :   kwmc space -fExperimental 2
+#switcher - 3            :   kwmc space -fExperimental 3
+#switcher - 4            :   kwmc space -fExperimental 4
+#switcher - 5            :   kwmc space -fExperimental 5
+#switcher - 6            :   kwmc space -fExperimental 6
+#switcher - z            :   kwmc space -fExperimental left
+#switcher - c            :   kwmc space -fExperimental right
+#switcher - f            :   kwmc space -fExperimental previous
+
+# Move Focused Window to Screen (and focus screen)
+switcher + shift - z    :   kwmc window -m space left;\
+                            kwmc space -fExperimental left
+
+switcher + shift - c    :   kwmc window -m space right;\
+                            kwmc space -fExperimental right
+
+# Give Focus to Display
+switcher - 1    :   kwmc display -f 0
+switcher - 2    :   kwmc display -f 1
+switcher - 3    :   kwmc display -f 2
+
+# Move Focused Window to Display (and focus on display)
+switcher + shift - 1	:	kwmc window -m display 0;\
+							kwmc display -f 0
+switcher + shift - 2	:	kwmc window -m display 1;\
+							kwmc display -f 1
+switcher + shift - 3	:	kwmc window -m display 2;\
+							kwmc display -f 2
+
+###
+# tree mode (ctrl - f)
+###
+
+# Set (Temporary) Window Container
+tree - f                :   kwmc window -z fullscreen
+tree - d                :   kwmc window -t focused
+tree - s                :   kwmc window -z parent
+
+tree - c                :   kwmc window -c split-mode toggle;\
+                            khd -e "mode activate default"
+
+
+###
+# space mode (ctrl - d)
+###
+
+# I also use ctrl-d to exit shell
+space + ctrl - d    	[HyperTerm,Terminal,iTerm,iTerm2]   ->   :   khd -e "mode activate default"
+
+# Set Space Tiling Mode
+space - b               :   kwmc space -t bsp
+space - m               :   kwmc space -t monocle
+space - f               :   kwmc space -t float
+
+# Increase Container Gaps
+space - x               :   kwmc space -g increase horizontal
+space - y               :   kwmc space -g increase vertical
+
+# Decrease Container Gaps
+space + shift - x       :   kwmc space -g decrease horizontal
+space + shift - y       :   kwmc space -g decrease vertical
+
+# Increase Screen Padding
+space - left            :   kwmc space -p increase left
+space - right           :   kwmc space -p increase right
+space - up              :   kwmc space -p increase top
+space - down            :   kwmc space -p increase bottom
+space - p               :   kwmc space -p increase all
+
+# Decrease Screen Padding
+space + shift - left    :   kwmc space -p decrease left
+space + shift - right   :   kwmc space -p decrease right
+space + shift - up      :   kwmc space -p decrease top
+space + shift - down    :   kwmc space -p decrease bottom
+space + shift - p       :   kwmc space -p decrease all
+
