@@ -1,0 +1,9 @@
+{
+	"extensions":
+	[
+		"md",
+		"markdown",
+		"kramdown"
+	],
+	"word_wrap": "true"
+}

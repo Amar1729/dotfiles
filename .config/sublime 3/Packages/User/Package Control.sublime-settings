@@ -1,0 +1,23 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ApplySyntax",
+		"Better CoffeeScript",
+		"ClangAutoComplete",
+		"Comment-Snippets",
+		"Devastate",
+		"Energy Color Scheme",
+		"Generic Config",
+		"Git",
+		"GitGutter",
+		"Glue",
+		"Package Control",
+		"Python PEP8 Autoformat",
+		"Terminal",
+		"Theme - Spaceblack"
+	]
+}

@@ -1,0 +1,42 @@
+{
+	/* Header files to fetch completion information from */
+	"include_dirs" : [
+					  "/usr/include",
+					  "$project_base_path/src",
+					  "/workspace/$project_name/src",
+					  "$project_base_path",	// Amar's addition
+					  ],
+	/* Temporary file where current file will be written to */
+	// "tmp_file_path" : "/tmp/auto_complete_tmp",
+	/* If file encoding was not detected, assume this instead */
+	"default_encoding" : "UTF-8",
+	/*
+	 * If set to "true", auto-complete is always on, it will provide suggestions for any key press,
+	 * regardless what triggers are configured in "selectors".
+	 * It will slow down sublime, essentially re-compiling the file for every key press.
+	 */
+	"autocomplete_all" : "false",
+	/*
+	 * if autocomplete_all is set to false,
+	 * What triggers auto-completion process (should be same as sublime's own settings 
+	 */
+	"selectors" : [ ">","."],
+
+	/*
+	 * if verbose is set to false, the plugin will output nothing.
+	 * else it will show the paths that it has found.
+	 */
+	"verbose" : "false",
+
+	/*
+	 * if include_file_parent_folder is set to true, the parent folder of the
+	 * current file will be included to clang call with -I flag. Don't worry, it
+	 * doesn't ruin anything. It will not be included if this flag is set to
+	 * false.
+	 */
+	"include_file_parent_folder" : "false",
+
+	/* Allow to change the binary or location of clang program */
+	// "clang_binary" : "\"C:\\Program Files (x86)\\LLVM\\bin\\clang++\""
+	"clang_binary" : "clang++"
+}

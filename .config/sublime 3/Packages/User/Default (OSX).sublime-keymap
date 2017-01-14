@@ -1,0 +1,7 @@
+[
+    // ctrl+[shift+]tab used to be:
+        //next_view_in_stack
+        //prev_view_in_stack
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+]
