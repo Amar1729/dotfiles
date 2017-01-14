@@ -14,7 +14,9 @@ lctrl - a         ![HyperTerm,Terminal,iTerm,iTerm2]      :   khd -p "ctrl - lef
 lctrl - e         ![HyperTerm,Terminal,iTerm,iTerm2]      :   khd -p "ctrl - right"
 
 #lalt - delete -> lalt - delete
-lalt - delete -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+#lalt - delete -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+# alt - backspace deletes a word in terminal; ?why does this need passthrough
+alt - backspace    [HyperTerm,Terminal,iTerm,iTerm2]  ->  : echo ""
 
 # enable kwm compatibility mode
 khd kwm on
@@ -25,6 +27,13 @@ khd kwm on
 #khd mode terminal color 0xddd75f5f
 #khd mode swap color 0xdd458588
 #khd mode info color 0xddcd950c
+
+
+# Default: default
+# Switcher: used mostly for swapping windows in or between screens/displays
+# Tree: temporary window containers
+# Space: change space tiling mode or modify padding/gaps 
+
 
 # set border color for different modes
 khd mode default color 0xddd5c4a1
@@ -40,22 +49,24 @@ khd mode tree restore default
 
 khd mode space prefix on
 khd mode space color 0xddb16286
-khd mode space timeout 1.5
+#khd mode space timeout 1
 khd mode space restore default
 
 
 # toggle between modes
 ctrl - s                :   khd -e "mode activate switcher"
 switcher + ctrl - s     :   khd -e "mode activate default"
-#swap + ctrl - s         :   khd -e "mode activate default"
+#swap + ctrl - s        :   khd -e "mode activate default"
 space + ctrl - s        :   khd -e "mode activate default"
+space - s 				:	khd -e "mode activate default"
 tree + ctrl - s         :   khd -e "mode activate default"
 
-#switcher - a            :   khd -e "mode activate swap"
-#switcher - d            :   khd -e "mode activate space"
-#switcher - f            :   khd -e "mode activate tree"
-ctrl - d 				 :   khd -e "mode activate space"
-ctrl - f 				 :	 khd -e "mode activate tree"
+#switcher - a     		:   khd -e "mode activate swap"
+#switcher - d           :   khd -e "mode activate space"
+#switcher - f           :   khd -e "mode activate tree"
+ctrl - d 				:   khd -e "mode activate space"
+ctrl - f 				:	 khd -e "mode activate tree"
+
 
 ###
 # Defaults
@@ -64,13 +75,13 @@ ctrl - f 				 :	 khd -e "mode activate tree"
 # Terminal Profiles
 ctrl - n			:	open ~/.terminal_profiles/Zenburn.terminal
 ctrl - q            :   open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
-ctrl - w            :   open ~/.terminal_profiles/Red\ Sands.terminal
+ctrl - w     		:   open ~/.terminal_profiles/Red\ Sands.terminal
 
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
 # Rotate Window Tree
-cmd + ctrl - r 			:    kwmc tree rotate 90
+cmd + ctrl - r 			:    kwmc tree rotate 270
 
 # Swap Focused Window
 ctrl + alt - h          :    kwmc window -s west
@@ -86,9 +97,13 @@ cmd + alt + ctrl - l    :   kwmc window -mk east wrap
 cmd + alt + ctrl - j    :   kwmc window -mk south wrap
 cmd + alt + ctrl - k    :   kwmc window -mk north wrap
 
-# Give Focus to Window (monocle)
-lalt - n    	        :   kwmc window -fm prev
-lalt - m 	            :   kwmc window -fm next
+# Give Focus to Window (helpful when Space is in Monocle mode)
+lalt - n 				:   kwmc window -f prev
+lalt - m 				:   kwmc window -f next
+
+# Give Focus to Monocle-Subtree Window
+lalt + shift - n    	:   kwmc window -fm prev
+lalt + shift - m 		:   kwmc window -fm next
 
 # Modify Container (switch between bsp/monocle splitting of a window)
 lalt - c                :   kwmc window -c type toggle
@@ -168,18 +183,17 @@ switcher + shift - 3	:	kwmc window -m display 2;\
 
 # Set (Temporary) Window Container
 tree - f                :   kwmc window -z fullscreen
-tree - d                :   kwmc window -t focused
-tree - s                :   kwmc window -z parent
+tree + shift - f 		:   kwmc window -t focused
+tree - p                :   kwmc window -z parent
 
 tree - c                :   kwmc window -c split-mode toggle;\
                             khd -e "mode activate default"
-
 
 ###
 # space mode (ctrl - d)
 ###
 
-# I also use ctrl-d to exit shell
+# I use ctrl-d to exit shell and to close tmux panes
 space + ctrl - d    	[HyperTerm,Terminal,iTerm,iTerm2]   ->   :   khd -e "mode activate default"
 
 # Set Space Tiling Mode
