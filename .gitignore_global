@@ -6,12 +6,12 @@
 *~
 *.swp
 
-# Ptyhon
+# Python
 *.pyc
 env/
 __pycache__/
 
-# Object fileskj
+# Object files
 *.o
 *.dll
 *.so
