@@ -30,7 +30,7 @@ alias novel="open ~/.terminal_profiles/Novel.terminal"
 torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
 
 # use `highlight' for colorized cat
-ccat () { highlight -O xterm256 -i "$1" ;}
+ccat () { highlight -O xterm256 --style=zenburn -i "$1" ;}
 
 # alias for deluged (temporary until Transmission):
 alias deluged="/Applications/Deluge.app/Contents/MacOS/deluged"

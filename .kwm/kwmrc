@@ -92,9 +92,9 @@ Override default settings for space 1 on screen 0
    kwmc config space 0 1 padding 100 100 100 100
    kwmc config space 0 1 gap 40 40
 */
-kwmc config space 0 4 mode monocle
+kwmc config space 0 3 mode monocle
 #kwmc config space 0 1 padding 100 100 100 100
-#kwmc config space 0 1 gap 40 40
+kwmc config space 0 3 gap 30 30
 
 /*
 Override default settings for screen 1
@@ -125,9 +125,9 @@ blacklists an application from Kwms tiling
     kwmc rule owner="Steam" properties={float="true"}
     kwmc rule owner="Photoshop" properties={float="true"}
 */
-
 kwmc rule owner="Steam" properties={float="true"}
 kwmc rule owner="Finder" properties={float="true"}
+kwmc rule owner="Preview" properties={float="true"}
 kwmc rule owner="python" properties={float="true"}
 kwmc rule owner="Deluge" properties={float="true"}
 
@@ -138,6 +138,7 @@ if the screen exists.
 
    kwmc rule owner="iTunes" properties={display="1"}
 */
+kwmc rule owner="VLC" properties={space="3"}
 
 # Enable border for focused window
 kwmc config border focused on
