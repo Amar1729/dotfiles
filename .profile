@@ -1,3 +1,9 @@
+# History stuff belongs in profile?
+shopt -s histappend
+export HISTCONTROL=ignoreboth
+export HISTSIZE=9999
+export HISTFILESIZE=100000
+
 # PATH and DYLD stuff go here for launchctl stuff (and other things probably)
 
 # Sourced from .xinitrc

@@ -2,11 +2,11 @@
 # General stuff (put this on all of my *nix machines)
 
 # When shell exits, append history
-shopt -s histappend
+#shopt -s histappend
 
 # Explicitly ignore commands starting with space and duplicates
-export HISTCONTROL=ignoreboth
-export HISTFILESIZE=100000
+#export HISTCONTROL=ignoreboth
+#export HISTFILESIZE=100000
 
 # Terminal Profile
 # Helpful: http://blog.taylormcgann.com/tag/prompt-color/
