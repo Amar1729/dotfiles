@@ -49,7 +49,7 @@ khd mode tree restore default
 
 khd mode space prefix on
 khd mode space color 0xddb16286
-#khd mode space timeout 1
+khd mode space timeout 1
 khd mode space restore default
 
 
@@ -58,7 +58,7 @@ ctrl - s                :   khd -e "mode activate switcher"
 switcher + ctrl - s     :   khd -e "mode activate default"
 #swap + ctrl - s        :   khd -e "mode activate default"
 space + ctrl - s        :   khd -e "mode activate default"
-space - s 				:	khd -e "mode activate default"
+#space - s 				:	khd -e "mode activate default"
 tree + ctrl - s         :   khd -e "mode activate default"
 
 #switcher - a     		:   khd -e "mode activate swap"
@@ -73,7 +73,8 @@ ctrl - f 				:	 khd -e "mode activate tree"
 ###
 
 # Terminal Profiles
-ctrl - n			:	open ~/.terminal_profiles/Zenburn.terminal
+#ctrl - n			:	open ~/.terminal_profiles/Zenburn.terminal
+ctrl -n 			:	osascript ~/.config/scripts/gruvbox.app
 ctrl - q            :   open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
 ctrl - w     		:   open ~/.terminal_profiles/Red\ Sands.terminal
 
@@ -98,12 +99,12 @@ cmd + alt + ctrl - j    :   kwmc window -mk south wrap
 cmd + alt + ctrl - k    :   kwmc window -mk north wrap
 
 # Give Focus to Window (helpful when Space is in Monocle mode)
-lalt - n 				:   kwmc window -f prev
-lalt - m 				:   kwmc window -f next
+lalt - n 				:   kwmc window -f next
+lalt - m 				:   kwmc window -f prev
 
 # Give Focus to Monocle-Subtree Window
-lalt + shift - n    	:   kwmc window -fm prev
-lalt + shift - m 		:   kwmc window -fm next
+lalt + shift - n    	:   kwmc window -fm next
+lalt + shift - m 		:   kwmc window -fm prev
 
 # Modify Container (switch between bsp/monocle splitting of a window)
 lalt - c                :   kwmc window -c type toggle
