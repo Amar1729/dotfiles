@@ -9,6 +9,7 @@
 # Python
 *.pyc
 env/
+venv/
 __pycache__/
 
 # Object files
