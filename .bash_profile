@@ -25,15 +25,73 @@ alias soldark="open ~/.terminal_profiles/Solarized\ Dark\ ansi.terminal"
 alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
 alias novel="open ~/.terminal_profiles/Novel.terminal"
 
-# Just make a function lol (uses global IP for safety?)
-# This function doesn't accept wildcards
-torrent () { scp "$1" pi@bass2000.ddns.net:/home/pi/deluge/"$2" ;}
+################
+##
+## Personal functions
+##
+################
 
-# use `highlight' for colorized cat
-ccat () { highlight -O xterm256 --style=zenburn -i "$1" ;}
+# Switch iTerm2 profiles
+# TODO: setup profile tab completion?
+# http://tldp.org/LDP/abs/html/tabexpansion.html
+itswitch () { echo -e "\033]50;SetProfile=$1\a" ; }
 
-# alias for deluged (temporary until Transmission):
-alias deluged="/Applications/Deluge.app/Contents/MacOS/deluged"
+# Transfer iterm2 colorscheme from themer dir to itermcolors directory
+itcolor () {
+	file="$1"
+	theme=$(basename $(dirname "$file"))
+	cp "$file" "/Users/Amar/.config/iterm2_colors/""$theme"".itermcolors"
+}
+
+# Use neovim instead of vim
+vimdiff () { nvim -d "$@" ;}
+
+# use `highlight` for colorized cat
+ccat () {
+	if [ -f "$1" ]; then
+		case "$1" in
+			# force configuration file syntax for rc and profile files
+			*rc)		highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"	;;
+			*profile)	highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"	;;
+			*)			highlight -O xterm256 --style=zenburn -i "$1"				;;
+		esac
+	else
+		echo "$1"" is not a valid file"
+	fi
+}
+
+# Use modified `ccat` function and `nl` to add line numbering
+hcat () {
+	NUMBER=0
+
+	while [[ $# -gt 0 ]]
+	do
+	key="$1"
+
+	case $key in
+		-n)
+			NUMBER=1
+			;;
+		*)
+			if [ $NUMBER -eq 0 ]
+			then
+				ccat "$key"
+			else
+				ccat "$key" | nl
+			fi
+			;;
+	esac
+	shift
+	done
+
+	unset NUMBER
+}
+
+####
+##
+##
+##
+####
 
 ################################################################
 #### #### #### ####

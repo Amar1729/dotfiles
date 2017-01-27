@@ -10,6 +10,10 @@ export HISTFILESIZE=100000
 
 export PANEL_FIFO="/tmp/panel-fifo"
 
+# always use nvim ?
+alias vim="nvim"
+alias vi="nvim"
+
 ################################################################
 #### #### #### ####
 #### #### #### ####

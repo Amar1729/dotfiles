@@ -12,7 +12,7 @@
 # Helpful: http://blog.taylormcgann.com/tag/prompt-color/
 # Old:
 #   export PS1="\h:\W \u\$ "
-export PS1="\n\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "   # white name, red directory
+export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "   # white name, red directory
 # export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;32m\]\W\[\033[0m\] $ "
 
 # My aliases:
@@ -50,6 +50,7 @@ function PostCommand() {
 
   # Do stuff.
   # echo "Running PostCommand"
+  echo ""
 }
 PROMPT_COMMAND="PostCommand"
 
