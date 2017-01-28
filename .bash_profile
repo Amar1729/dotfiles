@@ -43,6 +43,21 @@ itcolor () {
 	cp "$file" "/Users/Amar/.config/iterm2_colors/""$theme"".itermcolors"
 }
 
+# Display terminal ANSI colors
+termcolors() {
+	# Print numbers
+	echo -en "    \t"
+	for i in {0..7}; do echo -en "  ${i}    \t"; done; echo
+
+	# Print regular colors
+	echo -en "reg:\t"
+	for i in {0..7}; do echo -en "\033[0;3${i}m▉▉▉▉▉▉▉\t"; done; echo; echo
+	
+	# Print alternate colors
+	echo -en "alt:\t"
+	for i in {0..7}; do echo -en "\033[1;3${i}m▉▉▉▉▉▉▉\t"; done; echo
+}
+
 # Use neovim instead of vim
 vimdiff () { nvim -d "$@" ;}
 

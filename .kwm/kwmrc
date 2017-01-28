@@ -97,7 +97,7 @@ Override default settings for space 1 on screen 0
 kwmc config space 0 1 mode monocle
 
 # space 3: usually full-size terminal
-kwmc config space 0 3 mode monocle
+#kwmc config space 0 3 mode monocle
 #kwmc config space 0 1 padding 100 100 100 100
 kwmc config space 0 3 gap 30 30
 
@@ -131,16 +131,23 @@ blacklists an application from Kwms tiling
     kwmc rule owner="Photoshop" properties={float="true"}
 */
 kwmc rule owner="Steam" properties={float="true"}
-#kwmc rule owner="Finder" properties={float="true"}
+kwmc rule owner="Finder" properties={float="true"}
 #kwmc rule owner="Preview" properties={float="true"}
 kwmc rule owner="python" properties={float="true"}
 kwmc rule owner="Deluge" properties={float="true"}
 kwmc rule owner="Deluge" name="Add Torrents" properties={float="true"}
 kwmc rule owner="Deluge" name="From URL" properties={float="true"}
 kwmc rule owner="System Properties" properties={float="true"}
+kwmc rule owner="Activity Monitor" properties={float="true"}
+kwmc rule owner="Trash" properties={float="true"}
+kwmc rule owner="Finder" name="Trash" properties={float="true"}
 
-kwmc rule owner="Finder" properties={role="AXDialog"}
-kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
+kwmc rule owner="VMware Fusion" properties={float="true"}
+
+kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
+
+#kwmc rule owner="Finder" properties={role="AXDialog"}
+#kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
 
 /*
 The following command creates a rule that
