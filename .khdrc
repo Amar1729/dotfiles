@@ -17,8 +17,6 @@ lctrl - e			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl - right"
 lctrl - u			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl + shift - left";\
 																khd -p " - delete"
 
-#lalt - delete -> lalt - delete
-#lalt - delete -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
 # alt - backspace deletes a word in terminal; ?why does this need passthrough
 alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 
@@ -39,25 +37,27 @@ khd kwm on
 
 # (from kwm's default)
 # unused (keep for colors? idk)
+#khd mode switcher color 0xddbdd322
 #khd mode terminal color 0xddd75f5f
 #khd mode swap color 0xdd458588
 #khd mode info color 0xddcd950c
+#khd mode tree color 0xddfabd2f
 
 
-# Default: default
-# Switcher: used mostly for swapping windows in or between screens/displays
+# Default: default mode
+# Switcher: used mostly for swapping view/windows in or between screens/displays
 # Tree: temporary window containers
 # Space: change space tiling mode or modify padding/gaps 
+# In progress:
+#	tmux: passthrough when a tmux session is open
+#	terminal: quickly spawn terminals with different profiles
 
 
-# set border color for different modes
+# border color for different modes
 khd mode default color 0xddd5c4a1
-#khd mode switcher color 0xddbdd322
-#khd mode switcher color 0xdd449105
 khd mode switcher color 0xdd00d409
 
 khd mode tree prefix on
-#khd mode tree color 0xddfabd2f
 khd mode tree color 0xdd458588
 khd mode tree timeout 1
 khd mode tree restore default
@@ -67,47 +67,24 @@ khd mode space color 0xddb16286
 khd mode space timeout 1
 khd mode space restore default
 
-# Mode for allowing passthrough of tmux keycombos
 khd mode tmux prefix on
 khd mode tmux color 0xdd7b4b93
 khd mode tmux timeout 1
 khd mode tmux restore default
 
-# Mode for opening terminal windows with different profiles
 khd mode term prefix on
 khd mode term color 0xdfdfdf
 khd mode term timeout 1
 khd mode term restore default
 
-term + ctrl - s			:	khd -e "mode activate default"
-#ctrl - n				:	khd -e "mode activate term"
-# temporary terminal mode:
-term + q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal; \
-							khd -e "mode activate default"
-term + w				:	open ~/.terminal_profiles/Red\ Sands.terminal; \
-							khd -e "mode activate default"
-term + n				:	osascript ~/.config/scripts/gruvbox.app; \
-							khd -e "mode activate default"
-
 
 # toggle between modes
 ctrl - s				:	khd -e "mode activate switcher"
 switcher + ctrl - s		:	khd -e "mode activate default"
-#swap + ctrl - s		:	khd -e "mode activate default"
-space + ctrl - s		:	khd -e "mode activate default"
-#space - s				:	khd -e "mode activate default"
-tree + ctrl - s			:	khd -e "mode activate default"
 
-tmux + ctrl - s			:	khd -e "mode activate default"
-
-
-#switcher - a			:	khd -e "mode activate swap"
-#switcher - d			:	khd -e "mode activate space"
-#switcher - f			:	khd -e "mode activate tree"
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
-
-ctrl - a				:	khd -e "mode activate tmux"
+#ctrl - a				:	khd -e "mode activate tmux"
 
 ###
 # Defaults
@@ -118,6 +95,15 @@ ctrl - a				:	khd -e "mode activate tmux"
 ctrl - n				:	osascript ~/.config/scripts/gruvbox.app
 ctrl - q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
 ctrl - w				:	open ~/.terminal_profiles/Red\ Sands.terminal
+
+# temporary terminal mode:
+#ctrl - n				:	khd -e "mode activate term"
+term + q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal; \
+							khd -e "mode activate default"
+term + w				:	open ~/.terminal_profiles/Red\ Sands.terminal; \
+							khd -e "mode activate default"
+term + n				:	osascript ~/.config/scripts/gruvbox.app; \
+							khd -e "mode activate default"
 
 # Switch between night and day modes
 # can there be a script to toggle? just set an env for $DAY or $NIGHT ?
