@@ -1,13 +1,14 @@
 {
-	"color_scheme": "Packages/Theme - Spaceblack/Color Schemes/Spaceblack.tmTheme",
+	"color_scheme": "Packages/gruvbox/gruvbox (Dark) (Soft).tmTheme",
 	"font_face": "Source Code Pro",
-	"font_size": 13,
+	"font_size": 14,
+	"gruvbox_tabs_s": true,
 	"ignored_packages":
 	[
 		"GitGutter",
 		"Vintage"
 	],
 	"tab_size": 4,
-	"theme": "Spaceblack.sublime-theme",
+	"theme": "gruvbox (Dark) (Soft).sublime-theme",
 	"translate_tabs_to_spaces": false
 }

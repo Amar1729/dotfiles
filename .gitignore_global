@@ -3,6 +3,8 @@
 
 # Mac/editing (tmp) stuff
 .DS_Store
+.AppleDouble
+._*
 *~
 *.swp
 

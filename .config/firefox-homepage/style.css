@@ -64,3 +64,43 @@ a {
 a:hover {
   color: #666666;
 }
+
+/* trying to make "trackers" expandible */
+input {
+	display: none;
+	visibility: hidden;
+}
+label {
+  display: block;
+  padding: 0.5em;
+  text-align: center;
+  /*border-bottom: 1px solid #CCC;*/
+  color: #C99664;
+}
+label:hover {
+  color: #666666;
+}
+label::before {
+  font-family: Consolas, monaco, monospace;
+  font-weight: bold;
+  font-size: 15px;
+  content: "+";
+  vertical-align: text-top;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 3px;
+}
+
+#expand {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.5s;
+  color: #FFF;
+}
+#toggle:checked ~ #expand {
+  height: 50px;
+}
+#toggle:checked ~ label::before {
+  content: "-";
+}
