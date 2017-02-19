@@ -13,7 +13,6 @@
 # Old:
 #   export PS1="\h:\W \u\$ "
 export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "   # white name, red directory
-# export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;32m\]\W\[\033[0m\] $ "
 
 # My aliases:
 alias ll="ls -lhFG"
@@ -21,6 +20,8 @@ alias la="ll -a"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
+
+alias ggrep="ggrep --color=auto"
 
 # hack? for printing a newline after command but before output
 # From: https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html

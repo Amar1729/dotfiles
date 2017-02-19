@@ -7,6 +7,10 @@
 # and .profile
 if [ -r ~/.profile ]; then . ~/.profile; fi
 
+# rice scripts
+[[ -r ~/.config/scripts/daytime.sh ]] && . ~/.config/scripts/daytime.sh
+[[ -r ~/.config/airline-prompt.sh ]] && . ~/.config/airline-prompt.sh
+
 # and temporary aliases
 [[ -r ~/.bash_aliases_tmp ]] && . ~/.bash_aliases_tmp
 
