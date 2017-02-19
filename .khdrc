@@ -22,6 +22,17 @@ lctrl - u			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl + shift - left";\
 # alt - backspace deletes a word in terminal; ?why does this need passthrough
 alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 
+# more passthroughs:
+# have to be careful of tmux! my switching/resize is also
+# defined by option keys.
+# Idea:
+#	"tmux" mode for kwm (ctrl-a) with no timeout
+#	stay in tmux mode until ctrl-d is hit:
+#		ctrl-d -> send ctrl-d to tmux and go back to default mode
+#	might be a bit of an impact on usage for other modes,
+#	so possibly look at a different key (shift-literal?) 
+#	that can also exit tmux mode
+
 # enable kwm compatibility mode
 khd kwm on
 
@@ -56,14 +67,39 @@ khd mode space color 0xddb16286
 khd mode space timeout 1
 khd mode space restore default
 
+# Mode for allowing passthrough of tmux keycombos
+khd mode tmux prefix on
+khd mode tmux color 0xdd7b4b93
+khd mode tmux timeout 1
+khd mode tmux restore default
+
+# Mode for opening terminal windows with different profiles
+khd mode term prefix on
+khd mode term color 0xdfdfdf
+khd mode term timeout 1
+khd mode term restore default
+
+term + ctrl - s			:	khd -e "mode activate default"
+#ctrl - n				:	khd -e "mode activate term"
+# temporary terminal mode:
+term + q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal; \
+							khd -e "mode activate default"
+term + w				:	open ~/.terminal_profiles/Red\ Sands.terminal; \
+							khd -e "mode activate default"
+term + n				:	osascript ~/.config/scripts/gruvbox.app; \
+							khd -e "mode activate default"
+
 
 # toggle between modes
 ctrl - s				:	khd -e "mode activate switcher"
-switcher + ctrl - s	:	khd -e "mode activate default"
+switcher + ctrl - s		:	khd -e "mode activate default"
 #swap + ctrl - s		:	khd -e "mode activate default"
 space + ctrl - s		:	khd -e "mode activate default"
 #space - s				:	khd -e "mode activate default"
-tree + ctrl - s		:	khd -e "mode activate default"
+tree + ctrl - s			:	khd -e "mode activate default"
+
+tmux + ctrl - s			:	khd -e "mode activate default"
+
 
 #switcher - a			:	khd -e "mode activate swap"
 #switcher - d			:	khd -e "mode activate space"
@@ -71,16 +107,17 @@ tree + ctrl - s		:	khd -e "mode activate default"
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
 
+ctrl - a				:	khd -e "mode activate tmux"
 
 ###
 # Defaults
 ###
 
 # Terminal Profiles
-#ctrl - n			:	open ~/.terminal_profiles/Zenburn.terminal
-ctrl - n			:	osascript ~/.config/scripts/gruvbox.app
-ctrl - q			:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
-ctrl - w			:	open ~/.terminal_profiles/Red\ Sands.terminal
+#ctrl - n				:	open ~/.terminal_profiles/Zenburn.terminal
+ctrl - n				:	osascript ~/.config/scripts/gruvbox.app
+ctrl - q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
+ctrl - w				:	open ~/.terminal_profiles/Red\ Sands.terminal
 
 # Switch between night and day modes
 # can there be a script to toggle? just set an env for $DAY or $NIGHT ?
@@ -94,6 +131,9 @@ cmd + alt + ctrl - y	: echo "toggle night/day mode yo " #~/.config/scripts/day
 shift - 0x7A			:	echo "decrease flux temp"
 # 0x78: f2
 shift - 0x78			:	echo "increase flux temp"
+
+cmd + shift - 0x7A		:	khd -e "open -a Flux"
+cmd + shift - 0x78		:	khd -e "killall Flux"
 
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
@@ -116,12 +156,12 @@ cmd + alt + ctrl - j	:	kwmc window -mk south wrap
 cmd + alt + ctrl - k	:	kwmc window -mk north wrap
 
 # Give Focus to Window (helpful when Space is in Monocle mode)
-lalt - n				:	kwmc window -f next
-lalt - m				:	kwmc window -f prev
+alt - n					:	kwmc window -f next
+alt - m					:	kwmc window -f prev
 
 # Give Focus to Monocle-Subtree Window
-lalt + shift - n		:	kwmc window -fm next
-lalt + shift - m		:	kwmc window -fm prev
+alt + shift - n			:	kwmc window -fm next
+alt + shift - m			:	kwmc window -fm prev
 
 # Modify Container (switch between bsp/monocle splitting of a window)
 lalt - c				:	kwmc window -c type toggle
@@ -189,9 +229,9 @@ switcher + shift - c	:	kwmc window -m space right;\
 							kwmc space -fExperimental right
 
 # Give Focus to Display
-switcher - 1	:	kwmc display -f 0
-switcher - 2	:	kwmc display -f 1
-switcher - 3	:	kwmc display -f 2
+switcher - 1			:	kwmc display -f 0
+switcher - 2			:	kwmc display -f 1
+switcher - 3			:	kwmc display -f 2
 
 # Move Focused Window to Display (and focus on display)
 switcher + shift - 1	:	kwmc window -m display 0;\
@@ -238,12 +278,14 @@ space - left			:	kwmc space -p increase left
 space - right			:	kwmc space -p increase right
 space - up				:	kwmc space -p increase top
 space - down			:	kwmc space -p increase bottom
-space - p				:	kwmc space -p increase all
+space - p				:	kwmc space -p increase all; \
+							kwmc space -g increase vertical
 
 # Decrease Screen Padding
 space + shift - left	:	kwmc space -p decrease left
 space + shift - right	:	kwmc space -p decrease right
 space + shift - up		:	kwmc space -p decrease top
 space + shift - down	:	kwmc space -p decrease bottom
-space + shift - p		:	kwmc space -p decrease all
+space + shift - p		:	kwmc space -p decrease all; \
+							kwmc space -g decrease vertical
 

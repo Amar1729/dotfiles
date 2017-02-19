@@ -38,10 +38,10 @@ e.g: window-rules in a separate file called 'rules'
     include rules
 */
 
-# Set default values for screen padding
+# Set default values for screen padding (top bottom left right)
 kwmc config padding 40 20 20 20
 
-# Set default values for container gaps
+# Set default values for container gaps (vertical horizontal)
 kwmc config gap 15 15
 
 # Default tiling mode for Kwm (bsp | monocle | float)
@@ -93,13 +93,8 @@ Override default settings for space 1 on screen 0
    kwmc config space 0 1 gap 40 40
 */
 
-# space 1: lots of chrome/firefox windows
+# space 0: lots of chrome/firefox windows
 kwmc config space 0 1 mode monocle
-
-# space 3: usually full-size terminal
-#kwmc config space 0 3 mode monocle
-#kwmc config space 0 1 padding 100 100 100 100
-kwmc config space 0 3 gap 30 30
 
 /*
 Override default settings for screen 1
@@ -141,10 +136,9 @@ kwmc rule owner="System Properties" properties={float="true"}
 kwmc rule owner="Activity Monitor" properties={float="true"}
 kwmc rule owner="Trash" properties={float="true"}
 kwmc rule owner="Finder" name="Trash" properties={float="true"}
-
 kwmc rule owner="VMware Fusion" properties={float="true"}
-
 kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
+kwmc rule owner="Cyberduck" properties={float="true"}
 
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
