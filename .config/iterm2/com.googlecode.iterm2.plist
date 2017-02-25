@@ -34189,7 +34189,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/.config/iterm2_colors</string>
+	<string>~/Documents</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{894, 487}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
@@ -40762,7 +40762,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/Amar/.config/iterm2_profiles</string>
+	<string>/Users/Amar/.config/iterm2</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
