@@ -1,165 +1,124 @@
 # Amar Paul's .bash_profile
-# Mac OS specific (i.e. specific to one computer)
+# 	Login shells:							.bash_profile
+#	nonlogin (i.e. open shell once in):		.bashrc
+# On Mac (Terminal and iTerm2) all shells are login shells
+# good explanation: http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
+#
+# For Mac, file hierarchy is:
+# .bash_profile > .bash_login > .profile 
 
-# read .bashrc
+# Source .bashrc for aliases and everything
 [[ -r ~/.bashrc ]] && . ~/.bashrc
 
-# and .profile
-if [ -r ~/.profile ]; then . ~/.profile; fi
-
-# rice scripts
-[[ -r ~/.config/scripts/daytime.sh ]] && . ~/.config/scripts/daytime.sh
-[[ -r ~/.config/airline-prompt.sh ]] && . ~/.config/airline-prompt.sh
-
-# and temporary aliases
-[[ -r ~/.bash_aliases_tmp ]] && . ~/.bash_aliases_tmp
-
-# very rudimentary rename (or syntax for it)
-#	for f in Game.of.Thrones.S03E*
-#	 do
-#	  new=${f/Game.of.Thrones./}
-#	  new=${new/720p*/srt}
-#	  mv $f $new
-#	 done
-
-# Open different Terminal windows
-alias redsand="open ~/.terminal_profiles/Red\ Sands.terminal"
-alias zenburn="open ~/.terminal_profiles/Zenburn.terminal"
-alias soldark="open ~/.terminal_profiles/Solarized\ Dark\ ansi.terminal"
-alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
-alias novel="open ~/.terminal_profiles/Novel.terminal"
-
-################
-##
-## Personal functions
-##
-################
-
-# Switch iTerm2 profiles
-# TODO: setup profile tab completion?
-# http://tldp.org/LDP/abs/html/tabexpansion.html
-itswitch () { echo -e "\033]50;SetProfile=$1\a" ; }
-
-# Transfer iterm2 colorscheme from themer dir to itermcolors directory
-itcolor () {
-	file="$1"
-	theme=$(basename $(dirname "$file"))
-	cp "$file" "/Users/Amar/.config/iterm2_colors/""$theme"".itermcolors"
-}
-
-# Display terminal ANSI colors
-termcolors() {
-	# Print numbers
-	echo -en "    \t"
-	for i in {0..7}; do echo -en "  ${i}    \t"; done; echo
-
-	# Print regular colors
-	echo -en "reg:\t"
-	for i in {0..7}; do echo -en "\033[0;3${i}m▉▉▉▉▉▉▉\t"; done; echo; echo
-	
-	# Print alternate colors
-	echo -en "alt:\t"
-	for i in {0..7}; do echo -en "\033[1;3${i}m▉▉▉▉▉▉▉\t"; done; echo
-}
-
-# Use neovim instead of vim
-vimdiff () { nvim -d "$@" ;}
-
-# use `highlight` for colorized cat
-ccat () {
-	if [ -f "$1" ]; then
-		case "$1" in
-			# force configuration file syntax for rc and profile files
-			*rc)		highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"	;;
-			*profile)	highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"	;;
-			*)			highlight -O xterm256 --style=zenburn -i "$1"				;;
-		esac
-	else
-		echo "$1"" is not a valid file"
-	fi
-}
-
-# Use modified `ccat` function and `nl` to add line numbering
-hcat () {
-	NUMBER=0
-
-	while [[ $# -gt 0 ]]
-	do
-	key="$1"
-
-	case $key in
-		-n)
-			NUMBER=1
-			;;
-		*)
-			if [ $NUMBER -eq 0 ]
-			then
-				ccat "$key"
-			else
-				ccat "$key" | nl
-			fi
-			;;
-	esac
-	shift
-	done
-
-	unset NUMBER
-}
-
-####
-##
-##
-##
-####
-
-################################################################
 #### #### #### ####
+# Change prompt: PS1 and pre/post command
+
+# Helpful: http://blog.taylormcgann.com/tag/prompt-color/
+#   white name, red directory
+export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "
+
+# hack for printing a newline after command but before output
+# From: https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html
+# This will run before any command is executed.
+function PreCommand() {
+  if [ -z "$AT_PROMPT" ]; then
+    return
+  fi
+  unset AT_PROMPT
+  echo ""
+}
+trap "PreCommand" DEBUG
+
+# This will run after the execution of the previous full command line.  We don't
+# want it PostCommand to execute when first starting a bash session (i.e., at
+# the first prompt).
+FIRST_PROMPT=1
+function PostCommand() {
+  AT_PROMPT=1
+  if [ -n "$FIRST_PROMPT" ]; then
+    unset FIRST_PROMPT
+    return
+  fi
+  echo ""
+}
+PROMPT_COMMAND="PostCommand"
+
+# End of prompt changes
 #### #### #### ####
-#
-# Following modifications are from:
-# http://natelandau.com/my-mac-osx-bash_profile/
 
-#   ---------------------------------------
-#   General
-#   ---------------------------------------
-# mcd:          Makes new Dir and jumps inside
-#   I'm having second thoughts about whether this should use '-p' ?
-mcd () { mkdir -p "$1" && cd "$1"; }
-
-# Prevent power button from immediately sleeping display (fuck Dimoff)
-alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
-alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
-
-# Move default screencap location
-# Where I want them saved:
-alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
-# Actual default:
-alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
-
-#   ---------------------------------------
-#   7.  SYSTEMS OPERATIONS & INFORMATION
-#   ---------------------------------------
-
-alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when booted into single-user
-
-#   cleanupDS:  Recursively delete .DS_Store files
-#   -------------------------------------------------------------------
-    alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
-
-#   finderShowHidden:   Show hidden files in Finder
-#   finderHideHidden:   Hide hidden files in Finder
-#   -------------------------------------------------------------------
-    alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
-    alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
-
-#   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
-#   -----------------------------------------------------------------------------------
-    alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-#    screensaverDesktop: Run a screensaver on the Desktop
-#   -----------------------------------------------------------------------------------
-    alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+###
+# moar history
+###
+shopt -s histappend
+export HISTCONTROL=ignoreboth
+export HISTSIZE=9999
+export HISTFILESIZE=100000
 
 #### #### #### ####
-#### #### #### #### End - Nate Landau's suggestions
-################################################################
+# PATH and DYLD stuff go here for launchctl stuff (and other things probably)
+# PATH and DYLD exports (lots of fixes)
+# default PATH: /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+
+# Homebrew
+export PATH=/usr/local/bin:$PATH
+
+# fix Brew sbin problems
+export PATH=/usr/local/sbin:$PATH
+
+# Uncomment to use GNU utils without g prefix
+# PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+# MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+# Virtualenv/VirtualenvWrapper
+[[ -r /usr/local/bin/virtualenvwrapper.sh ]] && . /usr/local/bin/virtualenvwrapper.sh
+
+# OpenCV 3.1.0 Support (Installed view homebrew, bound to Python 2.7)
+if [[ -d /usr/local/Cellar/opencv3 ]]; then
+    export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/Cellar/opencv3/3.1.0/lib:$DYLD_FALLBACK_LIBRARY_PATH 
+    export PYTHONPATH=/usr/local/Cellar/opencv3/3.1.0/lib/python2.7/site-packages:$PYTHONPATH
+fi
+
+# For using matplotlib instide virtualenv
+# Inside (env), run: $ frameworkpython
+function frameworkpython {
+    if [[ ! -z "$VIRTUAL_ENV" ]]; then
+        PYTHONHOME=$VIRTUAL_ENV /usr/local/bin/python "$@"
+    else
+        /usr/local/bin/python "$@"
+    fi
+}
+
+# path for adb (Android Studio 1.0.xx)
+if [[ -d $HOME/Library/Android/sdk/platform-tools ]]; then
+  export PATH="$PATH:""$HOME/Library/Android/sdk/platform-tools"
+fi
+
+###
+# Temporarily stop Geant/Root stuff
+# Temporarily stop Ubertooth stuff
+: << 'END'
+
+# Temporarily stop Geant/Root stuff (can we brew install them?)
+if [[ -d /Users/Amar/Desktop/Projects/Coutu && 0 -eq 1 ]]; then
+  # Path modifications for Geant4
+  export G4INSTALL='/Users/Amar/Desktop/Projects/Coutu/geant4.10.2-install'
+  source $G4INSTALL/bin/geant4.sh
+
+  # Path modifications for Root
+  export ROOT='/Users/Amar/Desktop/Projects/Coutu/root'
+  export PATH=$PATH:"/Users/Amar/Desktop/Projects/Coutu/root/bin"
+  export LD_LIBRARY_PATH="/Users/Amar/Desktop/Projects/Coutu/root/lib"
+  source /Users/Amar/Desktop/Projects/Coutu/root/bin/thisroot.sh
+fi
+
+# Temporarily stop Ubertooth stuff
+# Paths for Ubertooth One dynamic libs (libbtbb and libubertooth)
+if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
+    export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/libbtbb-2015-10-R1/build/lib/src
+    export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/Users/Amar/Ubertooth/ubertooth-2015-10-R1/host/build/libubertooth/src
+fi
+
+END
+
+# End - PATH, DYLD fixes
+#### #### #### ####

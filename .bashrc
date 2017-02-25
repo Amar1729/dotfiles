@@ -1,57 +1,150 @@
 # Amar Paul's .bashrc
-# General stuff (put this on all of my *nix machines)
 
-# When shell exits, append history
-#shopt -s histappend
+# read .profile
+[[ -r ~/.profile ]] && source ~/.profile
 
-# Explicitly ignore commands starting with space and duplicates
-#export HISTCONTROL=ignoreboth
-#export HISTFILESIZE=100000
+# and temporary aliases
+[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
-# Terminal Profile
-# Helpful: http://blog.taylormcgann.com/tag/prompt-color/
-# Old:
-#   export PS1="\h:\W \u\$ "
-export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "   # white name, red directory
+# rice scripts
+[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
+#[[ -r ~/.config/airline-prompt.sh ]] && . ~/.config/airline-prompt.sh
 
-# My aliases:
+# rudimentary rename (or syntax for it)
+# for f in Game.of.Thrones.S03E*
+#  do
+#   new=${f/Game.of.Thrones./}
+#   new=${new/720p*/srt}
+#   mv $f $new
+#  done
+
+################
+##
+## Personal aliases, functions
+##
+################
+
+# Open different Terminal profiles
+alias redsand="open ~/.terminal_profiles/Red\ Sands.terminal"
+alias zenburn="open ~/.terminal_profiles/Zenburn.terminal"
+alias soldark="open ~/.terminal_profiles/Solarized\ Dark\ ansi.terminal"
+alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
+alias novel="open ~/.terminal_profiles/Novel.terminal"
+
+alias pi="ssh pi@192.168.1.120"
+
+###
+# Common aliases, command improvements:
+###
+
+# Set default editor
+export EDITOR="nvim"
+
+# ls, grep, mkdir, tmux improvements
 alias ll="ls -lhFG"
 alias la="ll -a"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
-
 alias ggrep="ggrep --color=auto"
 
-# hack? for printing a newline after command but before output
-# From: https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html
-# This will run before any command is executed.
-function PreCommand() {
-  if [ -z "$AT_PROMPT" ]; then
-    return
+# Make new directory and immediately cd into it (from Nate Landau's, link below)
+# should the -p flag be included?
+mcd () { mkdir -p "$1" && cd "$1"; }
+
+# Use neovim instead of vim
+alias vi="nvim"
+alias vim="nvim"
+vimdiff () { nvim -d "$@" ;}
+
+# TODO:
+# [c|h]cat needs improvement
+# use `highlight` for colorized cat
+ccat () {
+  if [ -f "$1" ]; then
+    case "$1" in
+      # force configuration file syntax for rc and profile files
+      *rc)    highlight -O xterm256 --style=zenburn --syntax=conf -i "$1" ;;
+      *profile) highlight -O xterm256 --style=zenburn --syntax=conf -i "$1" ;;
+      *)      highlight -O xterm256 --style=zenburn -i "$1"       ;;
+    esac
+  else
+    echo "$1"" is not a valid file"
   fi
-  unset AT_PROMPT
-
-  # Do stuff.
-  echo ""
 }
-trap "PreCommand" DEBUG
 
-# This will run after the execution of the previous full command line.  We don't
-# want it PostCommand to execute when first starting a bash session (i.e., at
-# the first prompt).
-FIRST_PROMPT=1
-function PostCommand() {
-  AT_PROMPT=1
+# Use modified `ccat` function and `nl` to add line numbering
+hcat () {
+  NUMBER=0
 
-  if [ -n "$FIRST_PROMPT" ]; then
-    unset FIRST_PROMPT
-    return
-  fi
+  while [[ $# -gt 0 ]]; do
+  key="$1"
 
-  # Do stuff.
-  # echo "Running PostCommand"
-  echo ""
+  case $key in
+    -n)
+      NUMBER=1
+      ;;
+    *)
+      if [ $NUMBER -eq 0 ]
+      then
+        ccat "$key"
+      else
+        ccat "$key" | nl
+      fi
+      ;;
+  esac
+  shift
+  done
+
+  unset NUMBER
 }
-PROMPT_COMMAND="PostCommand"
 
+# make tmux easier to check
+alias tmux-ls="tmux list-sessions"
+tmux-a () { tmux attach -t "$1" ;}
+
+###
+# Following modifications are from:
+# http://natelandau.com/my-mac-osx-bash_profile/
+
+#   ---------------------------------------
+#   General
+#   ---------------------------------------
+
+# Prevent power button from immediately sleeping display (fuck Dimoff)
+alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
+alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
+
+# Move default screencap location
+# Where I want them saved:
+alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
+# Actual default:
+alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
+
+#   ---------------------------------------
+#   7.  SYSTEMS OPERATIONS & INFORMATION
+#   ---------------------------------------
+
+alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when booted into single-user
+
+#   cleanupDS:  Recursively delete .DS_Store files
+#   -------------------------------------------------------------------
+    alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
+
+#   finderShowHidden:   Show hidden files in Finder
+#   finderHideHidden:   Hide hidden files in Finder
+#   -------------------------------------------------------------------
+    alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
+    alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
+
+#   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
+#   -----------------------------------------------------------------------------------
+    alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+
+#    screensaverDesktop: Run a screensaver on the Desktop
+#   -----------------------------------------------------------------------------------
+    alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+
+###
+# End - Nate Landau's suggestions
+###
