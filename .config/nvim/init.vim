@@ -1,3 +1,5 @@
+" Amar Paul's nvim init.vim
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -32,9 +34,11 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   
   " powerline that works with neovim
   call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
 
-  " bash airline-prompt generator
+  " bash and tmux airline-prompt generators
   call dein#add('edkolev/promptline.vim')
+  call dein#add('edkolev/tmuxline.vim')
 
   " Required:
   call dein#end()
@@ -53,7 +57,13 @@ endif
 "End dein Scripts-------------------------
 
 
+"""
 " Personal Settings
+"""
+
+"""
+" Look and Feel
+"""
 
 "colorscheme zenburn
 colorscheme gruvbox
@@ -63,13 +73,17 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+"""
+" Personal definitions
+"""
+
 let mapleader=","
 
 " " Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
 
 " " Paste from clipboard
 nnoremap <leader>p "+p
@@ -82,7 +96,33 @@ nmap <leader>n :tabn<CR>
 nmap <leader>m :tabp<CR>
 nmap <leader>w <C-W><C-W>
 
-" Various Plugin Settings, Keybinds
+" clear highlighted matches from find
+nmap <leader><Space> :noh<CR>
+
+" Hide status bar on command Shift+H
+" From http://unix.stackexchange.com/questions/140898/vim-hide-status-line-in-the-bottom
+let s:hidden_all = 0
+function! ToggleHiddenAll()
+	if s:hidden_all == 0
+		let s:hidden_all = 1
+		set noshowmode
+		set noruler
+		set laststatus=0
+		set noshowcmd
+	else
+		let s:hidden_all = 0
+		set showmode
+		set ruler
+		set laststatus=2
+		set showcmd
+	endif
+endfunction
+
+nnoremap <S-h> :call ToggleHiddenAll()<CR>
+
+"""
+" Plugin Settings and Keybinds
+"""
 
 " vim-minimap settings
 let g:minimap_show='<leader>ms'
@@ -94,10 +134,19 @@ let g:minimap_toggle='<leader>gt'
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#enable_at_startup=1
 
-" airline-vim settings
+" airline-vim, airline-vim-themes settings
 " TODO
 
-" promptline customization
+" some ideas for airline theme:
+" badcat, laederon, base16_twilight, bubblegum, distinguished, term
+let g:airline_theme='term'
+
+" Don't rewrite my tmux conf!
+let g:airline#extensions#tmuxline#enabled = 0
+
+" promptline customization (for bash/fish and tmux)
+" :PromptlineSnapshot [theme] [preset]
+" :TmuxlineSnapshot [theme] [preset]
 
 " Only print git information if not in top-level dotfiles repo
 " https://github.com/edkolev/promptline.vim/blob/master/autoload/promptline/slices/vcs_branch.vim
@@ -131,9 +180,10 @@ let g:promptline_preset = {
 	\'b': [ promptline#slices#cwd({'dir_limit':2}) ],
 	\'c' : [ vcs_revised_slice ],
 	\'warn' : [ promptline#slices#last_exit_code(), promptline#slices#battery({'threshold':15}) ],
+	\'x' : [ promptline#slices#python_virtualenv(), promptline#slices#user() ],
 	\'z' : [ promptline#slices#git_status() ],
 	\'options': {
-		\'left_sections' : [ 'a', 'b', 'c' ],
+		\'left_sections' : [ 'x', 'b', 'c' ],
 		\'right_sections' : [ 'warn', 'z' ],
 		\'left_only_sections' : [ 'a', 'b', 'c', 'warn' ]}}
 
