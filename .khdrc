@@ -208,11 +208,13 @@ switcher - p			:	kwmc window -m mark
 #switcher - f			:	kwmc space -fExperimental previous
 
 # Move Focused Window to Screen (and focus screen)
-switcher + shift - z	:	kwmc window -m space left;\
-							kwmc space -fExperimental left
+switcher + shift - z	:	kwmc window -m space left; \
+							kwmc space -fExperimental left; \
+							khd -e "mode activate default"
 
-switcher + shift - c	:	kwmc window -m space right;\
-							kwmc space -fExperimental right
+switcher + shift - c	:	kwmc window -m space right; \
+							kwmc space -fExperimental right; \
+							khd -e "mode activate default"
 
 # Give Focus to Display
 switcher - 1			:	kwmc display -f 0
