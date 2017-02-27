@@ -1,10 +1,10 @@
 # Amar's Dotfiles
 After lots of work customizing quite a few different tools, these are my dotfiles! Some are Mac-specific, but most of them will work on Linux too. This is the stuff I've included (with explanation mostly in comments in the files but also some below):  
 * Shell:
-  * Currently using `zsh` and it's great! check out my [.zshrc](blob/master/.zshrc).
+  * Currently using `zsh` and it's great! check out my [.zshrc](.zshrc).
 	* using [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/) for managing the `zsh` config, and
     * using [Antigen](https://github.com/zsh-users/antigen) as a plugin manager
-  * was using `bash` until recently: config for this is mostly in [.bashrc](blob/master/.bashrc), [.bash_profile](blob/master/.bash_profile), and [.profile](blob/master/.profile)
+  * was using `bash` until recently: config for this is mostly in [.bashrc](.bashrc), [.bash_profile](.bash_profile), and [.profile](.profile)
 * Workflow:
   * [iTerm2 beta](https://www.iterm2.com/downloads.html) as my terminal emulator
   * [Neovim](https://github.com/neovim/neovim) (using [dein](https://github.com/Shougo/dein.vim) as a plugin manager)
@@ -61,4 +61,4 @@ You can make these edits by running `git config -e` or manually editing `~/.gitc
 ```
 
 ### Firfox homepage (minor mention)
-All managed by [firefox-homepage](firefox-homepage)
+All managed by [firefox-homepage](.config/firefox-homepage)
