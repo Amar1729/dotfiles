@@ -142,6 +142,9 @@ kwmc rule owner="VMware Fusion" properties={float="true"}
 kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
 kwmc rule owner="Cyberduck" properties={float="true"}
 
+# pushbullet quickreply
+kwmc rule name="Quick Reply" properties={float="true"}
+
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
 

@@ -1,4 +1,4 @@
-" Amar Paul's nvim init.vim
+" Amar Paul's init.vim (for Neovim)
 
 "dein Scripts-----------------------------
 if &compatible
@@ -65,13 +65,21 @@ endif
 " Look and Feel
 """
 
-"colorscheme zenburn
 colorscheme gruvbox
 set background=dark
 set number relativenumber
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+
+" Clear SignColumn (git symbols) same as background, recolor git symbols
+hi clear SignColumn
+hi SignColumn ctermbg=235
+" linenr: ctermfg=245 for all symbols				  Defaults:
+hi GitGutterAdd ctermbg=235 ctermfg=142				" GruvboxGreenSign fg/bg 142/237
+hi GitGutterChange ctermbg=235 ctermfg=108			" GruvboxAquaSign fg/bg 108/237
+hi GitGutterDelete ctermbg=235 ctermfg=167			" GruvboxRedSign fg/bg 167/237
+hi GitGutterChangeDelete ctermbg=235 ctermfg=108	" GruvboxAquaSign fg/bg 108/237
 
 " hide modified buffers (?what is this)
 "set hidden
@@ -88,22 +96,22 @@ augroup END
 
 let mapleader=","
 
-" " Copy to clipboard
+" Copy to clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_
 nnoremap <leader>y "+y
 nnoremap <leader>yy "+yy
 
-" " Paste from clipboard
+" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" Switch buffers more easily
-nmap <leader>n :bnext<CR>
+" Buffer movement
+nmap <leader>n :bnext<CR>	" Cycle through buffers
 "nmap <leader>m :bprev<CR>	" use this for tab-switching?
-nmap <leader>w <C-W><C-W>
+nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
@@ -127,7 +135,7 @@ function! ToggleHiddenAll()
 	endif
 endfunction
 
-" also want to hide airline buffer at top
+" also want to programmatically hide airline buffer at top (how to do this?)
 function! TogBuf()
 	if g:airline#extensions#tabline#enabled == 1
 		let g:airline#extensions#tabline#enabled = 0
@@ -151,7 +159,7 @@ let g:minimap_update='<leader>mu'
 let g:minimap_close='<leader>gc'
 let g:minimap_toggle='<leader>gt'
 
-" chromatica settings
+" TODO chromatica settings
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#enable_at_startup=1
 
@@ -169,11 +177,12 @@ let g:chromatica#enable_at_startup=1
  " let g:airline_section_error   (ycm_error_count, syntastic, eclim)
  " let g:airline_section_warning (ycm_warning_count, whitespace)
 " Changes:
-let g:airline_section_x = airline#section#create(['virtualenv'])
-let g:airline_section_y = airline#section#create(['branch'])
-let g:airline_section_z = '%3p%% :%3v'
+let g:airline_section_x = ""
+let g:airline_section_y = "%v"
+let g:airline_section_z = '%l/%L'
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
+"autocmd VimEnter * call AirlineOverride()
 
 " Patch the font myself
 let g:airline_powerline_fonts = 1
@@ -211,19 +220,17 @@ let g:airline_symbols.linenr = ''
 " light:
 "	papercolor
 let g:airline_theme='term'
-
-" Don't rewrite my tmux conf!
-let g:airline#extensions#tmuxline#enabled = 0
-
-" Enable the list of buffers
-let g:airline#extensions#tabline#enabled = 1
-
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#enabled = 1		" Enable list of buffers
+let g:airline#extensions#tabline#fnamemod = ':t'	" Show just filename in bufferline
+let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
 
 " promptline customization (for bash/fish and tmux)
 " :PromptlineSnapshot [theme] [preset]
 " :TmuxlineSnapshot [theme] [preset]
+
+" TODO:
+" move all this promptline defns out of here (maybe into some `promptline.vim`
+" file)
 
 " Only print git information if not in top-level dotfiles repo
 " https://github.com/edkolev/promptline.vim/blob/master/autoload/promptline/slices/vcs_branch.vim
