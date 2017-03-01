@@ -60,15 +60,15 @@ You can make these edits by running `git config -e` or manually editing `~/.gitc
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 ```
 
-### Firfox homepage (minor mention)
+### Firefox homepage (minor mention)
 All managed by [firefox-homepage](.config/firefox-homepage)
 
-### Changes to browsers (Chrome and Firefox) Userstyles, Extensions, Plugins, and Apps
-### userstyles/scripts
+### Changes to browsers (Chrome and Firefox): Userstyles, Extensions, Plugins, and Apps
+#### userstyles/scripts
 * Chrome ([stylus](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne) and [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
-  * Messenger Convo List Hover Toggle
-  * Messenger.com Dark
+  * [Messenger Convo List Hover Toggle](http://userstyles.org/styles/120562)
+  * [Messenger.com Dark](http://userstyles.org/styles/112722)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
 * Firefox ([Stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
@@ -76,3 +76,42 @@ All managed by [firefox-homepage](.config/firefox-homepage)
   * [SOUNDCLOUD NIGHTMODE REIMAGINED](https://userstyles.org/styles/136523/soundcloud-nightmode-reimagined)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
   * [Youtube Dark Style](https://userstyles.org/styles/116675/youtube-dark-style)
+
+#### Extensions, Plugins, Apps
+# TODO
+* Both:
+  * Adblock Plus
+  * Imagus (very helpful)
+  * tampermonkey/stylus (chrome) / greasemonkey/stylish (firefox)
+  * IITC: Ingress Intel Map Total Conversion
+  * Dashlane
+* Chrome:
+	* dashlane (KeePass also good - local storage)
+	* dropbox for gmail
+	* eyedropper (not great)
+	* Google Hangouts
+	* Google Keep
+	* Google Play Music
+	* MagiCSS - Live CSS Editor
+	* Pushbullet
+	* Smile Always (redirect amazon.com to smile.amazon.com)
+	* SoundCloud Downloader Free
+	* Videostream
+	* Vimium (don't use since I have `khd` bindings)
+	* Web of Trust - Website Rankings
+* Firefox:
+  * Extensions:
+	* Adblock Plus
+	* checkCompatibility (for forcing old extension compatibility)
+	* cliget (turns a link into a `curl` command with correct flags for cookies)
+	* colorPicker (great eyedropper)
+	* CurrentSong
+	* FireFTP
+	* Prospector - OneLiner (turn navbar and tab bar into one line)
+	* New Tab Tools (define tab keyboard shortcuts and a lot more)
+	* Stylish
+	* Tab Mix Plus (this is run when Firefox starts)
+  * Appearance:
+    * Flat Underline (for making my tabs look cool: not been updated for a long time, requires checkCompatibility)
+
+
