@@ -62,3 +62,17 @@ You can make these edits by running `git config -e` or manually editing `~/.gitc
 
 ### Firfox homepage (minor mention)
 All managed by [firefox-homepage](.config/firefox-homepage)
+
+### Changes to browsers (Chrome and Firefox) Userstyles, Extensions, Plugins, and Apps
+### userstyles/scripts
+* Chrome ([stylus](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne) and [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
+  * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
+  * Messenger Convo List Hover Toggle
+  * Messenger.com Dark
+  * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
+* Firefox ([Stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
+  * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
+  * [Reddit Slate Nights (Fixed, Custom Fork) - Dark](https://userstyles.org/styles/123908/reddit-slate-nights-fixed-custom-fork-dark)
+  * [SOUNDCLOUD NIGHTMODE REIMAGINED](https://userstyles.org/styles/136523/soundcloud-nightmode-reimagined)
+  * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
+  * [Youtube Dark Style](https://userstyles.org/styles/116675/youtube-dark-style)

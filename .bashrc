@@ -47,6 +47,7 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
+alias cclear="cd; clear"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
 # should the -p flag be included?
@@ -104,42 +105,28 @@ alias tmux-ls="tmux list-sessions"
 tmux-a () { tmux attach -t "$1" ;}
 
 ###
-# Following modifications are from:
+# Following suggestions are from:
 # http://natelandau.com/my-mac-osx-bash_profile/
 
-#   ---------------------------------------
-#   General
-#   ---------------------------------------
-
-# Prevent power button from immediately sleeping display (fuck Dimoff)
+# Prevent power button from immediately sleeping display
 alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
 alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
 
-# Move default screencap location
+# Move default screencap location (only have to run this once, but saved here just in case)
 # Where I want them saved:
 alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
 # Actual default:
 alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
 
-#   ---------------------------------------
-#   7.  SYSTEMS OPERATIONS & INFORMATION
-#   ---------------------------------------
-
-alias mountReadWrite='/sbin/mount -uw /'    # mountReadWrite:   For use when booted into single-user
-
 #   cleanupDS:  Recursively delete .DS_Store files
 #   -------------------------------------------------------------------
-    alias cleanupDS="find . -type f -name '*.DS_Store' -ls -delete"
+alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
 
-#   finderShowHidden:   Show hidden files in Finder
-#   finderHideHidden:   Hide hidden files in Finder
+#   finder-unhide:      Show hidden files in Finder
+#   finder-hide:	    Hide hidden files in Finder
 #   -------------------------------------------------------------------
-    alias finderShowHidden='defaults write com.apple.finder ShowAllFiles TRUE'
-    alias finderHideHidden='defaults write com.apple.finder ShowAllFiles FALSE'
-
-#   cleanupLS:  Clean up LaunchServices to remove duplicates in the "Open With" menu
-#   -----------------------------------------------------------------------------------
-    alias cleanupLS="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
+alias finder-unhide='defaults write com.apple.finder ShowAllFiles TRUE'
+alias finder-hide='defaults write com.apple.finder ShowAllFiles FALSE'
 
 #    screensaverDesktop: Run a screensaver on the Desktop
 #   -----------------------------------------------------------------------------------
