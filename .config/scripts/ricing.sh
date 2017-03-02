@@ -1,3 +1,5 @@
+#!/usr/local/bin/bash
+
 # A bunch of scripts to aid in window-manager, ricing, profiling etc setup
 # Note - lots of these functions are probably Mac-specific
 
@@ -21,6 +23,7 @@ wp () {
 # tab completion done for zsh (see .zshrc)
 # bash?:
 # http://tldp.org/LDP/abs/html/tabexpansion.html
+# TODO: (possibly) add flag for also changing wallpaper (named same as theme?)
 # ITERM2 ONLY
 prof () { echo -e "\033]50;SetProfile=$1\a" ; }
 
@@ -62,6 +65,8 @@ flux-temp () {
 	else
 	  echo "provide a temperature between 2700 and 6500 (rounded to nearest 100)"
 	fi
+
+	return 0
 }
 
 # When shutting down Flux, want to gradually increase temp so transition isn't as abrupt
@@ -99,3 +104,6 @@ flux-lower () {
 	# Decrease by 100 ( if higher than 2700 (?) )
 	return 0
 }
+
+# If this script is called, call arguments verbatim (so I don't have to add to $PATH):
+"$@"

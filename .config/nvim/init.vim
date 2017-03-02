@@ -40,6 +40,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('edkolev/promptline.vim')
   call dein#add('edkolev/tmuxline.vim')
 
+  " for surrounding phrases with characters
+  call dein#add('tpope/vim-surround')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -81,8 +84,8 @@ hi GitGutterChange ctermbg=235 ctermfg=108			" GruvboxAquaSign fg/bg 108/237
 hi GitGutterDelete ctermbg=235 ctermfg=167			" GruvboxRedSign fg/bg 167/237
 hi GitGutterChangeDelete ctermbg=235 ctermfg=108	" GruvboxAquaSign fg/bg 108/237
 
-" hide modified buffers (?what is this)
-"set hidden
+" hide modified buffers (allow opening of new buffers if current is edited)
+set hidden
 
 """
 " Personal definitions

@@ -81,7 +81,7 @@ kwmc config mouse-follows-focus on
 kwmc config mouse-drag on
 
 # The modifier keys to be held down to initiate mouse-drag
-kwmc config mouse-drag mod cmd+ctrl
+kwmc config mouse-drag mod cmd
 
 # Allow window focus to wrap-around
 kwmc config cycle-focus on
@@ -129,7 +129,6 @@ blacklists an application from Kwms tiling
 */
 kwmc rule owner="Steam" properties={float="true"}
 kwmc rule owner="Finder" properties={float="true"}
-#kwmc rule owner="Preview" properties={float="true"}
 kwmc rule owner="python" properties={float="true"}
 kwmc rule owner="Deluge" properties={float="true"}
 kwmc rule owner="Deluge" name="Add Torrents" properties={float="true"}
@@ -141,7 +140,6 @@ kwmc rule owner="Finder" name="Trash" properties={float="true"}
 kwmc rule owner="VMware Fusion" properties={float="true"}
 kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
 kwmc rule owner="Cyberduck" properties={float="true"}
-
 # pushbullet quickreply
 kwmc rule name="Quick Reply" properties={float="true"}
 # installing userstyles
@@ -162,12 +160,12 @@ kwmc rule owner="VLC" properties={space="3"}
 
 # Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 2
-kwmc config border focused color 0xFFBDD322
-kwmc config border focused radius 8
+kwmc config border focused size 1
+kwmc config border focused color 0xFF665c54
+kwmc config border focused radius 3
 
 # Enable border for marked window
 kwmc config border marked on
 kwmc config border marked size 2
-kwmc config border marked color 0xFFCC5577
-kwmc config border marked radius 8
+kwmc config border marked color 0xCCcc241d
+kwmc config border marked radius 3

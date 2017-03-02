@@ -101,8 +101,37 @@ hcat () {
 }
 
 # make tmux easier to check
-alias tmux-ls="tmux list-sessions"
-tmux-a () { tmux attach -t "$1" ;}
+alias tmux-ls="/usr/local/bin/tmux list-sessions"
+# tmux-a [index]	: attaches to the index of given session
+# tmux-a			: tries to attach to last session; if none active, creates new one
+tmux-a () {
+	sessions=`tmux list-sessions 2>/dev/null`
+	# if there are tmux sessions, connect to the last one or the one specified by $1
+	if [[ $? -eq 0 ]]
+	then
+		# if there's an argument given then connect to given session
+		if [[ -n "$1" ]]
+		then
+			tmux attach -t "$1"
+			#return $?
+		else
+			# no argument, and tmux is running: attach to the most recent session
+			tmux attach
+			#return $?
+		fi
+	else
+		# tmux isn't running: start it up
+		tmux
+		#return 0
+	fi
+}
+
+###
+# Some function calls to ricing.sh (in case I call from cmd line)
+###
+
+day () { ~/.config/scripts/ricing.sh day ;}
+night () { ~/.config/scripts/ricing.sh night ;}
 
 ###
 # Following suggestions are from:
@@ -130,8 +159,8 @@ alias finder-hide='defaults write com.apple.finder ShowAllFiles FALSE'
 
 #    screensaverDesktop: Run a screensaver on the Desktop
 #   -----------------------------------------------------------------------------------
-    alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
+alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
 ###
-# End - Nate Landau's suggestions
+# End of Nate Landau's suggestions
 ###

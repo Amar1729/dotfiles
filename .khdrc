@@ -54,21 +54,21 @@ khd kwm on
 
 
 # border color for different modes
-khd mode default color 0xddd5c4a1
-khd mode switcher color 0xdd00d409
+khd mode default color 0xaa282828
+khd mode switcher color 0xcc98971a	# gruvbox green
 
 khd mode tree prefix on
-khd mode tree color 0xdd458588
+khd mode tree color 0xcc458588
 khd mode tree timeout 1
 khd mode tree restore default
 
 khd mode space prefix on
-khd mode space color 0xddb16286
+khd mode space color 0xccb16286
 khd mode space timeout 1
 khd mode space restore default
 
 khd mode tmux prefix on
-khd mode tmux color 0xdd7b4b93
+khd mode tmux color 0xcc7b4b93
 khd mode tmux timeout 1
 khd mode tmux restore default
 
