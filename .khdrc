@@ -73,7 +73,7 @@ khd mode tmux timeout 1
 khd mode tmux restore default
 
 khd mode term prefix on
-khd mode term color 0xdfdfdf
+khd mode term color 0x77fbf1c7
 khd mode term timeout 1
 khd mode term restore default
 
@@ -85,6 +85,7 @@ switcher + ctrl - s		:	khd -e "mode activate default"
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
 #ctrl - a				:	khd -e "mode activate tmux"
+ctrl - n				:	khd -e "mode activate term"
 
 ###
 # Defaults
@@ -164,7 +165,26 @@ lalt + shift - l		:	kwmc window -c reduce 0.05 east
 
 
 ###
-# switcher mode
+# terminal mode (ctrl - n)
+###
+
+# Terminal Profiles
+#ctrl - n				:	open ~/.terminal_profiles/Zenburn.terminal
+#ctrl - n				:	osascript ~/.config/scripts/gruvbox.app
+ctrl - q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
+ctrl - w				:	open ~/.terminal_profiles/Red\ Sands.terminal
+
+# Open windows with different profiles
+term - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
+term - c				:	~/.config/scripts/ricing.sh wp -n changer
+term - a				:	~/.config/scripts/ricing.sh wp -n adwaita
+term - b				:	~/.config/scripts/ricing.sh wp -n blaziken
+term - 2				:	~/.config/scripts/ricing.sh wp -n blaziken2
+term - p				:	~/.config/scripts/ricing.sh wp -n animeswing
+
+
+###
+# switcher mode (ctrl - s)
 ###
 
 # Reload Config
@@ -267,7 +287,8 @@ space - right			:	kwmc space -p increase right
 space - up				:	kwmc space -p increase top
 space - down			:	kwmc space -p increase bottom
 space - p				:	kwmc space -p increase all; \
-							kwmc space -g increase vertical
+							kwmc space -g increase vertical; \
+							kwmc space -g increase horizontal
 
 # Decrease Screen Padding
 space + shift - left	:	kwmc space -p decrease left
@@ -275,5 +296,6 @@ space + shift - right	:	kwmc space -p decrease right
 space + shift - up		:	kwmc space -p decrease top
 space + shift - down	:	kwmc space -p decrease bottom
 space + shift - p		:	kwmc space -p decrease all; \
-							kwmc space -g decrease vertical
+							kwmc space -g decrease vertical; \
+							kwmc space -g decrease horizontal
 

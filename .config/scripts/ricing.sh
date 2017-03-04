@@ -3,9 +3,39 @@
 # A bunch of scripts to aid in window-manager, ricing, profiling etc setup
 # Note - lots of these functions are probably Mac-specific
 
-# Change wallpaper to a given file
-# MAC SPECIFIC
+# wp: do a bunch of stuff! 
+# most of this is MAC SPECIFIC
 wp () {
+	key=$1
+	case $key in
+		-w|--wallpaper)
+			wp-wallpaper "$2"
+			;;
+		-t|--transparency)
+			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
+			;;
+		-p|--profile)
+			echo -e "\033]50;SetProfile=$2\a"
+			;;
+		-n|--new)
+			# (not done: this needs to open new window)
+			osascript -e "tell application \"iTerm\" to create window with profile \"$2\""
+			;;
+		*)
+			echo "Not supported: ""$1"
+			echo "wp: Tool for on-the-fly screen changes."
+			print "Usage:"
+			print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE"
+			print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
+			print "\twp -p|--profile PROFILE\t\tChange current profile to PROFILE"
+			print "\twp -n|--new NAME\t\tNew terminal window with profile NAME"
+			;;
+	esac
+
+	return 0
+}
+
+wp-wallpaper () {
 	file="$(realpath "$1")"
 	if [[ -f "$file" ]]
 	then

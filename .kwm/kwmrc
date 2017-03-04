@@ -81,7 +81,7 @@ kwmc config mouse-follows-focus on
 kwmc config mouse-drag on
 
 # The modifier keys to be held down to initiate mouse-drag
-kwmc config mouse-drag mod cmd
+kwmc config mouse-drag mod cmd+ctrl #just cmd conflicts with cmd+click for selection
 
 # Allow window focus to wrap-around
 kwmc config cycle-focus on
@@ -160,12 +160,12 @@ kwmc rule owner="VLC" properties={space="3"}
 
 # Enable border for focused window
 kwmc config border focused on
-kwmc config border focused size 1
+kwmc config border focused size 2
 kwmc config border focused color 0xFF665c54
-kwmc config border focused radius 3
+kwmc config border focused radius 4
 
 # Enable border for marked window
 kwmc config border marked on
 kwmc config border marked size 2
 kwmc config border marked color 0xCCcc241d
-kwmc config border marked radius 3
+kwmc config border marked radius 4

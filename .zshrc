@@ -55,25 +55,8 @@ plugins=(git)
 # Don't need this if calling `antigen use oh-my-zsh`
 #source $ZSH/oh-my-zsh.sh
 
-# Powerlevel9K customization (similar to included agnoster prompt)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_DELIMITER=""
-POWERLEVEL9K_CUSTOM_USER="print -P $USER"
-POWERLEVEL9K_CUSTOM_USER_BACKGROUND="black"
-POWERLEVEL9K_CUSTOM_USER_FOREGROUND="alt_white"
-POWERLEVEL9K_BATTERY_VERBOSE="false"
-POWERLEVEL9K_BATTERY_ICON=""
-POWERLEVEL9K_STATUS_VERBOSE="false"
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv custom_user dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status battery)
-
-# gruvbox-powerline customization
-ZSH_POWERLINE_SINGLE_LINE="true"
-ZSH_POWERLINE_SHOW_IP="false"
-ZSH_POWERLINE_SHOW_TIME="false"
-POWERLINE_RIGHT_A=" "
-POWERLINE_RIGHT_B="none"
+# Source a file with my prompt customization (for powerlevel9k, etc)
+#source ~/.zsh-promptsrc
 
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
@@ -85,6 +68,7 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle pip
 #antigen bundle command-not-found
+antigen bundle jsontools
 
 # bundles (and env vars)
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -92,25 +76,15 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle kennethreitz/autoenv
 #AUTOENV_ENV_FILENAME="env"
 
-# theme
-#antigen theme agnoster
-#source ~/.oh-my-zsh/custom/amar.zsh-theme
-#antigen theme bhilburn/powerlevel9k powerlevel9k
-#antigen theme commanderkelso/oh-my-zsh-gruvbox-powerline-theme gruvbox-powerline
-#antigen bundle mafredri/zsh-async
-#antigen bundle sindresorhus/pure
-
 # my theme:
-#	doesn't include virtualenvs in slices
-#	includes failed command at beginning of name (change?)
-#	doesn't include any git info
-#	DOES truncate dirpath to last 2
+#	doesn't include virtualenvs in the first slice
+#	DOES truncate dirpath to last 2 (or 25 chars)
 #	colors similar to powerlevel9k 
-#	- battery status ? (eh)
-#	vcs:
+#	- no battery status (not a problem)
+#	vcs ideas:
 #		sha hash, working dir status, upstream status, commits ahead, etc ...
-#	liked pure theme. possible to create fork/temp 'pure' work?
-# private gist while I work on my own theme
+#	note - I liked pure theme. possible to create fork/temp 'pure' work?
+# private gist while I work on my own theme:
 antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
 
 # done!
