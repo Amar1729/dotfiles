@@ -43,6 +43,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " for surrounding phrases with characters
   call dein#add('tpope/vim-surround')
 
+  " Syntax highlighting for coffeescript
+  call dein#add('kchmck/vim-coffee-script')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -75,7 +78,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
-" Clear SignColumn (git symbols) same as background, recolor git symbols
+" Clear SignColumn (git symbols) so it's same as background, recolor git symbols
 hi clear SignColumn
 hi SignColumn ctermbg=235
 " linenr: ctermfg=245 for all symbols				  Defaults:
@@ -99,11 +102,11 @@ augroup END
 
 let mapleader=","
 
-" Copy to clipboard
-vnoremap <leader>y "+y
-nnoremap <leader>Y "+yg_
-nnoremap <leader>y "+y
-nnoremap <leader>yy "+yy
+" Copy to clipboard (mac uses * register: linux uses + reg)
+vnoremap <leader>y "*y
+nnoremap <leader>Y "*yg_
+nnoremap <leader>y "*y
+nnoremap <leader>yy "*+yy
 
 " Paste from clipboard
 nnoremap <leader>p "+p
@@ -185,7 +188,6 @@ let g:airline_section_y = "%v"
 let g:airline_section_z = '%l/%L'
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
-"autocmd VimEnter * call AirlineOverride()
 
 " Patch the font myself
 let g:airline_powerline_fonts = 1
@@ -217,7 +219,7 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
-" some ideas for airline theme:
+" some good airline themes:
 " dark:
 "	badcat, laederon, base16_twilight, bubblegum, distinguished, term
 " light:
@@ -227,51 +229,8 @@ let g:airline#extensions#tabline#enabled = 1		" Enable list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t'	" Show just filename in bufferline
 let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
 
-" promptline customization (for bash/fish and tmux)
+" (used to use) promptline customization to generate bars for for bash/fish and tmux
 " :PromptlineSnapshot [theme] [preset]
 " :TmuxlineSnapshot [theme] [preset]
-
-" TODO:
-" move all this promptline defns out of here (maybe into some `promptline.vim`
-" file)
-
-" Only print git information if not in top-level dotfiles repo
-" https://github.com/edkolev/promptline.vim/blob/master/autoload/promptline/slices/vcs_branch.vim
-let g:branch_symbol = promptline#symbols#get().vcs_branch
-let vcs_revised_slice = {
-  \'function_name': 'vcs_revised',
-  \'function_body': [
-    \'function vcs_revised {',
-    \'  local branch',
-    \'  local branch_symbol="' . branch_symbol . '"',
-    \'  if hash git 2>/dev/null; then',
-    \'    repo=$( { git remote -v | grep "dotfiles"; } 2>/dev/null )',
-    \'    if [[ -z $repo ]]; then',
-    \'    if branch=$( { git symbolic-ref --quiet HEAD || git rev-parse --short HEAD; } 2>/dev/null ); then',
-    \'      branch=${branch##*/}',
-    \'      printf "%s" "${branch_symbol}${branch:-unknown}"',
-    \'      return',
-    \'    fi',
-    \'    fi',
-    \'  fi',
-    \'  return 1',
-    \'}']}
-   
-
-" so vcs_revised_slice.vim
-
-let g:promptline_theme = 'airline'
-
-let g:promptline_preset = {
-	\'a' : [ promptline#slices#python_virtualenv(), '\[\033[1;37m\]\u\033[1m\]' ],
-	\'b': [ promptline#slices#cwd({'dir_limit':2}) ],
-	\'c' : [ vcs_revised_slice ],
-	\'warn' : [ promptline#slices#last_exit_code(), promptline#slices#battery({'threshold':15}) ],
-	\'x' : [ promptline#slices#python_virtualenv(), promptline#slices#user() ],
-	\'z' : [ promptline#slices#git_status() ],
-	\'options': {
-		\'left_sections' : [ 'x', 'b', 'c' ],
-		\'right_sections' : [ 'warn', 'z' ],
-		\'left_only_sections' : [ 'a', 'b', 'c', 'warn' ]}}
-
+"so promptline_settings.vim
 
