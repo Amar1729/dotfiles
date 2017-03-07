@@ -138,6 +138,3 @@ preexec() {print ''}
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
-
-
-

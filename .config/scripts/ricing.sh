@@ -21,6 +21,12 @@ wp () {
 			# (not done: this needs to open new window)
 			osascript -e "tell application \"iTerm\" to create window with profile \"$2\""
 			;;
+		--bonsai)
+			~/.config/scripts/bonsai.sh
+			;;
+		--coffee)
+			~/.config/scripts/coffee.sh
+			;;
 		*)
 			echo "Not supported: ""$1"
 			echo "wp: Tool for on-the-fly screen changes."
