@@ -18,6 +18,9 @@
 #   mv $f $new
 #  done
 
+# Python shell tab completion
+export PYTHONSTARTUP="$(python -m jedi repl)"
+
 ################
 ##
 ## Personal aliases, functions
@@ -32,6 +35,7 @@ alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
 alias novel="open ~/.terminal_profiles/Novel.terminal"
 
 alias pi="ssh pi@192.168.1.120"
+alias pi-ext="ssh pi@bass2000.ddns.net"
 
 ###
 # Common aliases, command improvements:
@@ -64,10 +68,13 @@ vimdiff () { nvim -d "$@" ;}
 ccat () {
   if [ -f "$1" ]; then
     case "$1" in
-      # force configuration file syntax for rc and profile files
-      *rc)    highlight -O xterm256 --style=zenburn --syntax=conf -i "$1" ;;
-      *profile) highlight -O xterm256 --style=zenburn --syntax=conf -i "$1" ;;
-      *)      highlight -O xterm256 --style=zenburn -i "$1"       ;;
+		# force configuration file syntax for rc and profile files
+		*rc|*profile)
+			highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"
+			;;
+		*)
+			highlight -O xterm256 --style=zenburn -i "$1"
+			;;
     esac
   else
     echo "$1"" is not a valid file"

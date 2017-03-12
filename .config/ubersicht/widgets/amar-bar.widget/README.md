@@ -1,7 +1,7 @@
 # zenbar
 
-![Screenshot](screen-nocharge.png)
-![Screenshot](screen-charge.png)
+![Screenshot](screens/screen-nocharge.png)
+![Screenshot](screens/screen-charge.png)
 
 Übersicht system information bar for use with kwm window manager. My zenbar results from multiple successive forks:  
 * [Herrbischoff's original nerdbar](https://github.com/herrbischoff/nerdbar.widget), inspired by koekeishiya's NerdTool configuration
@@ -22,9 +22,8 @@ And my changes:
 ## Installation
 
 Make sure you have [Übersicht](http://tracesof.net/uebersicht/) installed, and then clone this repository.  
-
+IMPORTANT: Make sure you name the resulting folder `amar-bar.widget`, or change the image paths in `background.coffee` and `focused-window.coffee`, since they source css and scripts (respectively) starting with the parent directory's name.  
 ```bash
-git clone https://github.com/Amar1729/zenbar $HOME/Library/Application\ Support/Übersicht/widgets/amar-zenbar.widget
+# or wherever your ubersicht looks for widgets (mine looks in ~/.config/ubersicht/widgets/)
+git clone https://github.com/Amar1729/nerdbar.widget $HOME/Library/Application\ Support/Übersicht/widgets/amar-bar.widget
 ```
-
-Note, if you ever rename the directory, you have to change the image paths in `background.coffee` and `focused-window.coffee`, since they source css and scripts (respectively) starting with the parent directory's name.

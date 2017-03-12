@@ -26,6 +26,12 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " colorscheme
   call dein#add('morhetz/gruvbox')
 
+  " completion (remember to call ./install.py to generate completions!)
+  call dein#add('Valloric/YouCompleteMe')
+
+  " python completion (YCM uses Jedi)
+  call dein#add('davidhalter/jedi-vim')
+
   " git gutter
   call dein#add('airblade/vim-gitgutter')
 
@@ -42,6 +48,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
 
   " for surrounding phrases with characters
   call dein#add('tpope/vim-surround')
+
+  " nice completion of (x)html tags
+  call dein#add('tpope/vim-ragtag')
 
   " Syntax highlighting for coffeescript
   call dein#add('kchmck/vim-coffee-script')
@@ -171,6 +180,7 @@ let g:chromatica#enable_at_startup=1
 
 " airline-vim, airline-vim-themes settings
 " TODO
+let g:airline#extensions#branch#enabled = 1
 
 " Default:
  " let g:airline_section_a       (mode, crypt, paste, spell, iminsert)
