@@ -141,6 +141,23 @@ day () { ~/.config/scripts/ricing.sh day ;}
 night () { ~/.config/scripts/ricing.sh night ;}
 
 ###
+# General computer mgmt aliases and functions
+###
+
+# Open the screensaver with `lock`. Set preferences to lock the screen after 5s of screensaver
+alias lock="open -a ScreenSaverEngine"
+
+# reboot wifi (my router will occasionally boot my computer off)
+alias wifi-toggle="networksetup -setairportpower en0 off; \
+					networksetup -setairportpower en0 on"
+
+
+###
+# http://tex.stackexchange.com/questions/43057/macosx-pdf-viewer-automatic-reload-on-file-modification
+# setup Skim for vim latex pdf previewing
+# defaults write -app Skim SKAutoReloadFileUpdate -boolean true
+
+###
 # Following suggestions are from:
 # http://natelandau.com/my-mac-osx-bash_profile/
 
@@ -163,10 +180,6 @@ alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
 #   -------------------------------------------------------------------
 alias finder-unhide='defaults write com.apple.finder ShowAllFiles TRUE'
 alias finder-hide='defaults write com.apple.finder ShowAllFiles FALSE'
-
-#    screensaverDesktop: Run a screensaver on the Desktop
-#   -----------------------------------------------------------------------------------
-alias screensaverDesktop='/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background'
 
 ###
 # End of Nate Landau's suggestions

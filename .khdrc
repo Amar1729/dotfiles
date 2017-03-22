@@ -1,9 +1,7 @@
 # Amar's khdrc
 
-
-# how to use :
-# Pseudo containers (?)
-
+# TODO: how to open a window and make it focused?
+# TODO: how to "replace" window with another? (mark window + new window + close window)
 
 ###
 # Emacs mode for non-terminal apps (I'm used to this since it's default behavior for bash)
@@ -48,9 +46,9 @@ khd kwm on
 # Switcher: used mostly for swapping view/windows in or between screens/displays
 # Tree: temporary window containers
 # Space: change space tiling mode or modify padding/gaps 
+# Terminal (term): spawn terminals (or brwoser windows) with different profiles
 # In progress:
 #	tmux: passthrough when a tmux session is open
-#	terminal: quickly spawn terminals with different profiles
 
 
 # border color for different modes
@@ -67,10 +65,10 @@ khd mode space color 0xccb16286
 khd mode space timeout 1
 khd mode space restore default
 
-khd mode tmux prefix on
-khd mode tmux color 0xcc7b4b93
-khd mode tmux timeout 1
-khd mode tmux restore default
+#khd mode tmux prefix on
+#khd mode tmux color 0xcc7b4b93
+#khd mode tmux timeout 1
+#khd mode tmux restore default
 
 khd mode term prefix on
 khd mode term color 0x77fbf1c7
@@ -126,7 +124,13 @@ cmd + shift - 0x78		:	khd -e "killall Flux"
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
 # Rotate Window Tree
-cmd + ctrl - r			:	kwmc tree rotate 270
+ctrl - r				:	kwmc tree rotate 270
+
+# Move focus (necessary?)
+cmd + ctrl - h			:	kwmc window -f west
+cmd + ctrl - j			:	kwmc window -f south
+cmd + ctrl - k			:	kwmc window -f north
+cmd + ctrl - l			:	kwmc window -f east
 
 # Swap Focused Window
 ctrl + alt - h			:	kwmc window -s west
@@ -136,11 +140,14 @@ ctrl + alt - l			:	kwmc window -s east
 ctrl + alt - m			:	kwmc window -s mark
 
 # Mark Window
-cmd + alt + ctrl - m	:	kwmc window -mk focused
 cmd + alt + ctrl - h	:	kwmc window -mk west wrap
 cmd + alt + ctrl - l	:	kwmc window -mk east wrap
 cmd + alt + ctrl - j	:	kwmc window -mk south wrap
 cmd + alt + ctrl - k	:	kwmc window -mk north wrap
+cmd + alt + ctrl - m	:	kwmc window -mk focused
+
+# Reinsert marked window at focused window
+cmd + alt + ctrl - p	:	kwmc window -m mark
 
 # Give Focus to Window (helpful when Space is in Monocle mode)
 alt - n					:	kwmc window -f next
@@ -163,19 +170,20 @@ lalt + shift - j		:	kwmc window -c reduce 0.05 south
 lalt + shift - k		:	kwmc window -c reduce 0.05 north
 lalt + shift - l		:	kwmc window -c reduce 0.05 east
 
+# Switch displays
+cmd +lalt +ctrl -right	:	kwmc display -f next
+cmd +lalt +ctrl -left	:	kwmc display -f prev
+
 
 ###
 # terminal mode (ctrl - n)
 ###
 
 # Terminal Profiles
-#ctrl - n				:	open ~/.terminal_profiles/Zenburn.terminal
-#ctrl - n				:	osascript ~/.config/scripts/gruvbox.app
-ctrl - q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
-ctrl - w				:	open ~/.terminal_profiles/Red\ Sands.terminal
-
-# Open windows with different profiles
+# -> open windows with different profiles
+ctrl - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
+term + shift - n		:	open -na Google\ Chrome
 term - c				:	~/.config/scripts/ricing.sh wp -n changer
 term - a				:	~/.config/scripts/ricing.sh wp -n adwaita
 term - b				:	~/.config/scripts/ricing.sh wp -n blaziken

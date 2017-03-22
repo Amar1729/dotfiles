@@ -67,8 +67,19 @@ antigen use oh-my-zsh
 # bundles from default repo
 antigen bundle git
 antigen bundle pip
+
+#slows down shell startup :/
 #antigen bundle command-not-found
+
+# prettier display of JSON
 antigen bundle jsontools
+
+# open GitHub from cli
+antigen bundle peterhurford/git-it-on.zsh
+
+# include a notification for long-running commands or nonzero return codes
+# make sure to install terminal-notifier (Mac) or notify-send (Linux)
+antigen bundle marzocchi/zsh-notify
 
 # bundles (and env vars)
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -77,13 +88,14 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #AUTOENV_ENV_FILENAME="env"
 
 # my theme:
+#	style similar to powerlevel9k 
 #	doesn't include virtualenvs in the first slice
 #	DOES truncate dirpath to last 2 (or 25 chars)
-#	colors similar to powerlevel9k 
-#	- no battery status (not a problem)
-#	vcs ideas:
-#		sha hash, working dir status, upstream status, commits ahead, etc ...
-#	note - I liked pure theme. possible to create fork/temp 'pure' work?
+#	- no battery status (i don't need this)
+#	simpler vcs
+#	TODO:
+#		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
+#	note - I liked pure theme. possible to create fork/temp for 'pure' work?
 # private gist while I work on my own theme:
 antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
 
@@ -99,9 +111,9 @@ antigen apply
 setopt APPEND_HISTORY          # history appends to existing file
 setopt HIST_REDUCE_BLANKS      # trim multiple insgnificant blanks in history
 HISTCONTROL=ignoreboth
-HISTFILESIZE=100000
-HISTSIZE=1000000               # number of history lines kept internally
-SAVEHIST=1000000               # max number of history lines saved
+HISTFILESIZE=1000000
+HISTSIZE=10000000               # number of history lines kept internally
+SAVEHIST=10000000               # max number of history lines saved
 
 ###
 

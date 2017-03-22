@@ -1,42 +1,5 @@
-# slightly modified by mister amar
-
-/*
-This is a sample config for Kwm
-
-The following statements can be used to set Kwms internal directory structure.
-
-    This is the root folder for Kwms files, the only thing this actually
-    specifies is the location of the 'init' script which Kwm runs upon startup.
-    Defaults to $HOME/.kwm
-
-        kwm_home /path/to/.kwm
-
-    This is the root folder in which all files included using 'include' must reside.
-    Defaults to $HOME/.kwm
-
-        kwm_include /path/to/.kwm/include
-
-    This is the folder in which all bsp-layouts managed by 'tree load' and 'tree save'
-    is loaded from / saved to. Defaults to $HOME/.kwm/layouts
-
-        kwm_layouts /path/to/.kwm/layouts
-
-Commands prefixed with 'kwmc' will call
-local functions corresponding to the
-kwmc syntax.
-
-To run an external program or command,
-use the prefix 'exec' followed by command.
-e.g 'exec mvim' would open macvim
-
-Read file and execute commands as
-if they were written inside kwmrc.
-
-include filename
-
-e.g: window-rules in a separate file called 'rules'
-    include rules
-*/
+# Amar's kwmc config
+# see /usr/local/opt/kwm/kwmrc for default config file
 
 # Set default values for screen padding (top bottom left right)
 kwmc config padding 40 20 20 20
@@ -78,10 +41,10 @@ kwmc config mouse-follows-focus on
     Allows a window to be resized by dragging
     when a modifier key and right-click is held down.
 */
-kwmc config mouse-drag on
+#kwmc config mouse-drag on
 
 # The modifier keys to be held down to initiate mouse-drag
-kwmc config mouse-drag mod cmd+ctrl #just cmd conflicts with cmd+click for selection
+#kwmc config mouse-drag mod cmd+ctrl #just cmd conflicts with cmd+click for selection
 
 # Allow window focus to wrap-around
 kwmc config cycle-focus on
@@ -93,8 +56,12 @@ Override default settings for space 1 on screen 0
    kwmc config space 0 1 gap 40 40
 */
 
-# space 0: lots of chrome/firefox windows
+# space 1: lots of chrome/firefox windows
 kwmc config space 0 1 mode monocle
+
+# space 3: two terminals and Telegram
+kwmc config space 0 3 padding 70 50 35 35
+kwmc config space 0 3 gap 50 50
 
 /*
 Override default settings for screen 1
@@ -140,11 +107,15 @@ kwmc rule owner="Finder" name="Trash" properties={float="true"}
 kwmc rule owner="VMware Fusion" properties={float="true"}
 kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
 kwmc rule owner="Cyberduck" properties={float="true"}
-# pushbullet quickreply
-kwmc rule name="Quick Reply" properties={float="true"}
-# installing userstyles
+# pushbullet quickreply - doesn't work yet?
+#kwmc rule name="Quick Reply" properties={float="true"}
 kwmc rule name="Install user style" properties={float="true"}
 kwmc rule owner="Google Chrome" name="Google Hangouts" properties={float="true"}
+kwmc rule owner="VLC" properties={float="true"}
+kwmc rule owner="Calculator" properties={float="true"}
+kwmc rule owner="App Store" properties={float="true"}
+kwmc rule owner="Disk Utility" properties={float="true"}
+kwmc rule owner="VOX" properties={float="true"}
 
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}

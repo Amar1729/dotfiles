@@ -14,6 +14,9 @@ wp () {
 		-t|--transparency)
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
 			;;
+		--tg|--transparency-get)
+			osascript -e 'tell application "iTerm" to tell current window to tell current session to get transparency'
+			;;
 		-p|--profile)
 			echo -e "\033]50;SetProfile=$2\a"
 			;;
@@ -65,10 +68,10 @@ prof () { echo -e "\033]50;SetProfile=$1\a" ; }
 
 # Transfer iterm2 colorscheme from themer dir to itermcolors directory
 # PERSONAL USE
-itcolor () {
+iterm-transfer () {
   file="$1"
   theme=$(basename $(dirname "$file"))
-  cp "$file" "/Users/Amar/.config/iterm2_colors/""$theme"".itermcolors"
+  cp "$file" "/Users/Amar/.config/iterm2/""$theme"".itermcolors"
 }
 
 # Display terminal ANSI colors
