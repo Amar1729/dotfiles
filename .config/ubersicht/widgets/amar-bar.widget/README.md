@@ -10,12 +10,12 @@
 * Date and time 
 
 Space 1 or 2:
-![Screenshot](screens/space-1.png)
-![Screenshot](screens/space-2.png)
+![Screenshot](https://github.com/Amar1729/nerdbar.widget/screens/space-1.png)
+![Screenshot](https://github.com/Amar1729/nerdbar.widget/screens/space-2.png)
 
 Difference between charging and not charging:
-![Screenshot](screens/charge.png)
-![Screenshot](screens/no-charge.png)
+![Screenshot](https://github.com/Amar1729/nerdbar.widget/screens/charge.png)
+![Screenshot](https://github.com/Amar1729/nerdbar.widget/screens/no-charge.png)
 
 Übersicht system information bar for use with kwm window manager. My zenbar results from multiple successive forks:  
 * [Herrbischoff's original nerdbar](https://github.com/herrbischoff/nerdbar.widget), inspired by koekeishiya's NerdTool configuration

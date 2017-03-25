@@ -63,6 +63,13 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Syntax highlighting for coffeescript
   call dein#add('kchmck/vim-coffee-script')
 
+  " Live LaTeX previewing
+  "call dein#add('xuhdev/vim-latex-live-preview')
+
+  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
+  "call dein#add('donRaphaco/neotex')
+  " no, I think this only works for vim?
+
   " Required:
   call dein#end()
   call dein#save_state()

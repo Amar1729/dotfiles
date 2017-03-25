@@ -86,6 +86,7 @@ kwmc config spawn right
 */
 kwmc rule owner="iTerm2" properties={role="AXDialog"}
 kwmc rule owner="iTerm" properties={role="AXDialog"}
+kwmc rule owner="evince" properties={role="AXDialog"}
 
 /*
 The following commands create rules that
@@ -121,11 +122,9 @@ kwmc rule owner="VOX" properties={float="true"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
 
 /*
-The following command creates a rule that
-captures an application to the given screen,
-if the screen exists.
-
-   kwmc rule owner="iTunes" properties={display="1"}
+	The following command creates a rule that
+	captures an application to the given screen,
+	if the screen exists.
 */
 kwmc rule owner="VLC" properties={space="3"}
 
