@@ -1,6 +1,6 @@
+#include "/Users/Amar/.colors/hybrid"
 !#include "/Users/Amar/.colors/wall-themes/soundboard.dark.xresources"
 
-#include "/Users/Amar/.colors/hybrid"
 !#include "/Users/Amar/.colors/base16/base16-embers.dark.xresources"
 !#include "/Users/Amar/.colors/mikado"
 
@@ -11,7 +11,7 @@ urxvt*fading: 1
 urxvt*cursorBlink: true
 !urxvt*imLocale: en_US.UTF-8
 urxvt*scrollBar: false
-URxvt*internalBorder:5
+URxvt.internalBorder:20
 urxvt*visualBell: false
 
 !urxvt*perl-lib:			/usr/local/Cellar/rxvt-unicode/9.20/urxvt/perl
@@ -20,6 +20,12 @@ urxvt*perl-matcher: 		1
 urxvt*matcher-button: 		3
 !urxvt*url-launcher:		/usr/bin/firefox
 !urxvt*url-launcher:        /Applications/Firefox.app/Contents/MacOS/firefox
+
+!copy/paste
+! check out http://dywypi.org/2011/04/rxvt-unicode-and-os-x.html
+URxvt.perl-ext-common:		macosx-clipboard
+URxvt*keysym.M-c:			perl:macosx-clipboard:copy
+URxvt*keysym.M-v:			perl:macosx-clipboard:paste
 
 ! Font change settings
 !URxvt.iso14755: false
@@ -30,6 +36,10 @@ URxvt.keysym.C-9: command:\033]710;-lokaltog-fixed-medium-r-normal--10-100-75-75
 URxvt.keysym.C-0: command:\033]710;xft:monaco:size=9\007\033]711;xft:monaco:size=9\007
 URxvt.keysym.C-equal:	perl:font-size:increase
 URxvt.keysym.C-minus:   perl:font-size:decrease
+
+!URxvt.font: xft:FantasqueSansMono-Regular:size=14
+!URxvt.font: xft:FireMono-Regular:size=14
+URxvt.font: xft:monaco:size=12
 
 !urxvt*font: -*-tamzen-medium-r-normal-*-*-87-*-*-*-*-*-*
 !urxvt*boldFont: -*-tamzen-medium-r-normal-*-*-87-*-*-*-*-*-*
