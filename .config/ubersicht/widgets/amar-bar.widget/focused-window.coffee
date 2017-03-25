@@ -34,7 +34,7 @@ decide: (elem) ->
     return """ """
   else
     if elem[0] is "("
-      elem = elem[1]
+      elem = elem[1...-1]
       elem = """<span class="list active">#{elem}</span>"""
     else
       elem = """<span class="list inactive">#{elem}</span>"""

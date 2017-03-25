@@ -1,7 +1,21 @@
 # zenbar
 
-![Screenshot](screens/screen-nocharge.png)
-![Screenshot](screens/screen-charge.png)
+### zenbar widget
+* Displays `bsp`/`float`/`n/m` (monocle mode)  
+* List of spaces, with active one highlighted with color  
+* Name of focused window
+* Currently-playing song
+* cpu/mem info 
+* Battery percentage remaining (including whether it's charging)
+* Date and time 
+
+Space 1 or 2:
+![Screenshot](screens/space-1.png)
+![Screenshot](screens/space-2.png)
+
+Difference between charging and not charging:
+![Screenshot](screens/charge.png)
+![Screenshot](screens/no-charge.png)
 
 Übersicht system information bar for use with kwm window manager. My zenbar results from multiple successive forks:  
 * [Herrbischoff's original nerdbar](https://github.com/herrbischoff/nerdbar.widget), inspired by koekeishiya's NerdTool configuration
@@ -15,6 +29,7 @@
   * ellipsis cutoff if focused-window title is too long
 
 And my changes:  
+* Changed the activation information to a color box rather than parentheses (see screens)
 * Added bolt symbol near battery to indicate when charging (font-awesome currently (Jan 2017) has no charging battery symbol) - see screenshots
 * Changed font to monospace and increased the size in certain areas for important text
 * Modified widget spacing
