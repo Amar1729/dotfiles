@@ -27,13 +27,21 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('morhetz/gruvbox')
 
   " completion (remember to call ./install.py to generate completions!)
-  call dein#add('Valloric/YouCompleteMe')
+  "call dein#add('Valloric/YouCompleteMe')
 
   " python completion (YCM uses Jedi)
-  call dein#add('davidhalter/jedi-vim')
+  "call dein#add('davidhalter/jedi-vim')
+
+  " deoplete for nvim: try usurping YCM?
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-clang')
+  call dein#add('zchee/deoplete-jedi')
 
   " git gutter
   call dein#add('airblade/vim-gitgutter')
+
+  " git fugitive
+  call dein#add('tpope/vim-fugitive')
 
   " (vim plugin) minimap
   call dein#add('severin-lemaignan/vim-minimap')
@@ -65,8 +73,9 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
+" (Annoying when you're testing lots of different plugins)
 if dein#check_install()
-  call dein#install()
+  " call dein#install()
 endif
 
 "End dein Scripts-------------------------
@@ -104,10 +113,10 @@ set hidden
 """
 
 " auto-reload config
-augroup AutoCommands
-	au!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC 
-augroup END
+"augroup AutoCommands
+"	au!
+"    autocmd BufWritePost $MYVIMRC source $MYVIMRC 
+"augroup END
 
 let mapleader=","
 
@@ -118,10 +127,10 @@ nnoremap <leader>y "*y
 nnoremap <leader>yy "*+yy
 
 " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nnoremap <leader>p "*p
+nnoremap <leader>P "*P
+vnoremap <leader>p "*p
+vnoremap <leader>P "*P
 
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
@@ -159,9 +168,7 @@ function! TogBuf()
 	endif
 endfunction
 
-nnoremap <S-j> :call TogBuf()<CR>
-
-
+"nnoremap <S-j> :call TogBuf()<CR>
 nnoremap <S-h> :call ToggleHiddenAll()<CR>
 
 """

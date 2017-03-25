@@ -47,4 +47,4 @@ do
 	fi
 done
 
-echo "$($kwmc query space active mode)   ${bbar[*]}"
+echo "$($kwmc query space active mode) | ${bbar[*]}"

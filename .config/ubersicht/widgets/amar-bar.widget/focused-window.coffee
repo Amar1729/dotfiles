@@ -11,8 +11,12 @@ render: (output) ->
   """
 
 update: (output, el) ->
-  output = @dotted output, 80
-  $(".foc span:first-child", el).text("  #{output}")
+  # my attempts to get monospaced spaces list:
+  [mode, spaces, focused...] = output.split '|'
+  spaces = @redraw spaces
+  focused = @dotted focused.join('|'), 60
+  output = [ "<span>#{mode}|</span>", spaces, "<span>|#{focused}</span>" ].join('')
+  $(".foc span:first-child", el).html("  #{output}")
 
 dotted: (str, limit) ->
   dots = "..."
@@ -20,16 +24,59 @@ dotted: (str, limit) ->
     str = str.substring(0,limit) + dots
   return str
 
+redraw: (spaces) ->
+  list = spaces.split ' '
+  result = ( @decide space for space in list).join('')
+
+decide: (elem) ->
+  elem.replace /^\s+|\s+$/g, ""
+  if elem is ""
+    return """ """
+  else
+    if elem[0] is "("
+      elem = elem[1]
+      elem = """<span class="list active">#{elem}</span>"""
+    else
+      elem = """<span class="list inactive">#{elem}</span>"""
+    return elem
+
+###
+#old style values
+
+  font: 10px Input
+  height: 16px
+  left: 10px
+  top: 7px
+
+###
+
 style: """
   -webkit-font-smoothing: antialiased
   color: #d5c4a1
-  font: 10px Input
   font: 11px Inconsolata
-  height: 16px
+
+  height: 18px
   left: 10px
+  top: 0px
+  padding-top: 7px
+
+  width: auto
   overflow: hidden
   text-overflow: ellipsis
-  top: 7px
-  width: auto
   white-space: nowrap
+
+  span .list
+    display: inline
+    text-align: center
+    padding-top: 7px
+    padding-bottom: 11px
+    padding-left: 9px
+    padding-right: 8px
+
+  .inactive
+    border: 1px #a89984
+
+  .active
+    background: #ebdbb2
+    color: #282828
 """
