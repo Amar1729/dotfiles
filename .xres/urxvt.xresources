@@ -1,0 +1,47 @@
+! Xresources file for urxvt settings
+
+!urxvt.termName: xterm
+urxvt*cursorUnderline: 1
+urxvt*fading: 1
+urxvt*cursorBlink: true
+!urxvt*imLocale: en_US.UTF-8
+urxvt*scrollBar: false
+URxvt.internalBorder:20
+urxvt*visualBell: false
+
+urxvt*transparent: true
+urxvt*shading: 30
+
+!urxvt*perl-lib:			/usr/local/Cellar/rxvt-unicode/9.20/urxvt/perl
+urxvt*perl-ext-common:		default,matcher,font-size
+urxvt*perl-matcher: 		1
+urxvt*matcher-button: 		3
+!urxvt*url-launcher:		/usr/bin/firefox
+!urxvt*url-launcher:        /Applications/Firefox.app/Contents/MacOS/firefox
+
+!copy/paste
+! check out http://dywypi.org/2011/04/rxvt-unicode-and-os-x.html
+URxvt.perl-ext-common:		macosx-clipboard
+URxvt*keysym.M-c:			perl:macosx-clipboard:copy
+URxvt*keysym.M-v:			perl:macosx-clipboard:paste
+
+! Font change settings
+!URxvt.iso14755: false
+!URxvt.iso14755_52: false
+URxvt.keysym.C-equal:	perl:font-size:increase
+URxvt.keysym.C-minus:   perl:font-size:decrease
+
+!URxvt.font: xft:FantasqueSansMono-Regular:size=14
+!URxvt.font: xft:FireMono-Regular:size=14
+URxvt.font: xft:monaco:size=12
+
+!xterm.transparency: true
+!xterm.shading: 20
+
+!urxvt*font: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*boldFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*italicFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+!urxvt*bolditalicFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
+
+!URxvt.font:     xft:bitstream vera sans mono:size=16:antialias=true
+!URxvt.boldFont: xft:bitstream vera sans mono:bold:size=16:antialias=true

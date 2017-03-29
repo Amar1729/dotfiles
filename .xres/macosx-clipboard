@@ -1,0 +1,78 @@
+#! perl -w
+
+# http://triplefusion.net/system/macosx-clipboard
+
+# ----------------------------------------------------------------------
+#  File: macosx-clipboard
+# ----------------------------------------------------------------------
+# 
+# All portions of code are copyright by their respective author/s.
+# Copyright (c) 2006 Samuel Ljungkvist <salj@triplefusion.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+# ----------------------------------------------------------------------
+#
+
+# Modification by Matias Larre-Borges <larre-borges.com:devel>:
+# To allow this module to work with the rxvt-unicode from macports,
+# I had to avoid using Foundation.pm
+
+# Modification by Jyrki Pulliainen <jyrki@dywypi.org>:
+# To remove double-encoding of UTF-8 from this module
+
+# Usage: put in your .Xdefaults the following lines
+
+# URxvt.perl-ext-common: macosx-clipboard
+# URxvt.keysym.M-c: perl:macosx-clipboard:copy
+# URxvt.keysym.M-v: perl:macosx-clipboard:paste
+
+use Fcntl ();
+use locale;
+#use utf8;
+
+sub copy {
+   my ($self) = @_;
+
+   open(CLIPBOARD, "| pbcopy ");
+   print CLIPBOARD $self->locale_encode($self->selection);
+   close CLIPBOARD;
+   ()
+}
+
+sub paste {
+   my ($self) = @_;
+   my ($str);
+
+   $str = `pbpaste`;
+   $str =~ tr/\n/\r/;
+   # $self->tt_write($self->locale_encode($str));
+   $self->tt_write($str);
+   ()
+}
+
+sub on_user_command {
+   my ($self, $cmd) = @_;
+
+   if ($cmd eq "macosx-clipboard:copy") {
+      $self->copy;
+   }
+
+   if ($cmd eq "macosx-clipboard:paste") {
+      $self->paste;
+   }
+
+   ()
+}
+

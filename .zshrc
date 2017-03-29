@@ -29,15 +29,6 @@ ZSH_THEME="amar"
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
 
@@ -46,17 +37,8 @@ ZSH_THEME="amar"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
 # Don't need this if calling `antigen use oh-my-zsh`
 #source $ZSH/oh-my-zsh.sh
-
-# Source a file with my prompt customization (for powerlevel9k, etc)
-#source ~/.zsh-promptsrc
 
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
@@ -102,6 +84,7 @@ antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 
 # done!
 antigen apply
 
+
 # User configuration
 
 ###
@@ -126,15 +109,7 @@ preexec() {print ''}
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export EDITOR="nvim"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -143,10 +118,6 @@ preexec() {print ''}
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof

@@ -34,9 +34,6 @@ alias soldark="open ~/.terminal_profiles/Solarized\ Dark\ ansi.terminal"
 alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
 alias novel="open ~/.terminal_profiles/Novel.terminal"
 
-alias pi="ssh pi@192.168.1.120"
-alias pi-ext="ssh pi@bass2000.ddns.net"
-
 ###
 # Common aliases, command improvements:
 ###
