@@ -1,4 +1,12 @@
 # Amar's Dotfiles
+
+##### Quick Reference - Changes to:
+* [Shell](#shell)
+* [Workflow](#workflow)
+* [Window Manager](#wms)
+* [Misc](#misc)
+  * [Browsers](#browsers)
+
 After lots of work customizing quite a few different tools, these are my dotfiles! Some are Mac-specific, but most of them will work on Linux too. This is the stuff I've included (with explanation mostly in comments in the files but also some below):  
 * Shell:
   * Currently using `zsh` and it's great! check out my [.zshrc](.zshrc).
@@ -19,18 +27,21 @@ After lots of work customizing quite a few different tools, these are my dotfile
   * some ricing scripts in .config/scripts/ricing.sh for functions like changing the wallpaper
   * .Xmodmap, .Xresources, .Xdefaults, .xinitrc leftover from playing around with XQuartz
 
+<a name="shell"></a>
 ## Shell
 Files: `.zshrc`, `.bashrc`, `.bash_profile`, `.profile`, (although `.profile` also deals with some leftover stuff from using `bspwm`) `.config/scripts/ricing.sh`
 * zsh config is a bit of a hassle and oh-my-zsh doesn't scale well, so `antigen` is used to easily manage plugins
 * If you don't want to spend too much time on shell configuration, `fish` is a good alternative shell to `bash`, similar to `zsh` but with a lot of sane defaults built in.
 * Some of my `bash`-defined functions are sourced by `zshrc` since I haven't fully moved over yet (normally this isn't great practice)
 
+<a name="workflow"></a>
 ## Workflow
 Files:
 * `.config/nvim/init.vim`
 * `.tmux.conf`, `.tmux-osx.conf`
 * `.config/sublime 3/*`
 
+<a name="wms"></a>
 ## Window Management
 Files:
 * `.khd` and `.kwm/kwmrc`
@@ -38,6 +49,7 @@ Files:
 * `.config/themer/*` (these are where the generated themes are written)
 * `.config/bspwm/bspwmrc` and `.config/sxhkd/sxhkdrc`
 
+<a name="misc"></a>
 ## Misc
 ### misc scripts
 Files: `.config/scripts/*`
@@ -60,9 +72,7 @@ You can make these edits by running `git config -e` or manually editing `~/.gitc
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 ```
 
-### Firefox homepage (minor mention)
-All managed by [firefox-homepage](.config/firefox-homepage)
-
+<a name="browsers"></a>
 ### Changes to browsers (Chrome and Firefox): Userstyles, Extensions, Plugins, and Apps
 #### userstyles/scripts
 * Chrome ([stylus](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne) and [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
@@ -78,7 +88,7 @@ All managed by [firefox-homepage](.config/firefox-homepage)
   * [Youtube Dark Style](https://userstyles.org/styles/116675/youtube-dark-style)
 
 #### Extensions, Plugins, Apps
-# TODO
+TODO:
 * Both:
   * Adblock Plus
   * Imagus (very helpful)
