@@ -26,6 +26,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " colorscheme
   call dein#add('morhetz/gruvbox')
 
+  " sensible settings
+  call dein#add('tpope/vim-sensible')
+
   " completion (remember to call ./install.py to generate completions!)
   "call dein#add('Valloric/YouCompleteMe')
 
@@ -124,6 +127,12 @@ set hidden
 "	au!
 "    autocmd BufWritePost $MYVIMRC source $MYVIMRC 
 "augroup END
+
+augroup AutoSaveFolds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  "autocmd BufWinEnter * silent loadview
+augroup END
 
 let mapleader=","
 
