@@ -1,5 +1,18 @@
 {
+	"tab_size": 4,
+	"translate_tabs_to_spaces": false,
+
+	"auto_complete": true,
+	"index_files": true,
+	"rulers": [79],
+	"trim_trailing_white_space_on_save": true,
+	
+	"font_face": "Source Code Pro",
+	"font_size": 14,
 	"color_scheme": "Packages/gruvbox/gruvbox (Dark) (Soft).tmTheme",
+	"theme": "gruvbox (Dark) (Soft).sublime-theme",
+	"gruvbox_tabs_s": true,
+	
 	"file_exclude_patterns":
 	[
 		"*.pyc",
@@ -24,15 +37,10 @@
 		"*.db",
 		"*.sublime-workspace"
 	],
-	"font_face": "Source Code Pro",
-	"font_size": 14,
-	"gruvbox_tabs_s": true,
+
 	"ignored_packages":
 	[
 		"GitGutter",
 		"Vintage"
-	],
-	"tab_size": 4,
-	"theme": "gruvbox (Dark) (Soft).sublime-theme",
-	"translate_tabs_to_spaces": false
+	]
 }

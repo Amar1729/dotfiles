@@ -5,12 +5,15 @@
 	],
 	"installed_packages":
 	[
+		"AdvancedNewFile",
+		"All Autocomplete",
 		"ApplySyntax",
 		"Better CoffeeScript",
 		"ClangAutoComplete",
 		"Color Highlighter",
 		"Comment-Snippets",
 		"Devastate",
+		"DocBlockr",
 		"Energy Color Scheme",
 		"Generic Config",
 		"Git",
