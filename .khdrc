@@ -120,6 +120,9 @@ shift - 0x78			:	echo "increase flux temp"
 cmd + shift - 0x7A		:	khd -e "open -a Flux"
 cmd + shift - 0x78		:	khd -e "killall Flux"
 
+#
+###
+
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
@@ -295,8 +298,8 @@ space - right			:	kwmc space -p increase right
 space - up				:	kwmc space -p increase top
 space - down			:	kwmc space -p increase bottom
 space - p				:	kwmc space -p increase all; \
-							kwmc space -g increase vertical; \
-							kwmc space -g increase horizontal
+							kwmc space -g increase vertical
+							#kwmc space -g increase horizontal
 
 # Decrease Screen Padding
 space + shift - left	:	kwmc space -p decrease left
@@ -304,6 +307,6 @@ space + shift - right	:	kwmc space -p decrease right
 space + shift - up		:	kwmc space -p decrease top
 space + shift - down	:	kwmc space -p decrease bottom
 space + shift - p		:	kwmc space -p decrease all; \
-							kwmc space -g decrease vertical; \
-							kwmc space -g decrease horizontal
+							kwmc space -g decrease vertical
+							#kwmc space -g decrease horizontal
 

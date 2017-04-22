@@ -69,6 +69,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
 
+  " Support for Julia
+  call dein#add('JuliaEditorSupport/julia-vim')
+
   " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
   "call dein#add('donRaphaco/neotex')
   " no, I think this only works for vim?
@@ -200,6 +203,20 @@ let g:minimap_toggle='<leader>gt'
 " TODO chromatica settings
 let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#enable_at_startup=1
+
+" deoplete settings
+let g:deoplete#enable_at_startup=1
+let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+" this will chang with each upgrade! symlink?
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
+
+let g:python_host_prog='/usr/local/bin/python'
+let g:python3_host_prog='/usr/local/bin/python3'
+" close the deoplete preview window on autocomplete
+autocmd CompleteDone * pclose
+" deoplete tab-complete:
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
+
 
 " airline-vim, airline-vim-themes settings
 " TODO
