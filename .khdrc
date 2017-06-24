@@ -29,8 +29,8 @@ alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 #	so possibly look at a different key (shift-literal?) 
 #	that can also exit tmux mode
 
-# enable kwm compatibility mode
-khd kwm on
+# enable kwm compatibility mode (not anymore)
+#khd kwm on
 
 
 # (from kwm's default)
@@ -51,29 +51,46 @@ khd kwm on
 #	tmux: passthrough when a tmux session is open
 
 
-# border color for different modes
-khd mode default color 0xaa282828
-khd mode switcher color 0xcc98971a	# gruvbox green
 
+# IMPORTANT
+# Old khd syntax ( < 3.0.0 )
+#	khd mode prefix color 0xffff0000
+# after:
+#	khd mode prefix on_enter kwmc config border focused color 0xffff0000
+# and possibly replace kwmc -> chunkc ?
+
+
+# border color for different modes
+#khd mode default color 0xaa282828
+#khd mode switcher color 0xcc98971a	# gruvbox green
+#
 khd mode tree prefix on
-khd mode tree color 0xcc458588
+#khd mode tree color 0xcc458588
 khd mode tree timeout 1
 khd mode tree restore default
-
+#
 khd mode space prefix on
-khd mode space color 0xccb16286
+#khd mode space color 0xccb16286
 khd mode space timeout 1
 khd mode space restore default
-
-#khd mode tmux prefix on
-#khd mode tmux color 0xcc7b4b93
-#khd mode tmux timeout 1
-#khd mode tmux restore default
-
+#
 khd mode term prefix on
-khd mode term color 0x77fbf1c7
+#khd mode term color 0x77fbf1c7
 khd mode term timeout 1
 khd mode term restore default
+
+khd mode default on_enter kwmc config border focused color 0xaa282828
+khd mode switcher on_enter kwmc config border focused color 0xcc98971a 
+khd mode tree on_enter kwmc config border focused color 0xcc458588 
+khd mode space on_enter kwmc config border focused color 0xccb16286
+khd mode term on_enter kwmc config border focused color 0x77fbf1c7 
+
+# Mode `tmux` not complete (keep this commented)
+#khd mode tmux prefix on
+#khd mode tmux color 0xcc7b4b93
+#khd mode tmux on_enter kwmc config border focused color 0xcc7b4b93 
+#khd mode tmux timeout 1
+#khd mode tmux restore default
 
 
 # toggle between modes

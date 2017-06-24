@@ -109,6 +109,8 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+set mouse=a
+
 " Clear SignColumn (git symbols) so it's same as background, recolor git symbols
 hi clear SignColumn
 hi SignColumn ctermbg=235
