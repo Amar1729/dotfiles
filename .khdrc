@@ -106,24 +106,16 @@ ctrl - n				:	khd -e "mode activate term"
 # Defaults
 ###
 
-# Terminal Profiles
-#ctrl - n				:	open ~/.terminal_profiles/Zenburn.terminal
-ctrl - n				:	osascript ~/.config/scripts/gruvbox.app
-ctrl - q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal
-ctrl - w				:	open ~/.terminal_profiles/Red\ Sands.terminal
+### messing around with flux, night/day, other config stuff (incomplete)
+#
 
-# temporary terminal mode:
-#ctrl - n				:	khd -e "mode activate term"
-term + q				:	open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal; \
-							khd -e "mode activate default"
-term + w				:	open ~/.terminal_profiles/Red\ Sands.terminal; \
-							khd -e "mode activate default"
-term + n				:	osascript ~/.config/scripts/gruvbox.app; \
-							khd -e "mode activate default"
+# focus-follows-mouse
+#lalt					:	kwmc config mouse-follows-focus off
 
 # Switch between night and day modes
 # can there be a script to toggle? just set an env for $DAY or $NIGHT ?
-cmd + alt + ctrl - y	: echo "toggle night/day mode yo " #~/.config/scripts/day
+cmd + alt + ctrl - y	:	~/.config/scripts/ricing.sh toggle
+#cmd + alt + ctrl - u	:	~/.config/scripts/ricing.sh night
 # have a script for :
 #	killing flux, restoring OS X dark mode 
 #	starting flux 
@@ -191,9 +183,17 @@ lalt + shift - k		:	kwmc window -c reduce 0.05 north
 lalt + shift - l		:	kwmc window -c reduce 0.05 east
 
 # Switch displays
-cmd +lalt +ctrl -right	:	kwmc display -f next
-cmd +lalt +ctrl -left	:	kwmc display -f prev
+ctrl - 1				:	kwmc display -f 0
+ctrl - 2				:	kwmc display -f 1
+ctrl - 3				:	kwmc display -f 2
 
+# Send focused window to another display
+ctrl + shift - 1		:	kwmc window -m display 0;\
+							kwmc display -f 0
+ctrl + shift - 2		:	kwmc window -m display 1;\
+							kwmc display -f 1
+ctrl + shift - 3		:	kwmc window -m display 2;\
+							kwmc display -f 2
 
 ###
 # terminal mode (ctrl - n)
@@ -243,18 +243,6 @@ switcher - o			:	kwmc window -s mark
 # Detach Focused Window And Reinsert At Marked Window
 switcher - p			:	kwmc window -m mark
 
-# Give Focus to Screen
-# I use builtin Mac gesture control for screen mgmt
-#switcher - 1			:	kwmc space -fExperimental 1
-#switcher - 2			:	kwmc space -fExperimental 2
-#switcher - 3			:	kwmc space -fExperimental 3
-#switcher - 4			:	kwmc space -fExperimental 4
-#switcher - 5			:	kwmc space -fExperimental 5
-#switcher - 6			:	kwmc space -fExperimental 6
-#switcher - z			:	kwmc space -fExperimental left
-#switcher - c			:	kwmc space -fExperimental right
-#switcher - f			:	kwmc space -fExperimental previous
-
 # Move Focused Window to Screen (and focus screen)
 switcher + shift - z	:	kwmc window -m space left; \
 							kwmc space -fExperimental left; \
@@ -263,19 +251,6 @@ switcher + shift - z	:	kwmc window -m space left; \
 switcher + shift - c	:	kwmc window -m space right; \
 							kwmc space -fExperimental right; \
 							khd -e "mode activate default"
-
-# Give Focus to Display
-switcher - 1			:	kwmc display -f 0
-switcher - 2			:	kwmc display -f 1
-switcher - 3			:	kwmc display -f 2
-
-# Move Focused Window to Display (and focus on display)
-switcher + shift - 1	:	kwmc window -m display 0;\
-							kwmc display -f 0
-switcher + shift - 2	:	kwmc window -m display 1;\
-							kwmc display -f 1
-switcher + shift - 3	:	kwmc window -m display 2;\
-							kwmc display -f 2
 
 ###
 # tree mode (ctrl - f)
