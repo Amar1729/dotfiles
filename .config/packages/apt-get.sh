@@ -3,8 +3,40 @@
 # amar paul's ubuntu config
 # common apt-get installs and config for ubuntu/debian systems
 
-# Update first
-sudo apt-get update
+# use this as reference for making home dir the dotfiles repo
+import-dotfiles () {
+	git init
+	git remote add origin <remote_url>
+	git fetch --all --prune
+	git checkout master
+	git add -A .
+	git commit -m "Adding my files..."
+}
+
+setup () {
+
+	echo "creating Downloads/wm and ~/.config/ if it's not there"
+
+	mkdir ~/Downloads/wm
+	mkdir -p ~/.config/nvim
+
+	git clone https://github.com/baskerville/bspwm ~/Downloads/wm/
+	git clone https://github.com/baskerville/sxhkd ~/Downloads/wm/
+
+	# setup nvim and zsh? 
+
+	echo "Copied init.vim, make sure to install dein and edit paths"
+	[[ -f ../../.config/nvim/init.vim ]] && cp ../../.config/nvim/init.vim ~/.config/nvim/init.vim
+
+	echo "Copying zsh, oh-my-zsh, antigen ..."
+
+	# https://github.com/robbyrussell/oh-my-zsh
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+	# https://github.com/zsh-users/antigen
+	curl -L git.io/antigen > ~/antigen.zsh
+}
+
 
 theming () {
 
