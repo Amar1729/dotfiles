@@ -97,6 +97,16 @@ HISTCONTROL=ignoreboth
 HISTFILESIZE=1000000
 HISTSIZE=10000000               # number of history lines kept internally
 SAVEHIST=10000000               # max number of history lines saved
+setopt APPEND_HISTORY          # history appends to existing file
+setopt HIST_REDUCE_BLANKS      # trim multiple insgnificant blanks in history
+setopt HIST_IGNORE_DUPS			# ignore duplicates and (?)
+
+# ignore if beginning with space
+setopt HIST_IGNORE_SPACE
+setopt HIST_NO_STORE
+
+# save time and how long cmd ran
+setopt EXTENDED_HISTORY
 
 ###
 

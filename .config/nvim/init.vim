@@ -26,9 +26,6 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " colorscheme
   call dein#add('morhetz/gruvbox')
 
-  " sensible settings
-  call dein#add('tpope/vim-sensible')
-
   " completion (remember to call ./install.py to generate completions!)
   "call dein#add('Valloric/YouCompleteMe')
 
@@ -135,8 +132,14 @@ set hidden
 
 augroup AutoSaveFolds
   autocmd!
-  autocmd BufWinLeave * mkview
-  "autocmd BufWinEnter * silent loadview
+  autocmd BufWinLeave *.* mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+
+" why is this necessary? didn't nvim use to do this automatically?
+augroup SetSyntaxColor
+	autocmd!
+	autocmd BufWinLeave *rc set syntax=config
 augroup END
 
 let mapleader=","

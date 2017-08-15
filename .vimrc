@@ -1,14 +1,13 @@
+" Amar's .vimrc
 
-
+" Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
 "
 "Plug 'tpope/vim-sensible'
 "Plug 'morhetz/gruvbox'
-"
 "Plug 'davidhalter/jedi-vim'
 "
 "call plug#end()
-
 
 augroup remember_folds
 	autocmd!
@@ -23,7 +22,6 @@ set autoindent noexpandtab tabstop=4 shiftwidth=4
 set hlsearch
 set relativenumber
 set number
-
 
 map <Leader>n :bnext<Enter>
 map <Leader><Space> :noh<Enter>

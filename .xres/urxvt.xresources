@@ -1,16 +1,11 @@
 ! Xresources file for urxvt settings
 
+! why was this here?
 !urxvt.termName: xterm
-urxvt*cursorUnderline: 1
-urxvt*fading: 1
-urxvt*cursorBlink: true
-!urxvt*imLocale: en_US.UTF-8
-urxvt*scrollBar: false
-URxvt.internalBorder:20
-urxvt*visualBell: false
 
-urxvt*transparent: true
-urxvt*shading: 30
+urxvt.termName: urxvt
+
+! Standard stuff
 
 !urxvt*perl-lib:			/usr/local/Cellar/rxvt-unicode/9.20/urxvt/perl
 urxvt*perl-ext-common:		default,matcher,font-size
@@ -25,19 +20,32 @@ URxvt.perl-ext-common:		macosx-clipboard
 URxvt*keysym.M-c:			perl:macosx-clipboard:copy
 URxvt*keysym.M-v:			perl:macosx-clipboard:paste
 
-! Font change settings
+! Look and Feel
+urxvt*cursorUnderline: 1
+urxvt*fading: 1
+urxvt*cursorBlink: true
+!urxvt*imLocale: en_US.UTF-8
+urxvt*scrollBar: false
+URxvt.internalBorder:20
+urxvt*visualBell: false
+urxvt*transparent: true
+urxvt*shading: 30
+
+! try to prevent bad kerning
+urxvt*letterSpace: -1
+
+
+! Fonts
+!URxvt.font: xft:FantasqueSansMono-Regular:size=14
+!URxvt.font: xft:monaco:size=12
+URxvt.font: xft:Fira Mono Regular:size=14
+! change on the fly:
 !URxvt.iso14755: false
 !URxvt.iso14755_52: false
 URxvt.keysym.C-equal:	perl:font-size:increase
 URxvt.keysym.C-minus:   perl:font-size:decrease
 
-!URxvt.font: xft:FantasqueSansMono-Regular:size=14
-!URxvt.font: xft:FireMono-Regular:size=14
-URxvt.font: xft:monaco:size=12
-
-!xterm.transparency: true
-!xterm.shading: 20
-
+! old defaults settings, make sure you don't need these
 !urxvt*font: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
 !urxvt*boldFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
 !urxvt*italicFont: -*-courier-medium-r-normal-*-12-120-*-*-*-*-*-*
@@ -45,3 +53,4 @@ URxvt.font: xft:monaco:size=12
 
 !URxvt.font:     xft:bitstream vera sans mono:size=16:antialias=true
 !URxvt.boldFont: xft:bitstream vera sans mono:bold:size=16:antialias=true
+!
