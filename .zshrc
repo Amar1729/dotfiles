@@ -41,7 +41,14 @@ ZSH_THEME="amar"
 #source $ZSH/oh-my-zsh.sh
 
 # antigen (homebrew) path
-source /usr/local/share/antigen/antigen.zsh
+#source /usr/local/share/antigen/antigen.zsh
+find-antigen () {
+	src="$(brew --prefix)"
+	src="$(find $src -name 'antigen.zsh')"
+	[[ -f $src ]] && echo $src
+}
+source $(find-antigen)
+
 
 # load oh-my-zsh's library
 antigen use oh-my-zsh
