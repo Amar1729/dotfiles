@@ -1,4 +1,0 @@
-{
-	"cmd": ["/Library/TeX/texbin/pdflatex","$file"],
-    "selector": "text.tex.latex"
-}
