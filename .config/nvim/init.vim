@@ -64,7 +64,7 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('kchmck/vim-coffee-script')
 
   " Live LaTeX previewing
-  "call dein#add('xuhdev/vim-latex-live-preview')
+  call dein#add('xuhdev/vim-latex-live-preview')
 
   " Support for Julia
   call dein#add('JuliaEditorSupport/julia-vim')
@@ -108,14 +108,19 @@ set softtabstop=4
 
 set mouse=a
 
+" set transparency when using urxvt fake transparency
+hi Normal ctermbg=NONE
+
 " Clear SignColumn (git symbols) so it's same as background, recolor git symbols
 hi clear SignColumn
-hi SignColumn ctermbg=235
+" gruvbox: ctermbg=235
+" urxvt fake transparency: ctermbg=NONE
+hi SignColumn ctermbg=NONE
 " linenr: ctermfg=245 for all symbols				  Defaults:
-hi GitGutterAdd ctermbg=235 ctermfg=142				" GruvboxGreenSign fg/bg 142/237
-hi GitGutterChange ctermbg=235 ctermfg=108			" GruvboxAquaSign fg/bg 108/237
-hi GitGutterDelete ctermbg=235 ctermfg=167			" GruvboxRedSign fg/bg 167/237
-hi GitGutterChangeDelete ctermbg=235 ctermfg=108	" GruvboxAquaSign fg/bg 108/237
+hi GitGutterAdd ctermbg=NONE ctermfg=142			" GruvboxGreenSign fg/bg 142/237
+hi GitGutterChange ctermbg=NONE ctermfg=108			" GruvboxAquaSign fg/bg 108/237
+hi GitGutterDelete ctermbg=NONE ctermfg=167			" GruvboxRedSign fg/bg 167/237
+hi GitGutterChangeDelete ctermbg=NONE ctermfg=108	" GruvboxAquaSign fg/bg 108/237
 
 " hide modified buffers (allow opening of new buffers if current is edited)
 set hidden
@@ -134,12 +139,6 @@ augroup AutoSaveFolds
   autocmd!
   autocmd BufWinLeave *.* mkview
   autocmd BufWinEnter *.* silent! loadview
-augroup END
-
-" why is this necessary? didn't nvim use to do this automatically?
-augroup SetSyntaxColor
-	autocmd!
-	autocmd BufWinLeave *rc set syntax=config
 augroup END
 
 let mapleader=","
@@ -211,12 +210,12 @@ let g:chromatica#enable_at_startup=1
 
 " deoplete settings
 let g:deoplete#enable_at_startup=1
-let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+"let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " this will chang with each upgrade! symlink?
-let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
+"let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
-let g:python_host_prog='/usr/local/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
 " deoplete tab-complete:
