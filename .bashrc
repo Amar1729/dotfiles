@@ -19,7 +19,7 @@
 #  done
 
 # Python shell tab completion
-export PYTHONSTARTUP="$(python -m jedi repl)"
+export PYTHONSTARTUP="$(/usr/local/bin/python2 -m jedi repl)"
 
 ################
 ##
@@ -146,13 +146,21 @@ alias lock="open -a ScreenSaverEngine"
 
 # reboot wifi (my router will occasionally boot my computer off)
 alias wifi-toggle="networksetup -setairportpower en0 off; \
-					networksetup -setairportpower en0 on"
+networksetup -setairportpower en0 on"
+
+# copy with a progress bar.
+# check how this works for Mac
+#alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
 
 ###
 # http://tex.stackexchange.com/questions/43057/macosx-pdf-viewer-automatic-reload-on-file-modification
 # setup Skim for vim latex pdf previewing
 # defaults write -app Skim SKAutoReloadFileUpdate -boolean true
+#
+# http://stackoverflow.com/questions/1264210/does-mac-x11-have-the-xtest-extension
+# xtest for xQuartz?
+# defaults write org.x.X11 enable_test_extensions -boolean true
 
 ###
 # Following suggestions are from:
@@ -172,12 +180,42 @@ alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killal
 #   -------------------------------------------------------------------
 alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
 
-#   finder-unhide:      Show hidden files in Finder
-#   finder-hide:	    Hide hidden files in Finder
-#   -------------------------------------------------------------------
-alias finder-unhide='defaults write com.apple.finder ShowAllFiles TRUE'
-alias finder-hide='defaults write com.apple.finder ShowAllFiles FALSE'
+# true by default
+export FINDER_SHOW_HIDDEN=1
+toggleFinderHidden () {
+	if [[ $FINDER_SHOW_HIDDEN -eq 0 ]]
+	then
+		export FINDER_SHOW_HIDDEN=1
+		defaults write com.apple.finder ShowAllFiles true
+		killall Finder
+	else
+		export FINDER_SHOW_HIDDEN=0
+		defaults write com.apple.finder ShowAllFiles false
+		killall Finder
+	fi
+}
+
+# Show desktop icons by default
+export DESKTOP_SHOW=1
+toggleDesktop () {
+	if [[ $DESKTOP_SHOW -eq 0 ]]
+	then
+		export DESKTOP_SHOW=1
+		defaults write com.apple.finder CreateDesktop true
+		killall Finder
+	else
+		export DESKTOP_SHOW=0
+		defaults write com.apple.finder CreateDesktop false
+		killall Finder
+	fi
+}
 
 ###
 # End of Nate Landau's suggestions
 ###
+
+# Add user scripts dir (e.g. for cmus in tmux)
+export PATH="/Users/Amar/.config/scripts:$PATH"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
