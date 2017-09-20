@@ -14,6 +14,7 @@ alias l="ll"
 
 alias open="xdg-open"
 
+alias pbcopy='xclip -selection clipboard'
 
 function mcat
 	highlight -O xterm256 --style=zenburn -i $argv[1]

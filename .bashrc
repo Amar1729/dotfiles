@@ -21,6 +21,8 @@
 # Python shell tab completion
 export PYTHONSTARTUP="$(python -m jedi repl)"
 
+alias pbcopy='xclip -selection clipboard'
+
 ################
 ##
 ## Personal aliases, functions
@@ -142,7 +144,7 @@ night () { ~/.config/scripts/ricing.sh night ;}
 ###
 
 # Open the screensaver with `lock`. Set preferences to lock the screen after 5s of screensaver
-alias lock="open -a ScreenSaverEngine"
+alias lock="~/.config/lock.sh"
 
 # reboot wifi (my router will occasionally boot my computer off)
 alias wifi-toggle="networksetup -setairportpower en0 off; \
