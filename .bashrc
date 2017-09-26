@@ -107,7 +107,7 @@ hcat () {
 }
 
 # make tmux easier to check
-alias tmux-ls="/usr/local/bin/tmux list-sessions"
+alias tmux-ls="/usr/bin/tmux list-sessions"
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {

@@ -54,6 +54,10 @@ wp-wallpaper () {
 	fi
 }
 
+clock () {
+	watch -t -n 1 date +%T
+}
+
 ###
 # theme/color quick testing
 ###

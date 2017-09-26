@@ -149,11 +149,17 @@ nnoremap <leader>Y "+yg_
 nnoremap <leader>y "+y
 nnoremap <leader>yy "+yy
 
-" Paste from clipboard
+" Paste from system: clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
+
+" Paste from system: primary
+nnoremap <leader><C-p> "*p
+nnoremap <leader><C-P> "*P
+vnoremap <leader><C-p> "*p
+vnoremap <leader><C-P> "*P
 
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
@@ -221,70 +227,11 @@ autocmd CompleteDone * pclose
 " deoplete tab-complete:
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
 
+" latex live stuff
+" update time
+autocmd Filetype tex setl updatetime=5
+nnoremap <F12> :LLPStartPreview<CR>
 
-" airline-vim, airline-vim-themes settings
-" TODO
-let g:airline#extensions#branch#enabled = 1
-
-" Default:
- " let g:airline_section_a       (mode, crypt, paste, spell, iminsert)
- " let g:airline_section_b       (hunks, branch)
- " let g:airline_section_c       (bufferline or filename)
- " let g:airline_section_gutter  (readonly, csv)
- " let g:airline_section_x       (tagbar, filetype, virtualenv)
- " let g:airline_section_y       (fileencoding, fileformat)
- " let g:airline_section_z       (percentage, line number, column number)
- " let g:airline_section_error   (ycm_error_count, syntastic, eclim)
- " let g:airline_section_warning (ycm_warning_count, whitespace)
-" Changes:
-let g:airline_section_x = ""
-let g:airline_section_y = "%v"
-let g:airline_section_z = '%l/%L'
-let g:airline_section_error = ''
-let g:airline_section_warning = ''
-
-" Patch the font myself
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.whitespace = 'Ξ'
-
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-" some good airline themes:
-" dark:
-"	badcat, laederon, base16_twilight, bubblegum, distinguished, term
-" light:
-"	papercolor
-let g:airline_theme='term'
-let g:airline#extensions#tabline#enabled = 1		" Enable list of buffers
-let g:airline#extensions#tabline#fnamemod = ':t'	" Show just filename in bufferline
-let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
-
-" (used to use) promptline customization to generate bars for for bash/fish and tmux
-" :PromptlineSnapshot [theme] [preset]
-" :TmuxlineSnapshot [theme] [preset]
-"so promptline_settings.vim
-
+" change from default evince
+" actually i think evince is fine?
+"let g:livepreview_previewer = 'mupdf'
