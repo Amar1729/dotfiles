@@ -50,6 +50,9 @@ alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
 alias cclear="cd; clear"
 
+# always use homebrew python?
+alias python='python2'
+
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
 # should the -p flag be included?
 mcd () { mkdir -p "$1" && cd "$1"; }
@@ -142,11 +145,13 @@ night () { ~/.config/scripts/ricing.sh night ;}
 ###
 
 # Open the screensaver with `lock`. Set preferences to lock the screen after 5s of screensaver
-alias lock="open -a ScreenSaverEngine"
+SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
+alias lock="open -a $SCREEN_ENGINE"
 
 # reboot wifi (my router will occasionally boot my computer off)
 alias wifi-toggle="networksetup -setairportpower en0 off; \
-networksetup -setairportpower en0 on"
+					sleep 2; \
+					networksetup -setairportpower en0 on"
 
 # copy with a progress bar.
 # check how this works for Mac
