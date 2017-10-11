@@ -108,15 +108,14 @@ kwmc rule owner="Finder" name="Trash" properties={float="true"}
 kwmc rule owner="VMware Fusion" properties={float="true"}
 kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={float="true"}
 kwmc rule owner="Cyberduck" properties={float="true"}
-# pushbullet quickreply - doesn't work yet?
-#kwmc rule name="Quick Reply" properties={float="true"}
 kwmc rule name="Install user style" properties={float="true"}
 kwmc rule owner="Google Chrome" name="Google Hangouts" properties={float="true"}
 kwmc rule owner="VLC" properties={float="true"}
 kwmc rule owner="Calculator" properties={float="true"}
 kwmc rule owner="App Store" properties={float="true"}
 kwmc rule owner="Disk Utility" properties={float="true"}
-kwmc rule owner="VOX" properties={float="true"}
+# pushbullet quickreply - doesn't work yet?
+#kwmc rule name="Quick Reply" properties={float="true"}
 
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
@@ -126,7 +125,7 @@ kwmc rule owner="VOX" properties={float="true"}
 	captures an application to the given screen,
 	if the screen exists.
 */
-kwmc rule owner="VLC" properties={space="3"}
+#kwmc rule owner="VLC" properties={space="3"}
 
 # Enable border for focused window
 kwmc config border focused on

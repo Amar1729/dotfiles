@@ -36,6 +36,7 @@ wp () {
 			print "Usage:"
 			print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE"
 			print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
+			print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
 			print "\twp -p|--profile PROFILE\t\tChange current profile to PROFILE"
 			print "\twp -n|--new NAME\t\tNew terminal window with profile NAME"
 			;;
@@ -62,7 +63,6 @@ wp-wallpaper () {
 # tab completion done for zsh (see .zshrc)
 # bash?:
 # http://tldp.org/LDP/abs/html/tabexpansion.html
-# TODO: (possibly) add flag for also changing wallpaper (named same as theme?)
 # ITERM2 ONLY
 prof () { echo -e "\033]50;SetProfile=$1\a" ; }
 
@@ -73,6 +73,9 @@ iterm-transfer () {
   theme=$(basename $(dirname "$file"))
   cp "$file" "/Users/Amar/.config/iterm2/""$theme"".itermcolors"
 }
+
+# resets current song display (e.g. if firefox is closed)
+alias reset-song="echo 'hack the planet' > ~/.config/song.txt"
 
 # Display terminal ANSI colors
 termcolors() {

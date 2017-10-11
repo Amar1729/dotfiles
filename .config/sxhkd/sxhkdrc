@@ -5,9 +5,7 @@
 # terminal emulator
 # windelicato - mod1 + shift + Return
 mod1 + Return
-	xterm
-#	urxvt
-#	urxvtc
+	urxvt
 
 # What is this?
 #mod1 + ctrl + Return

@@ -41,6 +41,7 @@
 	"gruvbox_tabs_s": true,
 	"ignored_packages":
 	[
+		"Package Control",
 		"Vintage"
 	],
 	"index_files": true,
