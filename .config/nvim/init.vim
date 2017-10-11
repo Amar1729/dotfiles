@@ -16,12 +16,6 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Required:
   call dein#add('/Users/Amar/.config/nvim//repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
   " colorscheme
   call dein#add('morhetz/gruvbox')
@@ -59,9 +53,6 @@ if dein#load_state('/Users/Amar/.config/nvim/')
 
   " nice completion of (x)html tags
   call dein#add('tpope/vim-ragtag')
-
-  " Syntax highlighting for coffeescript
-  call dein#add('kchmck/vim-coffee-script')
 
   " Live LaTeX previewing
   call dein#add('xuhdev/vim-latex-live-preview')
@@ -108,22 +99,27 @@ set softtabstop=4
 
 set mouse=a
 
-" set transparency when using urxvt fake transparency
-hi Normal ctermbg=NONE
+" hide modified buffers (allow opening of new buffers if current is edited)
+set hidden
 
-" Clear SignColumn (git symbols) so it's same as background, recolor git symbols
+" override some defaults (only needed on ubuntu?)
+set foldmethod=manual
+set foldcolumn=2
+
+" Recolor columns and git symbols
+" set transparency when using urxvt fake transparency (ctermbg=NONE)
+hi Normal ctermbg=NONE
+hi clear FoldColumn
+hi FoldColumn ctermbg=NONE
+hi Folded cterm=bold ctermbg=NONE ctermfg=7
 hi clear SignColumn
 " gruvbox: ctermbg=235
-" urxvt fake transparency: ctermbg=NONE
 hi SignColumn ctermbg=NONE
 " linenr: ctermfg=245 for all symbols				  Defaults:
 hi GitGutterAdd ctermbg=NONE ctermfg=142			" GruvboxGreenSign fg/bg 142/237
 hi GitGutterChange ctermbg=NONE ctermfg=108			" GruvboxAquaSign fg/bg 108/237
 hi GitGutterDelete ctermbg=NONE ctermfg=167			" GruvboxRedSign fg/bg 167/237
 hi GitGutterChangeDelete ctermbg=NONE ctermfg=108	" GruvboxAquaSign fg/bg 108/237
-
-" hide modified buffers (allow opening of new buffers if current is edited)
-set hidden
 
 """
 " Personal definitions

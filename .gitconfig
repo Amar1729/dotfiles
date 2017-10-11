@@ -1,4 +1,6 @@
-
+[user]
+	name = Amar1729
+	email = amar.paul16@gmail.com
 [alias]
 	co = checkout
 	ci = commit
@@ -6,6 +8,22 @@
 	st = status
 	br = branch
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-
 [push]
 	default = simple
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
