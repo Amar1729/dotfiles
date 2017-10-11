@@ -108,7 +108,10 @@ set softtabstop=4
 
 set mouse=a
 
-" Clear SignColumn (git symbols) so it's same as background, recolor git symbols
+" Recolor columns and git symbols
+hi clear FoldColumn
+hi FoldColumn ctermbg=235
+hi Folded cterm=bold ctermbg=235 ctermfg=7
 hi clear SignColumn
 hi SignColumn ctermbg=235
 " linenr: ctermfg=245 for all symbols				  Defaults:
