@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
+export PATH=$PATH:/opt/bin
 
 # source my bashrc and ricing scripts (switching shells takes a while)
 [[ -r ~/.bashrc ]] && source ~/.bashrc
@@ -133,4 +134,4 @@ export EDITOR="nvim"
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+[[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
