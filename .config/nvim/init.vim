@@ -254,6 +254,12 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
+" wip : rename other modes?
+let g:airline_mode_map = {
+	\ 'n' : 'normie',
+	\ 'i' : 'hardcore hacking',
+	\ }
+
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -292,3 +298,7 @@ let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
 " :TmuxlineSnapshot [theme] [preset]
 "so promptline_settings.vim
 
+" I think this helped with the deoplete install issue
+call remote#host#RegisterPlugin('python3', '/Users/shougo/.vim/bundle/deoplete.nvim/rplugin/python3/deoplete.py', [
+      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
+     \ ])
