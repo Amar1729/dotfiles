@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 # A bunch of scripts to aid in window-manager, ricing, profiling etc setup
 # Note - lots of these functions are probably Mac-specific
