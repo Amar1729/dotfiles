@@ -132,6 +132,10 @@ cmd + shift - 0x78		:	khd -e "killall Flux"
 #
 ###
 
+# mouse buttons ( send cmd + {[,]} )
+- button3					:	khd -p "cmd - 0x21"
+- button4					:	khd -p "cmd - 0x1e"
+
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
