@@ -207,7 +207,7 @@ ctrl + shift - 3		:	kwmc window -m display 2;\
 
 # Terminal Profiles
 # -> open windows with different profiles
-ctrl - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
+cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term + shift - n		:	open -na Google\ Chrome
 term - c				:	~/.config/scripts/ricing.sh wp -n changer
