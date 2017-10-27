@@ -21,8 +21,8 @@ wp () {
 			echo -e "\033]50;SetProfile=$2\a"
 			;;
 		-n|--new)
-			# (not done: this needs to open new window)
-			osascript -e "tell application \"iTerm\" to create window with profile \"$2\""
+			[[ -n "$2" ]] && PROF="$2" || PROF="gruvbox"
+			osascript -e "tell application \"iTerm\" to create window with profile \"$PROF\""
 			;;
 		--bonsai)
 			~/.config/scripts/bonsai.sh
