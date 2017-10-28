@@ -129,3 +129,9 @@ export EDITOR="nvim"
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
+
+# add manually-installed stuff from here
+export PATH="$PATH:/opt/bin"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+[[ -d $HOME/.rvm/bin/ ]] && export PATH="$PATH:$HOME/.rvm/bin"
