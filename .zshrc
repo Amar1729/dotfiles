@@ -1,10 +1,8 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+# Amar Paul's zshrc (macOS)
 
 # source my bashrc and ricing scripts (switching shells takes a while)
+# also note - bashrc now sources .profile, which should do the path changes?
 [[ -r ~/.bashrc ]] && source ~/.bashrc
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
 
 export TERM="xterm-256color"
 
@@ -131,6 +129,3 @@ export EDITOR="nvim"
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"

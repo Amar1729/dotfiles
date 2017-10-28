@@ -132,6 +132,10 @@ cmd + shift - 0x78		:	khd -e "killall Flux"
 #
 ###
 
+# mouse buttons ( send cmd + {[,]} )
+- button3					:	khd -p "cmd - 0x21"
+- button4					:	khd -p "cmd - 0x1e"
+
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
@@ -203,7 +207,7 @@ ctrl + shift - 3		:	kwmc window -m display 2;\
 
 # Terminal Profiles
 # -> open windows with different profiles
-ctrl - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
+cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term + shift - n		:	open -na Google\ Chrome
 term - c				:	~/.config/scripts/ricing.sh wp -n changer
@@ -229,6 +233,13 @@ switcher - left			:	kwmc window -m space left; \
 switcher - right		:	kwmc window -m space right; \
 							kwmc space -fExperimental right; \
 							khd -e "mode activate default"
+
+switcher - 1			:	kwmc window -m space 1
+switcher - 2			:	kwmc window -m space 2
+switcher - 3			:	kwmc window -m space 3
+switcher - 4			:	kwmc window -m space 4
+switcher - 5			:	kwmc window -m space 5
+switcher - 6			:	kwmc window -m space 6
 
 ###
 # tree mode (ctrl - f)

@@ -6,20 +6,11 @@
 # and temporary aliases
 [[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
-# rice scripts
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
-#[[ -r ~/.config/airline-prompt.sh ]] && . ~/.config/airline-prompt.sh
-
-# rudimentary rename (or syntax for it)
-# for f in Game.of.Thrones.S03E*
-#  do
-#   new=${f/Game.of.Thrones./}
-#   new=${new/720p*/srt}
-#   mv $f $new
-#  done
-
 # Python shell tab completion
 export PYTHONSTARTUP="$(/usr/local/bin/python2 -m jedi repl)"
+
+# Set default editor
+export EDITOR="nvim"
 
 ################
 ##
@@ -27,19 +18,9 @@ export PYTHONSTARTUP="$(/usr/local/bin/python2 -m jedi repl)"
 ##
 ################
 
-# Open different Terminal profiles
-alias redsand="open ~/.terminal_profiles/Red\ Sands.terminal"
-alias zenburn="open ~/.terminal_profiles/Zenburn.terminal"
-alias soldark="open ~/.terminal_profiles/Solarized\ Dark\ ansi.terminal"
-alias solit="open ~/.terminal_profiles/Solarized\ Light\ ansi.terminal"
-alias novel="open ~/.terminal_profiles/Novel.terminal"
-
 ###
 # Common aliases, command improvements:
 ###
-
-# Set default editor
-export EDITOR="nvim"
 
 # ls, grep, mkdir, tmux improvements
 alias ll="ls -lhFG"
@@ -218,9 +199,3 @@ toggleDesktop () {
 ###
 # End of Nate Landau's suggestions
 ###
-
-# Add user scripts dir (e.g. for cmus in tmux)
-export PATH="/Users/Amar/.config/scripts:$PATH"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
