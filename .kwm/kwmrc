@@ -69,8 +69,8 @@ Override default settings for screen 1
    kwmc config display 1 padding 100 100 100 100
    kwmc config display 1 gap 40 40
 */
-kwmc config display 1 padding 60 60 60 60
-kwmc config display 1 gap 40 40
+# use for ViewSonic Monitor
+kwmc config display 1 gap 20 20
 
 # Set default container split-ratio
 kwmc config split-ratio 0.5

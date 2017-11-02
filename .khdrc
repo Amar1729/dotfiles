@@ -43,44 +43,26 @@ alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 
 
 # Default: default mode
-# Switcher: used mostly for swapping view/windows in or between screens/displays
-# Tree: temporary window containers
+# Tree: change window containers/spaces
 # Space: change space tiling mode or modify padding/gaps 
 # Terminal (term): spawn terminals (or brwoser windows) with different profiles
 # In progress:
 #	tmux: passthrough when a tmux session is open
 
-
-
-# IMPORTANT
-# Old khd syntax ( < 3.0.0 )
-#	khd mode prefix color 0xffff0000
-# after:
-#	khd mode prefix on_enter kwmc config border focused color 0xffff0000
-# and possibly replace kwmc -> chunkc ?
-
-
-# border color for different modes
-#khd mode default color 0xaa282828
-#khd mode switcher color 0xcc98971a	# gruvbox green
-#
 khd mode tree prefix on
-#khd mode tree color 0xcc458588
 khd mode tree timeout 1
 khd mode tree restore default
-#
+
 khd mode space prefix on
-#khd mode space color 0xccb16286
 khd mode space timeout 1
 khd mode space restore default
-#
+
 khd mode term prefix on
-#khd mode term color 0x77fbf1c7
 khd mode term timeout 1
 khd mode term restore default
 
 khd mode default on_enter kwmc config border focused color 0xaa282828
-khd mode switcher on_enter kwmc config border focused color 0xcc98971a 
+#khd mode switcher on_enter kwmc config border focused color 0xcc98971a 
 khd mode tree on_enter kwmc config border focused color 0xcc458588 
 khd mode space on_enter kwmc config border focused color 0xccb16286
 khd mode term on_enter kwmc config border focused color 0x77fbf1c7 
@@ -94,8 +76,8 @@ khd mode term on_enter kwmc config border focused color 0x77fbf1c7
 
 
 # toggle between modes
-ctrl - s				:	khd -e "mode activate switcher"
-switcher + ctrl - s		:	khd -e "mode activate default"
+#ctrl - s				:	khd -e "mode activate switcher"
+#switcher + ctrl - s		:	khd -e "mode activate default"
 
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
@@ -106,41 +88,12 @@ ctrl - n				:	khd -e "mode activate term"
 # Defaults
 ###
 
-### messing around with flux, night/day, other config stuff (incomplete)
-#
-
-# focus-follows-mouse
-#lalt					:	kwmc config mouse-follows-focus off
-
-# Switch between night and day modes
-# can there be a script to toggle? just set an env for $DAY or $NIGHT ?
-cmd + alt + ctrl - y	:	~/.config/scripts/ricing.sh toggle
-#cmd + alt + ctrl - u	:	~/.config/scripts/ricing.sh night
-# have a script for :
-#	killing flux, restoring OS X dark mode 
-#	starting flux 
-#	increasing/lowering flux temp (shift f1/f2 ?)
-
-# 0x7A: f1
-shift - 0x7A			:	echo "decrease flux temp"
-# 0x78: f2
-shift - 0x78			:	echo "increase flux temp"
-
-cmd + shift - 0x7A		:	khd -e "open -a Flux"
-cmd + shift - 0x78		:	khd -e "killall Flux"
-
-#
-###
-
 # mouse buttons ( send cmd + {[,]} )
-- button3					:	khd -p "cmd - 0x21"
-- button4					:	khd -p "cmd - 0x1e"
+- button3				:	khd -p "cmd - 0x21"
+- button4				:	khd -p "cmd - 0x1e"
 
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
-
-# Rotate Window Tree
-ctrl - r				:	kwmc tree rotate 270
 
 # Move focus (necessary?)
 cmd + ctrl - h			:	kwmc window -f west
@@ -206,44 +159,45 @@ ctrl + shift - 3		:	kwmc window -m display 2;\
 ###
 
 # Terminal Profiles
-# -> open windows with different profiles
+# most common: cmd+enter (similar to sxhkd default)
 cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n gruvbox
-term - n				:	~/.config/scripts/ricing.sh wp -n gruvbox
-term + shift - n		:	open -na Google\ Chrome
 term - c				:	~/.config/scripts/ricing.sh wp -n changer
 term - a				:	~/.config/scripts/ricing.sh wp -n adwaita
 term - b				:	~/.config/scripts/ricing.sh wp -n blaziken
 term - 2				:	~/.config/scripts/ricing.sh wp -n blaziken2
 term - p				:	~/.config/scripts/ricing.sh wp -n animeswing
+term + shift - n		:	open -na Google\ Chrome
 
-
-###
-# switcher mode (ctrl - s)
-###
-
-# Reload Config
-switcher - r			:	khd -e "reload"
-
-# Move Focused Window to Screen (and focus screen)
-# refocus after consecutive window jumps only
-switcher - left			:	kwmc window -m space left; \
-							kwmc space -fExperimental left; \
-							khd -e "mode activate default"
-
-switcher - right		:	kwmc window -m space right; \
-							kwmc space -fExperimental right; \
-							khd -e "mode activate default"
-
-switcher - 1			:	kwmc window -m space 1
-switcher - 2			:	kwmc window -m space 2
-switcher - 3			:	kwmc window -m space 3
-switcher - 4			:	kwmc window -m space 4
-switcher - 5			:	kwmc window -m space 5
-switcher - 6			:	kwmc window -m space 6
 
 ###
 # tree mode (ctrl - f)
 ###
+
+tree + ctrl - f			[HyperTerm,Terminal,iTerm,iTerm2]	->	:	khd -e "mode activate default"
+
+# Rotate Window Tree
+tree - r				:	kwmc tree rotate 270
+
+
+# Reload Config
+tree + shift - r		:	khd -e "reload"
+
+# Move Focused Window to Screen (and focus screen)
+# refocus after consecutive window jumps only
+tree - left				:	kwmc window -m space left; \
+							kwmc space -fExperimental left; \
+							khd -e "mode activate default"
+
+tree - right			:	kwmc window -m space right; \
+							kwmc space -fExperimental right; \
+							khd -e "mode activate default"
+
+tree - 1				:	kwmc window -m space 1
+tree - 2				:	kwmc window -m space 2
+tree - 3				:	kwmc window -m space 3
+tree - 4				:	kwmc window -m space 4
+tree - 5				:	kwmc window -m space 5
+tree - 6				:	kwmc window -m space 6
 
 # Set (Temporary) Window Container
 tree - f				:	kwmc window -z fullscreen
@@ -290,4 +244,3 @@ space + shift - down	:	kwmc space -p decrease bottom
 space + shift - p		:	kwmc space -p decrease all; \
 							kwmc space -g decrease vertical
 							#kwmc space -g decrease horizontal
-

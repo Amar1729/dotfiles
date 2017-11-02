@@ -94,3 +94,6 @@ if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
 fi
 
 END
+
+# did i remove this on purpose?
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
