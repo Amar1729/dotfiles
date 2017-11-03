@@ -1,4 +1,4 @@
-" Amar's .vimrc
+" Amar's default .vimrc
 
 " Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
@@ -17,6 +17,7 @@ augroup END
 
 let mapleader = ","
 
+"colorscheme zenburn
 "colorscheme gruvbox
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 set hlsearch

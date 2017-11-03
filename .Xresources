@@ -1,8 +1,3 @@
 !#include "/Users/Amar/.colors/hybrid"
-!#include "/Users/Amar/.colors/wall-themes/soundboard.dark.xresources"
-
-!#include "/Users/Amar/.colors/base16/base16-embers.dark.xresources"
-!#include "/Users/Amar/.colors/mikado"
-
 #include ".xres/gruvbox-dark.xresources"
 #include "/Users/Amar/.xres/urxvt.xresources"
