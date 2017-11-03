@@ -1,4 +1,5 @@
 # Amar Paul's .profile
+# using this for sourcing external scripts, exports, PATH changes
 
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
@@ -13,12 +14,25 @@
 [[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
 
 ####
+## exports
+####
+
+# Set default editor
+export EDITOR="nvim"
+
+# Python shell tab completion
+#export PYTHONSTARTUP="$(/usr/local/bin/python2 -m jedi repl)"
+# should this be general, or explicit (per-distro)?
+export PYTHONSTARTUP="$(`which python2` -m jedi repl)"
+
+####
 ## PATH changes
 ####
 
 #DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # homebrew changes
+[[ $(uname) == 'Darwin' ]] && \
 [[ -n $DEFAULT_PATH ]] && \
 	export PATH="/usr/local/sbin:/usr/local/bin:$DEFAULT_PATH" && \
 	unset DEFAULT_PATH || \
@@ -29,6 +43,9 @@ export PATH="$PATH:/opt/bin"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
+
+# keep this?
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 # rudimentary rename (or syntax for it)
 # for f in Game.of.Thrones.S03E*
@@ -41,7 +58,7 @@ export PATH="$PATH:/opt/bin"
 : << 'END'
 
 # old path/dyld/etc stuff (from .bash_profile)
-#### #### #### ####
+####
 # PATH and DYLD stuff go here for launchctl stuff (and other things probably)
 # PATH and DYLD exports (lots of fixes)
 
@@ -94,6 +111,3 @@ if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
 fi
 
 END
-
-# did i remove this on purpose?
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

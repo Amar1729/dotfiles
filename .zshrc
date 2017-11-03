@@ -1,8 +1,4 @@
-# Amar Paul's zshrc (macOS)
-
-# source my bashrc and ricing scripts (switching shells takes a while)
-# also note - bashrc now sources .profile, which should do the path changes?
-[[ -r ~/.bashrc ]] && source ~/.bashrc
+# Amar Paul's zshrc
 
 export TERM="xterm-256color"
 
@@ -85,9 +81,9 @@ antigen apply
 
 # User configuration
 
-###
-# History
-###
+####
+## History
+####
 
 setopt APPEND_HISTORY          # history appends to existing file
 setopt HIST_REDUCE_BLANKS      # trim multiple insgnificant blanks in history
@@ -106,8 +102,6 @@ setopt HIST_NO_STORE
 # save time and how long cmd ran
 setopt EXTENDED_HISTORY
 
-###
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # newlines before and after command output
@@ -122,16 +116,11 @@ export EDITOR="nvim"
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
+# necessary PATH changes
+[[ -r ~/.profile ]] && source ~/.profile
+
+# source shell aliases
+[[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
-
-# add manually-installed stuff from here
-export PATH="$PATH:/opt/bin"
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-[[ -d $HOME/.rvm/bin/ ]] && export PATH="$PATH:$HOME/.rvm/bin"
