@@ -30,15 +30,18 @@ wp () {
 		--coffee)
 			~/.config/scripts/coffee.sh
 			;;
-		*)
-			echo "Not supported: ""$1"
-			echo "wp: Tool for on-the-fly screen changes."
+		-h|--help)
+			print "wp: Tool for on-the-fly screen changes."
 			print "Usage:"
 			print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE"
 			print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
 			print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
 			print "\twp -p|--profile PROFILE\t\tChange current profile to PROFILE"
 			print "\twp -n|--new NAME\t\tNew terminal window with profile NAME"
+			;;
+		*)
+			print "Not supported: ""$1"
+			wp --help
 			;;
 	esac
 
@@ -55,9 +58,9 @@ wp-wallpaper () {
 	fi
 }
 
-###
-# theme/color quick testing
-###
+####
+## theme/color quick testing
+####
 
 # Switch iTerm2 profiles
 # tab completion done for zsh (see .zshrc)
@@ -92,59 +95,42 @@ termcolors() {
   for i in {0..7}; do echo -en "\033[1;3${i}m▉▉▉▉▉▉▉\t"; done; echo
 }
 
-###
-# Functions for managing Flux (easier transitions, commandline ctrl, etc)
-###
-
-# From http://apple.stackexchange.com/questions/12719/how-can-i-adjust-the-apparent-color-temperature-of-my-display-in-os-x/51589#51589
-# Change Flux temp
-flux-temp () {
-	if [[ ! -z "$1" && "$1" -ge 2700 && "$1" -le 6500 ]]; then
-	  defaults write org.herf.Flux dayColorTemp -int "$1"
-	  defaults write org.herf.Flux nightColorTemp -int "$1"
-	  killall Flux
-	  open /Applications/Flux.app
-	else
-	  echo "provide a temperature between 2700 and 6500 (rounded to nearest 100)"
-	fi
-
-	return 0
-}
-
-# When shutting down Flux, want to gradually increase temp so transition isn't as abrupt
-flux-gradual-kill () {
-	# flux-higher
-	return 0
-}
+####
+## day/night changes
+####
 
 # changes to night mode
 night() {
 	open -a Flux
-	# should I also change any color schemes here?
+	# change colorshemes (?) and wallpapers
+
+	export NIGHT=1
 	return 0
 }
 
 # changes to day mode
 day () {
 	# Instead should progressively set Flux temp higher to ease transition
-	killall Flux
+	killall Flux &> /dev/null
 	# if Flux doesn't set to dark mode, don't need this toggle
 	#khd -p "cmd + alt + ctrl - t"
+
+	export NIGHT=0
 	return 0
 }
 
-# increase Flux temperature (more blue)
-flux-higher() {
-	# get current Flux temp
-	# Increase it by 100 if lower than 6500 (?)
-	return 0
-}
+toggle () {
+	if [[ -z "$NIGHT" ]]; then
+		export NIGHT=1
+	fi
 
-# decrease Flux temperature (more orange)
-flux-lower () {
-	# get current Flux temp
-	# Decrease by 100 ( if higher than 2700 (?) )
-	return 0
+	if [[ "$NIGHT" ]]; then
+		NIGHT=1
+		day
+	else
+		NIGHT=0
+		night
+	fi
 }
 
 # If this script is called, call arguments verbatim (so I don't have to add to $PATH):
