@@ -16,21 +16,8 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Required:
   call dein#add('/Users/Amar/.config/nvim//repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-
-  " You can specify revision/branch/tag.
-  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
-
   " colorscheme
   call dein#add('morhetz/gruvbox')
-
-  " completion (remember to call ./install.py to generate completions!)
-  "call dein#add('Valloric/YouCompleteMe')
-
-  " python completion (YCM uses Jedi)
-  "call dein#add('davidhalter/jedi-vim')
 
   " deoplete for nvim: try usurping YCM?
   call dein#add('Shougo/deoplete.nvim')
@@ -72,6 +59,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
   "call dein#add('donRaphaco/neotex')
   " no, I think this only works for vim?
+  
+  " async linting
+  call dein#add('Neomake/Neomake')
 
   " Required:
   call dein#end()

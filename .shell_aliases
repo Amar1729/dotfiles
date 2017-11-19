@@ -1,12 +1,13 @@
 # General shell aliases. Source from .bashrc or .zshrc
 
+[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
+
 # locking
 if [[ "$(uname)" == 'Darwin' ]]
 then
 	# Open the screensaver with `lock`
 	# note - should set preferences to lock the screen after 5s of screensaver
-	SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-	alias lock="open -a $SCREEN_ENGINE"
+	# lock() is defined in ~/.config/scripts/ricing.sh
 else
 	# linux locking
 	alias lock="~/.config/scripts/lock.sh"
@@ -108,6 +109,8 @@ tmux-a () {
 		#return 0
 	fi
 }
+
+alias ppjson='python -m json.tool'
 
 ####
 ## aliases/functions that are mac or linux specific

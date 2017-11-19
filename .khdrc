@@ -3,9 +3,9 @@
 # TODO: how to open a window and make it focused?
 # TODO: how to "replace" window with another? (mark window + new window + close window)
 
-###
-# Emacs mode for non-terminal apps (I'm used to this since it's default behavior for bash)
-###
+####
+## Emacs mode for non-terminal apps (I'm used to this since it's default behavior for bash)
+####
 
 # remap ctrl+a / ctrl+e -> start/end of line
 lctrl - a			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl - left"
@@ -154,9 +154,9 @@ ctrl + shift - 2		:	kwmc window -m display 1;\
 ctrl + shift - 3		:	kwmc window -m display 2;\
 							kwmc display -f 2
 
-###
-# terminal mode (ctrl - n)
-###
+####
+## terminal mode (ctrl - n)
+####
 
 # Terminal Profiles
 # most common: cmd+enter (similar to sxhkd default)
@@ -169,9 +169,9 @@ term - p				:	~/.config/scripts/ricing.sh wp -n animeswing
 term + shift - n		:	open -na Google\ Chrome
 
 
-###
-# tree mode (ctrl - f)
-###
+####
+## tree mode (ctrl - f)
+####
 
 tree + ctrl - f			[HyperTerm,Terminal,iTerm,iTerm2]	->	:	khd -e "mode activate default"
 
@@ -207,9 +207,9 @@ tree - p				:	kwmc window -z parent
 tree - c				:	kwmc window -c split-mode toggle;\
 							khd -e "mode activate default"
 
-###
-# space mode (ctrl - d)
-###
+####
+## space mode (ctrl - d)
+####
 
 # I use ctrl-d to exit shell and to close tmux panes
 space + ctrl - d		[HyperTerm,Terminal,iTerm,iTerm2]	->	:	khd -e "mode activate default"
