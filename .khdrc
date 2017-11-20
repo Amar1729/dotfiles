@@ -84,9 +84,9 @@ ctrl - f				:	khd -e "mode activate tree"
 #ctrl - a				:	khd -e "mode activate tmux"
 ctrl - n				:	khd -e "mode activate term"
 
-###
-# Defaults
-###
+####
+## Defaults
+####
 
 # mouse buttons ( send cmd + {[,]} )
 - button3				:	khd -p "cmd - 0x21"
@@ -160,6 +160,7 @@ ctrl + shift - 3		:	kwmc window -m display 2;\
 
 # Terminal Profiles
 # most common: cmd+enter (similar to sxhkd default)
+# can i modify this to open with a profile vs. wal -r ?
 cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n gruvbox
 term - c				:	~/.config/scripts/ricing.sh wp -n changer
 term - a				:	~/.config/scripts/ricing.sh wp -n adwaita

@@ -61,7 +61,7 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " no, I think this only works for vim?
   
   " async linting
-  call dein#add('Neomake/Neomake')
+  call dein#add('neomake/neomake')
 
   " Required:
   call dein#end()
@@ -208,13 +208,22 @@ let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/
 " this will chang with each upgrade! symlink?
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
-let g:python_host_prog='/usr/local/bin/python'
+let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
 " deoplete tab-complete:
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
 
+" neomake settings
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+" how to lint with python3?
+" let g:neomake_python_pylint_exe = 'python3'
+let g:neomake_error_sign =	 {'text' : 'x', 'texthl' : 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text' : '!', 'texthl' : 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text' : '>', 'texthl' : 'NeomakeMessageSign'}
+let g:neomake_info_sign =	 {'text' : 'i', 'texthl' : 'NeomakeInfoSign'}
 
 " airline-vim, airline-vim-themes settings
 " TODO

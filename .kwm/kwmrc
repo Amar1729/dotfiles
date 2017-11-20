@@ -120,6 +120,10 @@ kwmc rule owner="Disk Utility" properties={float="true"}
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
 
+# work stuff
+kwmc rule owner="Cisco AnyConnect Secure Mobility Client" properties={float="true"}
+kwmc rule owner="Microsoft Remote Desktop" properties={float="true"}
+
 /*
 	The following command creates a rule that
 	captures an application to the given screen,

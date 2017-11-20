@@ -1,13 +1,12 @@
 # Amar Paul's zshrc
 
 export TERM="xterm-256color"
+export EDITOR="nvim"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Amar/.oh-my-zsh
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# my own theme!
 ZSH_THEME="amar"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -16,23 +15,6 @@ ZSH_THEME="amar"
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Don't need this if calling `antigen use oh-my-zsh`
-#source $ZSH/oh-my-zsh.sh
 
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
@@ -85,15 +67,13 @@ antigen apply
 ## History
 ####
 
-setopt APPEND_HISTORY          # history appends to existing file
-setopt HIST_REDUCE_BLANKS      # trim multiple insgnificant blanks in history
 HISTCONTROL=ignoreboth
 HISTFILESIZE=1000000
-HISTSIZE=10000000               # number of history lines kept internally
-SAVEHIST=10000000               # max number of history lines saved
-setopt APPEND_HISTORY          # history appends to existing file
-setopt HIST_REDUCE_BLANKS      # trim multiple insgnificant blanks in history
-setopt HIST_IGNORE_DUPS			# ignore duplicates and (?)
+HISTSIZE=10000000			# number of history lines kept internally
+SAVEHIST=10000000			# max number of history lines saved
+setopt APPEND_HISTORY		# history appends to existing file
+setopt HIST_REDUCE_BLANKS	# trim multiple insgnificant blanks in history
+setopt HIST_IGNORE_DUPS		# ignore duplicates and (?)
 
 # ignore if beginning with space
 setopt HIST_IGNORE_SPACE
@@ -107,11 +87,6 @@ setopt EXTENDED_HISTORY
 # newlines before and after command output
 precmd() {print ''}
 preexec() {print ''}
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-export EDITOR="nvim"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
