@@ -127,6 +127,8 @@ alias pip='/usr/local/bin/pip2'
 # fix broken virtualenv (when brew updates python)
 alias fixEnv='gfind "$1" -type l -xtype l -delete'
 
+alias abri='open -a Abricotine'
+
 # control wifi
 wifi () {
 	if [[ -n "$1" ]]; then

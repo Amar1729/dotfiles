@@ -88,6 +88,12 @@ setopt EXTENDED_HISTORY
 precmd() {print ''}
 preexec() {print ''}
 
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# complex look-and-feel (airline theme to zsh prompt, vim, and tmux) by default
+export COMPLEX=1
+
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
@@ -96,6 +102,9 @@ preexec() {print ''}
 
 # source shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
+
+# ricing stuff
+[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
 
 # tab completion for my defined profiles
 compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof

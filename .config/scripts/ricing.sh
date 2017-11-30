@@ -119,6 +119,11 @@ day () {
 	return 0
 }
 
+lock () {
+	SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
+	open -a $SCREEN_ENGINE
+}
+
 toggle () {
 	if [[ -z "$NIGHT" ]]; then
 		export NIGHT=1
