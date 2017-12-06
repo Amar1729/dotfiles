@@ -9,10 +9,12 @@ then
 fi
 echo ""
 
-curl -O https://gist.githubusercontent.com/Amar1729/f6746935cfd56cbe23e147a7950cf837/raw/.bashrc
-curl -O https://gist.githubusercontent.com/Amar1729/f6746935cfd56cbe23e147a7950cf837/raw/.shell_aliases
-curl -O https://gist.githubusercontent.com/Amar1729/f6746935cfd56cbe23e147a7950cf837/raw/.vimrc
-curl -O https://gist.githubusercontent.com/Amar1729/f6746935cfd56cbe23e147a7950cf837/raw/.tmux.conf
+curl -O https://raw.githubusercontent.com/Amar1729/dotfiles/master/.config/simple-rc/.bashrc
+curl -O https://raw.githubusercontent.com/Amar1729/dotfiles/master/.config/simple-rc/.vimrc
+curl -O https://raw.githubusercontent.com/Amar1729/dotfiles/master/.config/simple-rc/.shell_aliases
+curl -O https://raw.githubusercontent.com/Amar1729/dotfiles/master/.config/simple-rc/.tmux.conf
+(mkdir -p .vim/colors && cd .vim/colors && \
+curl -O https://raw.githubusercontent.com/Amar1729/dotfiles/master/.config/simple-rc/.vim/colors/zenburn.vim)
 
 echo ""
 echo "tmux: $(which tmux)"

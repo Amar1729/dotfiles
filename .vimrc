@@ -1,4 +1,4 @@
-" Amar's default .vimrc
+" Amar's (simple) .vimrc
 
 " Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
@@ -9,6 +9,17 @@
 "
 "call plug#end()
 
+colorscheme zenburn
+"colorscheme gruvbox
+
+syntax on
+
+set number
+"set relativenumber
+
+set autoindent noexpandtab tabstop=4 shiftwidth=4
+set incsearch hlsearch
+
 augroup remember_folds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
@@ -17,14 +28,5 @@ augroup END
 
 let mapleader = ","
 
-"colorscheme zenburn
-"colorscheme gruvbox
-set autoindent noexpandtab tabstop=4 shiftwidth=4
-set hlsearch
-set relativenumber
-set number
-
 map <Leader>n :bnext<Enter>
 map <Leader><Space> :noh<Enter>
-
-:inoremap <S-Tab> <C-V><Tab>

@@ -151,6 +151,7 @@ vnoremap <leader>P "*P
 
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
+nmap <leader>< :bprev<CR>
 "nmap <leader>m :bprev<CR>	" use this for tab-switching?
 nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 
