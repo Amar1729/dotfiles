@@ -91,10 +91,8 @@ endif
 
 colorscheme gruvbox
 set background=dark
-set number relativenumber
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set relativenumber
+set tabstop=4 softtabstop=4 shiftwidth=4
 
 set mouse=a
 
@@ -158,18 +156,26 @@ nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
 
-" Hide status bar on command Shift+H
+" Cycle status line on command Shift+H
 " From http://unix.stackexchange.com/questions/140898/vim-hide-status-line-in-the-bottom
-let s:hidden_all = 0
-function! ToggleHiddenAll()
-	if s:hidden_all == 0
-		let s:hidden_all = 1
+" 0 : airline on (default)
+" 1 : airline off, statusline on 
+" 2 : everything hidden
+"let s:cycle = 0
+let s:cycle = get(s:, 'cycle', 0)
+function! CycleHiddenAll()
+	if s:cycle == 0
+		let s:cycle = 1
+		:AirlineToggle
+	elseif s:cycle == 1
+		let s:cycle = 2
 		set noshowmode
 		set noruler
 		set laststatus=0
 		set noshowcmd
 	else
-		let s:hidden_all = 0
+		let s:cycle = 0
+		:AirlineToggle
 		set showmode
 		set ruler
 		set laststatus=2
@@ -177,18 +183,11 @@ function! ToggleHiddenAll()
 	endif
 endfunction
 
-" also want to programmatically hide airline buffer at top (how to do this?)
-function! TogBuf()
-	if g:airline#extensions#tabline#enabled == 1
-		let g:airline#extensions#tabline#enabled = 0
-	else
-		let g:airline#extensions#tabline#enabled = 1
-	endif
-endfunction
+nnoremap <S-h> :call CycleHiddenAll()<CR>
 
 " for the almost-quiet statusbar
 " want the bar itself to be transparent and text to be green.
-hi StatusLine ctermbg=None cterm=None
+hi StatusLine cterm=None ctermbg=None ctermfg=142 
 set statusline=%t
 
 """
