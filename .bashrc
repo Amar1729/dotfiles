@@ -72,11 +72,11 @@ ccat () {
 			highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"
 			;;
 		*)
-			highlight -O xterm256 --style=zenburn -i "$1"
+			highlight -O xterm256 --style=zenburn -i "$1" 2>/dev/null || cat "$1"
 			;;
     esac
   else
-    echo "$1"" is not a valid file"
+    echo "$1"": No such file or directory"
   fi
 }
 

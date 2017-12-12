@@ -1,6 +1,7 @@
 # Amar Paul's xinitrc
 
 xrdb ~/.Xresources
+sh ~/.fehbg
 
 #xset +fp ~/.fonts
     # https://github.com/sunaku/tamzen-font
