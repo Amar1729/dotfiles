@@ -123,6 +123,7 @@ kwmc rule owner="Disk Utility" properties={float="true"}
 # work stuff
 kwmc rule owner="Cisco AnyConnect Secure Mobility Client" properties={float="true"}
 kwmc rule owner="Microsoft Remote Desktop" properties={float="true"}
+kwmc rule owner="Abricotine" properties={float="true"}
 
 /*
 	The following command creates a rule that

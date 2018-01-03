@@ -36,8 +36,7 @@ alias vim="nvim"
 vimdiff () { nvim -d "$@" ;}
 
 # copy with a progress bar.
-# TODO: check how this works for Mac
-alias cpv="rsync -poghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
+alias cpv="rsync -avzh --progress --"
 
 # use `highlight` for colorized cat
 # Requires `nl` for line numbering
@@ -127,7 +126,7 @@ alias pip='/usr/local/bin/pip2'
 # fix broken virtualenv (when brew updates python)
 alias fixEnv='gfind "$1" -type l -xtype l -delete'
 
-alias abri='open -a Abricotine'
+abri () { open -a Abricotine "$@" }
 
 # control wifi
 wifi () {

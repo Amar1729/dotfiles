@@ -294,13 +294,3 @@ let g:airline_theme='term'
 let g:airline#extensions#tabline#enabled = 1		" Enable list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t'	" Show just filename in bufferline
 let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
-
-" (used to use) promptline customization to generate bars for for bash/fish and tmux
-" :PromptlineSnapshot [theme] [preset]
-" :TmuxlineSnapshot [theme] [preset]
-"so promptline_settings.vim
-
-" I think this helped with the deoplete install issue
-call remote#host#RegisterPlugin('python3', '/Users/shougo/.vim/bundle/deoplete.nvim/rplugin/python3/deoplete.py', [
-      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
-     \ ])

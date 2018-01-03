@@ -8,8 +8,8 @@
 ####
 
 # remap ctrl+a / ctrl+e -> start/end of line
-lctrl - a			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl - left"
-lctrl - e			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl - right"
+lctrl - a			![HyperTerm,Terminal,iTerm,iTerm2,Abricotine]		:	khd -p "ctrl - left"
+lctrl - e			![HyperTerm,Terminal,iTerm,iTerm2,Abricotine]		:	khd -p "ctrl - right"
 
 # remap ctrl+u -> delete from cursor to start of line
 lctrl - u			![HyperTerm,Terminal,iTerm,iTerm2]		:	khd -p "ctrl + shift - left";\
