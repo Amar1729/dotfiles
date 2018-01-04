@@ -27,3 +27,5 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
+[pager]
+	stash = false
