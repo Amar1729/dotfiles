@@ -1,6 +1,18 @@
 # Amar's kwmc config
 # see /usr/local/opt/kwm/kwmrc for default config file
 
+# Enable border for focused window
+kwmc config border focused on
+kwmc config border focused size 2
+kwmc config border focused color 0xFF665c54
+kwmc config border focused radius 4
+
+# Enable border for marked window
+kwmc config border marked on
+kwmc config border marked size 2
+kwmc config border marked color 0xCCcc241d
+kwmc config border marked radius 4
+
 # Set default values for screen padding (top bottom left right)
 kwmc config padding 40 20 20 20
 
@@ -56,7 +68,7 @@ Override default settings for space 1 on screen 0
    kwmc config space 0 1 gap 40 40
 */
 
-# space 1: lots of chrome/firefox windows
+# space 1: all browser windows
 kwmc config space 0 1 mode monocle
 
 # space 3: two terminals and Telegram
@@ -88,13 +100,6 @@ kwmc rule owner="iTerm2" properties={role="AXDialog"}
 kwmc rule owner="iTerm" properties={role="AXDialog"}
 kwmc rule owner="evince" properties={role="AXDialog"}
 
-/*
-The following commands create rules that
-blacklists an application from Kwms tiling
-
-    kwmc rule owner="Steam" properties={float="true"}
-    kwmc rule owner="Photoshop" properties={float="true"}
-*/
 kwmc rule owner="Steam" properties={float="true"}
 kwmc rule owner="Finder" properties={float="true"}
 kwmc rule owner="python" properties={float="true"}
@@ -119,10 +124,6 @@ kwmc rule owner="Disk Utility" properties={float="true"}
 
 #kwmc rule owner="Finder" properties={role="AXDialog"}
 #kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
-
-# work stuff
-kwmc rule owner="Cisco AnyConnect Secure Mobility Client" properties={float="true"}
-kwmc rule owner="Microsoft Remote Desktop" properties={float="true"}
 kwmc rule owner="Abricotine" properties={float="true"}
 
 /*
@@ -131,15 +132,3 @@ kwmc rule owner="Abricotine" properties={float="true"}
 	if the screen exists.
 */
 #kwmc rule owner="VLC" properties={space="3"}
-
-# Enable border for focused window
-kwmc config border focused on
-kwmc config border focused size 2
-kwmc config border focused color 0xFF665c54
-kwmc config border focused radius 4
-
-# Enable border for marked window
-kwmc config border marked on
-kwmc config border marked size 2
-kwmc config border marked color 0xCCcc241d
-kwmc config border marked radius 4
