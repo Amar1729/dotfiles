@@ -20,6 +20,7 @@ fi
 # ls, grep, mkdir, tmux improvements
 alias ll="ls -lhFG"
 alias la="ll -a"
+alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
