@@ -64,6 +64,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Support for Julia
   call dein#add('JuliaEditorSupport/julia-vim')
 
+  " (vim plugin) minimap
+  call dein#add('severin-lemaignan/vim-minimap')
+
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
 
@@ -214,6 +217,13 @@ set statusline=%t
 """
 " Plugin Settings and Keybinds
 """
+
+
+" vim-minimap settings
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
 
 
 " TODO chromatica settings
