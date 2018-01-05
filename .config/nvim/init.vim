@@ -136,7 +136,7 @@ let mapleader=","
 vnoremap <leader>y "*y
 nnoremap <leader>Y "*yg_
 nnoremap <leader>y "*y
-nnoremap <leader>yy "*+yy
+nnoremap <leader>yy "*yy
 
 " Paste from clipboard
 nnoremap <leader>p "*p
@@ -210,7 +210,7 @@ nnoremap <S-h> :call CycleHiddenAll()<CR>
 
 " for the almost-quiet statusbar
 " want the bar itself to be transparent and text to be green.
-hi StatusLine cterm=None ctermbg=None ctermfg=142 
+hi StatusLine cterm=None ctermfg=142 ctermbg=None
 set statusline=%t
 
 
