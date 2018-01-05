@@ -1,4 +1,0 @@
-!#include "/Users/Amar/.colors/hybrid"
-#include ".xres/gruvbox-dark.xresources"
-#include ".xres/urxvt.xresources"
-#include ".xres/macosx-clipboard"
