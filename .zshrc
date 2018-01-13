@@ -54,8 +54,9 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #	TODO:
 #		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
 #	note - I liked pure theme. possible to create fork/temp for 'pure' work?
-# private gist while I work on my own theme:
-antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+
+#antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+antigen theme https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c amar_simple
 
 # done!
 antigen apply

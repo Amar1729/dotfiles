@@ -39,7 +39,7 @@ export PYTHONSTARTUP="$(`which python2` -m jedi repl)"
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
 # my changes
-export PATH="$PATH:/opt/bin"
+export PATH="/opt/bin:$PATH"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
