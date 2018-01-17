@@ -7,7 +7,8 @@ export EDITOR="nvim"
 export ZSH=/Users/Amar/.oh-my-zsh
 
 # my own theme!
-ZSH_THEME="amar"
+#ZSH_THEME="amar"
+ZSH_THEME="amar_simple"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
