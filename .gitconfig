@@ -18,7 +18,7 @@
 	histl = log --graph --abbrev-commit --decorate --all \
 		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.gitignore_global
 [color "branch"]
 	current = yellow bold

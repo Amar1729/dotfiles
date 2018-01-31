@@ -53,7 +53,7 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('tpope/vim-surround')
 
   " collab editing
-  call dein#add('FredKSchott/CoVim')
+  "call dein#add('FredKSchott/CoVim')
 
   " nice completion of (x)html tags
   call dein#add('tpope/vim-ragtag')
@@ -219,18 +219,6 @@ set statusline=%t
 """
 
 
-" vim-minimap settings
-let g:minimap_show='<leader>ms'
-let g:minimap_update='<leader>mu'
-let g:minimap_close='<leader>gc'
-let g:minimap_toggle='<leader>gt'
-
-
-" TODO chromatica settings
-let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
-let g:chromatica#enable_at_startup=1
-
-
 " deoplete settings
 let g:deoplete#enable_at_startup=1
 
@@ -266,21 +254,48 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 
+" TODO chromatica settings
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#enable_at_startup=1
+
+
+" vim-minimap settings
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+
+
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+nnoremap <leader>L :LLPStartPreview<CR>
+" live previewing currently broken?
+"autocmd TextChanged,TextChangedI *tex silent :LLPStartPreview 
+
+" neotex settings
+"let g:neotex_enabled = 0
+
+
 " airline-vim, airline-vim-themes settings
-" TODO
 let g:airline#extensions#branch#enabled = 1
 
-" Default:
- " let g:airline_section_a       (mode, crypt, paste, spell, iminsert)
- " let g:airline_section_b       (hunks, branch)
- " let g:airline_section_c       (bufferline or filename)
- " let g:airline_section_gutter  (readonly, csv)
- " let g:airline_section_x       (tagbar, filetype, virtualenv)
- " let g:airline_section_y       (fileencoding, fileformat)
- " let g:airline_section_z       (percentage, line number, column number)
- " let g:airline_section_error   (ycm_error_count, syntastic, eclim)
- " let g:airline_section_warning (ycm_warning_count, whitespace)
-" Changes:
+" wip : rename other modes?
+let g:airline_mode_map = {
+	\ 'n' : 'normie',
+	\ 'i' : 'hardcore hacking',
+	\ }
+
+function! AirlineInit()
+	let g:airline_section_a = airline#section#create(['mode','crypt','paste','spell','iminsert'])
+	"let g:airline_section_b = airline#section#create(['hunks'])
+	let g:airline_section_b = airline#section#create(['%v'])
+	let g:airline_section_x = ""
+	let g:airline_section_y = "%v"
+	let g:airline_section_z = '%l/%L'
+	let g:airline_section_error = ''
+	let g:airline_section_warning = ''
+endfunction
+"autocmd VimEnter * call AirlineInit()
 let g:airline_section_x = ""
 let g:airline_section_y = "%v"
 let g:airline_section_z = '%l/%L'
@@ -293,12 +308,6 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-
-" wip : rename other modes?
-let g:airline_mode_map = {
-	\ 'n' : 'normie',
-	\ 'i' : 'hardcore hacking',
-	\ }
 
 " unicode symbols
 let g:airline_left_sep = '»'
