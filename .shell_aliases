@@ -39,6 +39,16 @@ vimdiff () { nvim -d "$@" ;}
 # copy with a progress bar.
 alias cpv="rsync -avzh --progress --"
 
+# pretty-print json
+alias ppjson='python -m json.tool'
+
+# colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
+alias diff='colordiff'
+
+# Use fuck/thefuck for command correction
+which thefuck>/dev/null && eval $(thefuck --alias)
+
+# TODO - improve this (pass commands to hcat with $@?)
 # use `highlight` for colorized cat
 # Requires `nl` for line numbering
 hcat () {
@@ -110,8 +120,6 @@ tmux-a () {
 	fi
 }
 
-alias ppjson='python -m json.tool'
-
 ####
 ## aliases/functions that are mac or linux specific
 ####
@@ -120,10 +128,11 @@ if [[ "$(uname)" == 'Darwin' ]]
 then
 
 # (mac) always use homebrew python?
-alias python='python2'
-alias pip='/usr/local/bin/pip2'
+#alias python='python2'
+#alias pip='/usr/local/bin/pip2'
 #alias python='python3'
 
+# TODO - fix (make this a function?)
 # fix broken virtualenv (when brew updates python)
 alias fixEnv='gfind "$1" -type l -xtype l -delete'
 
