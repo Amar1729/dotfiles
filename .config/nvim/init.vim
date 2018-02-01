@@ -137,6 +137,12 @@ augroup AutoSaveFolds
   autocmd BufWinEnter *.* silent! loadview
 augroup END
 
+" why is this necessary? didn't nvim use to do this automatically?
+augroup SetSyntaxColor
+	autocmd!
+	autocmd BufWinLeave *rc set syntax=config
+augroup END
+
 let mapleader=","
 
 " Copy to clipboard (mac uses * register: linux uses + reg)
@@ -160,6 +166,7 @@ vnoremap <leader><C-P> "*P
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
 "nmap <leader>m :bprev<CR>	" use this for tab-switching?
+nmap <leader>m :tabn<CR>
 nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 
 " clear highlighted matches from find

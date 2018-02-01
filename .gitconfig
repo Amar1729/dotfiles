@@ -1,17 +1,24 @@
+# lots of ideas taken from
+# https://gist.github.com/pksunkara/988716
 [user]
 	name = Amar1729
 	email = amar.paul16@gmail.com
 [alias]
 	co = checkout
 	ci = commit
-	#st = status -sb
 	st = status
 	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-[push]
-	default = simple
+	# nicely formatted history (includes all branches)
+	hist = log --graph --abbrev-commit --decorate --all --date=short \
+		 --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%ad%C(reset) | %C(white)%s%C(reset) %C(dim green)[%an]%C(reset) %C(bold yellow)%d%C(reset)'
+	# history of specific branch
+	histb = log --graph --abbrev-commit --decorate \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)'
+	# longer format for really looking through history
+	histl = log --graph --abbrev-commit --decorate --all \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
 [core]
-	editor = nvim
+	editor = vim
 	excludesfile = ~/.gitignore_global
 [color "branch"]
 	current = yellow bold
@@ -27,3 +34,5 @@
 	added = green bold
 	changed = yellow bold
 	untracked = red bold
+[pager]
+	stash = false
