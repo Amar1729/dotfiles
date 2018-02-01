@@ -144,7 +144,7 @@ night () { ~/.config/scripts/ricing.sh night ;}
 ###
 
 # Open the screensaver with `lock`. Set preferences to lock the screen after 5s of screensaver
-alias lock="~/.config/lock.sh"
+alias lock="~/.config/lock.sh -l 2>/dev/null"
 
 # reboot wifi (my router will occasionally boot my computer off)
 alias wifi-toggle="networksetup -setairportpower en0 off; \
