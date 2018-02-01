@@ -80,6 +80,7 @@ You can make these edits by running `git config -e` or manually editing `~/.gitc
   * [Messenger Convo List Hover Toggle](http://userstyles.org/styles/120562)
   * [Messenger.com Dark](http://userstyles.org/styles/112722)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
+  * [reddit - hide sidebar](https://userstyles.org/styles/142862/reddit-hide-sidebar-for-low-screen-width)
 * Firefox ([Stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
   * [Reddit Slate Nights (Fixed, Custom Fork) - Dark](https://userstyles.org/styles/123908/reddit-slate-nights-fixed-custom-fork-dark)

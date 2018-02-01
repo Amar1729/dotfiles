@@ -1,0 +1,229 @@
+# General shell aliases. Source from .bashrc or .zshrc
+
+[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
+
+# locking
+if [[ "$(uname)" == 'Darwin' ]]
+then
+	# Open the screensaver with `lock`
+	# note - should set preferences to lock the screen after 5s of screensaver
+	# lock() is defined in ~/.config/scripts/ricing.sh
+else
+	# linux locking
+	alias lock="~/.config/scripts/lock.sh"
+fi
+
+####
+## Common aliases, command improvements:
+####
+
+# ls, grep, mkdir, tmux improvements
+alias ll="ls -lhFG"
+alias la="ll -a"
+alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+alias ggrep="ggrep --color=auto"
+alias cclear="cd; clear"
+
+# Make new directory and immediately cd into it (from Nate Landau's, link below)
+# should the -p flag be included?
+mcd () { mkdir -p "$1" && cd "$1"; }
+
+# Use neovim instead of vim
+alias vi="nvim"
+alias vim="nvim"
+vimdiff () { nvim -d "$@" ;}
+
+# copy with a progress bar.
+alias cpv="rsync -avzh --progress --"
+
+# pretty-print json
+alias ppjson='python -m json.tool'
+
+# colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
+alias diff='colordiff'
+
+# Use fuck/thefuck for command correction
+which thefuck>/dev/null && eval $(thefuck --alias)
+
+# TODO - improve this (pass commands to hcat with $@?)
+# use `highlight` for colorized cat
+# Requires `nl` for line numbering
+hcat () {
+  _hcat () {
+    if [ -f "$1" ]; then
+    case "$1" in
+      # force configuration file syntax for rc and profile files
+      *rc|*profile)
+        highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"
+        ;;
+      *)
+        highlight -O xterm256 --style=zenburn -i "$1"
+        ;;
+    esac
+    else
+    echo "$1"" is not a valid file for highlighting."
+    fi
+  }
+
+  NUMBER=0
+
+  # loop through arguments
+  while [[ $# -gt 0 ]]; do
+  key="$1"
+
+  case $key in
+    -n)
+      NUMBER=1
+      ;;
+    *)
+      if [ $NUMBER -eq 0 ]
+      then
+        _hcat "$key"
+      else
+        _hcat "$key" | nl
+      fi
+      ;;
+  esac
+  shift
+  done
+
+  unset NUMBER
+  unset -f _hcat
+}
+
+# make tmux easier to check
+alias tmux-ls="tmux list-sessions"
+# tmux-a [index]	: attaches to the index of given session
+# tmux-a			: tries to attach to last session; if none active, creates new one
+tmux-a () {
+	sessions=`tmux list-sessions 2>/dev/null`
+	# if there are tmux sessions, connect to the last one or the one specified by $1
+	if [[ $? -eq 0 ]]
+	then
+		# if there's an argument given then connect to given session
+		if [[ -n "$1" ]]
+		then
+			tmux attach -t "$1"
+			#return $?
+		else
+			# no argument, and tmux is running: attach to the most recent session
+			tmux attach
+			#return $?
+		fi
+	else
+		# tmux isn't running: start it up
+		tmux
+		#return 0
+	fi
+}
+
+####
+## aliases/functions that are mac or linux specific
+####
+
+if [[ "$(uname)" == 'Darwin' ]]
+then
+
+# (mac) always use homebrew python?
+#alias python='python2'
+#alias pip='/usr/local/bin/pip2'
+#alias python='python3'
+
+# TODO - fix (make this a function?)
+# fix broken virtualenv (when brew updates python)
+alias fixEnv='gfind "$1" -type l -xtype l -delete'
+
+abri () { open -a Abricotine "$@" }
+
+# control wifi
+wifi () {
+	if [[ -n "$1" ]]; then
+		case "$1" in
+			"status")
+				networksetup -getairportnetwork en0
+				;;
+			"on"|"off")
+				networksetup -setairportpower en0 "$1"
+				;;
+			*)
+				echo "Not valid option: ""$1" && return 1
+				;;
+		esac
+	else
+		STATUS="$(networksetup -getairportpower en0|cut -f4 -d ' ')"
+		if [[ $STATUS == "Off" ]]; then
+			networksetup -setairportpower en0 on && echo "wifi on..."
+		else
+			networksetup -setairportpower en0 off && echo "wifi off..."
+		fi
+	fi
+}
+
+# Show hidden files (default: false)
+export FINDER_SHOW_HIDDEN=1
+toggleFinderHidden () {
+	if [[ $FINDER_SHOW_HIDDEN -eq 0 ]]
+	then
+		export FINDER_SHOW_HIDDEN=1
+		defaults write com.apple.finder ShowAllFiles true
+		killall Finder
+	else
+		export FINDER_SHOW_HIDDEN=0
+		defaults write com.apple.finder ShowAllFiles false
+		killall Finder
+	fi
+}
+
+# Show desktop icons by default
+export DESKTOP_SHOW=1
+toggleDesktop () {
+	if [[ $DESKTOP_SHOW -eq 0 ]]
+	then
+		export DESKTOP_SHOW=1
+		defaults write com.apple.finder CreateDesktop true
+		killall Finder
+	else
+		export DESKTOP_SHOW=0
+		defaults write com.apple.finder CreateDesktop false
+		killall Finder
+	fi
+}
+
+# hardcore ricing stuff (lol)
+# http://tex.stackexchange.com/questions/43057/macosx-pdf-viewer-automatic-reload-on-file-modification
+# setup Skim for vim latex pdf previewing
+# defaults write -app Skim SKAutoReloadFileUpdate -boolean true
+#
+# http://stackoverflow.com/questions/1264210/does-mac-x11-have-the-xtest-extension
+# xtest for xQuartz?
+# defaults write org.x.X11 enable_test_extensions -boolean true
+
+####
+# Following suggestions are from:
+# http://natelandau.com/my-mac-osx-bash_profile/
+
+# Prevent power button from immediately sleeping display
+alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
+alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
+
+# Move default screencap location (only have to run this once, but saved here just in case)
+# Where I want them saved:
+alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
+# Actual default:
+alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
+
+# Recursively delete .DS_Store files
+alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
+
+####
+## End of Nate Landau's suggestions
+####
+
+else
+
+# linux-specific aliases
+
+fi

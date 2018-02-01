@@ -8,9 +8,6 @@ import-dotfiles () {
 	git init
 	git remote add origin <remote_url>
 	git fetch --all --prune
-	git checkout master
-	git add -A .
-	git commit -m "Adding my files..."
 
 	# use this also once branch is dl'd to set HEAD properly (git reset is probably the important one)
 	git branch --set-upstream-to=origin/master master
