@@ -10,7 +10,7 @@ then
 	# lock() is defined in ~/.config/scripts/ricing.sh
 else
 	# linux locking
-	alias lock="~/.config/scripts/lock.sh"
+	alias lock="~/.config/scripts/lock.sh -l 2>/dev/null"
 fi
 
 ####
