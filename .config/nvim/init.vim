@@ -99,16 +99,16 @@ endif
 " Personal Settings
 """
 
+
 """
 " Look and Feel
 """
 
 colorscheme gruvbox
+" colorscheme wal
 set background=dark
-set number relativenumber
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set relativenumber
+set tabstop=4 softtabstop=4 shiftwidth=4
 
 set mouse=a
 
