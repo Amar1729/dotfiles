@@ -7,6 +7,7 @@
 	co = checkout
 	ci = commit
 	st = status
+	stn = status -sb -uno
 	br = branch
 	# nicely formatted history (includes all branches)
 	hist = log --graph --abbrev-commit --decorate --all --date=short \

@@ -21,9 +21,7 @@
 export EDITOR="nvim"
 
 # Python shell tab completion
-#export PYTHONSTARTUP="$(/usr/local/bin/python2 -m jedi repl)"
-# should this be general, or explicit (per-distro)?
-export PYTHONSTARTUP="$(`which python2` -m jedi repl)"
+export PYTHONSTARTUP="$(python -m jedi repl)"
 
 ####
 ## PATH changes

@@ -51,43 +51,43 @@ which thefuck>/dev/null && eval $(thefuck --alias)
 # TODO - improve this (pass commands to hcat with $@?)
 # use `highlight` for colorized cat
 # Requires `nl` for line numbering
+# first, set better alias for highlight
+alias highlight='highlight -O xterm256 --style=zenburn --force'
 hcat () {
   _hcat () {
     if [ -f "$1" ]; then
-    case "$1" in
-      # force configuration file syntax for rc and profile files
-      *rc|*profile)
-        highlight -O xterm256 --style=zenburn --syntax=conf -i "$1"
-        ;;
-      *)
-        highlight -O xterm256 --style=zenburn -i "$1"
-        ;;
-    esac
+      case "$1" in
+        # force configuration file syntax for rc and profile files
+        *rc|*profile)
+          highlight --syntax=conf -i "$1"
+          ;;
+        *)
+          highlight -i "$1"
+          ;;
+      esac
     else
-    echo "$1"" is not a valid file for highlighting."
+	  # just use cat to get decent error handling
+	  cat "$1"
     fi
   }
 
-  NUMBER=0
-
-  # loop through arguments
-  while [[ $# -gt 0 ]]; do
-  key="$1"
-
-  case $key in
+  case "$1" in
     -n)
-      NUMBER=1
-      ;;
-    *)
-      if [ $NUMBER -eq 0 ]
-      then
-        _hcat "$key"
-      else
-        _hcat "$key" | nl
-      fi
-      ;;
+	  NUMBER=1
+	  shift
+	  ;;
+	*)
+	  NUMBER=0
+	  ;;
   esac
-  shift
+
+  while [[ $# -gt 0 ]]; do
+    if [ $NUMBER -eq 0 ]; then
+  	  _hcat "$1"
+    else
+  	  _hcat "$1" | nl
+    fi
+    shift
   done
 
   unset NUMBER
