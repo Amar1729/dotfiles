@@ -114,6 +114,9 @@ set mouse=a
 set wildmenu
 set wildmode=full
 
+" case-insensitive, smart search for /, ?
+set ignorecase smartcase
+
 " hide modified buffers (allow opening of new buffers if current is edited)
 set hidden
 

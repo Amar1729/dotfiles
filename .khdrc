@@ -33,7 +33,6 @@ alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 # Default: default mode
 # Tree: change window containers/spaces
 # Space: change space tiling mode or modify padding/gaps 
-# Terminal (term): spawn terminals (or brwoser windows) with different profiles
 # In progress:
 #	tmux: passthrough when a tmux session is open
 
@@ -45,25 +44,24 @@ khd mode space prefix on
 khd mode space timeout 1
 khd mode space restore default
 
+# Mode `tmux` not complete (keep this commented)
+#khd mode tmux prefix on
+#khd mode tmux timeout 1
+#khd mode tmux restore default
+
 # old colors:
 # green: 0xcc98971a 
 # white: 0x77fbf1c7
 khd mode default on_enter kwmc config border focused color 0xaa282828
 khd mode tree on_enter kwmc config border focused color 0xcc458588 
 khd mode space on_enter kwmc config border focused color 0xccb16286
-
-# Mode `tmux` not complete (keep this commented)
-#khd mode tmux prefix on
-#khd mode tmux color 0xcc7b4b93
 #khd mode tmux on_enter kwmc config border focused color 0xcc7b4b93 
-#khd mode tmux timeout 1
-#khd mode tmux restore default
 
-
+# toggle between modes
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
 #ctrl - a				:	khd -e "mode activate tmux"
-ctrl - n				:	khd -e "mode activate term"
+
 
 ####
 ## Defaults
