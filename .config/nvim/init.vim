@@ -101,29 +101,21 @@ endif
 " Look and Feel
 """
 
-colorscheme gruvbox
-" colorscheme wal
+" colorscheme gruvbox
+colorscheme wal
 set background=dark
 set relativenumber
 set tabstop=4 softtabstop=4 shiftwidth=4
 
+" allow mouse control
 set mouse=a
+
+" zsh-style tab completion
+set wildmenu
+set wildmode=full
 
 " hide modified buffers (allow opening of new buffers if current is edited)
 set hidden
-
-" Recolor columns and git symbols
-" -> not necessary with wal colorscheme
-hi clear FoldColumn
-hi FoldColumn ctermbg=235
-hi Folded cterm=bold ctermfg=7 ctermbg=235
-hi clear SignColumn
-hi SignColumn ctermbg=235
-" linenr: ctermfg=245 for all symbols                 Defaults:
-hi GitGutterAdd ctermfg=142 ctermbg=235               " GruvboxGreenSign fg/bg 142/237
-hi GitGutterChange ctermfg=108 ctermbg=235            " GruvboxAquaSign fg/bg 108/237
-hi GitGutterDelete ctermfg=167 ctermbg=235            " GruvboxRedSign fg/bg 167/237
-hi GitGutterChangeDelete ctermfg=108 ctermbg=235      " GruvboxAquaSign fg/bg 108/237
 
 
 """
@@ -176,6 +168,8 @@ augroup SetSyntaxColor
 	autocmd BufWinLeave *rc set syntax=config
 augroup END
 
+autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
+
 
 " Deal with status bar (necessary?)
 
@@ -225,7 +219,8 @@ let g:deoplete#enable_at_startup=1
 " completion engines
 let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " this will chang with each upgrade! symlink?
-let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include'
+
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
 
@@ -242,6 +237,16 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " When writing a buffer, and on normal mode changes (after 750ms).
 call neomake#configure#automake('nw', 750)
+
+" red
+hi NeomakeErrorSign ctermfg=1
+" white
+hi NeomakeWarningSign ctermfg=7
+" blue (?)
+hi NeomakeMessageSign ctermfg=4
+" green (?)
+hi NeomakeInfoSign ctermfg=2
+
 let g:neomake_error_sign =   {'text' : 'x', 'texthl' : 'NeomakeErrorSign'}
 let g:neomake_warning_sign = {'text' : '!', 'texthl' : 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text' : '>', 'texthl' : 'NeomakeMessageSign'}

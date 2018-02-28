@@ -34,6 +34,7 @@ mcd () { mkdir -p "$1" && cd "$1"; }
 # Use neovim instead of vim
 alias vi="nvim"
 alias vim="nvim"
+alias gvim="/usr/local/bin/vim"
 vimdiff () { nvim -d "$@" ;}
 
 # copy with a progress bar.
@@ -48,11 +49,11 @@ alias diff='colordiff'
 # Use fuck/thefuck for command correction
 which thefuck>/dev/null && eval $(thefuck --alias)
 
-# TODO - improve this (pass commands to hcat with $@?)
+# set better defaults for highlight
+alias highlight='highlight -O xterm256 --style=zenburn --force'
+
 # use `highlight` for colorized cat
 # Requires `nl` for line numbering
-# first, set better alias for highlight
-alias highlight='highlight -O xterm256 --style=zenburn --force'
 hcat () {
   _hcat () {
     if [ -f "$1" ]; then
@@ -127,14 +128,11 @@ tmux-a () {
 if [[ "$(uname)" == 'Darwin' ]]
 then
 
-# (mac) always use homebrew python?
-#alias python='python2'
-#alias pip='/usr/local/bin/pip2'
-#alias python='python3'
+# quick look alias
+alias ql='qlmanage -p 2>/dev/null'
 
-# TODO - fix (make this a function?)
 # fix broken virtualenv (when brew updates python)
-alias fixEnv='gfind "$1" -type l -xtype l -delete'
+fixEnv () { gfind "$1" -type l -xtype l -delete }
 
 abri () { open -a Abricotine "$@" }
 
@@ -149,15 +147,16 @@ wifi () {
 				networksetup -setairportpower en0 "$1"
 				;;
 			*)
-				echo "Not valid option: ""$1" && return 1
+				echo "Not valid option: ""$1" && echo "{on|off|status}" && return 1
 				;;
 		esac
 	else
+		# with no argument, just toggle
 		STATUS="$(networksetup -getairportpower en0|cut -f4 -d ' ')"
 		if [[ $STATUS == "Off" ]]; then
-			networksetup -setairportpower en0 on && echo "wifi on..."
+			networksetup -setairportpower en0 on && echo "turning wifi on..."
 		else
-			networksetup -setairportpower en0 off && echo "wifi off..."
+			networksetup -setairportpower en0 off && echo "turning wifi off..."
 		fi
 	fi
 }

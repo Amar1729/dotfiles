@@ -29,18 +29,6 @@ alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 #	so possibly look at a different key (shift-literal?) 
 #	that can also exit tmux mode
 
-# enable kwm compatibility mode (not anymore)
-#khd kwm on
-
-
-# (from kwm's default)
-# unused (keep for colors? idk)
-#khd mode switcher color 0xddbdd322
-#khd mode terminal color 0xddd75f5f
-#khd mode swap color 0xdd458588
-#khd mode info color 0xddcd950c
-#khd mode tree color 0xddfabd2f
-
 
 # Default: default mode
 # Tree: change window containers/spaces
@@ -57,15 +45,12 @@ khd mode space prefix on
 khd mode space timeout 1
 khd mode space restore default
 
-khd mode term prefix on
-khd mode term timeout 1
-khd mode term restore default
-
+# old colors:
+# green: 0xcc98971a 
+# white: 0x77fbf1c7
 khd mode default on_enter kwmc config border focused color 0xaa282828
-#khd mode switcher on_enter kwmc config border focused color 0xcc98971a 
 khd mode tree on_enter kwmc config border focused color 0xcc458588 
 khd mode space on_enter kwmc config border focused color 0xccb16286
-khd mode term on_enter kwmc config border focused color 0x77fbf1c7 
 
 # Mode `tmux` not complete (keep this commented)
 #khd mode tmux prefix on
@@ -75,10 +60,6 @@ khd mode term on_enter kwmc config border focused color 0x77fbf1c7
 #khd mode tmux restore default
 
 
-# toggle between modes
-#ctrl - s				:	khd -e "mode activate switcher"
-#switcher + ctrl - s		:	khd -e "mode activate default"
-
 ctrl - d				:	khd -e "mode activate space"
 ctrl - f				:	khd -e "mode activate tree"
 #ctrl - a				:	khd -e "mode activate tmux"
@@ -87,6 +68,10 @@ ctrl - n				:	khd -e "mode activate term"
 ####
 ## Defaults
 ####
+
+# open terminal or browser window
+cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n
+cmd + shift - n			:	open -na Google\ Chrome
 
 # mouse buttons ( send cmd + {[,]} )
 - button3				:	khd -p "cmd - 0x21"
@@ -124,12 +109,8 @@ cmd + alt + ctrl - p	:	kwmc window -m mark
 alt - n					:	kwmc window -f next
 alt - m					:	kwmc window -f prev
 
-# Give Focus to Monocle-Subtree Window
-alt + shift - n			:	kwmc window -fm next
-alt + shift - m			:	kwmc window -fm prev
-
-# Modify Container (switch between bsp/monocle splitting of a window)
-lalt - c				:	kwmc window -c type toggle
+# Tell kwm to make next window on space floating
+lalt - c				:	kwmc window -t next
 
 # Modify Container (size)
 lalt - h				:	kwmc window -c expand 0.05 west
@@ -153,21 +134,6 @@ ctrl + shift - 2		:	kwmc window -m display 1;\
 							kwmc display -f 1
 ctrl + shift - 3		:	kwmc window -m display 2;\
 							kwmc display -f 2
-
-####
-## terminal mode (ctrl - n)
-####
-
-# Terminal Profiles
-# most common: cmd+enter (similar to sxhkd default)
-# can i modify this to open with a profile vs. wal -r ?
-cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n gruvbox
-term - c				:	~/.config/scripts/ricing.sh wp -n changer
-term - a				:	~/.config/scripts/ricing.sh wp -n adwaita
-term - b				:	~/.config/scripts/ricing.sh wp -n blaziken
-term - 2				:	~/.config/scripts/ricing.sh wp -n blaziken2
-term - p				:	~/.config/scripts/ricing.sh wp -n animeswing
-term + shift - n		:	open -na Google\ Chrome
 
 
 ####

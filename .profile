@@ -20,8 +20,8 @@
 # Set default editor
 export EDITOR="nvim"
 
-# Python shell tab completion
-export PYTHONSTARTUP="$(python -m jedi repl)"
+# Python shell tab completion (use homebrew python)
+which python2 >/dev/null && export PYTHONSTARTUP="$(`which python2` -m jedi repl)"
 
 ####
 ## PATH changes
