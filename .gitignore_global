@@ -6,7 +6,9 @@
 .AppleDouble
 ._*
 *~
-*.swp
+*.sw[p|o]
+.cache/
+.gitignore
 
 # Python
 *.pyc
@@ -18,4 +20,3 @@ __pycache__/
 *.o
 *.dll
 *.so
-

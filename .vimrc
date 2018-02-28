@@ -3,19 +3,22 @@
 " Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
 "
-"Plug 'tpope/vim-sensible'
-"Plug 'morhetz/gruvbox'
-"Plug 'davidhalter/jedi-vim'
-"
+"	Plug 'tpope/vim-sensible'
+"	Plug 'morhetz/gruvbox'
+"	Plug 'davidhalter/jedi-vim'
+
+ 	"Plug 'FredKSchott/CoVim'
+	Plug('dylanaraps/wal.vim')
+
 "call plug#end()
 
-colorscheme zenburn
+"colorscheme zenburn
 "colorscheme gruvbox
+colorscheme wal
 
 syntax on
 
-set number
-"set relativenumber
+set relativenumber number
 
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 set incsearch hlsearch
