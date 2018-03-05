@@ -40,6 +40,12 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " async linting
   call dein#add('neomake/neomake')
 
+  " code snippet engine
+  call dein#add('SirVer/ultisnips')
+
+  " snippets are separated from the engine
+  call dein#add('honza/vim-snippets')
+
 
   " Quality of life:
 
@@ -86,7 +92,7 @@ syntax enable
 " If you want to install not installed plugins on startup.
 " (Annoying when you're testing lots of different plugins)
 if dein#check_install()
-  " call dein#install()
+  call dein#install()
 endif
 
 "End dein Scripts-------------------------
@@ -148,6 +154,8 @@ nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
 
+" for exiting nvim terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 """
 " Augroups
@@ -224,7 +232,7 @@ let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/
 " this will chang with each upgrade! symlink?
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include'
 
-let g:python_host_prog='/usr/local/bin/python2'
+let g:python_host_prog='/usr/local/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
 
 " close the deoplete preview window on autocomplete
@@ -232,6 +240,11 @@ autocmd CompleteDone * pclose
 
 " deoplete tab-complete:
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
+
+
+" ultisnip settings
+" <c-j>, <c-k> : jump forward, backward, respectively
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 
 " neomake settings

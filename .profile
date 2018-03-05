@@ -39,11 +39,15 @@ which python2 >/dev/null && export PYTHONSTARTUP="$(`which python2` -m jedi repl
 # my changes
 export PATH="/opt/bin:$PATH"
 
+# Add cargo (Rust) stuff
+[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
 
 # keep this?
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 # rudimentary rename (or syntax for it)
 # for f in Game.of.Thrones.S03E*
