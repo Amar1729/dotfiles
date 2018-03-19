@@ -78,11 +78,11 @@ cmd + shift - n			:	open -na Google\ Chrome
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
 
-# Move focus (necessary?)
-cmd + ctrl - h			:	kwmc window -f west
-cmd + ctrl - j			:	kwmc window -f south
-cmd + ctrl - k			:	kwmc window -f north
-cmd + ctrl - l			:	kwmc window -f east
+# Mark, Swap, Reinsert Window
+# note - these are consistent (I use mouseover to change focus)
+cmd + ctrl - m			:	kwmc window -mk focused
+cmd + ctrl - o			:	kwmc window -s mark
+cmd + ctrl - p			:	kwmc window -m mark
 
 # Swap Focused Window
 ctrl + alt - h			:	kwmc window -s west
@@ -90,18 +90,11 @@ ctrl + alt - j			:	kwmc window -s south
 ctrl + alt - k			:	kwmc window -s north
 ctrl + alt - l			:	kwmc window -s east
 
-# Mark Window
-cmd + alt + ctrl - h	:	kwmc window -mk west wrap
-cmd + alt + ctrl - l	:	kwmc window -mk east wrap
-cmd + alt + ctrl - j	:	kwmc window -mk south wrap
-cmd + alt + ctrl - k	:	kwmc window -mk north wrap
-cmd + alt + ctrl - m	:	kwmc window -mk focused
-
-# Swap marked window with focused window
-cmd + alt + ctrl - o	:	kwmc window -s mark
-
-# Reinsert marked window at focused window
-cmd + alt + ctrl - p	:	kwmc window -m mark
+# Reinsert Focused Window
+cmd + shift - h			:	kwmc window -m west
+cmd + shift - j			:	kwmc window -m south
+cmd + shift - k			:	kwmc window -m north
+cmd + shift - l			:	kwmc window -m east
 
 # Give Focus to Window (helpful when Space is in Monocle mode)
 alt - n					:	kwmc window -f next

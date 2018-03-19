@@ -64,14 +64,11 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " nice completion of (x)html tags
   call dein#add('tpope/vim-ragtag')
 
-  " Syntax highlighting for coffeescript
-  call dein#add('kchmck/vim-coffee-script')
-
-  " Support for Julia
-  call dein#add('JuliaEditorSupport/julia-vim')
-
   " (vim plugin) minimap
   call dein#add('severin-lemaignan/vim-minimap')
+
+
+  " Language-specific syntax support, completions:
 
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
@@ -79,6 +76,16 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
   "call dein#add('donRaphaco/neotex')
   " no, I think this only works for vim?
+
+  " Syntax highlighting for coffeescript
+  call dein#add('kchmck/vim-coffee-script')
+
+  " Support for Julia
+  call dein#add('JuliaEditorSupport/julia-vim')
+
+  " toml syntax
+  call dein#add('cespare/vim-toml')
+
 
   " Required:
   call dein#end()
@@ -148,7 +155,8 @@ vnoremap <leader>P "*P
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
 nmap <leader>N :bprev<CR>
-"nmap <leader>m :bprev<CR>	" use this for tab-switching?
+nmap <leader>m :tabn<CR>	" Cycle through tabs
+nmap <leader>M :tabp<CR>
 nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
 
 " clear highlighted matches from find
@@ -161,12 +169,7 @@ tnoremap <Esc> <C-\><C-n>
 " Augroups
 """
 
-" auto-reload config
-"augroup AutoCommands
-"	au!
-"    autocmd BufWritePost $MYVIMRC source $MYVIMRC 
-"augroup END
-
+" save folds in a file, restore when it's opened again
 augroup AutoSaveFolds
   autocmd!
   autocmd BufWinLeave *.* mkview
@@ -175,8 +178,8 @@ augroup END
 
 " why is this necessary? didn't nvim use to do this automatically?
 augroup SetSyntaxColor
-	autocmd!
-	autocmd BufWinLeave *rc set syntax=config
+  autocmd!
+  autocmd BufWinLeave *rc set syntax=config
 augroup END
 
 autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
@@ -222,6 +225,12 @@ set statusline=%t
 """
 " Plugin Settings and Keybinds
 """
+
+
+" gitgutter
+set updatetime=100
+nmap ghn <Plug>GitGutterNextHunk
+nmap ghp <Plug>GitGutterPrevHunk
 
 
 " deoplete settings

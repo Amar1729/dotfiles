@@ -19,6 +19,13 @@
 [[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
 ####
+## bash-specific settings
+####
+
+# expand argument callbacks in shell with space (e.g. !![space])
+bind Space:magic-space
+
+####
 ## moar history plz
 ####
 
@@ -60,7 +67,3 @@ function PostCommand() {
   echo ""
 }
 PROMPT_COMMAND="PostCommand"
-
-####
-## End of prompt changes
-####
