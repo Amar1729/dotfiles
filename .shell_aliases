@@ -46,9 +46,6 @@ alias ppjson='python -m json.tool'
 # colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
 alias diff='colordiff'
 
-# Use fuck/thefuck for command correction
-which thefuck>/dev/null && eval $(thefuck --alias)
-
 # set better defaults for highlight
 alias highlight='highlight -O xterm256 --style=zenburn --force'
 

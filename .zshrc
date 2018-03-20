@@ -7,7 +7,6 @@ export EDITOR="nvim"
 export ZSH=/Users/Amar/.oh-my-zsh
 
 # my own theme!
-#ZSH_THEME="amar"
 ZSH_THEME="amar_simple"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -15,7 +14,7 @@ ZSH_THEME="amar_simple"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
@@ -119,3 +118,5 @@ compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)"
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
+
+[[ -r ~/.cache/wal/sequences ]] && cat ~/.cache/wal/sequences

@@ -239,7 +239,7 @@ let g:deoplete#enable_at_startup=1
 " completion engines
 let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " this will chang with each upgrade! symlink?
-let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/include'
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
 let g:python_host_prog='/usr/local/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'

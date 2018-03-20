@@ -4,29 +4,10 @@
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
 ####
-## Script sourcing
-####
-
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
-
-# rice scripts
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
-
-####
-## exports
-####
-
-# Set default editor
-export EDITOR="nvim"
-
-# Python shell tab completion (use homebrew python)
-which python2 >/dev/null && export PYTHONSTARTUP="$(`which python2` -m jedi repl)"
-
-####
 ## PATH changes
 ####
 
+# use this to fix if the path gets weird?
 #DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # homebrew changes
@@ -39,6 +20,9 @@ which python2 >/dev/null && export PYTHONSTARTUP="$(`which python2` -m jedi repl
 # my changes
 export PATH="/opt/bin:$PATH"
 
+# add pip installs (user)
+export PATH="$PATH:/Users/paula1/Library/Python/3.6/bin"
+
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -49,14 +33,18 @@ export PATH="/opt/bin:$PATH"
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-# rudimentary rename (or syntax for it)
-# for f in Game.of.Thrones.S03E*
-#  do
-#   new=${f/Game.of.Thrones./}
-#   new=${new/720p*/srt}
-#   mv $f $new
-#  done
+####
+## interpreter stuff
+####
 
+# Python shell tab completion (use homebrew python)
+which python3 >/dev/null && export PYTHONSTARTUP="$(`which python3` -m jedi repl)"
+
+# Use fuck/thefuck for command correction
+which thefuck >/dev/null && eval $(thefuck --alias)
+
+
+# comment out the rest of this, but keep it around?
 : << 'END'
 
 # old path/dyld/etc stuff (from .bash_profile)
