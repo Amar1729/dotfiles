@@ -11,18 +11,17 @@ wp () {
 		-w|--wallpaper)
 			wp-wallpaper "$2"
 			;;
+		-n|--new)
+			wp-new-window "$2"
+			;;
+		-p|--profile)
+			echo -e "\033]50;SetProfile=$2\a"
+			;;
 		-t|--transparency)
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
 			;;
 		--tg|--transparency-get)
 			osascript -e 'tell application "iTerm" to tell current window to tell current session to get transparency'
-			;;
-		-p|--profile)
-			echo -e "\033]50;SetProfile=$2\a"
-			;;
-		-n|--new)
-			[[ -n "$2" ]] && PROF="$2" || PROF="gruvbox"
-			osascript -e "tell application \"iTerm\" to create window with profile \"$PROF\""
 			;;
 		--bonsai)
 			~/.config/scripts/bonsai.sh
@@ -53,9 +52,23 @@ wp-wallpaper () {
 	if [[ -f "$file" ]]
 	then
 		osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$file\""
+		# TODO
+		# cache the colorscheme of that file (pywal) as `space id`_sequences
 	else
 		echo "Not a valid file"
 	fi
+}
+
+wp-new-window () {
+	SPACE=$(/usr/local/bin/kwmc query space active id)
+	LINE=$(grep "^$SPACE" ~/.config/scripts/sources.txt 2>/dev/null | head -n1)
+	if [[ -n "$LINE" ]]; then
+		PROF="$(echo $LINE | cut -f2 -d' ')"
+	else
+		PROF="gruvbox"
+	fi
+	#[[ -n "$1" ]] && PROF="$1" || PROF="gruvbox"
+	osascript -e "tell application \"iTerm\" to create window with profile \"$PROF\""
 }
 
 ####
