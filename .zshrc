@@ -107,10 +107,8 @@ export COMPLEX=1
 # ricing stuff
 [[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
 
-# tab completion for my defined profiles
-compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)" prof
-
 # zsh-specific aliases
+
 # autopushd		: make cd act like pushd (alias doesn't work properly)
 # pushdminus	: use -1 instead of +1
 # pushdsilent	: prevents printing stack on each cd
@@ -119,4 +117,5 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
-[[ -r ~/.cache/wal/sequences ]] && cat ~/.cache/wal/sequences
+# dynamic colors with (a wrapper for) pywal!
+~/.config/scripts/ricing.sh wp -r
