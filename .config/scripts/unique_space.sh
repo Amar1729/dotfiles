@@ -4,9 +4,6 @@
 # _space_id:	change command to get current space
 # new_terminal:	change command to spawn new terminal
 
-# Use pywal, or manually manage schemes:
-# Manual usage requires you to create a profile in iTerm
-
 _space_id () {
 	# change command here?
 	SPACE=$(/usr/local/bin/kwmc query space active id)
