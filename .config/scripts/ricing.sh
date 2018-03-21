@@ -6,16 +6,20 @@
 # wp: do a bunch of stuff! 
 # most of this is MAC SPECIFIC
 wp () {
-	key=$1
-	case $key in
+	case $1 in
 		-w|--wallpaper)
-			wp-wallpaper "$2"
+			~/.config/scripts/unique_space.sh change_wallpaper "$2"
 			;;
 		-n|--new)
-			wp-new-window "$2"
+			~/.config/scripts/unique_space.sh new_terminal
 			;;
-		-p|--profile)
-			echo -e "\033]50;SetProfile=$2\a"
+		-r|--reload)
+			~/.config/scripts/unique_space.sh reload_colors
+			;;
+		-b|--both)
+			wp -w "$2"
+			sleep 1
+			wp -r
 			;;
 		-t|--transparency)
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
@@ -32,11 +36,13 @@ wp () {
 		-h|--help)
 			print "wp: Tool for on-the-fly screen changes."
 			print "Usage:"
-			print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE"
+			print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE, cache colors"
+			print "\twp -n|--new \t\t\tNew iTerm window with default profile"
+			print "\twp -r|--reload \t\t\tLoad space-specific colorscheme"
+			print "\twp -b|--both FILE\t\tSet wallpaper and reload colors"
+			print "\t\t\t\t\t\tNote - reloading too soon might not work for complex images"
 			print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
 			print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
-			print "\twp -p|--profile PROFILE\t\tChange current profile to PROFILE"
-			print "\twp -n|--new NAME\t\tNew terminal window with profile NAME"
 			;;
 		*)
 			print "Not supported: ""$1"
@@ -45,30 +51,6 @@ wp () {
 	esac
 
 	return 0
-}
-
-wp-wallpaper () {
-	file="$(realpath "$1")"
-	if [[ -f "$file" ]]
-	then
-		osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$file\""
-		# TODO
-		# cache the colorscheme of that file (pywal) as `space id`_sequences
-	else
-		echo "Not a valid file"
-	fi
-}
-
-wp-new-window () {
-	SPACE=$(/usr/local/bin/kwmc query space active id)
-	LINE=$(grep "^$SPACE" ~/.config/scripts/sources.txt 2>/dev/null | head -n1)
-	if [[ -n "$LINE" ]]; then
-		PROF="$(echo $LINE | cut -f2 -d' ')"
-	else
-		PROF="gruvbox"
-	fi
-	#[[ -n "$1" ]] && PROF="$1" || PROF="gruvbox"
-	osascript -e "tell application \"iTerm\" to create window with profile \"$PROF\""
 }
 
 ####
