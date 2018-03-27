@@ -7,15 +7,15 @@ export EDITOR="nvim"
 export ZSH=/Users/Amar/.oh-my-zsh
 
 # my own theme!
-#ZSH_THEME="amar"
-ZSH_THEME="amar_simple"
+ZSH_THEME="amar"
+#ZSH_THEME="amar_simple"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
@@ -46,18 +46,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 #antigen bundle kennethreitz/autoenv
 #AUTOENV_ENV_FILENAME="env"
 
-# my theme:
-#	style similar to powerlevel9k 
-#	doesn't include virtualenvs in the first slice
-#	DOES truncate dirpath to last 2 (or 25 chars)
-#	- no battery status (i don't need this)
-#	simpler vcs
-#	TODO:
-#		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
-#	note - I liked pure theme. possible to create fork/temp for 'pure' work?
-
-#antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
-antigen theme https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c amar_simple
+antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+#antigen theme https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c amar_simple
 
 # done!
 antigen apply
@@ -119,3 +109,5 @@ compctl -k "(gruvbox adwaita blaziken animeswing koe display changer blaziken2)"
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
+
+[[ -r ~/.cache/wal/sequences ]] && cat ~/.cache/wal/sequences

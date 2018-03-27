@@ -66,21 +66,6 @@ clock () {
 ## theme/color quick testing
 ####
 
-# Switch iTerm2 profiles
-# tab completion done for zsh (see .zshrc)
-# bash?:
-# http://tldp.org/LDP/abs/html/tabexpansion.html
-# ITERM2 ONLY
-prof () { echo -e "\033]50;SetProfile=$1\a" ; }
-
-# Transfer iterm2 colorscheme from themer dir to itermcolors directory
-# PERSONAL USE
-iterm-transfer () {
-  file="$1"
-  theme=$(basename $(dirname "$file"))
-  cp "$file" "/Users/Amar/.config/iterm2/""$theme"".itermcolors"
-}
-
 # resets current song display (e.g. if firefox is closed)
 alias reset-song="echo 'hack the planet' > ~/.config/song.txt"
 
@@ -121,11 +106,6 @@ day () {
 
 	export NIGHT=0
 	return 0
-}
-
-lock () {
-	SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-	open -a $SCREEN_ENGINE
 }
 
 toggle () {
