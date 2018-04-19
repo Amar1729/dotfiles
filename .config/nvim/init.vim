@@ -67,6 +67,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " (vim plugin) minimap
   call dein#add('severin-lemaignan/vim-minimap')
 
+  " vimwiki
+  call dein#add('vimwiki/vimwiki')
+
 
   " Language-specific syntax support, completions:
 
@@ -294,6 +297,10 @@ let g:minimap_show='<leader>ms'
 let g:minimap_update='<leader>mu'
 let g:minimap_close='<leader>gc'
 let g:minimap_toggle='<leader>gt'
+
+
+" vimwiki path
+let g:vimwiki_list = [{'path': '~/Dropbox/wiki/'}]
 
 
 " vim-latex-live-preview

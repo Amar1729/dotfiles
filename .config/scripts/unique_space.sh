@@ -14,11 +14,7 @@ _space_id () {
 _run_wal () {
 	if [[ ! -f "$1" ]]; then exit 1; fi
 
-	# until wal gets fixed to write sequences on -s
-	#wal -sn -i "$1"
-
-	cd ~/Documents/Projects/pywal/
-	python3 -m pywal -sn -i "$1"
+	wal -sn -i "$1"
 }
 
 _cache_seq () {
@@ -27,6 +23,7 @@ _cache_seq () {
 	cp ~/.cache/wal/sequences ~/.cache/wal/sequences_"$SPACE"
 }
 
+# TODO - add a check for sequences files that apply to destroyed desktops?
 change_wallpaper () {
 	FILE="$(realpath "$1")"
 	if [[ ! -f "$1" ]]; then exit 1; fi

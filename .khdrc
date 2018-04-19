@@ -37,11 +37,11 @@ alt - backspace	[HyperTerm,Terminal,iTerm,iTerm2]	->	:	echo ""
 #	tmux: passthrough when a tmux session is open
 
 khd mode tree prefix on
-khd mode tree timeout 1
+khd mode tree timeout 0.5
 khd mode tree restore default
 
 khd mode space prefix on
-khd mode space timeout 1
+khd mode space timeout 0.5
 khd mode space restore default
 
 # Mode `tmux` not complete (keep this commented)
@@ -77,6 +77,12 @@ cmd + shift - n			:	open -na Google\ Chrome
 
 # Write email address (bit of a joke)
 cmd - 9					:	khd -w "amar.paul16@gmail.com"
+
+# Refocus
+lcmd - h				:	kwmc window -f west
+lcmd - j				:	kwmc window -f south
+lcmd - k				:	kwmc window -f north
+lcmd - l				:	kwmc window -f east
 
 # Mark, Swap, Reinsert Window
 # note - these are consistent (I use mouseover to change focus)

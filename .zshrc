@@ -118,4 +118,4 @@ setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
 # dynamic colors with (a wrapper for) pywal!
-~/.config/scripts/ricing.sh wp -r
+(~/.config/scripts/ricing.sh wp -r &)
