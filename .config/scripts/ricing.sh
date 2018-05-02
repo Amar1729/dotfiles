@@ -25,6 +25,7 @@ wp () {
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
 			;;
 		--tg|--transparency-get)
+			# NOTE - cmd+u makes an iTerm window opaque?
 			osascript -e 'tell application "iTerm" to tell current window to tell current session to get transparency'
 			;;
 		--bonsai)

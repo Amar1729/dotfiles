@@ -16,7 +16,7 @@
 	stn = status -sb -uno
 	br = branch
 	m = merge
-	ma = merge abort
+	ma = merge --abort
 	p = pull
 	pr = pull --rebase
 

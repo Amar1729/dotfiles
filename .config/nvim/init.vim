@@ -139,6 +139,9 @@ set hidden
 " autoread changes made outside vim
 set autoread
 
+" persistent undo!
+au BufWritePre * setlocal undofile
+
 " File drawer - netrw settings
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3

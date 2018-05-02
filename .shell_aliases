@@ -30,6 +30,7 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
+alias less="less -FX"
 alias cclear="cd; clear"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
@@ -174,6 +175,9 @@ alias ql='qlmanage -p 2>/dev/null'
 fixEnv () { gfind "$1" -type l -xtype l -delete }
 
 abri () { open -a Abricotine "$@" }
+
+# get battery status (this is only used when I'm running very low power, no bar)
+alias power="pmset -g batt | egrep -o '([0-9]+\%).*?;.*?;'"
 
 # control wifi
 wifi () {
