@@ -25,6 +25,7 @@ fi
 alias ll="ls -lhFG"
 alias la="ll -a"
 alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
+alias lt="ll -t"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
@@ -45,7 +46,7 @@ vimdiff () { nvim -d "$@" ;}
 alias cpv="rsync -avzh --progress --"
 
 # pretty-print json
-alias ppjson='python -m json.tool'
+alias jcat='python -m json.tool'
 
 # colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
 alias diff='colordiff'
@@ -123,6 +124,25 @@ tmux-a () {
 		# tmux isn't running: start it up
 		tmux
 		#return 0
+	fi
+}
+
+# overwrite `python` and `python3` to always open better REPL (if it's installed)
+python () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python "$@"
+	fi
+}
+
+python3 () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python3 "$@"
 	fi
 }
 
@@ -243,5 +263,7 @@ alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
 else
 
 # linux-specific aliases
+
+:
 
 fi

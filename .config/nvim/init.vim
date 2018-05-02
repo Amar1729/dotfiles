@@ -121,7 +121,7 @@ endif
 colorscheme wal
 set background=dark
 set relativenumber
-set tabstop=4 softtabstop=4 shiftwidth=4
+set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
 
 " allow mouse control
 set mouse=a
@@ -135,6 +135,16 @@ set ignorecase smartcase
 
 " hide modified buffers (allow opening of new buffers if current is edited)
 set hidden
+
+" autoread changes made outside vim
+set autoread
+
+" File drawer - netrw settings
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 
 """
@@ -185,8 +195,16 @@ augroup SetSyntaxColor
   autocmd BufWinLeave *rc set syntax=config
 augroup END
 
+" auto-attempt json prettification
+augroup JsonPrettify
+  autocmd!
+  autocmd BufWinEnter *.json silent! %!python -m json.tool
+augroup END
+
 autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 
+" disable linting for temporary .py files
+autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " Deal with status bar (necessary?)
 
@@ -320,6 +338,11 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline_mode_map = {
 	\ 'n' : 'normie',
 	\ 'i' : 'hardcore hacking',
+	\ 'R' : 'swappity swip',
+	\ 'v' : 'look',
+	\ 'V' : 'line look',
+	\ '' : 'block look',
+	\ 't' : 'powershell',
 	\ }
 
 function! AirlineInit()

@@ -79,6 +79,10 @@ termcolors() {
 ## day/night changes
 ####
 
+clock () {
+	watch -t -n 1 date +%T
+}
+
 # changes to night mode
 night() {
 	open -a Flux

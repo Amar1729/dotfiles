@@ -20,6 +20,8 @@ set number
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 set incsearch hlsearch
 
+set mouse=a
+
 augroup remember_folds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
