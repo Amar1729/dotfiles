@@ -7,9 +7,13 @@ if [[ "$(uname)" == 'Darwin' ]]
 then
 	# Open the screensaver with `lock`
 	# note - should set preferences to lock the screen after 5s of screensaver
-	# lock() is defined in ~/.config/scripts/ricing.sh
+	lock () {
+		SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
+		open -a $SCREEN_ENGINE
+	}
+
 else
-	# linux locking
+	# linux locking (typically, this is a script that uses some version of i3lock)
 	alias lock="~/.config/scripts/lock.sh"
 fi
 
@@ -51,6 +55,10 @@ alias highlight='highlight -O xterm256 --style=zenburn --force'
 
 # use `highlight` for colorized cat
 # Requires `nl` for line numbering
+# TODO:
+#	1: should this just overwrite the `cat` cmd?
+#	2: allow passing highlight cmd flags (notably --syntax)
+#	3: handle multiple file args i.e. w/ "$@"
 hcat () {
   _hcat () {
     if [ -f "$1" ]; then
@@ -116,6 +124,20 @@ tmux-a () {
 		tmux
 		#return 0
 	fi
+}
+
+# wip: add completions to tmux-a (will defer between bash and zsh uh oh)
+function _tmux-a() {
+    [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
+    local -a args
+
+    args=(
+        #'-c[specify working directory for the session]:directory:_path_files -g "*(-/)"'
+        #'-d[detach other clients attached to target session]'
+        #'-r[put the client into read-only mode]'
+        '[choose a target session]:target session:__tmux-sessions'
+    )
+    _arguments ${args}
 }
 
 ####
