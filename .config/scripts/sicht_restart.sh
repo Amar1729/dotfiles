@@ -8,15 +8,19 @@ _kill() {
 
 _open() {
     printf "Starting app (takes a few seconds) ...\n"
-
-    sleep 2
     open -a /Applications/Übersicht.app
 }
 
-if [[ -n "$1" ]] && [[ "$1" == "-k" ]]
-then
-    _kill
+if [[ -n "$1" ]]; then
+    if [[ "$1" == "-k" ]]; then
+        _kill
+    elif [[ "$1" == "-r" ]]; then
+        osascript -e 'tell application "Übersicht" to refresh'
+    else
+        print "incorrect usage: -r|-k"
+    fi
 else
     _kill
+    sleep 2
     _open
 fi

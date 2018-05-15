@@ -130,8 +130,9 @@ chunkc tiling::rule --owner Firefox --name \"Install user style\" --state float
 chunkc tiling::rule --owner python --state float
 
 # work stuff
-# note - only outlook reminders should be floated
-#chunkc tiling::rule --owner \"Microsoft Outlook\" --state float
+chunkc tiling::rule --owner \"Microsoft Outlook\" --name \"1 Reminder\" --state float
+chunkc tiling::rule --owner \"Microsoft Outlook\" --name \"2 Reminders\" --state float
+chunkc tiling::rule --owner \"Microsoft Outlook\" --name \"3 Reminders\" --state float
 chunkc tiling::rule --owner \"Cisco AnyConnect Secure Mobility Client\" --state float
 chunkc tiling::rule --owner \"Microsoft Remote Desktop\" --state float
 chunkc tiling::rule --owner kinetis-design-studio --name \"Build Project\" --state float

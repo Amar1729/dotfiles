@@ -18,7 +18,8 @@ khd mode space restore default
 # black: 0xaa282828 (focused color)
 # green: 0xcc98971a 
 # white: 0x77fbf1c7
-khd mode default	on_enter chunkc set_focused_border_color 0xaa282828; chunkc border::color 0xaa282828 
+#khd mode default	on_enter chunkc set_focused_border_color 0xaa282828; chunkc border::color 0xaa282828
+khd mode default	on_enter chunkc set_focused_border_color 0xffebdbb2; chunkc border::color 0xffebdbb2
 khd mode tree		on_enter chunkc set_focused_border_color 0xcc458588; chunkc border::color 0xcc458588 
 khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286 
 #khd mode tmux		on_enter chunkc set_focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93 
@@ -48,6 +49,7 @@ ctrl + alt - w			: chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
 cmd - return			: ~/.config/scripts/ricing.sh wp -n
 cmd + shift - return	: open -na Google\ Chrome
+cmd + alt + ctrl - l	: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
 
 # float next window to be tiled
 alt - c : chunkc set window_float_next 1
@@ -110,6 +112,7 @@ cmd + alt - x   : `id=$(chunkc get _last_active_desktop); khd -p "cmd - $id" &> 
 #ctrl - z  : chunkc tiling::monitor -f prev
 ctrl - 1 : chunkc tiling::monitor -f 1
 ctrl - 2 : chunkc tiling::monitor -f 2
+ctrl - 3 : chunkc tiling::monitor -f 3
 
 # send window to monitor and follow focus
 #ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev

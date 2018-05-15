@@ -23,6 +23,9 @@ export PATH="/opt/bin:$PATH"
 # add pip installs (user)
 export PATH="$PATH:/Users/paula1/Library/Python/3.6/bin"
 
+# add fzf if it's there
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
