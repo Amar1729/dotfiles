@@ -74,7 +74,8 @@ HISTSIZE=10000000			# number of history lines kept internally
 SAVEHIST=10000000			# max number of history lines saved
 setopt APPEND_HISTORY		# history appends to existing file
 setopt HIST_REDUCE_BLANKS	# trim multiple insgnificant blanks in history
-setopt HIST_IGNORE_DUPS		# ignore duplicates and (?)
+setopt HIST_IGNORE_ALL_DUPS	# ignore ALL duplicates (even if not immediately previous)
+setopt histignoredups		# ignore duplicates during search
 
 # ignore if beginning with space
 setopt HIST_IGNORE_SPACE
