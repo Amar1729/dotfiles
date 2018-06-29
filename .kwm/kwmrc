@@ -115,6 +115,7 @@ kwmc rule owner="firefox" name="Session Manager - Restore Session" properties={f
 kwmc rule owner="Cyberduck" properties={float="true"}
 kwmc rule name="Install user style" properties={float="true"}
 kwmc rule owner="Google Chrome" name="Google Hangouts" properties={float="true"}
+kwmc rule owner="Google Chrome" name="Task Manager - Google Chrome" properties={float="true"}
 kwmc rule name="Google Hangouts" properties={float="true"}
 kwmc rule owner="VLC" properties={float="true"}
 kwmc rule owner="Calculator" properties={float="true"}
