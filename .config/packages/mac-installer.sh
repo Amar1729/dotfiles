@@ -23,6 +23,6 @@ git checkout master
 
 echo "Make sure to set global git uname/email"
 
-brew install python python3
+brew install python python@2
 brew install zsh antigen neovim
 brew install tmux

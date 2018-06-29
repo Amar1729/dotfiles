@@ -50,46 +50,24 @@ alias diff='colordiff'
 alias highlight='highlight -O xterm256 --style=zenburn --force'
 
 # use `highlight` for colorized cat
-# Requires `nl` for line numbering
 hcat () {
-  _hcat () {
-    if [ -f "$1" ]; then
-      case "$1" in
-        # force configuration file syntax for rc and profile files
-        *rc|*profile)
-          highlight --syntax=conf -i "$1"
-          ;;
-        *)
-          highlight -i "$1"
-          ;;
-      esac
-    else
-	  # just use cat to get decent error handling
-	  cat "$1"
-    fi
-  }
-
-  case "$1" in
-    -n)
-	  NUMBER=1
-	  shift
-	  ;;
-	*)
-	  NUMBER=0
-	  ;;
-  esac
 
   while [[ $# -gt 0 ]]; do
-    if [ $NUMBER -eq 0 ]; then
-  	  _hcat "$1"
-    else
-  	  _hcat "$1" | nl
-    fi
+    case "$1" in
+      -n)
+        ARGS="-l"
+        ;;
+      *rc|*profile)
+        highlight "$ARGS" --syntax=conf -i "$1"
+        ;;
+      *)
+        highlight "$ARGS" -i "$1"
+        ;;
+    esac
     shift
   done
 
-  unset NUMBER
-  unset -f _hcat
+  unset ARGS
 }
 
 # make tmux easier to check

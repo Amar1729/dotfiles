@@ -136,6 +136,12 @@ set ignorecase smartcase
 " hide modified buffers (allow opening of new buffers if current is edited)
 set hidden
 
+" file explorer sidebar
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+
 
 """
 " Personal definitions

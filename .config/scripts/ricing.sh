@@ -21,6 +21,9 @@ wp () {
 			sleep 1
 			wp -r
 			;;
+		-f|--file)
+			cat ~/.cache/wal/sequences_"$2"
+			;;
 		-t|--transparency)
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
 			;;
@@ -40,6 +43,7 @@ wp () {
 			print "\twp -n|--new \t\t\tNew iTerm window with default profile"
 			print "\twp -r|--reload \t\t\tLoad space-specific colorscheme"
 			print "\twp -b|--both FILE\t\tSet wallpaper and reload colors"
+			print "\twp -f|--file NUMBER\t\tAttempt to load .cache/wal/sequences_NUMBER"
 			print "\t\t\t\t\t\tNote - reloading too soon might not work for complex images"
 			print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
 			print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
