@@ -108,6 +108,7 @@ gen-pw () {
 	cat /dev/urandom | \
 		gtr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | \
 		head -c "$LEN"
+}
 
 # overwrite `python` and `python3` to always open better REPL (if it's installed)
 python () {
@@ -129,7 +130,7 @@ python3 () {
 }
 
 # wip: add completions to tmux-a (will defer between bash and zsh uh oh)
-function _tmux-a() {
+function _tmux-a () {
     [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
     local -a args
 
@@ -153,7 +154,7 @@ then
 alias ql='qlmanage -p 2>/dev/null'
 
 # fix broken virtualenv (when brew updates python)
-fixEnv () { gfind "$1" -type l -xtype l -delete }
+fix-env () { gfind "$1" -type l -xtype l -delete }
 
 abri () { open -a Abricotine "$@" }
 
