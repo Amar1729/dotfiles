@@ -1,0 +1,11 @@
+# only for bash
+# 
+# $include /etc/inputrc
+# 
+# set completion-ignore-case On
+# 
+# # arrow up
+# "\e[A":history-search-backward
+# 
+# ## arrow down
+# "\e[B":history-search-forward

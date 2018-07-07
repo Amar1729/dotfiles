@@ -28,6 +28,7 @@ wp () {
 			osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
 			;;
 		--tg|--transparency-get)
+			# NOTE - cmd+u makes an iTerm window opaque?
 			osascript -e 'tell application "iTerm" to tell current window to tell current session to get transparency'
 			;;
 		--bonsai)
@@ -83,6 +84,10 @@ termcolors() {
 ## day/night changes
 ####
 
+clock () {
+	watch -t -n 1 date +%T
+}
+
 # changes to night mode
 night() {
 	open -a Flux
@@ -101,11 +106,6 @@ day () {
 
 	export NIGHT=0
 	return 0
-}
-
-lock () {
-	SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-	open -a $SCREEN_ENGINE
 }
 
 toggle () {

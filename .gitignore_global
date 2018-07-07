@@ -13,11 +13,13 @@
 # Python
 *.pyc
 env/
-venv/
+venv*
 __pycache__/
+*.egg-info
 
 # Object files
 *.o
 *.dll
 *.so
 .ctags
+tags

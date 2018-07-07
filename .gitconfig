@@ -16,9 +16,13 @@
 	stn = status -sb -uno
 	br = branch
 	m = merge
-	ma = merge abort
+	ma = merge --abort
 	p = pull
 	pr = pull --rebase
+
+	sts = stash
+	sta = stash apply
+	std = stash drop
 
 	# nicely formatted history (includes all branches)
 	hist = log --graph --abbrev-commit --decorate --all --date=short \

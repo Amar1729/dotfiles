@@ -9,13 +9,6 @@ export ZSH=/Users/Amar/.oh-my-zsh
 # my own theme!
 ZSH_THEME="amar_simple"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
 # antigen (homebrew) path
 source /usr/local/share/antigen/antigen.zsh
 
@@ -37,7 +30,7 @@ antigen bundle peterhurford/git-it-on.zsh
 
 # include a notification for long-running commands or nonzero return codes
 # make sure to install terminal-notifier (Mac) or notify-send (Linux)
-antigen bundle marzocchi/zsh-notify
+#antigen bundle marzocchi/zsh-notify
 
 # bundles (and env vars)
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -64,9 +57,16 @@ antigen apply
 
 # User configuration
 
-####
-## History
-####
+# PATH changes
+[[ -r ~/.profile ]] && source ~/.profile
+
+# shell aliases
+[[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
+
+# ricing functions
+[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
+
+# History
 
 HISTCONTROL=ignoreboth
 HISTFILESIZE=1000000
@@ -84,31 +84,37 @@ setopt HIST_NO_STORE
 # save time and how long cmd ran
 setopt EXTENDED_HISTORY
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# newlines before and after command output
-precmd() {print ''}
-preexec() {print ''}
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+# zsh: other look-and-feel, configs, aliases
 
 # complex look-and-feel (airline theme to zsh prompt, vim, and tmux) by default
 export COMPLEX=1
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# don't write invalid commands into history (they are still cached locally)
+# wip: _also_ ignore failed cmds?
+zshaddhistory () { whence ${${(z)1}[1]} >| /dev/null || return 1 }
 
-# necessary PATH changes
-[[ -r ~/.profile ]] && source ~/.profile
+# auto-source virtualenvs
+chpwd () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
 
-# source shell aliases
-[[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
+# newlines before and after command output
+precmd () { print '' }
+preexec () { print '' }
 
-# ricing stuff
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
+# CASE_SENSITIVE="true"
+# case sensitive needs to be off; '_-' interchangeable.
+HYPHEN_INSENSITIVE="true"
 
-# zsh-specific aliases
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+
+# Upon menu completion, enter directories with ctrl-o
+bindkey -M menuselect '^o' accept-and-infer-next-history
+
+# use the vi navigation keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # autopushd		: make cd act like pushd (alias doesn't work properly)
 # pushdminus	: use -1 instead of +1
