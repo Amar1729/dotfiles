@@ -107,6 +107,10 @@ HYPHEN_INSENSITIVE="true"
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
+# Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
+bindkey "^P" up-line-or-beginning-search
+bindkey "^N" down-line-or-beginning-search
+
 # Upon menu completion, enter directories with ctrl-o
 bindkey -M menuselect '^o' accept-and-infer-next-history
 
