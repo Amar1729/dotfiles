@@ -1,0 +1,4 @@
+
+# linux locking
+# make sure you have a lock script haha
+alias lock="~/.config/scripts/lock.sh -l 2>/dev/null"
