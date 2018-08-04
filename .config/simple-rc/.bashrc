@@ -1,29 +1,7 @@
-# Amar Paul's .bashrc
-# 	Login shells:							.bash_profile
-#	nonlogin (i.e. open shell once in):		.bashrc
-# On Mac (Terminal and iTerm2) all shells are login shells
-# good explanation: http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
-#
-# For Mac, file hierarchy is:
-# .bash_profile > .bash_login > .profile 
-#
-# This .bashrc is sourced from .bash_profile (wanted to keep everything together)
-
-# read .profile
-[[ -r ~/.profile ]] && source ~/.profile
+# Amar Paul's (simple) .bashrc
 
 # shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
-
-# and temporary aliases
-[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
-
-####
-## bash-specific settings
-####
-
-# expand argument callbacks in shell with space (e.g. !![space])
-bind Space:magic-space
 
 ####
 ## moar history plz
@@ -67,3 +45,7 @@ function PostCommand() {
   echo ""
 }
 PROMPT_COMMAND="PostCommand"
+
+####
+## End of prompt changes
+####

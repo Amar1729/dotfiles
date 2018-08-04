@@ -1,9 +1,17 @@
 " -*- vim -*-
+<<<<<<< HEAD
 " FILE: python_fn.vim
 " LAST MODIFICATION: 2008-08-28 8:19pm
 " (C) Copyright 2001-2005 Mikael Berthe <bmikael@lists.lilotux.net>
 " Maintained by Jon Franklin <jvfranklin@gmail.com>
 " Version: 1.13
+=======
+" FILE: python.vim
+" LAST MODIFICATION: 2008-05-17 6:29pm
+" (C) Copyright 2001-2005 Mikael Berthe <bmikael@lists.lilotux.net>
+" Maintained by Jon Franklin <jvfranklin@gmail.com>
+" Version: 1.12
+>>>>>>> master
 
 " USAGE:
 "
@@ -341,7 +349,11 @@ function! MenuBuilder()
   let parentclass = ""
   while line(".") < line("$")
     " search for a class or function
+<<<<<<< HEAD
     if match ( getline("."), '^\s*class\s\+[_a-zA-Z].*\|^\s*def\s\+[_a-zA-Z].*' ) != -1
+=======
+    if match ( getline("."), '^\s*class\s\+[_a-zA-Z].*:\|^\s*def\s\+[_a-zA-Z].*:' ) != -1
+>>>>>>> master
       norm ^
       let linenum = line('.')
       let indentcol = col('.')

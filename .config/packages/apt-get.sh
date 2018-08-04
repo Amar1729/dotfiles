@@ -8,17 +8,9 @@ import-dotfiles () {
 	git init
 	git remote add origin <remote_url>
 	git fetch --all --prune
-
-	# use this also once branch is dl'd to set HEAD properly (git reset is probably the important one)
-	git branch --set-upstream-to=origin/master master
 	git checkout master
-	git stash
-	git config user.name 
-	git config user.email 
-	git reset origin/master
-	# is this the right one or does this fail?
-	git checkout -t master
-	git checkout -t origin/master
+	git add -A .
+	git commit -m "Adding my files..."
 }
 
 setup () {

@@ -1,6 +1,9 @@
 # General shell aliases. Source from .bashrc or .zshrc
 
+<<<<<<< HEAD
 # just temporary aliases, nothing to see here
+=======
+>>>>>>> master
 [[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
 # locking
@@ -12,9 +15,16 @@ then
 		SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
 		open -a $SCREEN_ENGINE
 	}
+<<<<<<< HEAD
 else
 	# linux locking
 	alias lock="~/.config/scripts/lock.sh -l 2>/dev/null"
+=======
+
+else
+	# linux locking (typically, this is a script that uses some version of i3lock)
+	alias lock="~/.config/scripts/lock.sh"
+>>>>>>> master
 fi
 
 ####
@@ -25,10 +35,18 @@ fi
 alias ll="ls -lhFG"
 alias la="ll -a"
 alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
+<<<<<<< HEAD
+=======
+alias lt="ll -t"
+>>>>>>> master
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
+<<<<<<< HEAD
+=======
+alias less="less -FX"
+>>>>>>> master
 alias cclear="cd; clear"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
@@ -38,13 +56,21 @@ mcd () { mkdir -p "$1" && cd "$1"; }
 # Use neovim instead of vim
 alias vi="nvim"
 alias vim="nvim"
+<<<<<<< HEAD
+=======
+alias gvim="/usr/local/bin/vim"
+>>>>>>> master
 vimdiff () { nvim -d "$@" ;}
 
 # copy with a progress bar.
 alias cpv="rsync -avzh --progress --"
 
 # pretty-print json
+<<<<<<< HEAD
 alias ppjson='python -m json.tool'
+=======
+alias jcat='python -m json.tool'
+>>>>>>> master
 
 # colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
 alias diff='colordiff'
@@ -53,6 +79,7 @@ alias diff='colordiff'
 alias highlight='highlight -O xterm256 --style=zenburn --force'
 
 # use `highlight` for colorized cat
+<<<<<<< HEAD
 # Requires `nl` for line numbering
 hcat () {
   _hcat () {
@@ -93,6 +120,26 @@ hcat () {
 
   unset NUMBER
   unset -f _hcat
+=======
+hcat () {
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -n)
+        ARGS="-l"
+        ;;
+      *rc|*profile)
+        highlight "$ARGS" --syntax=conf -i "$1"
+        ;;
+      *)
+        highlight "$ARGS" -i "$1"
+        ;;
+    esac
+    shift
+  done
+
+  unset ARGS
+>>>>>>> master
 }
 
 # make tmux easier to check
@@ -121,6 +168,50 @@ tmux-a () {
 	fi
 }
 
+<<<<<<< HEAD
+=======
+# Generate a password before plugging into `pass`
+gen-pw () {
+	[[ -z "$1" ]] && LEN=15 || LEN="$1"
+	cat /dev/urandom | \
+		gtr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | \
+		head -c "$LEN"
+}
+
+# overwrite `python` and `python3` to always open better REPL (if it's installed)
+python () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python "$@"
+	fi
+}
+
+python3 () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python3 "$@"
+	fi
+}
+
+# wip: add completions to tmux-a (will defer between bash and zsh uh oh)
+function _tmux-a () {
+    [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
+    local -a args
+
+    args=(
+        #'-c[specify working directory for the session]:directory:_path_files -g "*(-/)"'
+        #'-d[detach other clients attached to target session]'
+        #'-r[put the client into read-only mode]'
+        '[choose a target session]:target session:__tmux-sessions'
+    )
+    _arguments ${args}
+}
+
+>>>>>>> master
 ####
 ## aliases/functions that are mac or linux specific
 ####
@@ -132,10 +223,20 @@ then
 alias ql='qlmanage -p 2>/dev/null'
 
 # fix broken virtualenv (when brew updates python)
+<<<<<<< HEAD
 fixEnv () { gfind "$1" -type l -xtype l -delete }
 
 abri () { open -a Abricotine "$@" }
 
+=======
+fix-env () { gfind "$1" -type l -xtype l -delete }
+
+abri () { open -a Abricotine "$@" }
+
+# get battery status (this is only used when I'm running very low power, no bar)
+alias power="pmset -g batt | egrep -o '([0-9]+\%).*?;.*?;'"
+
+>>>>>>> master
 # control wifi
 wifi () {
 	if [[ -n "$1" ]]; then
@@ -225,4 +326,9 @@ else
 
 # linux-specific aliases
 
+<<<<<<< HEAD
+=======
+:
+
+>>>>>>> master
 fi

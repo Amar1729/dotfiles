@@ -38,7 +38,13 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('zchee/deoplete-jedi')
   
   " async linting
-  "call dein#add('neomake/neomake')
+  call dein#add('neomake/neomake')
+
+  " code snippet engine
+  call dein#add('SirVer/ultisnips')
+
+  " snippets are separated from the engine
+  call dein#add('honza/vim-snippets')
 
 
   " Quality of life:
@@ -58,17 +64,14 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " nice completion of (x)html tags
   call dein#add('tpope/vim-ragtag')
 
-  " Live LaTeX previewing
-  call dein#add('xuhdev/vim-latex-live-preview')
-
-  " Syntax highlighting for coffeescript
-  "call dein#add('kchmck/vim-coffee-script')
-
-  " Support for Julia
-  "call dein#add('JuliaEditorSupport/julia-vim')
-
   " (vim plugin) minimap
-  "call dein#add('severin-lemaignan/vim-minimap')
+  call dein#add('severin-lemaignan/vim-minimap')
+
+  " vimwiki
+  call dein#add('vimwiki/vimwiki')
+
+
+  " Language-specific syntax support, completions:
 
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
@@ -76,6 +79,16 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
   "call dein#add('donRaphaco/neotex')
   " no, I think this only works for vim?
+
+  " Syntax highlighting for coffeescript
+  call dein#add('kchmck/vim-coffee-script')
+
+  " Support for Julia
+  call dein#add('JuliaEditorSupport/julia-vim')
+
+  " toml syntax
+  call dein#add('cespare/vim-toml')
+
 
   " Required:
   call dein#end()
@@ -89,7 +102,7 @@ syntax enable
 " If you want to install not installed plugins on startup.
 " (Annoying when you're testing lots of different plugins)
 if dein#check_install()
-  " call dein#install()
+  call dein#install()
 endif
 
 "End dein Scripts-------------------------
@@ -104,41 +117,46 @@ endif
 " Look and Feel
 """
 
-colorscheme gruvbox
-" colorscheme wal
+" colorscheme gruvbox
+colorscheme wal
 set background=dark
 set relativenumber
-set tabstop=4 softtabstop=4 shiftwidth=4
+set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
 
+" allow mouse control
 set mouse=a
-
-" hide modified buffers (allow opening of new buffers if current is edited)
-set hidden
 
 " override some defaults (only needed on ubuntu?)
 set foldmethod=manual
 set foldcolumn=2
 
-" Recolor columns and git symbols
-" set transparency when using urxvt fake transparency (ctermbg=NONE)
-hi Normal ctermbg=NONE
-hi clear FoldColumn
-hi FoldColumn ctermbg=NONE
-hi Folded cterm=bold ctermbg=NONE ctermfg=7
-hi clear SignColumn
-" gruvbox: ctermbg=235
-hi SignColumn ctermbg=NONE
-" linenr: ctermfg=245 for all symbols				  Defaults:
-hi GitGutterAdd ctermbg=NONE ctermfg=142			" GruvboxGreenSign fg/bg 142/237
-hi GitGutterChange ctermbg=NONE ctermfg=108			" GruvboxAquaSign fg/bg 108/237
-hi GitGutterDelete ctermbg=NONE ctermfg=167			" GruvboxRedSign fg/bg 167/237
-hi GitGutterChangeDelete ctermbg=NONE ctermfg=108	" GruvboxAquaSign fg/bg 108/237
+" zsh-style tab completion
+set wildmenu
+set wildmode=full
+
+" case-insensitive, smart search for /, ?
+set ignorecase smartcase
+
+" hide modified buffers (allow opening of new buffers if current is edited)
+set hidden
+
+" autoread changes made outside vim
+set autoread
+
+" persistent undo!
+au BufWritePre * setlocal undofile
+
+" file explorer sidebar
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+
 
 """
 " Personal definitions
 """
-
-let mapleader=","
 
 " Copy to clipboard (mac uses * register: linux uses + reg)
 vnoremap <leader>y "+y
@@ -161,24 +179,21 @@ vnoremap <leader><C-P> "*P
 " Buffer movement
 nmap <leader>n :bnext<CR>	" Cycle through buffers
 nmap <leader>N :bprev<CR>
-"nmap <leader>m :bprev<CR>	" use this for tab-switching?
-nmap <leader>m :tabn<CR>
-nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
+nmap <leader>m :tabn<CR>	" Cycle through tabs
+nmap <leader>M :tabp<CR>
 
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
+
+" for exiting nvim terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 
 """
 " Augroups
 """
 
-" auto-reload config
-"augroup AutoCommands
-"	au!
-"    autocmd BufWritePost $MYVIMRC source $MYVIMRC 
-"augroup END
-
+" save folds in a file, restore when it's opened again
 augroup AutoSaveFolds
   autocmd!
   autocmd BufWinLeave *.* mkview
@@ -187,10 +202,20 @@ augroup END
 
 " why is this necessary? didn't nvim use to do this automatically?
 augroup SetSyntaxColor
-	autocmd!
-	autocmd BufWinLeave *rc set syntax=config
+  autocmd!
+  autocmd BufWinLeave *rc set syntax=config
 augroup END
 
+" auto-attempt json prettification
+augroup JsonPrettify
+  autocmd!
+  autocmd BufWinEnter *.json silent! %!python -m json.tool
+augroup END
+
+autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
+
+" disable linting for temporary .py files
+autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " Deal with status bar (necessary?)
 
@@ -233,9 +258,16 @@ set statusline=%t
 " Plugin Settings and Keybinds
 """
 
+" gitgutter
+set updatetime=100
+nmap ghn <Plug>GitGutterNextHunk
+nmap ghp <Plug>GitGutterPrevHunk
+
 
 " deoplete settings
 let g:deoplete#enable_at_startup=1
+
+" completion engines
 "let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " this will chang with each upgrade! symlink?
 "let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
@@ -303,6 +335,65 @@ nnoremap <F12> :LLPStartPreview<CR>
 "let g:neotex_enabled = 0
 
 
+" ultisnip settings
+" <c-j>, <c-k> : jump forward, backward, respectively
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+" neomake settings
+" how to lint with python3?
+" let g:neomake_python_pylint_exe = 'python3'
+
+" When writing a buffer, and on normal mode changes (after 750ms).
+call neomake#configure#automake('nw', 750)
+
+" red
+hi NeomakeErrorSign ctermfg=1
+" white
+hi NeomakeWarningSign ctermfg=7
+" blue (?)
+hi NeomakeMessageSign ctermfg=4
+" green (?)
+hi NeomakeInfoSign ctermfg=2
+
+let g:neomake_error_sign =   {'text' : 'x', 'texthl' : 'NeomakeErrorSign'}
+let g:neomake_warning_sign = {'text' : '!', 'texthl' : 'NeomakeWarningSign'}
+let g:neomake_message_sign = {'text' : '>', 'texthl' : 'NeomakeMessageSign'}
+let g:neomake_info_sign =    {'text' : 'i', 'texthl' : 'NeomakeInfoSign'}
+
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+
+" TODO chromatica settings
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#enable_at_startup=1
+
+
+" vim-minimap settings
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+
+
+" vimwiki path
+let g:vimwiki_list = [{'path': '~/Dropbox/wiki/'}]
+
+
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+nnoremap <leader>L :LLPStartPreview<CR>
+" live previewing currently broken?
+"autocmd TextChanged,TextChangedI *tex silent :LLPStartPreview 
+
+" neotex settings
+"let g:neotex_enabled = 0
+
+
 " airline-vim, airline-vim-themes settings
 let g:airline#extensions#branch#enabled = 1
 
@@ -310,6 +401,11 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline_mode_map = {
 	\ 'n' : 'normie',
 	\ 'i' : 'hardcore hacking',
+	\ 'R' : 'swappity swip',
+	\ 'v' : 'look',
+	\ 'V' : 'line look',
+	\ '' : 'block look',
+	\ 't' : 'powershell',
 	\ }
 
 function! AirlineInit()
