@@ -10,7 +10,7 @@ export ZSH=/Users/Amar/.oh-my-zsh
 ZSH_THEME="amar_simple"
 
 # antigen (homebrew) path
-source /usr/local/share/antigen/antigen.zsh
+source ~/antigen.zsh
 
 # load oh-my-zsh's library
 antigen use oh-my-zsh

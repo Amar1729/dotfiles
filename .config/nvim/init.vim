@@ -158,6 +158,8 @@ let g:netrw_winsize = 20
 " Personal definitions
 """
 
+let mapleader=","
+
 " Copy to clipboard (mac uses * register: linux uses + reg)
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_

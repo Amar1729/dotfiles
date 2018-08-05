@@ -1,15 +1,16 @@
-#include ".config/xresources/gruvbox-dark.xresources"
+!using pywal
+#include ".cache/wal/colors.Xresources"
 
-!*font: xft:fantasque sans mono regular:size=14:antialias=false
-!*font: xft:roboto mono:size=12:antialias=true
-!URxvt.font: xft:iosevka term light:size=12:antialias=true
+! finally figured out font naming (use fc-match)
+!URxvt.font: xft:Fantasque Sans Mono:size=18:antialias=true
+URxvt.font: xft:Iosevka:size=18
 
 *transparent: true
 *shading: 30
 
 *scrollBar: false
 !*fading: 20
-*internalBorder:40
+*internalBorder: 10
 
 *iso14755: false
 !*keysym.Shift-Control-V: perl:clipboard:paste

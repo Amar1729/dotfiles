@@ -19,6 +19,8 @@
 	ma = merge --abort
 	p = pull
 	pr = pull --rebase
+	rv = remote -v
+	rH = reset HEAD
 
 	sts = stash
 	sta = stash apply
