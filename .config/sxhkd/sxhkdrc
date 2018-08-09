@@ -4,11 +4,11 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	urxvtc
 
 # program launcher
-super + @space
-	dmenu_run
+super + space
+	rofi -show run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -47,8 +47,8 @@ super + ctrl + {x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
 
 # focus the next/previous node in the current desktop
 alt + {_,shift + }n
@@ -69,6 +69,17 @@ super + {_,shift + }{1-9,0}
 # swap windows
 ctrl + alt + {h,j,k,l}
 	bspc node -s {west,south,north,east}
+
+# reinsert windows (odd that this is so complicated)
+# (note) there's no way to have 1-to-many braces assignment (?) ^
+super + shift + h
+	bspc node west -p south && bspc node focused -n west
+super + shift + j
+	bspc node south -p east && bspc node focused -n south
+super + shift + k
+	bspc node north -p east && bspc node focused -n north
+super + shift + l
+	bspc node east -p south && bspc node focused -n east
 
 #
 # preselect
