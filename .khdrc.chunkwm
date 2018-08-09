@@ -31,12 +31,38 @@ ctrl - f			:	khd -e "mode activate tree"
 
 
 # remap ctrl+a / ctrl+e -> start/end of line
-lctrl - a	![HyperTerm,Terminal,iTerm,iTerm2,Microsoft Remote Desktop,kitty,XQuartz,urxvt] : khd -p "ctrl - left"
-lctrl - e	![HyperTerm,Terminal,iTerm,iTerm2,Microsoft Remote Desktop,kitty,XQuartz,urxvt] : khd -p "ctrl - right"
+lctrl - a	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt
+			] : khd -p "ctrl - left"
+lctrl - e	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt
+			] : khd -p "ctrl - right"
 
 # remap ctrl+u -> delete from cursor to start of line
-lctrl - u	![HyperTerm,Terminal,iTerm,iTerm2,Microsoft Remote Desktop,kitty,XQuartz,urxvt] : khd -p "ctrl + shift - left";\
-																					    khd -p " - delete"
+lctrl - u	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt
+			] : khd -p "ctrl + shift - left"; khd -p " - delete"
 
 ctrl - 9 : khd -w "hello?"
 
@@ -69,17 +95,17 @@ lcmd - l : chunkc tiling::window --focus east
 # equalize size of windows
 shift + alt - 0 : chunkc tiling::desktop --equalize
 
-# increase region size
-lalt - h : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
-lalt - j : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
-lalt - k : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
-lalt - l : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+# increase region size (floating or nonfloating)
+lalt - h : ~/.config/scripts/chunk_resize_mgr.sh --increase west
+lalt - j : ~/.config/scripts/chunk_resize_mgr.sh --increase south
+lalt - k : ~/.config/scripts/chunk_resize_mgr.sh --increase north
+lalt - l : ~/.config/scripts/chunk_resize_mgr.sh --increase east
 
-# decrease region size
-shift + lalt - h : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west
-shift + lalt - j : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south
-shift + lalt - k : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north
-shift + lalt - l : chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east
+# decrease region size (floating or nonfloating)
+shift + lalt - h : ~/.config/scripts/chunk_resize_mgr.sh --decrease west
+shift + lalt - j : ~/.config/scripts/chunk_resize_mgr.sh --decrease south
+shift + lalt - k : ~/.config/scripts/chunk_resize_mgr.sh --decrease north
+shift + lalt - l : ~/.config/scripts/chunk_resize_mgr.sh --decrease east
 
 # swap window
 ctrl + lalt - h : chunkc tiling::window --swap west
@@ -93,13 +119,18 @@ cmd + shift - j : chunkc tiling::window --warp south
 cmd + shift - k : chunkc tiling::window --warp north
 cmd + shift - l : chunkc tiling::window --warp east
 
-# # preselection is cool, but consider keybindings first
 # set insertion point for focused container
 lcmd + ctrl - f : chunkc tiling::window --use-insertion-point cancel
 lcmd + ctrl - h : chunkc tiling::window --use-insertion-point west
 lcmd + ctrl - j : chunkc tiling::window --use-insertion-point south
 lcmd + ctrl - k : chunkc tiling::window --use-insertion-point north
 lcmd + ctrl - l : chunkc tiling::window --use-insertion-point east
+
+# deal with floating windows! (this is a bash workaround)
+cmd + shift - left	: ~/.config/scripts/chunk_float.sh move -x 2
+cmd + shift - right	: ~/.config/scripts/chunk_float.sh move +x 2
+cmd + shift - up	: ~/.config/scripts/chunk_float.sh move -y 2
+cmd + shift - down	: ~/.config/scripts/chunk_float.sh move +y 2
 
 # switch to last active desktop (wip?)
 # actually, might be able to do
@@ -149,32 +180,18 @@ tree + shift - f : chunkc tiling::window --toggle native-fullscreen
 # toggle window parent zoom
 tree - p : chunkc tiling::window --toggle parent
 
-# float / unfloat window and center on screen
-tree - g : chunkc tiling::window --toggle float;\
-           chunkc tiling::window --grid-layout 4:4:1:1:2:2
+# Helpful presets for floating windows (see bash script for locations):
+# toggles floating, sends to center of screen
+tree - g		:	~/.config/scripts/chunk_float.sh preset 0
+tree - q		:	~/.config/scripts/chunk_float.sh preset 1
+tree - w		:	~/.config/scripts/chunk_float.sh preset 2
+tree - e		:	~/.config/scripts/chunk_float.sh preset 3
+tree + alt - g	:	~/.config/scripts/chunk_float.sh preset 4
 
-# toggle sticky, float and resize to picture-in-picture size
-tree - s : chunkc tiling::window --toggle sticky;\
-           chunkc tiling::window --grid-layout 5:5:4:0:1:1
-
-# rows:cols:left:top:width:height
-
-# make floating window fill screen
-tree - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
-
-# make floating window fill left-half of screen
-tree - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
-
-# make floating window fill right-half of screen
-tree - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
-
-# move floating windows / windows on a grid space
-# 10 rows 10 cols grid, windows left and top on 0 grid, and have 5 grid width 5 grid height
-# wtf is this binding?
-#alt - q : chunkc tiling::window --grid-layout 10:10:0:0:5:5
-#alt - q : chunkc tiling::window --grid-layout 10:20:12:1:7:4
-alt - q : `if [[ $(chunkc tiling::query -w float) -eq 0 ]]; then chunkc tiling::window --toggle float; chunkc tiling::window --grid-layout 4:4:1:1:2:2; fi`;\
-		 chunkc tiling::window --grid-layout 10:20:12:1:7:4
+# toggle sticky and float, then resize to picture-in-picture size
+# note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
+tree - s		:	chunkc tiling::window --toggle sticky;\
+					~/.config/scripts/chunk_float.sh preset 1
 
 # add this to tree mode
 # send window to desktop and switch desktop
