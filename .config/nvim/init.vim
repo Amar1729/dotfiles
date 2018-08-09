@@ -120,7 +120,7 @@ endif
 " colorscheme gruvbox
 colorscheme wal
 set background=dark
-set relativenumber
+set relativenumber number
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
 
 " allow mouse control
@@ -168,12 +168,24 @@ nnoremap <leader>P "*P
 vnoremap <leader>p "*p
 vnoremap <leader>P "*P
 
-" Buffer movement
-nmap <leader>n :bnext<CR>	" Cycle through buffers
+" Buffer control
+
+" Cycle through buffers
+nmap <leader>n :bnext<CR>
 nmap <leader>N :bprev<CR>
-nmap <leader>m :tabn<CR>	" Cycle through tabs
+
+" Cycle through tabs
+nmap <leader>m :tabn<CR>
 nmap <leader>M :tabp<CR>
-nmap <leader>w <C-W><C-W>	" Cycle through splits (in same window)
+
+" Cycle through splits (in same window)
+nmap <leader>w <C-W><C-W>
+
+" force kill those damn term bufs
+nmap <leader>d :bd!<CR>
+
+" move to next buffer and kill the previous one (good for keeping window layout)
+nmap <leader>b :bn \| bd # <CR>
 
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
@@ -242,7 +254,7 @@ nnoremap <S-h> :call CycleHiddenAll()<CR>
 
 " for the almost-quiet statusbar
 " want the bar itself to be transparent and text to be green.
-hi StatusLine cterm=None ctermfg=142 ctermbg=None
+hi StatusLine cterm=None ctermfg=1 ctermbg=None
 set statusline=%t
 
 
