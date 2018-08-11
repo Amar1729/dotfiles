@@ -36,6 +36,7 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-jedi')
+  call dein#add('racer-rust/vim-racer')
   
   " async linting
   call dein#add('neomake/neomake')
@@ -221,6 +222,9 @@ autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 " disable linting for temporary .py files
 autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
+" auto-compile rust files
+autocmd BufWritePost *.rs !cargo run
+
 " Deal with status bar (necessary?)
 
 " Cycle status line on command Shift+H
@@ -277,8 +281,12 @@ let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/
 " this will chang with each upgrade! symlink?
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
+" python info for deoplete
 let g:python_host_prog='/usr/local/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
+
+" Rust Auto-Complete-ER
+let g:racer_cmd = "/Users/Amar/.cargo/bin/racer"
 
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose

@@ -2,21 +2,6 @@
 
 [[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
-# locking
-if [[ "$(uname)" == 'Darwin' ]]
-then
-	# Open the screensaver with `lock`
-	# note - should set preferences to lock the screen after 5s of screensaver
-	lock () {
-		SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-		open -a $SCREEN_ENGINE
-	}
-
-else
-	# linux locking (typically, this is a script that uses some version of i3lock)
-	alias lock="~/.config/scripts/lock.sh"
-fi
-
 ####
 ## Common aliases, command improvements:
 ####
@@ -149,107 +134,7 @@ function _tmux-a () {
 
 if [[ "$(uname)" == 'Darwin' ]]
 then
-
-# quick look alias
-alias ql='qlmanage -p 2>/dev/null'
-
-# fix broken virtualenv (when brew updates python)
-fix-env () { gfind "$1" -type l -xtype l -delete }
-
-abri () { open -a Abricotine "$@" }
-
-# get battery status (this is only used when I'm running very low power, no bar)
-alias power="pmset -g batt | egrep -o '([0-9]+\%).*?;.*?;'"
-
-# control wifi
-wifi () {
-	if [[ -n "$1" ]]; then
-		case "$1" in
-			"status")
-				networksetup -getairportnetwork en0
-				;;
-			"on"|"off")
-				networksetup -setairportpower en0 "$1"
-				;;
-			*)
-				echo "Not valid option: ""$1" && echo "{on|off|status}" && return 1
-				;;
-		esac
-	else
-		# with no argument, just toggle
-		STATUS="$(networksetup -getairportpower en0|cut -f4 -d ' ')"
-		if [[ $STATUS == "Off" ]]; then
-			networksetup -setairportpower en0 on && echo "turning wifi on..."
-		else
-			networksetup -setairportpower en0 off && echo "turning wifi off..."
-		fi
-	fi
-}
-
-# Show hidden files (default: false)
-export FINDER_SHOW_HIDDEN=1
-toggleFinderHidden () {
-	if [[ $FINDER_SHOW_HIDDEN -eq 0 ]]
-	then
-		export FINDER_SHOW_HIDDEN=1
-		defaults write com.apple.finder ShowAllFiles true
-		killall Finder
-	else
-		export FINDER_SHOW_HIDDEN=0
-		defaults write com.apple.finder ShowAllFiles false
-		killall Finder
-	fi
-}
-
-# Show desktop icons by default
-export DESKTOP_SHOW=1
-toggleDesktop () {
-	if [[ $DESKTOP_SHOW -eq 0 ]]
-	then
-		export DESKTOP_SHOW=1
-		defaults write com.apple.finder CreateDesktop true
-		killall Finder
-	else
-		export DESKTOP_SHOW=0
-		defaults write com.apple.finder CreateDesktop false
-		killall Finder
-	fi
-}
-
-# hardcore ricing stuff (lol)
-# http://tex.stackexchange.com/questions/43057/macosx-pdf-viewer-automatic-reload-on-file-modification
-# setup Skim for vim latex pdf previewing
-# defaults write -app Skim SKAutoReloadFileUpdate -boolean true
-#
-# http://stackoverflow.com/questions/1264210/does-mac-x11-have-the-xtest-extension
-# xtest for xQuartz?
-# defaults write org.x.X11 enable_test_extensions -boolean true
-
-####
-# Following suggestions are from:
-# http://natelandau.com/my-mac-osx-bash_profile/
-
-# Prevent power button from immediately sleeping display
-alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
-alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
-
-# Move default screencap location (only have to run this once, but saved here just in case)
-# Where I want them saved:
-alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
-# Actual default:
-alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
-
-# Recursively delete .DS_Store files
-alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
-
-####
-## End of Nate Landau's suggestions
-####
-
+	[[ -r ~/.shell_aliases_osx ]] && source ~/.shell_aliases_osx
 else
-
-# linux-specific aliases
-
-:
-
+	[[ -r ~/.shell_aliases_linux ]] && source ~/.shell_aliases_linux
 fi
