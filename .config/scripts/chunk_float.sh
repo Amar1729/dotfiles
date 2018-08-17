@@ -4,7 +4,19 @@
 SAVEFILE="/tmp/float_sav"
 [[ ! -r $SAVEFILE ]] && touch $SAVEFILE
 
-# NOTE - if you chage any presets, search for "TODO" in this file. Some values are currently hardcoded.
+: << PYTHONCODE
+# i used this for converting old presets to different resolution
+def f(s):
+    x,y,w,h = s.split(':')[2:]
+    res_x_f = lambda _ : int((int(_)/old_x)*1600)
+    res_y_f = lambda _ : int((int(_)/old_y)*2560)
+    return "2560:1600:{}:{}:{}:{}".format(
+        res_x_f(x), res_y_f(y),
+        res_x_f(w), res_y_f(h)
+    )
+PYTHONCODE
+
+: << OLDPRESETS
 PRESETS=(
     # First preset - Assume this default size for all grids.
     "100:100:25:25:50:50"
@@ -12,6 +24,16 @@ PRESETS=(
     "100:100:5:8:34:42"     # top-left ish
     "100:100:5:55:34:42"    # bottom-left ish
     "100:100:29:9:42:82"    # centered (clean)
+)
+OLDPRESETS
+
+PRESETS=(
+    # First preset - Assume this default size for all grids.
+    "2560:1600:400:640:800:1280"
+    "2560:1600:960:204:544:1075"    # top-right ish
+    "2560:1600:80:204:544:1075"     # top-left ish
+    "2560:1600:80:1408:544:1075"    # bottom-left ish
+    "2560:1600:463:230:672:2099"    # centered (clean)
 )
 
 get_win () {
@@ -61,6 +83,12 @@ save_win_pos () {
 get_pos () {
     LOC=$(get_win_pos)
     case "$1" in
+        "my")
+            echo "$LOC" | cut -f1 -d ':'
+            ;;
+        "mx")
+            echo "$LOC" | cut -f2 -d ':'
+            ;;
         "x")
             echo "$LOC" | cut -f3 -d ':'
             ;;
@@ -129,11 +157,11 @@ preset () {
 }
 
 move () {
-    if [[ -z "$2" ]]; then SIZE="2"; else SIZE="$2"; fi
+    if [[ -z "$2" ]]; then SIZE="50"; else SIZE="$2"; fi
 
     case "$1" in
-        *x) dim_attr="x" ;;
-        *y) dim_attr="y" ;;
+        *x) dim_attr="x"; bound="$(get_pos mx)" ;;
+        *y) dim_attr="y"; bound="$(get_pos my)" ;;
     esac
 
     dim=$(get_pos $dim_attr)
@@ -143,18 +171,16 @@ move () {
         +*)
             dim=$(($dim+$SIZE))
 
-            # TODO - get max from first preset ?
             if [[ "$1" == "+x" ]]; then
                 max_dim=$(get_pos w)
             else
                 max_dim=$(get_pos h)
             fi
-            if [[ $dim -gt $((100-max_dim)) ]]; then dim=$((100-max_dim)); fi
+            if [[ $dim -gt $((bound-max_dim)) ]]; then dim=$((bound-max_dim)); fi
             ;;
         -*)
             dim=$(($dim-$SIZE))
 
-            # TODO - get min from first preset ?
             if [[ $dim -lt 0 ]]; then dim=0; fi
             ;;
     esac
@@ -164,16 +190,18 @@ move () {
 }
 
 dilate () {
-    if [[ -z "$3" ]]; then SIZE="2"; else SIZE="$3"; fi
+    if [[ -z "$3" ]]; then SIZE="50"; else SIZE="$3"; fi
 
     case "$2" in
         "w"|"e")
             dim1_attr="x"
             dim2_attr="w"
+            bound="$(get_pos mx)"
             ;;
         "n"|"s")
             dim1_attr="y"
             dim2_attr="h"
+            bound="$(get_pos my)"
             ;;
     esac
 
@@ -191,8 +219,7 @@ dilate () {
             else
                 dim2=$(($dim2+$SIZE))
 
-                # TODO get max from first preset
-                if [[ $dim2 -gt 100 ]]; then dim2=100; fi
+                if [[ $dim2 -gt $bound ]]; then dim2=$bound; fi
             fi
             ;;
         --decrease)

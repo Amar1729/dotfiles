@@ -68,7 +68,7 @@ ctrl - f				:	khd -e "mode activate tree"
 ####
 
 # open terminal or browser window
-cmd - 0x24				:	~/.config/scripts/ricing.sh wp -n
+cmd - 0x24				:	~/.bin/wp -n
 cmd + shift - n			:	open -na Google\ Chrome
 
 # mouse buttons ( send cmd + {[,]} )

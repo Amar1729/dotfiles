@@ -127,10 +127,10 @@ lcmd + ctrl - k : chunkc tiling::window --use-insertion-point north
 lcmd + ctrl - l : chunkc tiling::window --use-insertion-point east
 
 # deal with floating windows! (this is a bash workaround)
-cmd + shift - left	: ~/.config/scripts/chunk_float.sh move -x 2
-cmd + shift - right	: ~/.config/scripts/chunk_float.sh move +x 2
-cmd + shift - up	: ~/.config/scripts/chunk_float.sh move -y 2
-cmd + shift - down	: ~/.config/scripts/chunk_float.sh move +y 2
+cmd + shift - left	: ~/.config/scripts/chunk_float.sh move -x
+cmd + shift - right	: ~/.config/scripts/chunk_float.sh move +x
+cmd + shift - up	: ~/.config/scripts/chunk_float.sh move -y
+cmd + shift - down	: ~/.config/scripts/chunk_float.sh move +y
 
 # switch to last active desktop (wip?)
 # actually, might be able to do
