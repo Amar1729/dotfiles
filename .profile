@@ -18,7 +18,7 @@
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
 # my changes
-export PATH="/opt/bin:$PATH"
+export PATH="/opt/bin:$HOME/.bin:$PATH"
 
 # add pip installs (user)
 export PATH="$PATH:/Users/paula1/Library/Python/3.6/bin"

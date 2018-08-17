@@ -66,9 +66,6 @@ antigen apply
 # shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
 
-# ricing functions
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
-
 # History
 
 HISTCONTROL=ignoreboth
@@ -140,4 +137,4 @@ alias ....='../../..'
 alias .....='../../../..'
 
 # dynamic colors with (a wrapper for) pywal!
-(~/.config/scripts/ricing.sh wp -r &)
+(wp -r &)

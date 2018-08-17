@@ -73,7 +73,7 @@ ctrl - 9 : khd -w "hello?"
 # save current layout (?)
 ctrl + alt - w			: chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
-cmd - return			: ~/.config/scripts/ricing.sh wp -n
+cmd - return			: ~/.bin/wp -n
 cmd + shift - return	: open -na Google\ Chrome
 cmd + alt + ctrl - l	: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
 

@@ -73,4 +73,15 @@ reload_colors () {
 	fi
 }
 
-"$@"
+case "$1" in
+    -w|--wallpaper)
+        change_wallpaper "$2"
+        ;;
+    -r|--reload)
+        reload_colors
+        ;;
+    -n|--new)
+        new_terminal
+        ;;
+esac
+

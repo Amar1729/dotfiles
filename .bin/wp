@@ -1,0 +1,104 @@
+#!/bin/bash
+
+# A bunch of scripts to aid in window-manager, ricing, profiling etc setup
+# Note - lots of these functions are probably Mac-specific
+
+# wp: do a bunch of stuff! 
+# most of this is MAC SPECIFIC
+
+_usage() {
+    print "wp: Tool for on-the-fly screen changes."
+    print "Usage:"
+    print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE, cache colors"
+    print "\twp -n|--new \t\t\tNew iTerm window with default profile"
+    print "\twp -r|--reload \t\t\tLoad space-specific colorscheme"
+    print "\twp -b|--both FILE\t\tSet wallpaper and reload colors"
+    print "\twp -f|--file NUMBER\t\tAttempt to load .cache/wal/sequences_NUMBER"
+    print "\t\t\t\t\t\tNote - reloading too soon might not work for complex images"
+    print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
+    print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
+    # todo complete day/night/toggle
+}
+
+case "$1" in
+    -w|--wallpaper)
+        ~/.bin/unique_space.sh -w "$2"
+        ;;
+    -n|--new)
+        ~/.bin/unique_space.sh -n
+        ;;
+    -r|--reload)
+        ~/.bin/unique_space.sh -r
+        ;;
+    -b|--both)
+        $0 -w "$2"
+        sleep 1
+        $0 -r
+        ;;
+    -f|--file)
+        cat ~/.cache/wal/sequences_"$2"
+        ;;
+    -t|--transparency)
+        osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
+        ;;
+    --tg|--transparency-get)
+        # NOTE - cmd+u makes an iTerm window opaque?
+        osascript -e 'tell application "iTerm" to tell current window to tell current session to get transparency'
+        ;;
+    --day)
+        # Instead should progressively set Flux temp higher to ease transition
+        killall Flux &> /dev/null
+        # if Flux doesn't set to dark mode, don't need this toggle
+        #khd -p "cmd + alt + ctrl - t"
+
+        export NIGHT=0
+        return 0
+        ;;
+    --night)
+        open -a Flux
+        # change colorshemes (?) and wallpapers
+
+        export NIGHT=1
+        return 0
+        ;;
+    --toggle)
+        if [[ -z "$NIGHT" ]]; then
+            export NIGHT=1
+        fi
+
+        if [[ "$NIGHT" ]]; then
+            NIGHT=1
+            day
+        else
+            NIGHT=0
+            night
+        fi
+        ;;
+    --bonsai)
+        ~/.bin/bonsai.sh
+        ;;
+    --coffee)
+        ~/.bin/coffee.sh
+        ;;
+    --termcolors)
+        # Display terminal ANSI colors
+        # Print numbers
+        echo -en "    \t"
+        for i in {0..7}; do echo -en "  ${i}    \t"; done; echo
+
+        # Print regular colors
+        echo -en "reg:\t"
+        for i in {0..7}; do echo -en "\033[0;3${i}m▉▉▉▉▉▉▉\t"; done; echo; echo
+
+        # Print alternate colors
+        echo -en "alt:\t"
+        for i in {0..7}; do echo -en "\033[1;3${i}m▉▉▉▉▉▉▉\t"; done; echo
+        ;;
+    -h|--help)
+        _usage
+        ;;
+    *)
+        print "Not supported: ""$1"
+        _usage
+        ;;
+esac

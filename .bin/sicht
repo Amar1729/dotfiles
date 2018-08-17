@@ -20,6 +20,7 @@ if [[ -n "$1" ]]; then
         print "incorrect usage: -r|-k"
     fi
 else
+    # default usage: kill, wait, reopen
     _kill
     sleep 2
     _open
