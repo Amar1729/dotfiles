@@ -1,22 +1,20 @@
 #!/bin/bash
 
+# wp: do a bunch of stuff! 
 # A bunch of scripts to aid in window-manager, ricing, profiling etc setup
 # Note - lots of these functions are probably Mac-specific
 
-# wp: do a bunch of stuff! 
-# most of this is MAC SPECIFIC
-
 _usage() {
-    print "wp: Tool for on-the-fly screen changes."
-    print "Usage:"
-    print "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE, cache colors"
-    print "\twp -n|--new \t\t\tNew iTerm window with default profile"
-    print "\twp -r|--reload \t\t\tLoad space-specific colorscheme"
-    print "\twp -b|--both FILE\t\tSet wallpaper and reload colors"
-    print "\twp -f|--file NUMBER\t\tAttempt to load .cache/wal/sequences_NUMBER"
-    print "\t\t\t\t\t\tNote - reloading too soon might not work for complex images"
-    print "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)"
-    print "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)"
+    printf "wp: Tool for on-the-fly screen changes.\n"
+    printf "Usage:\n"
+    printf "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE, cache colors\n"
+    printf "\twp -n|--new \t\t\tNew iTerm window with default profile\n"
+    printf "\twp -r|--reload \t\t\tLoad space-specific colorscheme\n"
+    printf "\twp -b|--both FILE\t\tSet wallpaper and reload colors\n"
+    printf "\twp -f|--file NUMBER\t\tAttempt to load .cache/wal/sequences_NUMBER\n"
+    printf "\t\t\t\t\t\tNote - reloading too soon might not work for complex images\n"
+    printf "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)\n"
+    printf "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)\n"
     # todo complete day/night/toggle
 }
 
@@ -52,14 +50,14 @@ case "$1" in
         #khd -p "cmd + alt + ctrl - t"
 
         export NIGHT=0
-        return 0
+        #return 0
         ;;
     --night)
         open -a Flux
         # change colorshemes (?) and wallpapers
 
         export NIGHT=1
-        return 0
+        #return 0
         ;;
     --toggle)
         if [[ -z "$NIGHT" ]]; then
@@ -98,7 +96,7 @@ case "$1" in
         _usage
         ;;
     *)
-        print "Not supported: ""$1"
+        printf "Not supported: ""$1\n"
         _usage
         ;;
 esac

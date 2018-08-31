@@ -69,7 +69,7 @@ ctrl - f				:	khd -e "mode activate tree"
 
 # open terminal or browser window
 cmd - 0x24				:	~/.bin/wp -n
-cmd + shift - n			:	open -na Google\ Chrome
+cmd + ctrl + shift - n	:	open -na Google\ Chrome
 
 # mouse buttons ( send cmd + {[,]} )
 - button3				:	khd -p "cmd - 0x21"
@@ -144,7 +144,7 @@ tree - r				:	kwmc tree rotate 270
 
 
 # Reload Config
-tree + shift - r		:	khd -e "reload"
+tree + ctrl - r			:	khd -e "reload"
 
 # Move Focused Window to Screen (and focus screen)
 # refocus after consecutive window jumps only

@@ -104,6 +104,8 @@ preexec () { print '' }
 # case sensitive needs to be off; '_-' interchangeable.
 HYPHEN_INSENSITIVE="true"
 
+fpath=(~/.zsh/completions $fpath)
+
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 

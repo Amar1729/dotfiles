@@ -1,5 +1,7 @@
-
 # mac-specific aliases
+
+alias lr="gls -lhFG -a --color=auto \
+          --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"
 
 # Open the screensaver with `lock`
 # note - should set preferences to lock the screen after 5s of screensaver

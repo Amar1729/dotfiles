@@ -9,7 +9,6 @@
 # ls, grep, mkdir, tmux improvements
 alias ll="ls -lhFG"
 alias la="ll -a"
-alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
 alias lt="ll -t"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
@@ -112,20 +111,6 @@ python3 () {
 	else
 		command python3 "$@"
 	fi
-}
-
-# wip: add completions to tmux-a (will defer between bash and zsh uh oh)
-function _tmux-a () {
-    [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
-    local -a args
-
-    args=(
-        #'-c[specify working directory for the session]:directory:_path_files -g "*(-/)"'
-        #'-d[detach other clients attached to target session]'
-        #'-r[put the client into read-only mode]'
-        '[choose a target session]:target session:__tmux-sessions'
-    )
-    _arguments ${args}
 }
 
 ####
