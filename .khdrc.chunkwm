@@ -166,7 +166,7 @@ alt - e : chunkc tiling::window --toggle split
 
 
 # reload config
-tree + shift - r : khd -e "reload"
+tree + ctrl - r : khd -e "reload"
 
 # rotate tree
 tree - r : chunkc tiling::desktop --rotate 90
@@ -183,6 +183,8 @@ tree - p : chunkc tiling::window --toggle parent
 # Helpful presets for floating windows (see bash script for locations):
 # toggles floating, sends to center of screen
 tree - g		:	~/.config/scripts/chunk_float.sh preset 0
+# keep window where it is
+tree + shift -g	:	chunkc tiling::window --toggle float
 tree - q		:	~/.config/scripts/chunk_float.sh preset 1
 tree - w		:	~/.config/scripts/chunk_float.sh preset 2
 tree - e		:	~/.config/scripts/chunk_float.sh preset 3

@@ -31,6 +31,10 @@ antigen bundle peterhurford/git-it-on.zsh
 # good ch dir backward (helpful for very nested projects)
 antigen bundle Tarrasch/zsh-bd
 
+# ranking of directories
+export _Z_DATA="$HOME/.cache/z"
+antigen bundle rupa/z
+
 # include a notification for long-running commands or nonzero return codes
 # make sure to install terminal-notifier (Mac) or notify-send (Linux)
 #antigen bundle marzocchi/zsh-notify

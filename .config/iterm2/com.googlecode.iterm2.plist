@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -35951,36 +35953,44 @@
 	<string>493 598 735 562 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>136 21 700 562 0 0 1920 1200 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>2189 225 606 469 1920 120 1920 1080 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>579 477 918 512 0 0 1920 1200 </string>
+	<string>578 588 1018 447 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>41 40 1837 1095 0 0 1920 1200 </string>
+	<string>0 765 1920 435 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>980 40 899 1095 0 0 1920 1200 </string>
-	<key>NSWindow Frame iTerm Window 10</key>
-	<string>968 21 458 570 0 0 1920 1200 </string>
-	<key>NSWindow Frame iTerm Window 11</key>
-	<string>2463 400 213 240 1920 120 1920 1080 </string>
-	<key>NSWindow Frame iTerm Window 12</key>
-	<string>2463 143 500 495 1920 120 1920 1080 </string>
-	<key>NSWindow Frame iTerm Window 13</key>
-	<string>2463 400 500 240 1920 120 1920 1080 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
 	<string>41 40 1837 1095 0 0 1920 1200 </string>
+	<key>NSWindow Frame iTerm Window 10</key>
+	<string>3374 675 422 456 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 11</key>
+	<string>1960 160 899 975 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 12</key>
+	<string>2480 251 479 420 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 13</key>
+	<string>2480 525 94 90 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 14</key>
+	<string>2480 525 94 90 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 15</key>
+	<string>2480 525 94 90 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 16</key>
+	<string>2480 525 94 90 1920 120 1920 1080 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>980 40 899 1095 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>41 45 1837 1110 0 0 1920 1200 </string>
+	<string>40 40 899 1095 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>41 45 1837 1110 0 0 1920 1200 </string>
+	<string>500 323 920 540 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>41 45 1837 1110 0 0 1920 1200 </string>
+	<string>1144 602 626 450 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 6</key>
-	<string>978 617 899 540 0 0 1920 1200 </string>
+	<string>41 40 1837 1095 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 7</key>
-	<string>41 45 1837 1110 0 0 1920 1200 </string>
+	<string>40 40 899 1095 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 8</key>
-	<string>43 45 899 1110 0 0 1920 1200 </string>
+	<string>409 246 801 540 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 9</key>
-	<string>43 42 899 540 0 0 1920 1200 </string>
+	<string>651 420 920 540 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -38258,7 +38268,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-05-01T17:16:20Z</date>
+	<date>2018-08-29T01:06:37Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -40620,7 +40630,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.1.6</string>
+	<string>3.2.0</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

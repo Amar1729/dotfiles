@@ -22,6 +22,12 @@ case "$1" in
     -w|--wallpaper)
         ~/.bin/unique_space.sh -w "$2"
         ;;
+    -wo|--wallpaper-only)
+        if [[ -z "$2" ]]; then echo "Required: wallpaper" && exit 1; fi
+        FILE="$(realpath "$2")"
+        if [[ ! -f "$FILE" ]]; then exit 1; fi
+        osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$FILE\""
+        ;;
     -n|--new)
         ~/.bin/unique_space.sh -n
         ;;
