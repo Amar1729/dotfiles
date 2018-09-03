@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Some simple presets for kwm
+
+# full resolution:
+# 1680 x 1050
+
+if [[ "$(kwmc query window focused float)" == "false" ]]; then
+    kwmc window -t focused
+fi
+
+case "$1" in
+    q)
+        # top right ish
+        osascript -e 'tell app "iTerm2" to set bounds of front window to {986, 97, 1612, 472}'
+        ;;
+    e)
+        # bottom left
+        #osascript -e 'tell app "iTerm2" to set bounds of front window to {66, 450, 700, 800}'
+        osascript -e 'tell app "iTerm2" to set bounds of front window to {66, 500, 750, 920}'
+        ;;
+    w|*)
+        # top left, (very short)
+        osascript -e 'tell app "iTerm2" to set bounds of front window to {94, 84, 699, 294}'
+        ;;
+esac

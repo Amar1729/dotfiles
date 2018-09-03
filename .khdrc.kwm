@@ -171,6 +171,11 @@ tree - p				:	kwmc window -z parent
 tree - c				:	kwmc window -c split-mode toggle;\
 							khd -e "mode activate default"
 
+# different floating layouts
+tree - q				:	~/.bin/kwm-preset q
+tree - w				:	~/.bin/kwm-preset w
+tree - e				:	~/.bin/kwm-preset e
+
 ####
 ## space mode (ctrl - d)
 ####
