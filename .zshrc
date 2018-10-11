@@ -113,6 +113,11 @@ fpath=(~/.zsh/completions $fpath)
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
+# alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
+insert-first-word () { zle insert-last-word -- -1 1 }
+zle -N insert-first-word
+bindkey '^[,' insert-first-word
+
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
