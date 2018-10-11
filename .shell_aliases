@@ -60,8 +60,6 @@ hcat () {
   unset ARGS
 }
 
-# make tmux easier to check
-alias tmux-ls="tmux list-sessions"
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {
