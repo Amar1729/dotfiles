@@ -71,6 +71,12 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " vimwiki
   call dein#add('vimwiki/vimwiki')
 
+  " fzf support
+  call dein#add('/usr/local/opt/fzf')
+  call dein#add('junegunn/fzf.vim')
+
+  " line diffing
+  call dein#add('AndrewRadev/linediff.vim')
 
   " Language-specific syntax support, completions:
 
@@ -298,6 +304,10 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " ultisnip settings
 " <c-j>, <c-k> : jump forward, backward, respectively
 let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+" mappings for Linediff
+vnoremap <leader>d	:Linediff<CR>
 
 
 " neomake settings
