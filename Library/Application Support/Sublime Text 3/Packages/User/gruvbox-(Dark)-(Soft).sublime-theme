@@ -1,9 +1,0 @@
-[
-    {
-        "class": "sidebar_label",
-        "color": [0, 0, 0],
-        //"font.bold": false,
-        //"font.size": 12
-		"font.size": 20
-    },
-]
