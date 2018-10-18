@@ -21,20 +21,11 @@ alias cclear="cd; clear"
 # should the -p flag be included?
 mcd () { mkdir -p "$1" && cd "$1"; }
 
-# Use neovim instead of vim
-alias vi="nvim"
-alias vim="nvim"
-alias gvim="/usr/local/bin/vim"
-vimdiff () { nvim -d "$@" ;}
-
 # copy with a progress bar.
 alias cpv="rsync -avzh --progress --"
 
 # pretty-print json
 alias jcat='python -m json.tool'
-
-# colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
-alias diff='colordiff'
 
 # set better defaults for highlight
 alias highlight='highlight -O xterm256 --style=zenburn --force'
@@ -83,41 +74,3 @@ tmux-a () {
 		#return 0
 	fi
 }
-
-# Generate a password before plugging into `pass`
-gen-pw () {
-	[[ -z "$1" ]] && LEN=15 || LEN="$1"
-	cat /dev/urandom | \
-		gtr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | \
-		head -c "$LEN"
-}
-
-# overwrite `python` and `python3` to always open better REPL (if it's installed)
-python () {
-	which ipython > /dev/null
-	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
-		ipython
-	else
-		command python "$@"
-	fi
-}
-
-python3 () {
-	which ipython > /dev/null
-	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
-		ipython
-	else
-		command python3 "$@"
-	fi
-}
-
-####
-## aliases/functions that are mac or linux specific
-####
-
-if [[ "$(uname)" == 'Darwin' ]]
-then
-	[[ -r ~/.shell_aliases_osx ]] && source ~/.shell_aliases_osx
-else
-	[[ -r ~/.shell_aliases_linux ]] && source ~/.shell_aliases_linux
-fi

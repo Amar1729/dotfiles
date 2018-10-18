@@ -1,0 +1,38 @@
+
+# really simple screenrc for old systems
+
+hardstatus alwayslastline
+shelltitle 'bash'
+
+#hardstatus string '%{gk}[%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}][%{d}%l%{g}][ %{= w}%Y/%m/%d %0C:%s%a%{g} ]%{W}'
+#hardstatus string '%{gk}%{wk}%?%-Lw%?%{=b kR}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{= w}%?%+Lw%?%? %{g}'
+#
+#hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+#hardstatus string '%{= kG}[%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}]'
+#hardstatus string '%{gk}[%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %{g}]'
+
+#hardstatus string '%{gk} %-w %n*%t%?(%u)%? %{-}%+w %{g}'
+hardstatus string '%{gk} %-w %n*%t %+w %{g}'
+
+#hardstatus string '%{gk}(%{W}%n*%f %t%?(%u)%?%{=b kR})%{g}'
+#hardstatus string '%{gk}[%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}]'
+
+defscrollback 5000
+
+startup_message off
+
+#mousetrack on
+
+#autodetach on
+
+#bindkey 'h' focus left
+#bindkey 'j' focus down
+#bindkey 'k' focus up
+#bindkey 'l' focus right
+
+#bindkey "<M-j>" focus down
+
+#bindkey 's' split
+
+#bindkey "<S-Left>" focus prev
+#bindkey "<S-Right>" focus next

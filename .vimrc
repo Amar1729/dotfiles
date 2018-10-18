@@ -1,24 +1,22 @@
 " Amar's (simple) .vimrc
+" no plugins for low-pkg systems
 
 " Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
 "
-"	Plug 'tpope/vim-sensible'
-"	Plug 'morhetz/gruvbox'
-"	Plug 'davidhalter/jedi-vim'
-
- 	"Plug 'FredKSchott/CoVim'
-	Plug('dylanaraps/wal.vim')
-
+"Plug 'tpope/vim-sensible'
+"Plug 'morhetz/gruvbox'
+"Plug 'davidhalter/jedi-vim'
+"
 "call plug#end()
 
 "colorscheme zenburn
 "colorscheme gruvbox
-colorscheme wal
 
 syntax on
 
-set relativenumber number
+set number
+"set relativenumber
 
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 set incsearch hlsearch
