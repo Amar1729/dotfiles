@@ -3,6 +3,10 @@
 
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
+# try to use pinentry-ncurses in terminal, pinentry-mac otherwise?
+GPG_TTY=$(tty)
+export GPG_TTY
+
 ####
 ## PATH changes
 ####
@@ -20,8 +24,8 @@
 # my changes
 export PATH="/opt/bin:$HOME/.bin:$PATH"
 
-# add pip installs (user)
-export PATH="$PATH:/Users/paula1/Library/Python/3.6/bin"
+# add pip user installs
+export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 
 # add fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -40,6 +44,17 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 # keep this?
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+
+# add calibre cli
+[[ -d /Applications/calibre.app ]] && \
+export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS/"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 ####
 ## interpreter stuff
