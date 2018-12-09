@@ -165,7 +165,9 @@ tree - 6				:	kwmc window -m space 6
 
 # Set (Temporary) Window Container
 tree - f				:	kwmc window -z fullscreen
+lcmd - g				:	kwmc window -z fullscreen
 tree - g				:	kwmc window -t focused
+lcmd + shift - g		:	kwmc window -t focused
 tree - p				:	kwmc window -z parent
 
 tree - c				:	kwmc window -c split-mode toggle;\
