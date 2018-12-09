@@ -96,6 +96,8 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " toml syntax
   call dein#add('cespare/vim-toml')
 
+  " nix expression language
+  call dein#add('LnL7/vim-nix')
 
   " Required:
   call dein#end()
