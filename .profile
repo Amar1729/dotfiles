@@ -35,7 +35,7 @@ export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 
 # go stuff
 export GOPATH="${HOME}/.go"
-export GOROOT="$(brew --prefix golang)/libexec"
+export GOROOT=/usr/local/opt/go/libexec
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
