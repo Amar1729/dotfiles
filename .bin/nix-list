@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Query installed pkgs in nix store of the current user's profile
+# see `man nix-store' for more info
+# 
+# I wrote a little `depth' helper that makes viewing the --tree output a little better
+
+op="$1"
+[[ -z "$op" ]] && op="-R"
+
+# Args:
+#   -R - shows list of installed pkgs
+#   --tree - shows list of installed pkgs as ascii art tree output
+_default () {
+    nix-store -q $1 /nix/var/nix/profiles/per-user/$USER/profile
+}
+
+# Allows filtering the tree by how deep pkgs are
+# Minimum 0 (just outputs user manifest)
+# Depth 1 will show top-level pkgs (i.e. probably the ones the user installed with nix-env -i)
+_depth () {
+
+    esc=$(printf '\033')
+    _gsed () { gsed -e "1 s|^\(.*\)$|${esc}[31m\1${esc}[0m|"; }
+
+    expr='^'
+    if [[ $1 -eq 0 ]]; then
+        expr+='/'
+    elif [[ $1 -eq 1 ]]; then
+        expr+='+'
+
+        # make sure to print first line too
+        expr="\($expr\)\|\(^/\)"
+    else
+        for i in $(seq 1 $(($1-1))); do
+            expr+='\(|\s*\)\?'
+        done
+        expr+='+'
+
+        # make sure to print first line too
+        expr="\($expr\)\|\(^/\)"
+    fi
+
+    # display results (including first line) inside less if necessary
+    _default --tree | grep $expr | less -FX
+}
+
+if [[ "$op" == "--depth" ]]; then
+    [[ -z "$2" ]] && echo "Require arg to --depth" && exit 1
+    _depth $2
+else
+    _default $op
+fi
