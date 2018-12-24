@@ -71,10 +71,6 @@ Override default settings for space 1 on screen 0
 # space 1: all browser windows
 kwmc config space 0 1 mode monocle
 
-# space 3: two terminals and Telegram
-kwmc config space 0 3 padding 70 50 35 35
-kwmc config space 0 3 gap 50 50
-
 /*
 Override default settings for screen 1
    kwmc config display 1 mode bsp
