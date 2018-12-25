@@ -38,6 +38,11 @@ export GOPATH="${HOME}/.go"
 export GOROOT=/usr/local/opt/go/libexec
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
+# nix
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+	. ~/.nix-profile/etc/profile.d/nix.sh;
+fi
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
 
@@ -55,17 +60,6 @@ export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-
-####
-## interpreter stuff
-####
-
-# Python shell tab completion (use homebrew python)
-which python3 >/dev/null && export PYTHONSTARTUP="$(`which python3` -m jedi repl)"
-
-# Use fuck/thefuck for command correction
-which thefuck >/dev/null && eval $(thefuck --alias)
-
 
 # comment out the rest of this, but keep it around?
 : << 'END'
