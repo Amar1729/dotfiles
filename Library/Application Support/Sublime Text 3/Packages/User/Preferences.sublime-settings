@@ -36,12 +36,13 @@
 		"*.db",
 		"*.sublime-workspace"
 	],
-	"font_face": "Source Code Pro",
+	"font_face": "Iosevka Light",
 	"font_size": 14,
+	"gruvbox_sidebar_indent_xxs": true,
 	"gruvbox_tabs_s": true,
+	"gruvobx_sidebar_cozy": true,
 	"ignored_packages":
 	[
-		"Package Control",
 		"Vintage"
 	],
 	"index_files": true,
