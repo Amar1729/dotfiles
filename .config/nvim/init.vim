@@ -377,6 +377,10 @@ let g:airline_mode_map = {
 	\ 'v' : 'look',
 	\ 'V' : 'line look',
 	\ '' : 'block look',
+	\ 'c' : 'commando',
+	\ 's' : 'pick dat',
+	\ 'S' : 'pick dem',
+	\ '' : 'pick doze',
 	\ 't' : 'powershell',
 	\ }
 
