@@ -39,7 +39,8 @@ lctrl - a	![
 				Microsoft Remote Desktop,
 				kitty,
 				XQuartz,
-				urxvt
+				urxvt,
+				VirtualBox VM # doesn't seem to work
 			] : khd -p "ctrl - left"
 lctrl - e	![
 				HyperTerm,
@@ -49,7 +50,8 @@ lctrl - e	![
 				Microsoft Remote Desktop,
 				kitty,
 				XQuartz,
-				urxvt
+				urxvt,
+				VirtualBox VM
 			] : khd -p "ctrl - right"
 
 # remap ctrl+u -> delete from cursor to start of line
@@ -61,14 +63,27 @@ lctrl - u	![
 				Microsoft Remote Desktop,
 				kitty,
 				XQuartz,
-				urxvt
+				urxvt,
+				Google Chrome,
+				VirtualBox VM
 			] : khd -p "ctrl + shift - left"; khd -p " - delete"
 
-ctrl - 9 : khd -w "hello?"
+# this only works in url bar ???
+lctrl - u	[
+				Google Chrome,
+				Firefox
+			] : khd -p "lctrl + shift - a"; khd -p " - delete"
+
+cmd - 9 : khd -w "amar.paul16@gmail.com"
+cmd - 0 : khd -w "amar.paul@jhuapl.edu"
 
 ####
 ## Defaults
 ####
+
+# manually defined since lcmd+shift+n sends a window to a desktop
+rcmd + shift - 3		: screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
+rcmd + shift - 4 -> 	: chunkc border::clear
 
 # save current layout (?)
 ctrl + alt - w			: chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
@@ -159,7 +174,8 @@ ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::mon
 
 
 # toggle on/off padding
-alt - a : chunkc tiling::desktop --toggle offset
+alt - a :			chunkc tiling::desktop --toggle offset
+alt + shift - a :	chunkc tiling::desktop --toggle offset
 
 # toggle window split type (like a container rotation)
 alt - e : chunkc tiling::window --toggle split
@@ -172,6 +188,7 @@ tree + ctrl - r : khd -e "reload"
 tree - r : chunkc tiling::desktop --rotate 90
 
 # toggle window fullscreen
+lcmd - g : chunkc tiling::window --toggle fullscreen
 tree - f : chunkc tiling::window --toggle fullscreen
 
 # toggle window native fullscreen
@@ -182,9 +199,10 @@ tree - p : chunkc tiling::window --toggle parent
 
 # Helpful presets for floating windows (see bash script for locations):
 # toggles floating, sends to center of screen
+lcmd + shift - g:	~/.config/scripts/chunk_float.sh preset 0
 tree - g		:	~/.config/scripts/chunk_float.sh preset 0
 # keep window where it is
-tree + shift -g	:	chunkc tiling::window --toggle float
+tree + shift - g:	chunkc tiling::window --toggle float
 tree - q		:	~/.config/scripts/chunk_float.sh preset 1
 tree - w		:	~/.config/scripts/chunk_float.sh preset 2
 tree - e		:	~/.config/scripts/chunk_float.sh preset 3
@@ -201,6 +219,12 @@ tree - x : `id=$(chunkc get _last_active_desktop); chunkc tiling::window -d $id;
 
 tree - z : chunkc tiling::window -d prev; khd -p "cmd - left"
 tree - c : chunkc tiling::window -d next; khd -p "cmd - right"
+
+lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
+lcmd + shift - 2 : chunkc tiling::window -d 2; khd -p "cmd - 2"
+lcmd + shift - 3 : chunkc tiling::window -d 3; khd -p "cmd - 3"
+lcmd + shift - 4 : chunkc tiling::window -d 4; khd -p "cmd - 4"
+lcmd + shift - 5 : chunkc tiling::window -d 5; khd -p "cmd - 5"
 
 tree - 1 : chunkc tiling::window -d 1
 tree + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
@@ -229,4 +253,11 @@ space - b : chunkc tiling::desktop --layout bsp
 space - m : chunkc tiling::desktop --layout monocle
 space - f : chunkc tiling::desktop --layout float
 
-# do we still have dynamic screen padding?
+space - p :			chunkc tiling::desktop --padding inc;\
+					chunkc tiling::desktop --gap inc;\
+
+space + shift - p : chunkc tiling::desktop --padding dec;\
+					chunkc tiling::desktop --gap dec;\
+
+space - left		: chunkc tiling::desktop --annihilate
+space - right		: chunkc tiling::desktop --create
