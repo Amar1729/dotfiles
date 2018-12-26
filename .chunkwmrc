@@ -41,6 +41,7 @@ chunkc set global_desktop_offset_right   40
 chunkc set global_desktop_offset_gap     40
 
 chunkc set 1_desktop_mode				monocle
+#chunkc set focused_border_skip_monocle 1
 
 
 # step size needs to be played with a lot
@@ -53,7 +54,7 @@ chunkc set bsp_split_mode                optimal
 chunkc set bsp_split_ratio               0.5
 
 chunkc set monitor_focus_cycle           1
-chunkc set window_focus_cycle            monitor
+chunkc set window_focus_cycle            all
 
 chunkc set mouse_follows_focus           intrinsic
 chunkc set window_float_next             0
@@ -71,8 +72,7 @@ chunkc set preselect_border_radius       0
 #       (https://github.com/koekeishiya/chwm-sa)
 #
 
-# not on work laptop (yet)
-#chunkc set window_float_topmost          0
+#chunkc set window_float_topmost          1
 #chunkc set window_fade_inactive          0
 #chunkc set window_fade_alpha             0.85
 #chunkc set window_fade_duration          0.25
@@ -136,6 +136,11 @@ chunkc tiling::rule --owner \"Cisco AnyConnect Secure Mobility Client\" --state 
 chunkc tiling::rule --owner \"Microsoft Remote Desktop\" --state float
 chunkc tiling::rule --owner kinetis-design-studio --name \"Build Project\" --state float
 chunkc tiling::rule --owner Abricotine --state float
-chunkc tiling::rule --owner \"Sublime Text\" --state float
-chunkc tiling::rule --owner \"Sublime Text 3\" --state float
 chunkc tiling::rule --owner \"MCUXpresso IDE\" --state float
+chunkc tiling::rule --owner \"Pulse Secure\" --state float
+chunkc tiling::rule --owner \"Oracle VM VirtualBox Manager\" --state float
+
+# woot - have SA working which allows transparency
+chunkc tiling::rule --owner Atom --alpha 0.8
+chunkc tiling::rule --owner Alacritty --alpha 0.8
+chunkc tiling::rule --owner \"Sublime Text\" --alpha 0.8
