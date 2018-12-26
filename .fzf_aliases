@@ -1,0 +1,56 @@
+
+# fuzzy find file content (open results with <Enter>)
+fgr() {
+	local line
+    line=$(
+        ggrep --line-buffered --color=never -r '' * |
+        fzf --nth=1,2
+    ) && ${EDITOR:-vim} $(echo "${line%%:*}")
+}
+
+# fuzzy completion with 'z' when called without args
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+# ftags - search ctags
+ftags() {
+	local line
+    [ -e tags ] &&
+        line=$(
+            awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
+            cut -c1-80 | fzf --nth=1,2
+        ) && ${EDITOR:-vim} $(cut -f3 <<< "$line") -c "set nocst" \
+            -c "silent tag $(cut -f2 <<< "$line")"
+}
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+fstash() {
+    local out q k sha
+    while out=$(
+        git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+        fzf --ansi --no-sort --query="$q" --print-query \
+        --expect=ctrl-d,ctrl-b);
+    do
+        mapfile -t out <<< "$out"
+        q="${out[0]}"
+        k="${out[1]}"
+        sha="${out[-1]}"
+        sha="${sha%% *}"
+        [[ -z "$sha" ]] && continue
+        if [[ "$k" == 'ctrl-d' ]]; then
+            git diff $sha
+        elif [[ "$k" == 'ctrl-b' ]]; then
+            git stash branch "stash-$sha" $sha
+            break;
+        else
+            git stash show -p $sha
+        fi
+    done
+}

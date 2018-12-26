@@ -85,12 +85,7 @@ tmux-a () {
 }
 
 # Generate a password before plugging into `pass`
-gen-pw () {
-	[[ -z "$1" ]] && LEN=15 || LEN="$1"
-	cat /dev/urandom | \
-		gtr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | \
-		head -c "$LEN"
-}
+alias init-pw='pwgen -cnyB1 -r \`\"\; 15'
 
 # overwrite `python` and `python3` to always open better REPL (if it's installed)
 python () {
@@ -110,6 +105,8 @@ python3 () {
 		command python3 "$@"
 	fi
 }
+
+[[ -r ~/.fzf_aliases ]] && source ~/.fzf_aliases
 
 ####
 ## aliases/functions that are mac or linux specific
