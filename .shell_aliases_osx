@@ -3,16 +3,8 @@
 alias lr="gls -lhFG -a --color=auto \
           --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"
 
-# Open the screensaver with `lock`
-# note - should set preferences to lock the screen after 5s of screensaver
-# location of app changes in High Sierra, this should be robust
-lock () {
-    local SYS_LIB="/System/Library"
-    local SIERRA_FALLBACK="$SYS_LIB/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-    local HIGH_SIERRA_SCRSVR="$SYS_LIB/CoreServices/ScreenSaverEngine.app"
-
-    [[ -r $HIGH_SIERRA_SCRSVR ]] && SCREEN_ENGINE=$HIGH_SIERRA_SCRSVR || SCREEN_ENGINE=$SIERRA_FALLBACK
-	open -a $SCREEN_ENGINE
+clock () {
+	watch -t -n 1 date +%T
 }
 
 # quick look alias
