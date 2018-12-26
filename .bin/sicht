@@ -1,9 +1,10 @@
 #!/bin/bash
 # kill fricking ubersicht with its damn name
 
+# KilL
 _kill() {
-    sic=( $( ps aux|grep -i sicht|grep Applications|awk '{print $2}' ) )
-    for pid in $sic; do printf "killing pid: $pid ...\n"; kill -9 $pid; done
+    printf "Killing app (takes a few seconds) ...\n"
+    osascript -e 'tell application "Übersicht" to quit'
 }
 
 _open() {
@@ -11,14 +12,30 @@ _open() {
     open -a /Applications/Übersicht.app
 }
 
-if [[ -n "$1" ]]; then
-    if [[ "$1" == "-k" ]]; then
+_toggle() {
+    proc=$(ps aux|grep "Übersicht"|wc -l)
+    if [[ $proc -gt 1 ]]; then
         _kill
-    elif [[ "$1" == "-r" ]]; then
-        osascript -e 'tell application "Übersicht" to refresh'
     else
-        print "incorrect usage: -r|-k"
+        _open
     fi
+}
+
+if [[ -n "$1" ]]; then
+    case "$1" in
+        -k|--kill)
+            _kill
+            ;;
+        -r|--refresh)
+            osascript -e 'tell application "Übersicht" to refresh'
+            ;;
+        -t|--toggle)
+            _toggle
+            ;;
+        *)
+            print "incorrect usage: -r|-k|-t"
+            ;;
+    esac
 else
     # default usage: kill, wait, reopen
     _kill
