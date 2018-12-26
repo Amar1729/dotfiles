@@ -15,15 +15,8 @@ source /usr/local/share/antigen/antigen.zsh
 # load oh-my-zsh's library
 antigen use oh-my-zsh
 
-# bundles from default repo
+# from default repo
 antigen bundle git
-antigen bundle pip
-
-#slows down shell startup :/
-#antigen bundle command-not-found
-
-# prettier display of JSON
-antigen bundle jsontools
 
 # open GitHub from cli
 antigen bundle peterhurford/git-it-on.zsh
