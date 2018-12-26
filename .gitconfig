@@ -26,6 +26,8 @@
 	sta = stash apply
 	std = stash drop
 
+	short = rev-parse --short HEAD
+
 	# nicely formatted history (includes all branches)
 	hist = log --graph --abbrev-commit --decorate --all --date=short \
 		 --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%ad%C(reset) | %C(white)%s%C(reset) %C(dim green)[%an]%C(reset) %C(bold yellow)%d%C(reset)'
@@ -39,7 +41,9 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
-	pager = less -F -X
+	pager = less -FX
+	# slighlty fancier diff pager
+	#pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color "branch"]
 	current = yellow bold
@@ -52,6 +56,12 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 
 [color "status"]
 	added = green bold
