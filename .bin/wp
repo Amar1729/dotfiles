@@ -42,6 +42,11 @@ case "$1" in
     -f|--file)
         cat ~/.cache/wal/sequences_"$2"
         ;;
+    --clean)
+        rm -f ~/.cache/wal/sequences*
+        rm -f ~/.cache/wal/colors_*.css
+        rm -f ~/.cache/wal/colors_*.json
+        ;;
     -t|--transparency)
         osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
         ;;
