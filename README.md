@@ -6,7 +6,7 @@
 * [Window Manager](#wms)
   * [Browsers](#browsers)
 
-Note - there are two branches in this repo (`master` for macOS, and `ubuntu`)
+Note - there are two branches in this repo (`master` for macOS, and `ubuntu` for linux)
 
 Well these are my dotfiles. Most of these files are well-commented, so feel free to look through the repo.  
 * Shell: the bulk of my aliases are in `.shell_aliases` (`zsh` and `bash` compatible!)
@@ -16,13 +16,13 @@ Well these are my dotfiles. Most of these files are well-commented, so feel free
   * [Neovim](https://github.com/neovim/neovim) (using [dein](https://github.com/Shougo/dein.vim) as a plugin manager)
   * [Tmux](https://github.com/tmux/tmux)
   * Sublime Text with [Package Control](https://packagecontrol.io/) - I only really use this for LaTeX or website development
+  * [Pass](https://www.passwordstore.org/) for password management
 * Window Management:
-  * [kwm](https://github.com/koekeishiya/kwm) (obsolete!) and the hotkey daemon [khd](https://github.com/koekeishiya/khd)
-  * TODO - soon will switch to [chunkwm](https://github.com/koekeishiya/chunkwm/)
+  * [chunkwm](https://github.com/koekeishiya/chunkwm/) and the hotkey daemon [khd](https://github.com/koekeishiya/khd)
   * [Uebersicht](http://tracesof.net/uebersicht/), a neat tool for the display of html/css/js widgets directly on the desktop. This program is managing the custom toolbar you might see in a lot of Mac OS rices (and mine!)
   * [Pywal](https://github.com/dylanaraps/pywal) like pretty much everyone else
 * Miscellaneous:
-  * some ricing scripts in [.config/scripts/ricing.sh](.config/scripts/ricing.sh) for functions like changing the wallpaper
+  * various helper scripts in [.bin](.bin) and [.config/scripts/ricing.sh](.config/scripts/ricing.sh) for ricing or simple shell functions
 
 <a name="shell"></a>
 ## Shell
@@ -44,7 +44,7 @@ And check out my [.gitconfig](.gitconfig) for some helpful aliases. Most useful 
 <a name="wms"></a>
 ## Window Management
 Files (macOS and Ubuntu branches differ)
-* `.khd`, `.kwm/kwmrc`
+* `.khd`, `.chunkwmrc`
 * `.config/ubersicht/widgets/*`
 
 <a name="browsers"></a>
@@ -57,45 +57,28 @@ Files (macOS and Ubuntu branches differ)
   * [Messenger.com Dark](http://userstyles.org/styles/112722)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
   * [reddit - hide sidebar](https://userstyles.org/styles/142862/reddit-hide-sidebar-for-low-screen-width)
-* Firefox ([Stylish](https://addons.mozilla.org/en-US/firefox/addon/stylish/) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
+* Firefox (Stylus) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
   * [Reddit Slate Nights (Fixed, Custom Fork) - Dark](https://userstyles.org/styles/123908/reddit-slate-nights-fixed-custom-fork-dark)
   * [SOUNDCLOUD NIGHTMODE REIMAGINED](https://userstyles.org/styles/136523/soundcloud-nightmode-reimagined)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
-  * [Youtube Dark Style](https://userstyles.org/styles/116675/youtube-dark-style)
 
 ##### Extensions, Plugins, Apps
-TODO:
 * Both:
-  * uBlock Origin
-  * Imagus (very helpful)
-  * tampermonkey/stylus (chrome) / greasemonkey/stylish (firefox)
+  * uBlock Origin - opensource ad-blocking
+  * Imagus - blow up images on mouseover
+  * tampermonkey/greasemonkey - run custom js on specific webpages
+  * browserpass - browser extension for `pass`, the unix password manager  
 * Chrome:
-	* browserpass
-	* dropbox for gmail
-	* Google Hangouts
-	* Google Keep
-	* Google Play Music
-	* MagiCSS - Live CSS Editor
-	* Pushbullet
-	* Smile Always (redirect amazon.com to smile.amazon.com)
-	* SoundCloud Downloader Free
-	* Videostream
-	* Vimium (don't use since I have `khd` bindings)
-	* Web of Trust - Website Rankings
+  * Videostream - really underrated: an app that can easily chromecast any local video (regardless of codec)
+  * Google Keep - note-taking
+  * Pushbullet - sync messages between Android and laptop
+  * Smile Always - redirect amazon.com to smile.amazon.com
 * Firefox:
-  * Extensions:
-	* uBlock Origin
-	* checkCompatibility (for forcing old extension compatibility)
-	* cliget (turns a link into a `curl` command with correct flags for cookies)
-	* colorPicker (great eyedropper)
-	* CurrentSong (obsolete in Firefox Quantum :/)
-	* FireFTP
-	* Prospector - OneLiner (turn navbar and tab bar into one line)
-	* New Tab Tools (define tab keyboard shortcuts and a lot more)
-	* Stylish
-	* Tab Mix Plus (this is run when Firefox starts)
-  * Appearance:
-    * Flat Underline (for making my tabs look cool: not been updated for a long time, requires checkCompatibility)
-
-
+  * cliget (turns a link into a `curl` command with correct flags for cookies)
+  * FireFTP
+  * New Tab Tools (define tab keyboard shortcuts and a lot more)
+  * Tab Mix Plus (this is run when Firefox starts)
+  * checkCompatibility (for forcing old extension compatibility)
+  * Prospector - OneLiner (turn navbar and tab bar into one line)
+  * Flat Underline (for making my tabs look cool: not been updated for a long time, requires checkCompatibility)
