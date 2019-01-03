@@ -176,6 +176,7 @@ tree - c				:	kwmc window -c split-mode toggle;\
 # different floating layouts
 tree - q				:	~/.bin/kwm-preset q
 tree - w				:	~/.bin/kwm-preset w
+tree + shift - w		:	~/.bin/kwm-preset W
 tree - e				:	~/.bin/kwm-preset e
 
 ####

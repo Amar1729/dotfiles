@@ -19,6 +19,9 @@ case "$1" in
         #osascript -e 'tell app "iTerm2" to set bounds of front window to {66, 450, 700, 800}'
         osascript -e 'tell app "iTerm2" to set bounds of front window to {66, 500, 750, 920}'
         ;;
+    W)
+        osascript -e 'tell app "iTerm2" to set bounds of front window to {94, 84, 699, 924}'
+        ;;
     w|*)
         # top left, (very short)
         osascript -e 'tell app "iTerm2" to set bounds of front window to {94, 84, 699, 294}'
