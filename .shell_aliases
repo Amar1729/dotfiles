@@ -36,6 +36,11 @@ alias jcat='python -m json.tool'
 # colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
 alias diff='colordiff'
 
+# nice terminal clock
+clock () {
+	watch -t -n 1 date +%T
+}
+
 # set better defaults for highlight
 alias highlight='highlight -O xterm256 --style=zenburn --force'
 
