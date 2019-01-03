@@ -15,18 +15,18 @@ source ~/antigen.zsh
 # load oh-my-zsh's library
 antigen use oh-my-zsh
 
-# bundles from default repo
+# from default repo
 antigen bundle git
-antigen bundle pip
-
-#slows down shell startup :/
-#antigen bundle command-not-found
-
-# prettier display of JSON
-antigen bundle jsontools
 
 # open GitHub from cli
 antigen bundle peterhurford/git-it-on.zsh
+
+# good ch dir backward (helpful for very nested projects)
+antigen bundle Tarrasch/zsh-bd
+
+# ranking of directories
+export _Z_DATA="$HOME/.cache/z"
+antigen bundle rupa/z
 
 # include a notification for long-running commands or nonzero return codes
 # make sure to install terminal-notifier (Mac) or notify-send (Linux)
@@ -62,9 +62,6 @@ antigen apply
 
 # shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
-
-# ricing functions
-[[ -r ~/.config/scripts/ricing.sh ]] && source ~/.config/scripts/ricing.sh
 
 # History
 
@@ -104,12 +101,22 @@ preexec () { print '' }
 # case sensitive needs to be off; '_-' interchangeable.
 HYPHEN_INSENSITIVE="true"
 
+fpath=(~/.zsh/completions $fpath)
+
 zstyle ':completion:*' menu select
 zmodload zsh/complist
+
+# alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
+insert-first-word () { zle insert-last-word -- -1 1 }
+zle -N insert-first-word
+bindkey '^[,' insert-first-word
 
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
+
+# temporarily clear cmd so i can inspect, ls, man, etc
+bindkey '^q' push-line-or-edit
 
 # Upon menu completion, enter directories with ctrl-o
 bindkey -M menuselect '^o' accept-and-infer-next-history
@@ -128,5 +135,10 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
+# aliases for easier changing dir up
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+
 # dynamic colors with (a wrapper for) pywal!
-(~/.config/scripts/ricing.sh wp -r &)
+(wp -r &)

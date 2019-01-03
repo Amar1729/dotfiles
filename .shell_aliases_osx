@@ -1,18 +1,22 @@
+# mac-specific aliases
 
-# Open the screensaver with `lock`
-# note - should set preferences to lock the screen after 5s of screensaver
-lock () {
-	SCREEN_ENGINE="/System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app"
-	open -a $SCREEN_ENGINE
+alias lr="gls -lhFG -a --color=auto \
+          --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"
+
+clock () {
+	watch -t -n 1 date +%T
 }
 
 # quick look alias
 alias ql='qlmanage -p 2>/dev/null'
 
 # fix broken virtualenv (when brew updates python)
-fixEnv () { gfind "$1" -type l -xtype l -delete }
+fix-env () { gfind "$1" -type l -xtype l -delete }
 
 abri () { open -a Abricotine "$@" }
+
+# get battery status (this is only used when I'm running very low power, no bar)
+alias power="pmset -g batt | egrep -o '([0-9]+\%).*?;.*?;'"
 
 # control wifi
 wifi () {

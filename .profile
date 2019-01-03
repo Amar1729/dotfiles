@@ -3,6 +3,10 @@
 
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
+# try to use pinentry-ncurses in terminal, pinentry-mac otherwise?
+GPG_TTY=$(tty)
+export GPG_TTY
+
 ####
 ## PATH changes
 ####
@@ -18,13 +22,26 @@
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
 # my changes
-export PATH="/opt/bin:$PATH"
+export PATH="/opt/bin:$HOME/.bin:$PATH"
+
+# add pip user installs
+#export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 
 # add fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# go stuff
+export GOPATH="${HOME}/.go"
+export GOROOT=/usr/local/opt/go/libexec
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+# nix
+if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
+	. ~/.nix-profile/etc/profile.d/nix.sh;
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
@@ -33,16 +50,16 @@ export PATH="/opt/bin:$PATH"
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-####
-## interpreter stuff
-####
+# add calibre cli
+[[ -d /Applications/calibre.app ]] && \
+export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS/"
 
-# Python shell tab completion (use homebrew python)
-which python3 >/dev/null && export PYTHONSTARTUP="$(`which python3` -m jedi repl)"
-
-# Use fuck/thefuck for command correction
-which thefuck >/dev/null && eval $(thefuck --alias)
-
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 # comment out the rest of this, but keep it around?
 : << 'END'

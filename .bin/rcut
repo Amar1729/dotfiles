@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat "-" | rev | cut "$@" | rev

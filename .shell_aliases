@@ -10,13 +10,12 @@
 # ls, grep, mkdir, tmux improvements
 alias ll="ls -lhFG"
 alias la="ll -a"
-alias lr="gls -lhFG --color=auto --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~'}"
 alias lt="ll -t"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
-alias less="less -FX"
+alias less="less -i -FX"
 alias cclear="cd; clear"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
@@ -61,8 +60,6 @@ hcat () {
   unset ARGS
 }
 
-# make tmux easier to check
-alias tmux-ls="tmux list-sessions"
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {
@@ -88,12 +85,7 @@ tmux-a () {
 }
 
 # Generate a password before plugging into `pass`
-gen-pw () {
-	[[ -z "$1" ]] && LEN=15 || LEN="$1"
-	cat /dev/urandom | \
-		gtr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' | \
-		head -c "$LEN"
-}
+alias init-pw='pwgen -cnyB1 -r \`\"\; 15'
 
 # overwrite `python` and `python3` to always open better REPL (if it's installed)
 python () {
@@ -114,25 +106,14 @@ python3 () {
 	fi
 }
 
-# wip: add completions to tmux-a (will defer between bash and zsh uh oh)
-function _tmux-a () {
-    [[ -n ${tmux_describe} ]] && print "Attach or switch to a session" && return
-    local -a args
-
-    args=(
-        #'-c[specify working directory for the session]:directory:_path_files -g "*(-/)"'
-        #'-d[detach other clients attached to target session]'
-        #'-r[put the client into read-only mode]'
-        '[choose a target session]:target session:__tmux-sessions'
-    )
-    _arguments ${args}
-}
+[[ -r ~/.fzf_aliases ]] && source ~/.fzf_aliases
 
 ####
 ## aliases/functions that are mac or linux specific
 ####
 
-if [[ "$(uname)" == 'Darwin' ]]; then
+if [[ "$(uname)" == 'Darwin' ]]
+then
 	[[ -r ~/.shell_aliases_osx ]] && source ~/.shell_aliases_osx
 else
 	[[ -r ~/.shell_aliases_linux ]] && source ~/.shell_aliases_linux

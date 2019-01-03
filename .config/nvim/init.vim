@@ -36,6 +36,7 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('Shougo/deoplete.nvim')
   "call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-jedi')
+  call dein#add('racer-rust/vim-racer')
   
   " async linting
   call dein#add('neomake/neomake')
@@ -70,6 +71,12 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " vimwiki
   call dein#add('vimwiki/vimwiki')
 
+  " fzf support
+  call dein#add('/usr/local/opt/fzf')
+  call dein#add('junegunn/fzf.vim')
+
+  " line diffing
+  call dein#add('AndrewRadev/linediff.vim')
 
   " Language-specific syntax support, completions:
 
@@ -89,6 +96,8 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " toml syntax
   call dein#add('cespare/vim-toml')
 
+  " nix expression language
+  call dein#add('LnL7/vim-nix')
 
   " Required:
   call dein#end()
@@ -120,7 +129,7 @@ endif
 " colorscheme gruvbox
 colorscheme wal
 set background=dark
-set relativenumber
+set relativenumber number
 set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
 
 " allow mouse control
@@ -178,11 +187,24 @@ nnoremap <leader><C-P> "*P
 vnoremap <leader><C-p> "*p
 vnoremap <leader><C-P> "*P
 
-" Buffer movement
-nmap <leader>n :bnext<CR>	" Cycle through buffers
+" Buffer control
+
+" Cycle through buffers
+nmap <leader>n :bnext<CR>
 nmap <leader>N :bprev<CR>
-nmap <leader>m :tabn<CR>	" Cycle through tabs
+
+" Cycle through tabs
+nmap <leader>m :tabn<CR>
 nmap <leader>M :tabp<CR>
+
+" Cycle through splits (in same window)
+nmap <leader>w <C-W><C-W>
+
+" force kill those damn term bufs
+nmap <leader>d :bd!<CR>
+
+" move to next buffer and kill the previous one (good for keeping window layout)
+nmap <leader>b :bn \| bd # <CR>
 
 " clear highlighted matches from find
 nmap <leader><Space> :noh<CR>
@@ -219,6 +241,9 @@ autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 " disable linting for temporary .py files
 autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
+" auto-compile rust files
+autocmd BufWritePost *.rs !cargo run
+
 " Deal with status bar (necessary?)
 
 " Cycle status line on command Shift+H
@@ -252,7 +277,7 @@ nnoremap <S-h> :call CycleHiddenAll()<CR>
 
 " for the almost-quiet statusbar
 " want the bar itself to be transparent and text to be green.
-hi StatusLine cterm=None ctermfg=142 ctermbg=None
+hi StatusLine cterm=None ctermfg=1 ctermbg=None
 set statusline=%t
 
 
@@ -274,8 +299,12 @@ let g:deoplete#enable_at_startup=1
 " this will chang with each upgrade! symlink?
 "let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
+" python info for deoplete
 let g:python_host_prog='/usr/bin/python'
 let g:python3_host_prog='/usr/bin/python3'
+
+" Rust Auto-Complete-ER
+let g:racer_cmd = "/Users/Amar/.cargo/bin/racer"
 
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
@@ -340,6 +369,10 @@ nnoremap <F12> :LLPStartPreview<CR>
 " ultisnip settings
 " <c-j>, <c-k> : jump forward, backward, respectively
 let g:UltiSnipsExpandTrigger="<c-j>"
+
+
+" mappings for Linediff
+vnoremap <leader>d	:Linediff<CR>
 
 
 " neomake settings
@@ -407,6 +440,10 @@ let g:airline_mode_map = {
 	\ 'v' : 'look',
 	\ 'V' : 'line look',
 	\ '' : 'block look',
+	\ 'c' : 'commando',
+	\ 's' : 'pick dat',
+	\ 'S' : 'pick dem',
+	\ '' : 'pick doze',
 	\ 't' : 'powershell',
 	\ }
 

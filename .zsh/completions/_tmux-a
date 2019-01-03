@@ -1,0 +1,24 @@
+#compdef _tmux-a tmux-a
+
+# Complete attached-sessions and detached-sessions as separate tags.
+# function __tmux-sessions-separately {
+function _tmux-a {
+    local ret=1
+    local -a sessions detached_sessions attached_sessions
+    sessions=( ${${(f)"$(command tmux 2> /dev/null list-sessions)"}/:[ $'\t']##/:} )
+    detached_sessions=(    ${sessions:#*"(attached)"} )
+    attached_sessions=( ${(M)sessions:#*"(attached)"} )
+
+    # ### This seems to work without a _tags loop but not with it.  I suspect
+    # ### that has something to do with _describe doing its own _tags loop.
+    _tags detached-sessions attached-sessions
+    # Placing detached before attached means the default behaviour of this
+    # function better suits its only current caller, _tmux-attach-session().
+    _requested detached-sessions && _describe -t detached-sessions 'detached sessions' detached_sessions "$@" && ret=0
+    _requested attached-sessions && _describe -t attached-sessions 'attached sessions' attached_sessions "$@" && ret=0
+
+    return ret
+}
+
+#__tmux-sessions-separately "$@"
+_tmux-a "$@"
