@@ -5,9 +5,12 @@
 # new_terminal:	change command to spawn new terminal
 
 _space_id () {
-	# change command here?
-	SPACE=$(/usr/local/bin/kwmc query space active id)
-	#/usr/local/bin/chunkc tiling::query -d id
+    # (macOS)
+	# prefer newer wm
+    if ! SPACE=$(/usr/local/bin/chunkc tiling::query --desktop id 2>/dev/null); then
+        SPACE=$(/usr/local/bin/kwmc query space active id)
+        [[ $? -ne 0 ]] && exit 1
+    fi
 	echo $SPACE
 }
 
@@ -17,28 +20,41 @@ _run_wal () {
 	wal -sn -i "$1"
 }
 
-_cache_seq () {
-	SPACE=$(_space_id)
+_cache_wp () {
+    SPACE=$1
+    cp $2 ~/.cache/wal/wp_"$SPACE"
+}
 
+_cache_seq () {
+	SPACE=$1
 	cp ~/.cache/wal/sequences ~/.cache/wal/sequences_"$SPACE"
 }
 
 _cache_css () {
-	SPACE=$(_space_id)
-
-	cp ~/.cache/wal/colors.css ~/.cache/wal/"colors_""$SPACE"".css"
+	SPACE=$1
+	cp ~/.cache/wal/colors.css ~/.cache/wal/colors_"$SPACE".css
 }
 
 _cache_json() {
-	SPACE=$(_space_id)
-
-	cp ~/.cache/wal/colors.json ~/.cache/wal/"colors_""$SPACE"".json"
+	SPACE=$1
+	cp ~/.cache/wal/colors.json ~/.cache/wal/colors_"$SPACE".json
 }
 
 _cache() {
-	_cache_seq
-	#_cache_css
-	_cache_json
+    _cache_wp $@
+	_cache_seq $@
+	#_cache_css $@
+	_cache_json $@
+}
+
+get_wallpaper () {
+    SPACE=$(_space_id)
+    FILE=~/.cache/wal/wp_$SPACE
+    if [[ -e $FILE ]]; then
+        echo $FILE
+    else
+        echo ""
+    fi
 }
 
 # TODO - add a check for sequences files that apply to destroyed desktops?
@@ -46,7 +62,8 @@ change_wallpaper () {
 	FILE="$(realpath "$1")"
 	if [[ ! -f "$1" ]]; then exit 1; fi
 
-	(_run_wal "$FILE" && _cache) >/dev/null 2>&1 &
+    SPACE=$(_space_id)
+	(_run_wal "$FILE" && _cache $SPACE $FILE) >/dev/null 2>&1 &
 	osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$FILE\""
 }
 
@@ -74,8 +91,18 @@ reload_colors () {
 }
 
 case "$1" in
+    -c|--clean)
+        rm -f ~/.cache/wal/wp_*
+        rm -f ~/.cache/wal/sequences*
+        rm -f ~/.cache/wal/colors_*.css
+        rm -f ~/.cache/wal/colors_*.json
+        ;;
     -w|--wallpaper)
         change_wallpaper "$2"
+        ;;
+    --get-wallpaper)
+        # gets the current wallpaper (useful for other helper scripts)
+        get_wallpaper
         ;;
     -r|--reload)
         reload_colors

@@ -19,6 +19,9 @@ _usage() {
 }
 
 case "$1" in
+    -c|--clean)
+        ~/.bin/unique_space.sh --clean
+        ;;
     -w|--wallpaper)
         ~/.bin/unique_space.sh -w "$2"
         ;;
@@ -41,11 +44,6 @@ case "$1" in
         ;;
     -f|--file)
         cat ~/.cache/wal/sequences_"$2"
-        ;;
-    --clean)
-        rm -f ~/.cache/wal/sequences*
-        rm -f ~/.cache/wal/colors_*.css
-        rm -f ~/.cache/wal/colors_*.json
         ;;
     -t|--transparency)
         osascript -e "tell application \"iTerm\" to tell current window to tell current session to set transparency to $2"
