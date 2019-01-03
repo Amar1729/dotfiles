@@ -47,6 +47,10 @@ prelock() {
     if [ ! -z "$(pidof dunst)" ] ; then
         pkill -u "$USER" -USR1 dunst
     fi
+
+    if [ ! -z "$(pidof rofi)" ]; then
+        pkill -u "$USER" -USR1 rofi
+    fi
 }
 
 lock() {
@@ -74,6 +78,10 @@ lock() {
 postlock() {
     if [ ! -z "$(pidof dunst)" ] ; then
         pkill -u "$USER" -USR2 dunst
+    fi
+
+    if [ ! -z "$(pidof rofi)" ]; then
+        pkill -u "$USER" -USR2 rofi
     fi
 }
 
