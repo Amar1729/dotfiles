@@ -139,6 +139,3 @@ alias dh='dirs -v'
 alias ...='../..'
 alias ....='../../..'
 alias .....='../../../..'
-
-# dynamic colors with (a wrapper for) pywal!
-(wp -r &)

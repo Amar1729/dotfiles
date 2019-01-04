@@ -72,7 +72,6 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   call dein#add('vimwiki/vimwiki')
 
   " fzf support
-  call dein#add('/usr/local/opt/fzf')
   call dein#add('junegunn/fzf.vim')
 
   " line diffing
