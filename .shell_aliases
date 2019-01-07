@@ -47,16 +47,18 @@ alias highlight='highlight -O xterm256 --style=zenburn --force'
 # use `highlight` for colorized cat
 hcat () {
 
+  declare -a ARGS
+
   while [[ $# -gt 0 ]]; do
     case "$1" in
       -n)
         ARGS="-l"
         ;;
       *rc|*profile)
-        highlight "$ARGS" --syntax=conf -i "$1"
+        highlight "${ARGS[@]}" --syntax=conf -i "$1"
         ;;
       *)
-        highlight "$ARGS" -i "$1"
+        highlight "${ARGS[@]}" -i "$1"
         ;;
     esac
     shift
