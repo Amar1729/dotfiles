@@ -54,3 +54,13 @@ fstash() {
         fi
     done
 }
+
+# pass completion suggested by @d4ndo (#362) (slightly modified)
+_fzf_complete_pass() {
+  _fzf_complete '+m' "$@" < <(
+    local pwdir=${PASSWORD_STORE_DIR-~/.password-store/}
+    find "$pwdir" -name "*.gpg" -print |
+        sed -e "s#${pwdir}/\{0,1\}##" |
+        sed -e 's/\(.*\)\.gpg/\1/'
+  )
+}
