@@ -3,8 +3,6 @@
 # hotkey daemon and bar
 sxhkd &
 #$HOME/.config/polybar/launch.sh 2>/dev/null
-# conky's not working yet, but rofi is (time in default modi)
-# you know actually lets try to get conky going !
 
 # set up desktops
 bspc monitor -d I II III IV V

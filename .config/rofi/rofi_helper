@@ -2,12 +2,15 @@
 
 # one-liner for cutting down battery info
 batt () {
-    upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | tr -s ' ' | sed -e 's/percentage/Battery/; s/ //'
+    acpi -b
+    #upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | tr -s ' ' | sed -e 's/percentage/Battery/; s/ //'
 }
 
 # get previous terminal window to attach to a tmux session chosen by rofi?
 _tmux () {
     if [[ $# -eq 0 ]]; then
+        # exit early if no tmux sessions
+        SESSIONS=($(tmux list-sessions 2>/dev/null)) || return 0
         oIFS=$IFS
         IFS=$'\n'
         for session in $(tmux list-sessions); do

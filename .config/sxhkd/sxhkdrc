@@ -7,9 +7,10 @@ super + Return
 	urxvtc
 
 # program launcher
+# make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
+#rofi -modi "spc:$HOME/.config/rofi/rofi_helper,run" -sidebar-mode -show spc
 super + space
-    # make sure to install the rofi calc plugin: svenstaro/rofi-calc
-	rofi -modi "spc:$HOME/.config/rofi/rofi_helper,run,calc" -sidebar-mode -show spc
+	rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun,calc" -sidebar-mode -show spc
 
 # make sxhkd reload its configuration files:
 super + Escape

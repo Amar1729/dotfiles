@@ -24,5 +24,8 @@ URxvt.clipboard.copycmd: xclip -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o
 
 ! backward/forward a word (alt)
-URxvt.keysym.M-Left:	\033[1;5D
-URxvt.keysym.M-Right:	\033[1;5C
+! be wary of changing these - i think lack of oh-my-zsh may mess things up? not sure tbh
+!URxvt.keysym.M-Left:	\033[1;5D
+URxvt.keysym.M-Left:	\033b
+!URxvt.keysym.M-Right:	\033[1;5C
+URxvt.keysym.M-Right:	\033f
