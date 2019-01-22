@@ -3,57 +3,16 @@
 export TERM="xterm-256color"
 export EDITOR="nvim"
 
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/Amar/.oh-my-zsh
+# plugins: moving to antibody from antigen
+ANTIBODY_HOME="$(antibody home)"
+DISABLE_AUTO_UPDATE="true"
 
-# my own theme!
-ZSH_THEME="amar_simple"
-
-# antigen (homebrew) path
-source ~/antigen.zsh
-
-# load oh-my-zsh's library
-antigen use oh-my-zsh
-
-# from default repo
-antigen bundle git
-
-# open GitHub from cli
-antigen bundle peterhurford/git-it-on.zsh
-
-# good ch dir backward (helpful for very nested projects)
-antigen bundle Tarrasch/zsh-bd
-
-# ranking of directories
+export ZSH="$ANTIBODY_HOME"/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh
 export _Z_DATA="$HOME/.cache/z"
-antigen bundle rupa/z
 
-# include a notification for long-running commands or nonzero return codes
-# make sure to install terminal-notifier (Mac) or notify-send (Linux)
-#antigen bundle marzocchi/zsh-notify
-
-# bundles (and env vars)
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-#antigen bundle kennethreitz/autoenv
-#AUTOENV_ENV_FILENAME="env"
-
-# my theme:
-#	style similar to powerlevel9k 
-#	doesn't include virtualenvs in the first slice
-#	DOES truncate dirpath to last 2 (or 25 chars)
-#	- no battery status (i don't need this)
-#	simpler vcs
-#	TODO:
-#		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
-#	note - I liked pure theme. possible to create fork/temp for 'pure' work?
-
-#antigen theme https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
-antigen theme https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c amar_simple
-
-# done!
-antigen apply
-
+# statically load plugins. generate with:
+# antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+source ~/.zsh_plugins.sh
 
 # User configuration
 
