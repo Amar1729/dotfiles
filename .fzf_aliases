@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # fuzzy find file content (open results with <Enter>)
 fgr() {
