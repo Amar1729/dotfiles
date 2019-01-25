@@ -98,6 +98,9 @@ if dein#load_state('/Users/Amar/.config/nvim/')
   " nix expression language
   call dein#add('LnL7/vim-nix')
 
+  " sxhkd
+  call dein#add('kovetskiy/sxhkd-vim')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -299,7 +302,7 @@ let g:deoplete#enable_at_startup=1
 "let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/8.0.0/include'
 
 " python info for deoplete
-let g:python_host_prog='/usr/bin/python'
+"let g:python_host_prog='/usr/bin/python'
 let g:python3_host_prog='/usr/bin/python3'
 
 " Rust Auto-Complete-ER
