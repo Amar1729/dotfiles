@@ -13,8 +13,8 @@
 alias batt="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | grep -o '[0-9]\+%'"
 
 # copy/paste
-alias pbcopy="xsel -ib"
-alias pbpaste="xsel -ob"
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -o"
 
 
 # put this here for now:

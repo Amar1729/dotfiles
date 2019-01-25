@@ -33,11 +33,6 @@ export PATH="/opt/bin:$HOME/.bin:$PATH"
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
-# go stuff
-export GOPATH="${HOME}/.go"
-export GOROOT=/usr/local/opt/go/libexec
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
-
 # nix
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh;
