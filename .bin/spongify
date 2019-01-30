@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ $1 == "--copy" ]]; then
+
+    # copy!
+    osascript -e 'tell application "System Events" to keystroke "c" using {command down}'
+
+    # SpOnGiFy!
+    pbpaste | /usr/local/bin/gsed -r -e 's/(.)(.)?/\U\1\L\2/g' | pbcopy
+
+    # paste!
+    osascript -e 'tell application "System Events" to keystroke "v" using {command down}'
+
+else
+
+    /usr/local/bin/gsed -r -e 's/(.)(.)?/\U\1\L\2/g' < /dev/stdin | tee >(pbcopy)
+
+fi

@@ -249,6 +249,8 @@ tree + shift - 6 : chunkc tiling::window -d 6; khd -p "cmd - 6"
 ## Space
 ####
 
+space - s : khd -e "mode activate default"; ~/.bin/spongify --copy
+
 # as of chunkwm, is this necessary?
 # I use ctrl-d to exit shell and to close tmux panes
 space + ctrl - d		[HyperTerm,Terminal,iTerm,iTerm2]	->	:	khd -e "mode activate default"
