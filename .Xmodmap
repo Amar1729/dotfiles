@@ -1,0 +1,17 @@
+
+! Stop! so, keys cant belong two two different mod groups at once?
+! And bspwm group 'super' seems to pull from the default group for Super/Hper: mod4
+! So I can't clear that and set left/right keys differently, otherwise base 'super'
+! doesn't work in bspwm? figure out a compromise to this ...
+!clear mod1
+!clear mod2
+!clear mod3
+!clear mod4
+!
+!keycode 133 = Super_L
+!keycode 134 = Super_R
+!keycode 207 = Hyper_L
+!keycode 208 = Hyper_R
+!
+!add mod3 = Super_L Hyper_L
+!add mod4 = Super_R Hyper_R
