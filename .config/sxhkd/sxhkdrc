@@ -17,6 +17,44 @@ super + Escape
 	pkill -USR1 -x sxhkd
 
 #
+# function keys
+#
+
+#acpilight: xbacklight requires sudo ...
+#XF86MonBrightnessDown
+#	~/.bin/kb_light -d
+#
+#XF86MonBrightnessUp
+#	~/.bin/kb_light -i
+
+#XF86LaunchA
+#XF86LaunchB
+
+XF86KbdBrightnessDown
+	~/.bin/kb_light -d
+
+XF86KbdBrightnessUp
+	~/.bin/kb_light -i
+
+#XF86AudioPrev
+#	echo 'h'
+#
+#XF86AudioPlay
+#	echo 'h'
+#
+#XF86AudioNext
+#	echo 'h'
+
+XF86AudioRaiseVolume
+	pamixer --increase 5
+
+XF86AudioLowerVolume
+	pamixer --decrease 5
+
+XF86AudioMute
+	if pamixer --get-mute >/dev/null; then pamixer -u; else pamixer -m; fi
+
+#
 # bspwm hotkeys
 #
 

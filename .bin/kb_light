@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# requires `upower'
+# working on archlinux; not sure about compatibility with other flavors
+
+cachefile=/tmp/_kbd_brightness
+
+[[ ! -e $cachefile ]] && echo '40' > $cachefile
+
+_set () {
+    curr=$(cat $cachefile)
+
+    if [[ $1 == "-i" ]]; then
+        next=$((curr+5))
+    elif [[ $1 == "-d" ]]; then
+        next=$((curr-5))
+    elif [[ $1 == "--zero" ]]; then
+        next=0
+    elif [[ $1 == "--max" ]]; then
+        next=100
+    else
+        return 0
+    fi
+
+    dbus-send --system --type=method_call --dest="org.freedesktop.UPower" "/org/freedesktop/UPower/KbdBacklight" "org.freedesktop.UPower.KbdBacklight.SetBrightness" int32:$next
+
+    echo $next > $cachefile
+}
+
+_set $1
