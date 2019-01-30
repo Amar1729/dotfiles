@@ -1,11 +1,14 @@
 #!/bin/sh
 
-# hotkey daemon and bar
+# hotkey daemon, bar, terminal
 sxhkd &
 #$HOME/.config/polybar/launch.sh 2>/dev/null
+urxvtc &
 
-# set up desktops
-bspc monitor -d I II III IV V
+# set up desktops (determine with xrandr -q)
+#bspc monitor -d I II III IV V
+bspc monitor eDP-1 -d I II III IV V
+bspc monitor DP-1 -d I II III
 
 # colors, sizes
 bspc config focused_border_color	"#fbf1c7"
