@@ -50,7 +50,7 @@ font-2 = siji:pixelsize=10
 
 modules-left = bspwm 
 modules-center = date
-modules-right = volume memory cpu 
+modules-right = volume battery
 
 tray-position = right
 tray-padding = 2
