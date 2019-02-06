@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# copy/paste files across directories (like click-to-copy/paste functionality in a file explorer)
+
+BUFFER_FILE=/tmp/buffer-copy-files
+
+copy () {
+    readlink -f "$@" > $BUFFER_FILE
+}
+
+paste () {
+    for f in $(cat $BUFFER_FILE); do
+        cp $f ./
+    done
+}
+
+op=$1
+shift
+
+case $op in
+    c|copy)
+        copy "$@"
+        ;;
+    p|paste)
+        paste
+        ;;
+    *)
+        echo "Unsupported operation $op"
+        echo "$0 copy|paste files..."
+        ;;
+esac

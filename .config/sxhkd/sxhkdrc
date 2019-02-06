@@ -4,15 +4,55 @@
 
 # terminal emulator
 super + Return
-	urxvt
+	urxvtc
 
 # program launcher
-super + @space
-	dmenu_run
+# make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
+#rofi -modi "spc:$HOME/.config/rofi/rofi_helper,run" -sidebar-mode -show spc
+super + space
+	rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun,calc" -sidebar-mode -show spc
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+#
+# function keys
+#
+
+#acpilight: xbacklight requires sudo ...
+#XF86MonBrightnessDown
+#	~/.bin/kb_light -d
+#
+#XF86MonBrightnessUp
+#	~/.bin/kb_light -i
+
+#XF86LaunchA
+#XF86LaunchB
+
+XF86KbdBrightnessDown
+	~/.bin/kb_light -d
+
+XF86KbdBrightnessUp
+	~/.bin/kb_light -i
+
+#XF86AudioPrev
+#	echo 'h'
+#
+#XF86AudioPlay
+#	echo 'h'
+#
+#XF86AudioNext
+#	echo 'h'
+
+XF86AudioRaiseVolume
+	pamixer --increase 5
+
+XF86AudioLowerVolume
+	pamixer --decrease 5
+
+XF86AudioMute
+	if pamixer --get-mute >/dev/null; then pamixer -u; else pamixer -m; fi
 
 #
 # bspwm hotkeys
@@ -30,20 +70,12 @@ super + {_,shift + }w
 super + m
 	bspc desktop -l next
 
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-super + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
-
-# swap the current node and the biggest node
-super + g
-	bspc node -s biggest
-
 #
 # state/flags
 #
 
 # set the window state
-super + {t,shift + t,s,f}
+super + {t,shift + t,g,f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
@@ -55,35 +87,39 @@ super + ctrl + {x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
-
-# focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
+alt + {_,shift + }n
 	bspc node -f {next,prev}.local
 
-# focus the next/previous desktop in the current monitor
-#super + bracket{left,right}
-super + {Left,Right}
+# focus the next/previous desktop in the current monitor (mouse)
+shift + {button8,button9}
 	bspc desktop -f {prev,next}.local
 
-# focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+# focus the next/previous desktop in the current monitor (keyboard)
+super + {Left,Right}
+	bspc desktop -f {prev,next}.local
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# swap windows
+ctrl + alt + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# reinsert windows (odd that this is so complicated)
+# (note) there's no way to have 1-to-many braces assignment (?) ^
+super + shift + h
+	bspc node west -p south && bspc node focused -n west
+super + shift + j
+	bspc node south -p east && bspc node focused -n south
+super + shift + k
+	bspc node north -p east && bspc node focused -n north
+super + shift + l
+	bspc node east -p south && bspc node focused -n east
 
 #
 # preselect
@@ -110,13 +146,13 @@ super + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-super + alt + {h,j,k,l}
+alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-super + alt + shift + {h,j,k,l}
+alt + shift + {l,k,j,h}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-super + {Left,Down,Up,Right}
+super + shift + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}

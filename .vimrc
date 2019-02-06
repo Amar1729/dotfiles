@@ -1,13 +1,29 @@
-" Amar's .vimrc
+" Amar's (simple) .vimrc
 
 " Spin up default plugins if you don't install neovim
 "call plug#begin('~/.vim/plugged')
 "
-"Plug 'tpope/vim-sensible'
-"Plug 'morhetz/gruvbox'
-"Plug 'davidhalter/jedi-vim'
-"
+"	Plug 'tpope/vim-sensible'
+"	Plug 'morhetz/gruvbox'
+"	Plug 'davidhalter/jedi-vim'
+
+ 	"Plug 'FredKSchott/CoVim'
+	Plug('dylanaraps/wal.vim')
+
 "call plug#end()
+
+"colorscheme zenburn
+"colorscheme gruvbox
+colorscheme wal
+
+syntax on
+
+set relativenumber number
+
+set autoindent noexpandtab tabstop=4 shiftwidth=4
+set incsearch hlsearch
+
+set mouse=a
 
 augroup remember_folds
 	autocmd!
@@ -17,13 +33,5 @@ augroup END
 
 let mapleader = ","
 
-"colorscheme gruvbox
-set autoindent noexpandtab tabstop=4 shiftwidth=4
-set hlsearch
-set relativenumber
-set number
-
 map <Leader>n :bnext<Enter>
 map <Leader><Space> :noh<Enter>
-
-:inoremap <S-Tab> <C-V><Tab>

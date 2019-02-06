@@ -1,0 +1,34 @@
+# load oh-my-zsh's library
+robbyrussell/oh-my-zsh
+
+# open GitHub from cli
+peterhurford/git-it-on.zsh
+
+# good ch dir backward (helpful for very nested projects)
+Tarrasch/zsh-bd
+
+# ranking+searching of directories
+rupa/z
+
+# include a notification for long-running commands or nonzero return codes
+# make sure to install terminal-notifier (Mac) or notify-send (Linux)
+#marzocchi/zsh-notify
+
+# bundles (and env vars)
+zsh-users/zsh-syntax-highlighting
+
+#antigen bundle kennethreitz/autoenv
+#AUTOENV_ENV_FILENAME="env"
+
+# my theme:
+#	style similar to powerlevel9k 
+#	doesn't include virtualenvs in the first slice
+#	DOES truncate dirpath to last 2 (or 25 chars)
+#	- no battery status (i don't need this)
+#	simpler vcs
+#	TODO:
+#		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
+#	note - I liked pure theme. possible to create fork/temp for 'pure' work?
+
+#https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 # airline style
+https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # simple

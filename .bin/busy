@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat /dev/urandom|hexdump -C|grep --color=always 'ca fe'

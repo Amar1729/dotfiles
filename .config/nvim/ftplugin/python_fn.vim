@@ -341,7 +341,11 @@ function! MenuBuilder()
   let parentclass = ""
   while line(".") < line("$")
     " search for a class or function
+<<<<<<< HEAD
     if match ( getline("."), '^\s*class\s\+[_a-zA-Z].*\|^\s*def\s\+[_a-zA-Z].*' ) != -1
+=======
+    if match ( getline("."), '^\s*class\s\+[_a-zA-Z].*:\|^\s*def\s\+[_a-zA-Z].*:' ) != -1
+>>>>>>> master
       norm ^
       let linenum = line('.')
       let indentcol = col('.')

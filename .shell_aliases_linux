@@ -1,0 +1,76 @@
+# Shell aliases - linux-specific
+
+# note - this is kind of a temporary state. these aliases are pretty disorganized right now.
+
+# linux locking
+# make sure you have a lock script haha
+#alias lock="~/.config/scripts/lock.sh -l 2>/dev/null"
+#alias lock="~/Downloads/wm/i3-pixel-lock/lock 1"
+# the lock script is betterlockscreen in ~/.config/scripts
+# it is symlinked into /opt/bin as "lock"
+
+# temporary:
+alias batt="upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | grep -o '[0-9]\+%'"
+
+# copy/paste
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -o"
+
+
+# put this here for now:
+# so, ubuntu has nice understanding of mac function keys and special ops:
+: << end
+what am i missing in startx?
+* f1/2 don't change brightness
+* f5/f6 don't change keyboard backlighting
+* trackpad - dont have tap-to-click
+* three-finger back? is this possible?
+* four-finger desktop left/right
+* resolution is way too large
+
+f1/f2 (without fn): 232/233
+with fn:	67/68
+
+f5/f6 (without fn): 237/238
+with fn: 71/72
+
+end
+
+
+increase-brightness () {
+	CURR=$(get-brightness)
+
+	if [[ $CURR -lt 1.0 ]]; then
+		CURR=$(($CURR+0.1))
+	fi
+
+	if [[ $CURR -ge 1.0 ]]; then
+		CURR=1.0
+	fi
+
+	set-brightness $CURR
+}
+
+decrease-brightness () {
+	CURR=$(get-brightness)
+
+	if [[ $CURR -lt 1.0 ]]; then
+		CURR=$(($CURR-0.1))
+	fi
+
+	if [[ $CURR -le 0.0 ]]; then
+		CURR=0.0
+	fi
+
+	set-brightness $CURR
+}
+
+set-brightness () {
+	xrandr --output eDP-1 --brightness "$1"
+}
+
+get-brightness () {
+	xrandr --verbose|grep Brightness|cut -f2 -d' '
+}
+
+#xrandr --output eDP-1 --brightness 0.5

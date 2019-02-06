@@ -1,0 +1,127 @@
+# General shell aliases. Source from .bashrc or .zshrc
+
+# just temporary aliases, nothing to see here
+[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
+
+####
+## Common aliases, command improvements:
+####
+
+# ls, grep, mkdir, tmux improvements
+alias ll="ls -lhFG"
+alias la="ll -a"
+alias lt="ll -t"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+alias ggrep="ggrep --color=auto"
+alias less="less -i -FX"
+alias cclear="cd; clear"
+
+# Make new directory and immediately cd into it (from Nate Landau's, link below)
+# should the -p flag be included?
+mcd () { mkdir -p "$1" && cd "$1"; }
+
+# Use neovim instead of vim
+alias vi="nvim"
+alias vim="nvim"
+vimdiff () { nvim -d "$@" ;}
+
+# copy with a progress bar.
+alias cpv="rsync -avzh --progress --"
+
+# pretty-print json
+alias jcat='python -m json.tool'
+
+# colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
+alias diff='colordiff'
+
+# nice terminal clock
+clock () {
+	watch -t -n 1 date +%T
+}
+
+# set better defaults for highlight
+alias highlight='highlight -O xterm256 --style=zenburn --force'
+
+# use `highlight` for colorized cat
+hcat () {
+
+  declare -a ARGS
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -n)
+        ARGS="-l"
+        ;;
+      *rc|*profile)
+        highlight "${ARGS[@]}" --syntax=conf -i "$1"
+        ;;
+      *)
+        highlight "${ARGS[@]}" -i "$1"
+        ;;
+    esac
+    shift
+  done
+
+  unset ARGS
+}
+
+# tmux-a [index]	: attaches to the index of given session
+# tmux-a			: tries to attach to last session; if none active, creates new one
+tmux-a () {
+	sessions=`tmux list-sessions 2>/dev/null`
+	# if there are tmux sessions, connect to the last one or the one specified by $1
+	if [[ $? -eq 0 ]]
+	then
+		# if there's an argument given then connect to given session
+		if [[ -n "$1" ]]
+		then
+			tmux attach -t "$1"
+			#return $?
+		else
+			# no argument, and tmux is running: attach to the most recent session
+			tmux attach
+			#return $?
+		fi
+	else
+		# tmux isn't running: start it up
+		tmux
+		#return 0
+	fi
+}
+
+# Generate a password before plugging into `pass`
+alias init-pw='pwgen -cnyB1 -r \`\"\; 15'
+
+# overwrite `python` and `python3` to always open better REPL (if it's installed)
+python () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python "$@"
+	fi
+}
+
+python3 () {
+	which ipython > /dev/null
+	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
+		ipython
+	else
+		command python3 "$@"
+	fi
+}
+
+[[ -r ~/.fzf_aliases ]] && source ~/.fzf_aliases
+
+####
+## aliases/functions that are mac or linux specific
+####
+
+if [[ "$(uname)" == 'Darwin' ]]
+then
+	[[ -r ~/.shell_aliases_osx ]] && source ~/.shell_aliases_osx
+else
+	[[ -r ~/.shell_aliases_linux ]] && source ~/.shell_aliases_linux
+fi

@@ -1,11 +1,78 @@
+# lots of ideas taken from
+# https://gist.github.com/pksunkara/988716
+
+[user]
+	name = Amar1729
+	email = amar.paul16@gmail.com
 
 [alias]
+	c = clone
+	d = diff
+	ds = diff --staged
 	co = checkout
 	ci = commit
-	#st = status -sb
 	st = status
+	stb = status -sb
+	stn = status -sb -uno
 	br = branch
-	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	m = merge
+	ma = merge --abort
+	p = pull
+	pr = pull --rebase
+	rv = remote -v
+	rH = reset HEAD
 
-[push]
-	default = simple
+	sts = stash
+	sta = stash apply
+	std = stash drop
+
+	short = rev-parse --short HEAD
+
+	# nicely formatted history (includes all branches)
+	hist = log --graph --abbrev-commit --decorate --all --date=short \
+		 --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%ad%C(reset) | %C(white)%s%C(reset) %C(dim green)[%an]%C(reset) %C(bold yellow)%d%C(reset)'
+	# history of specific branch
+	histb = log --graph --abbrev-commit --decorate \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)'
+	# longer format for really looking through history
+	histl = log --graph --abbrev-commit --decorate --all \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+	pager = less -FX
+	# slighlty fancier diff pager
+	#pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+
+[pager]
+	stash = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

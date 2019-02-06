@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# one-liner for cutting down battery info
+batt () {
+    acpi -b
+    #upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | tr -s ' ' | sed -e 's/percentage/Battery/; s/ //'
+}
+
+# get previous terminal window to attach to a tmux session chosen by rofi?
+_tmux () {
+    if [[ $# -eq 0 ]]; then
+        # exit early if no tmux sessions
+        SESSIONS=($(tmux list-sessions 2>/dev/null)) || return 0
+        oIFS=$IFS
+        IFS=$'\n'
+        for session in $(tmux list-sessions); do
+            echo "tmux: $session"
+        done
+        IFS=$oIFS
+    else
+        # how to send this command to a terminal?
+        tmux attach -t $1
+    fi
+}
+
+if [[ $# -eq 0 ]]; then
+    # give option to lock screen from rofi - otherwise display time, battery, etc
+    echo 'lock'
+    echo "$(whoami)@$(hostname)"
+    date
+    batt
+    _tmux
+else
+    if [[ $1 == "lock" ]]; then
+        /opt/bin/lock
+    elif [[ $1 == "tmux: "* ]]; then
+        session=${1##*: }
+        #_tmux $sessions
+    fi
+fi
