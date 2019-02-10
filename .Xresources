@@ -1,9 +1,12 @@
 !using pywal
-#include ".cache/wal/colors.Xresources"
+!#include ".cache/wal/colors.Xresources"
+#include ".config/xresources/gruvbox-dark.xresources"
 
+! maybe this doesn't work on my '09 mbp because of weird resolution?
 ! finally figured out font naming (use fc-match)
-!URxvt.font: xft:Fantasque Sans Mono:size=18:antialias=true
-URxvt.font: xft:Iosevka:size=18
+!URxvt.font: xft:Fantasque Sans Mono:size=12
+!URxvt.font: xft:Iosevka:size=12
+!URxvt.font: xft:DejaVu Sans:size=8
 
 *transparent: true
 *shading: 30

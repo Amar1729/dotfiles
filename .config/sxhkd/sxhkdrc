@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 # make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
-#rofi -modi "spc:$HOME/.config/rofi/rofi_helper,run" -sidebar-mode -show spc
+#rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun" -sidebar-mode -show spc
 super + space
 	rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun,calc" -sidebar-mode -show spc
 
@@ -22,11 +22,7 @@ super + Escape
 
 #acpilight: xbacklight requires sudo ...
 #XF86MonBrightnessDown
-#	~/.bin/kb_light -d
-#
 #XF86MonBrightnessUp
-#	~/.bin/kb_light -i
-
 #XF86LaunchA
 #XF86LaunchB
 
@@ -37,22 +33,17 @@ XF86KbdBrightnessUp
 	~/.bin/kb_light -i
 
 #XF86AudioPrev
-#	echo 'h'
-#
 #XF86AudioPlay
-#	echo 'h'
-#
 #XF86AudioNext
-#	echo 'h'
 
 XF86AudioRaiseVolume
-	pamixer --increase 5
+	amixer set 'Master' 5%+
 
 XF86AudioLowerVolume
-	pamixer --decrease 5
+	amixer set 'Master' 5%-
 
 XF86AudioMute
-	if pamixer --get-mute >/dev/null; then pamixer -u; else pamixer -m; fi
+	amixer -D pulse set 'Master' 1+ toggle
 
 #
 # bspwm hotkeys

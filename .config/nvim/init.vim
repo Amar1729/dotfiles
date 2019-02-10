@@ -35,17 +35,17 @@ if dein#load_state('~/.config/nvim/')
   " deoplete for nvim
   call dein#add('Shougo/deoplete.nvim')
   "call dein#add('zchee/deoplete-clang')
-  call dein#add('zchee/deoplete-jedi')
-  call dein#add('racer-rust/vim-racer')
+  "call dein#add('zchee/deoplete-jedi')
+  "call dein#add('racer-rust/vim-racer')
   
   " async linting
-  call dein#add('neomake/neomake')
+  "call dein#add('neomake/neomake')
 
   " code snippet engine
-  call dein#add('SirVer/ultisnips')
+  "call dein#add('SirVer/ultisnips')
 
   " snippets are separated from the engine
-  call dein#add('honza/vim-snippets')
+  "call dein#add('honza/vim-snippets')
 
 
   " Quality of life:
@@ -63,40 +63,40 @@ if dein#load_state('~/.config/nvim/')
   "call dein#add('FredKSchott/CoVim')
 
   " nice completion of (x)html tags
-  call dein#add('tpope/vim-ragtag')
+  "call dein#add('tpope/vim-ragtag')
 
   " (vim plugin) minimap
-  call dein#add('severin-lemaignan/vim-minimap')
+  "call dein#add('severin-lemaignan/vim-minimap')
 
   " vimwiki
-  call dein#add('vimwiki/vimwiki')
+  "call dein#add('vimwiki/vimwiki')
 
   " fzf support
   call dein#add('junegunn/fzf.vim')
 
   " line diffing
-  call dein#add('AndrewRadev/linediff.vim')
+  "call dein#add('AndrewRadev/linediff.vim')
 
   " Language-specific syntax support, completions:
 
-  " Live LaTeX previewing
-  "call dein#add('xuhdev/vim-latex-live-preview')
-
-  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
-  "call dein#add('donRaphaco/neotex')
-  " no, I think this only works for vim?
-
-  " Syntax highlighting for coffeescript
-  call dein#add('kchmck/vim-coffee-script')
-
-  " Support for Julia
-  call dein#add('JuliaEditorSupport/julia-vim')
-
-  " toml syntax
-  call dein#add('cespare/vim-toml')
-
-  " nix expression language
-  call dein#add('LnL7/vim-nix')
+"  " Live LaTeX previewing
+"  "call dein#add('xuhdev/vim-latex-live-preview')
+"
+"  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
+"  "call dein#add('donRaphaco/neotex')
+"  " no, I think this only works for vim?
+"
+"  " Syntax highlighting for coffeescript
+"  call dein#add('kchmck/vim-coffee-script')
+"
+"  " Support for Julia
+"  call dein#add('JuliaEditorSupport/julia-vim')
+"
+"  " toml syntax
+"  call dein#add('cespare/vim-toml')
+"
+"  " nix expression language
+"  call dein#add('LnL7/vim-nix')
 
   " sxhkd
   call dein#add('kovetskiy/sxhkd-vim')
@@ -241,7 +241,7 @@ augroup END
 autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 
 " disable linting for temporary .py files
-autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
+"autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " auto-compile rust files
 autocmd BufWritePost *.rs !cargo run
@@ -382,7 +382,7 @@ vnoremap <leader>d	:Linediff<CR>
 " let g:neomake_python_pylint_exe = 'python3'
 
 " When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
+"call neomake#configure#automake('nw', 750)
 
 " red
 hi NeomakeErrorSign ctermfg=1
