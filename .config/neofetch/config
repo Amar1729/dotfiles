@@ -7,28 +7,28 @@
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 print_info() {
-    info title
-    info underline
+    #info title
+    #info underline
 
     info "OS" distro
-    info "Model" model
-    info "Kernel" kernel
-    info "Uptime" uptime
-    info "Packages" packages
+    #info "Model" model
+    #info "Kernel" kernel
+    #info "Uptime" uptime
+    #info "Packages" packages
     info "Shell" shell
-    info "Resolution" resolution
-    info "DE" de
-    #info "WM" wm
-	prin "WM" "kwm"
+    #info "Resolution" resolution
+    #info "DE" de
+    info "WM" wm
+	#prin "WM" "kwm"
     #info "WM Theme" wm_theme
     #info "Theme" theme
-    info "Icons" icons
+    #info "Icons" icons
     info "Terminal" term
-    #info "Terminal Font" term_font
-	prin "Font" "Fantasque Sans Mono"
-    info "CPU" cpu
-    info "GPU" gpu
-    info "Memory" memory
+    info "Terminal Font" term_font
+	#prin "Font" "Fantasque Sans Mono"
+    #info "CPU" cpu
+    #info "GPU" gpu
+    #info "Memory" memory
 
     # info "CPU Usage" cpu_usage
     # info "Disk" disk
@@ -114,7 +114,7 @@ uptime_shorthand="on"
 # Example:
 # on:  '/bin/bash'
 # off: 'bash'
-shell_path="on"
+shell_path="off"
 
 # Show $SHELL version
 #
@@ -125,7 +125,7 @@ shell_path="on"
 # Example:
 # on:  'bash 4.4.5'
 # off: 'bash'
-shell_version="on"
+shell_version="off"
 
 
 # CPU
