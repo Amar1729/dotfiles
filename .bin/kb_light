@@ -7,19 +7,25 @@ cachefile=/tmp/_kbd_brightness
 
 [[ ! -e $cachefile ]] && echo '40' > $cachefile
 
+max=255
+min=0
+inc=$(echo "$max / 20" | bc)
+
 _set () {
     curr=$(cat $cachefile)
 
     if [[ $1 == "-i" ]]; then
-        next=$((curr+5))
+        next=$((curr+inc))
+        [[ $next -ge $max ]] && next=$max
     elif [[ $1 == "-d" ]]; then
-        next=$((curr-5))
+        next=$((curr-inc))
+        [[ $next -le $min ]] && next=$min
     elif [[ $1 == "--zero" ]]; then
-        next=0
+        next=$min
     elif [[ $1 == "--max" ]]; then
-        next=100
+        next=$max
     else
-        return 0
+        return $min
     fi
 
     dbus-send --system --type=method_call --dest="org.freedesktop.UPower" "/org/freedesktop/UPower/KbdBacklight" "org.freedesktop.UPower.KbdBacklight.SetBrightness" int32:$next
