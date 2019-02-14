@@ -8,9 +8,9 @@ super + Return
 
 # program launcher
 # make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
-#rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun" -sidebar-mode -show spc
+#rofi -modi "drun" -sidebar-mode -show drun
 super + space
-	rofi -modi "spc:$HOME/.config/rofi/rofi_helper,drun,calc" -sidebar-mode -show spc
+	rofi -modi "drun,calc" -sidebar-mode -show drun
 
 # make sxhkd reload its configuration files:
 super + Escape
