@@ -1,285 +1,255 @@
-;=====================================================
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
-;
-;=====================================================
+###########################################
+#    ____        __      __               #
+#   / __ \____  / /_  __/ /_  ____ ______ #
+#  / /_/ / __ \/ / / / / __ \/ __ `/ ___/ #
+# / ____/ /_/ / / /_/ / /_/ / /_/ / /     #
+#/_/    \____/_/\__, /_.___/\__,_/_/      #
+#              /____/                     #
+#                                         #
+###########################################
 
+# Polybar Config by amar (loosely based off of LeD3F)
+# Polybar - https://github.com/jaagr/polybar
+
+##################################
+#   _____      _                 #
+#  / ____|    | |                #
+# | |     ___ | | ___  _ __ ___  #
+# | |    / _ \| |/ _ \| '__/ __| #
+# | |___| (_) | | (_) | |  \__ \ #
+#  \_____\___/|_|\___/|_|  |___/ #
+#                                #
+##################################                               
+                               
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #55
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+background = ${xrdb:color0}
+#background-alt = #121212
+background-alt = ${xrdb:color8}
+foreground = ${xrdb:color7}
+foreground-alt = ${xrdb:color7}
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
+primary = ${xrdb:color12}
+secondary = ${xrdb:color2}
+alert = ${xrdb:color3}
 
-[bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
-height = 27
-offset-x = 0
-offset-y = 0
+# currently only using c2
+c1 = ${xrdb:color1}
+c2 = ${xrdb:color2}
+c3 = ${xrdb:color3}
+c4 = ${xrdb:color4}
+c5 = ${xrdb:color5}
+c6 = ${xrdb:color6}
 
-;background = ${xrdb:color9}
+#[global/wm]
+##offset-y = 1%
+# 1% of 2880x1800 = 18
+#margin-top = 18
+
+#######################################
+#  _ _   _ _     ______    _____ _    #
+# (_) \ | | |   |  ____|  |_   _| |   #
+#  _|  \| | |__ | |__   _ __| | | |_  #
+# | | . ` | '_ \|  __| | '__| | | __| #
+# | | |\  | | | | |____| | _| |_| |_  #
+# |_|_| \_|_| |_|______|_||_____|\__| #
+#                                     #
+#######################################
+
+[section/base]
+monitor = eDP-1
+fixed-center = true
+bottom = true
+monitor-strict = true
+
+height = 60
+offset-y = 1%
+
 background = ${colors.background}
 foreground = ${colors.foreground}
+border-bottom-size = 8
+border-bottom-color = ${colors.primary}
 
-overline-size = 2
-overline-color = #f00
-underline-size = 2
-underline-color = #00f
+override-redirect = false
+wm-restack = bspwm
 
-border-bottom-size = 2
-border-bottom-color = #333
+cursor-click = pointer
+cursor-scroll = ns-resize 
 
-padding-left = 0
-padding-right = 2
-module-margin-left = 1
-module-margin-right = 2
+font-0 = Iosevka:style=Regular:pixelsize=14;2
+# scientifica just does not want to work (bitmap font?)
+font-1 = scientifica:style=Regular:pixelsize=14;2
+font-2 = NotoSansSymbols2-Regular:pixelsize=14;4
 
-font-0 = fixed:pixelsize=10
-font-1 = unifont:fontformat=truetype:size=6:heavy;-2
-font-2 = siji:pixelsize=10
+# using this for battery symbols
+font-3 = NotoSansUgaritic-Regular:pixelsize=14;3
+
+# using this for backlight symbols
+font-4 = Wuncon Siji:pixelsize=12;2
+
+##########################
+#  ____                  #
+# |  _ \                 #
+# | |_) | __ _ _ __ ___  #
+# |  _ < / _` | '__/ __| #
+# | |_) | (_| | |  \__ \ #
+# |____/ \__,_|_|  |___/ #
+#                        #
+##########################
+
+
+######################
+#  _         __ _    #
+# | |   ___ / _| |_  #
+# | |__/ -_)  _|  _| #
+# |____\___|_|  \__| #
+#                    #
+######################
+
+[bar/left]
+inherit = section/base
+width = 14%
+offset-x = 0.95%
+
+# for testing wip modules
+#modules-left = keyb backlight pulseaudio
+
+# TODO
+# im guessing here i'd like to have network(?), some kind of cert/vpn notify, share drive?, maybe something like rchat (should i send that over dunst?)
+# maybe also number of emails
+# music could be a pain
+# calendar?
+#   cal should be a popup or interaction with time on bar/right i think
+
+##############################
+#   ___         _            #
+#  / __|___ _ _| |_ ___ _ _  #
+# | (__/ -_) ' \  _/ -_) '_| #
+#  \___\___|_||_\__\___|_|   #
+#                            #
+##############################
+
+[bar/center]
+inherit = section/base
+width = 15%
+offset-x = 43.0%
 
 modules-left = bspwm 
+modules-center = xwindow
+modules-right =
+
+########################
+#  ___ _      _   _    #
+# | _ (_)__ _| |_| |_  #
+# |   / / _` | ' \  _| #
+# |_|_\_\__, |_||_\__| #
+#       |___/          #
+########################
+
+[bar/right]
+inherit = section/base
+width = 20%
+offset-x = 79.05%
+
+modules-left = pulseaudio backlight keyb
 modules-center = date
-modules-right = volume battery
+modules-right = battery
 
-tray-position = right
-tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
+##########################################
+#  __  __           _       _            #
+# |  \/  |         | |     | |           #
+# | \  / | ___   __| |_   _| | ___  ___  #
+# | |\/| |/ _ \ / _` | | | | |/ _ \/ __| #
+# | |  | | (_) | (_| | |_| | |  __/\__ \ #
+# |_|  |_|\___/ \__,_|\__,_|_|\___||___/ #
+#                                        #
+##########################################
 
-;wm-restack = bspwm
-;wm-restack = i3
-
-;override-redirect = true
-
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
-
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-label-layout = %{F#55}%{F-} %layout%
-label-layout-underline = ${colors.secondary}
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-mount-1 = /home
-mount-2 = /invalid/mountpoint
-
-label-mounted = %mountpoint%: %percentage_free%%
-
-label-unmounted = %mountpoint%: not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+##############################
+#  ___                       #
+# | _ )____ ____ __ ___ __   #
+# | _ (_-< '_ \ V  V / '  \  #
+# |___/__/ .__/\_/\_/|_|_|_| #
+#        |_|                 #
+##############################
 
 [module/bspwm]
 type = internal/bspwm
 
+label-occupied = 
+label-urgent =
+label-empty = 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
 label-focused-padding = 2
 
-label-occupied = %index%
-label-occupied-padding = 2
+label-focused-background = ${colors.primary}
+label-focused-foreground = ${colors.background}
+label-focused-underline= ${colors.background}
 
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+########################################
+# __  __       _         _             #
+# \ \/ /_ __ _(_)_ _  __| |_____ __ __ #
+#  >  <\ V  V / | ' \/ _` / _ \ V  V / #
+# /_/\_\\_/\_/|_|_||_\__,_\___/\_/\_/  #
+#                                      #
+########################################
 
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+[module/xwindow]
+type=internal/xwindow
+label="%title% "
+label-padding = 0
+label-maxlen = 40
+label-foreground=${colors.foreground}
 
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
+label-empty = ~clean and comf~
+label-empty-foreground = ${colors.foreground}
 
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+format-prefix-foreground=${colors.foreground}
+format-prefix-padding = 0
 
-label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+format=<label>
 
-label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-label-urgent = %index%!
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-label-visible = %index%
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-[module/mpd]
-type = internal/mpd
-
-format-online = <label-song>  <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-icon-prev = 
-icon-seekb = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-icon-seekf = 
-
-icon-random = 
-icon-repeat = 
-
-toggle-on-foreground = ${colors.primary}
-toggle-off-foreground = #66
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = │
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
-label = %percentage%%
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
-
-[module/wlan]
-type = internal/network
-interface = net1
-interval = 3.0
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-format-disconnected-underline = ${self.format-connected-underline}
-
-label-connected = %essid%
-label-disconnected = %ifname% disconnected
-label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = eth0
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-foreground-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% disconnected
-label-disconnected-foreground = ${colors.foreground-alt}
+#######################
+#  ___       _        #
+# |   \ __ _| |_ ___  #
+# | |) / _` |  _/ -_) #
+# |___/\__,_|\__\___| #
+#                     #
+#######################
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
+date = " %b %d"
+time = %H:%M:%S
 label = %date% %time%
 
-[module/volume]
-type = internal/volume
+#############################################
+#  ___      _                      _ _      #
+# | _ \_  _| |___ ___ __ _ _  _ __| (_)___  #
+# |  _/ || | (_-</ -_) _` | || / _` | / _ \ #
+# |_|  \_,_|_/__/\___\__,_|\_,_\__,_|_\___/ #
+#                                           #
+#############################################
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+[module/pulseaudio]
+type = internal/pulseaudio
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+format-volume = <ramp-volume> <label-volume>
+format-volume-padding = 2
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = │
-bar-volume-indicator-font = 2
-bar-volume-indicator-foreground = #ff
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+ramp-volume-foreground = ${colors.primary}
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+####################################
+#  ___       _   _                 #
+# | _ ) __ _| |_| |_ ___ _ _ _  _  #
+# | _ \/ _` |  _|  _/ -_) '_| || | #
+# |___/\__,_|\__|\__\___|_|  \_, | #
+#                            |__/  #
+####################################
 
 [module/battery]
 type = internal/battery
@@ -287,71 +257,54 @@ battery = BAT0
 adapter = ADP1
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
-
+format-charging = <ramp-capacity> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+format-charging-padding = 2
+format-discharging-padding = 2
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+# symbols from noto sans ugaritic
+# 𐎚𐎔𐎅
+# 𐎖𐎑𐎌
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.primary}
+ramp-capacity-0 = 𐎚
+ramp-capacity-1 = 𐎔
+ramp-capacity-2 = 𐎅
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+#######################################
+#  ___          _   _ _      _   _    #
+# | _ ) __ _ __| |_| (_)__ _| |_| |_  #
+# | _ \/ _` / _| / / | / _` | ' \  _| #
+# |___/\__,_\__|_\_\_|_\__, |_||_\__| #
+#                      |___/          #
+#######################################
 
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
+[module/backlight]
+type = internal/backlight
+card = gmux_backlight
 
+label = ⌼ %percentage%%
+format-padding = 2
 format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
 
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+ramp-foreground = ${colors.c2}
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+########################
+#  _  __         _     #
+# | |/ /___ _  _| |__  #
+# | ' </ -_) || | '_ \ #
+# |_|\_\___|\_, |_.__/ #
+#           |__/       #
+########################
 
-[module/powermenu]
-type = custom/menu
+[module/keyb]
+type = custom/script
+exec = ~/.bin/kb_polybar
+interval = 1
 
-format-spacing = 1
-
-label-open =  power
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-; vim:ft=dosini
+label = %output%%
+format-padding = 2
+format = <label>

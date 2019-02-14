@@ -1,0 +1,19 @@
+#!/bin/bash
+
+r0=""
+r1=""
+r2=""
+res=$(echo "100 * $(cat /tmp/_kbd_brightness) / 255" | bc -l | sed 's/\..*//')
+
+source ~/.cache/wal/colors.sh
+printf "%%{F${color12}}"
+if [[ $res -le 34 ]]; then
+    printf "$r0"
+elif [[ $res -le 67 ]]; then
+    printf "$r1"
+else
+    printf "$r2"
+fi
+printf "%%{F-}"
+printf " ⌸"
+printf " $res\n"
