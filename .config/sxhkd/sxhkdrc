@@ -20,10 +20,16 @@ super + Escape
 # function keys
 #
 
-#acpilight: xbacklight requires sudo ...
-#XF86MonBrightnessDown
-#XF86MonBrightnessUp
-#XF86LaunchA
+#acpilight: xbacklight requires sudo!
+XF86MonBrightnessDown
+	sudo xbacklight -dec 10
+
+XF86MonBrightnessUp
+	sudo xbacklight -inc 10
+
+XF86LaunchA
+	/opt/bin/lock
+
 #XF86LaunchB
 
 XF86KbdBrightnessDown
