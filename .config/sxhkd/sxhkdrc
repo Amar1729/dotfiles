@@ -32,6 +32,9 @@ XF86LaunchA
 
 #XF86LaunchB
 
+shift + XF86LaunchB
+	scrot -e 'mv $f ~/images' && notify-send "Screenshot taken"
+
 XF86KbdBrightnessDown
 	~/.bin/kb_light -d
 
