@@ -13,6 +13,11 @@
 "colorscheme zenburn
 "colorscheme gruvbox
 
+" need this shit
+set modeline
+set laststatus=2
+set statusline=%{mode()}\ %f
+
 syntax on
 
 set number
