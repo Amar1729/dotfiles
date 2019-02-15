@@ -1,9 +1,18 @@
 #!/bin/bash
 
+# script to show a scale of keyboard light brightness for polybar
+# outputs one of three glyphs depending on keyb brightness,
+# then a small symbol, then the percent.
+
+cachefile=/tmp/_kbd_brightness
+
+[[ ! -e $cachefile ]] && echo '40' > $cachefile
+
 r0=""
 r1=""
 r2=""
-res=$(echo "100 * $(cat /tmp/_kbd_brightness) / 255" | bc -l | sed 's/\..*//')
+
+res=$(echo "100 * $(cat $cachefile) / 255" | bc -l | sed 's/\..*//')
 
 source ~/.cache/wal/colors.sh
 printf "%%{F${color12}}"
