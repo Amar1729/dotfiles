@@ -147,10 +147,10 @@ modules-right =
 
 [bar/right]
 inherit = section/base
-width = 20%
-offset-x = 79.05%
+width = 25%
+offset-x = 74.05%
 
-modules-left = pulseaudio backlight keyb
+modules-left = pc pulseaudio backlight keyb
 modules-center = date
 modules-right = battery
 
