@@ -1,30 +1,20 @@
-!using pywal
-!#include ".cache/wal/colors.Xresources"
-#include ".config/xresources/gruvbox-dark.xresources"
+! .Xresources config !
+! removed a lot of stuff from here in favor of alacritty
+
+! using pywal for colors (keep gruvbox as backup)
+#include ".cache/wal/colors.Xresources"
+!#include ".config/xresources/gruvbox-dark.xresources"
 
 ! maybe this doesn't work on my '09 mbp because of weird resolution?
 ! finally figured out font naming (use fc-match)
-!URxvt.font: xft:Fantasque Sans Mono:size=12
-!URxvt.font: xft:Iosevka:size=12
-!URxvt.font: xft:DejaVu Sans:size=8
+!URxvt.font: xft:Fantasque Sans Mono:size=18:antialias=true
+URxvt.font: xft:Iosevka:size=18
 
 *transparent: true
 *shading: 30
 
 *scrollBar: false
-!*fading: 20
-*internalBorder: 10
-
-*iso14755: false
-!*keysym.Shift-Control-V: perl:clipboard:paste
-*perl-ext-common: default,clipboard
-URxvt.keysym.S-c:	perl:clipboard:copy
-URxvt.keysym.S-v:	perl:clipboard:paste
-URxvt.keysym.S-C-v:	perl:clipboard:paste_escaped
-!URxvt.keysym.Shift-Control-C:	perl:clipboard:copy
-!URxvt.keysym.Shift-Control-V:	perl:clipboard:paste
-URxvt.clipboard.copycmd: xclip -selection clipboard
-URxvt.clipboard.pastecmd: xclip -o
+*internalBorder: 40
 
 ! backward/forward a word (alt)
 ! be wary of changing these - i think lack of oh-my-zsh may mess things up? not sure tbh
