@@ -261,6 +261,8 @@ format-charging = <ramp-capacity> <label-charging>
 format-discharging = <ramp-capacity> <label-discharging>
 format-charging-padding = 2
 format-discharging-padding = 2
+format-full = <ramp-capacity> <label-full>
+format-full-padding = 2
 
 # symbols from noto sans ugaritic
 # 𐎚𐎔𐎅
@@ -308,3 +310,19 @@ interval = 1
 label = %output%%
 format-padding = 2
 format = <label>
+
+# TODO : music bar (don't have a use for this yet)
+[module/music]
+type = custom/text
+content = ""
+content-background = ${colors.primary}
+content-foreground = ${colors.foreground}
+content-padding = 3
+
+[module/pc]
+type = custom/text
+label = <content>
+content = ""
+content-background = ${colors.primary}
+content-foreground = ${colors.foreground}
+content-padding = 3
