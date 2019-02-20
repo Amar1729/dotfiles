@@ -98,3 +98,5 @@ alias dh='dirs -v'
 alias ...='../..'
 alias ....='../../..'
 alias .....='../../../..'
+
+(cat $HOME/.cache/wal/sequences &)

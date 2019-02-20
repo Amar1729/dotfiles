@@ -4,7 +4,8 @@
 
 # terminal emulator
 super + Return
-	urxvtc
+	alacritty
+#urxvtc
 
 # program launcher
 # make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
