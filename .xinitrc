@@ -27,6 +27,15 @@ export LANG="en_US.UTF-8"
 
 #conky -c $HOME/.config/conky/conkyrc &
 
+# ~dat sweet transparency~
+compton -b --shadow --no-dnd-shadow --shadow-radius=30 --shadow-opacity=0.9
+
+#autocutsel -fork
+autocutsel -selection PRIMARY -fork
+
+# touch gestures
+libinput-gestures-setup start
+
 exec >>~/.xsession-errors 2>&1
 
 # I think this should be daemonized
