@@ -1,0 +1,35 @@
+
+# oh-my-zsh stuff
+robbyrussell/oh-my-zsh
+# not sure if this works yet!
+robbyrussell/oh-my-zsh path:lib/git.zsh
+
+# open GitHub from cli
+peterhurford/git-it-on.zsh
+
+# good ch dir backward (helpful for very nested projects)
+Tarrasch/zsh-bd
+
+# ranking of directories
+#export _Z_DATA="$HOME/.cache/z"
+rupa/z
+
+# include a notification for long-running commands or nonzero return codes
+# make sure to install terminal-notifier (Mac) or notify-send (Linux)
+#marzocchi/zsh-notify
+
+# bundles (and env vars)
+zsh-users/zsh-syntax-highlighting
+
+# nix zsh completions
+spwhitt/nix-zsh-completions
+
+# fish-like command suggestions
+zsh-users/zsh-autosuggestions
+
+# put this here
+amar1729/chunkwm-zsh-completions
+
+# my own theme
+#https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # amar_simple
