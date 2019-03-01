@@ -1,6 +1,11 @@
 # Amar Paul's .profile
 # using this for sourcing external scripts, exports, PATH changes
 
+#    
+#export EDITOR_LOOK="carot"
+# ▏▎▍▌▋▊▉█
+export EDITOR_LOOK="block"
+
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
 # try to use pinentry-ncurses in terminal, pinentry-mac otherwise?

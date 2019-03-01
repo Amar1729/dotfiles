@@ -43,9 +43,6 @@ setopt EXTENDED_HISTORY
 
 # zsh: other look-and-feel, configs, aliases
 
-# complex look-and-feel (airline theme to zsh prompt, vim, and tmux) by default
-export COMPLEX=1
-
 # don't write invalid commands into history (they are still cached locally)
 # wip: _also_ ignore failed cmds?
 zshaddhistory () { whence ${${(z)1}[1]} >| /dev/null || return 1 }
