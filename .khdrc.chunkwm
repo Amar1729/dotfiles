@@ -86,6 +86,9 @@ cmd - 0 : khd -w "amar.paul@jhuapl.edu"
 ## Defaults
 ####
 
+# reload config: cmd+esc
+cmd - 0x35 : khd -e "reload"
+
 # manually defined since lcmd+shift+n sends a window to a desktop
 rcmd + shift - 3		: screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
 rcmd + shift - 4 -> 	: chunkc border::clear
@@ -95,6 +98,7 @@ ctrl + alt - w			: chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
 cmd - return			: ~/.bin/wp -n
 cmd + shift - return	: open -na Google\ Chrome
+cmd + ctrl - return		: open ~/
 cmd + alt + ctrl - l	: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
 
 # float next window to be tiled
@@ -140,7 +144,7 @@ cmd + shift - k : chunkc tiling::window --warp north
 cmd + shift - l : chunkc tiling::window --warp east
 
 # set insertion point for focused container
-lcmd + ctrl - f : chunkc tiling::window --use-insertion-point cancel
+lcmd + ctrl - space	: chunkc tiling::window --use-insertion-point cancel
 lcmd + ctrl - h : chunkc tiling::window --use-insertion-point west
 lcmd + ctrl - j : chunkc tiling::window --use-insertion-point south
 lcmd + ctrl - k : chunkc tiling::window --use-insertion-point north
@@ -152,22 +156,20 @@ cmd + shift - right	: ~/.config/scripts/chunk_float.sh move +x
 cmd + shift - up	: ~/.config/scripts/chunk_float.sh move -y
 cmd + shift - down	: ~/.config/scripts/chunk_float.sh move +y
 
-# switch to last active desktop (wip?)
-# actually, might be able to do
-# khd -p "cmd - $id"
-# instead - just harness macOS keybindings
-#cmd + alt - x   : `id=$(chunkc get _last_active_desktop); khd -p "cmd + alt - $id" &> /dev/null`
-cmd + alt - x   : `id=$(chunkc get _last_active_desktop); khd -p "cmd - $id" &> /dev/null`
+# send window to desktop and follow focus
+lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
+lcmd + shift - 2 : chunkc tiling::window -d 2; khd -p "cmd - 2"
+lcmd + shift - 3 : chunkc tiling::window -d 3; khd -p "cmd - 3"
+lcmd + shift - 4 : chunkc tiling::window -d 4; khd -p "cmd - 4"
+lcmd + shift - 5 : chunkc tiling::window -d 5; khd -p "cmd - 5"
+lcmd + shift - 6 : chunkc tiling::window -d 6; khd -p "cmd - 6"
 
 # focus monitor
-#ctrl - z  : chunkc tiling::monitor -f prev
 ctrl - 1 : chunkc tiling::monitor -f 1
 ctrl - 2 : chunkc tiling::monitor -f 2
 ctrl - 3 : chunkc tiling::monitor -f 3
 
 # send window to monitor and follow focus
-#ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
-#ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
 ctrl + shift - 1 : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
 ctrl + shift - 2 : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
@@ -183,11 +185,7 @@ alt - a :			chunkc tiling::desktop --toggle offset
 alt + shift - a :	chunkc tiling::desktop --toggle offset
 
 # toggle window split type (like a container rotation)
-alt - e : chunkc tiling::window --toggle split
-
-
-# reload config
-tree + ctrl - r : khd -e "reload"
+alt - e			: chunkc tiling::window --toggle split
 
 # rotate tree
 tree - r : chunkc tiling::desktop --rotate 90
@@ -215,34 +213,9 @@ tree + alt - g	:	~/.config/scripts/chunk_float.sh preset 4
 
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
-tree - s		:	chunkc tiling::window --toggle sticky;\
-					~/.config/scripts/chunk_float.sh preset 1
-
-# add this to tree mode
-# send window to desktop and switch desktop
-tree - x : `id=$(chunkc get _last_active_desktop); chunkc tiling::window -d $id; khd -p "cmd - $id"`
-
-tree - z : chunkc tiling::window -d prev; khd -p "cmd - left"
-tree - c : chunkc tiling::window -d next; khd -p "cmd - right"
-
-lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
-lcmd + shift - 2 : chunkc tiling::window -d 2; khd -p "cmd - 2"
-lcmd + shift - 3 : chunkc tiling::window -d 3; khd -p "cmd - 3"
-lcmd + shift - 4 : chunkc tiling::window -d 4; khd -p "cmd - 4"
-lcmd + shift - 5 : chunkc tiling::window -d 5; khd -p "cmd - 5"
-
-tree - 1 : chunkc tiling::window -d 1
-tree + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
-tree - 2 : chunkc tiling::window -d 2
-tree + shift - 2 : chunkc tiling::window -d 2; khd -p "cmd - 2"
-tree - 3 : chunkc tiling::window -d 3
-tree + shift - 3 : chunkc tiling::window -d 3; khd -p "cmd - 3"
-tree - 4 : chunkc tiling::window -d 4
-tree + shift - 4 : chunkc tiling::window -d 4; khd -p "cmd - 4"
-tree - 5 : chunkc tiling::window -d 5
-tree + shift - 5 : chunkc tiling::window -d 5; khd -p "cmd - 5"
-tree - 6 : chunkc tiling::window -d 6
-tree + shift - 6 : chunkc tiling::window -d 6; khd -p "cmd - 6"
+#tree - s		: chunkc tiling::window --toggle sticky;\
+#				  ~/.config/scripts/chunk_float.sh preset 1
+tree - s		: chunkc tiling::window --toggle sticky
 
 
 ####
