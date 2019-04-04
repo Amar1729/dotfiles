@@ -10,7 +10,9 @@
 # This .bashrc is sourced from .bash_profile (wanted to keep everything together)
 
 # read .profile
-[[ -r ~/.profile ]] && source ~/.profile
+# avoid feedback loop! (if .profile sources us upon login shells)
+# only source this if you modify it, take out the `. .bashrc`, and put pathfixes there (i.e. dont)
+#[[ -r ~/.profile ]] && source ~/.profile
 
 # shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
