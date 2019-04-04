@@ -7,6 +7,7 @@
 ####
 
 # ls, grep, mkdir, tmux improvements
+#alias ls='/bin/ls' # may be necessary
 alias ll="ls -lhFG"
 alias la="ll -a"
 alias lt="ll -t"
@@ -14,15 +15,12 @@ alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
-alias less="less -FX"
+alias less="less -i -FX"
 alias cclear="cd; clear"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
 # should the -p flag be included?
 mcd () { mkdir -p "$1" && cd "$1"; }
-
-# copy with a progress bar.
-alias cpv="rsync -avzh --progress --"
 
 # pretty-print json
 alias jcat='python -m json.tool'

@@ -51,5 +51,11 @@
 	changed = yellow bold
 	untracked = red bold
 
+[http]
+    sslVerify = false
+
+[credential]
+    helper = cache --timeout=600
+
 [pager]
 	stash = false

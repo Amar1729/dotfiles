@@ -41,6 +41,8 @@ export HISTFILESIZE=100000
 # Helpful: http://blog.taylormcgann.com/tag/prompt-color/
 #   white name, red directory
 export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "
+# default ps1 on debian systems : somehow my escape codes can sometimes screw up terms?
+# PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # hack for printing a newline after command but before output
 # From: https://seasonofcode.com/posts/debug-trap-and-prompt_command-in-bash.html
