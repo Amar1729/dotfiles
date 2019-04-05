@@ -18,10 +18,20 @@ declare -a files=(
 
 cd $HOME
 mkdir -p .vim/colors
-for f in ${files[@]}; do
-    # save backups
-    [[ -e $f ]] && mv $f "$f"".bak"
-    curl "${URL}${f}" -o $f
-done
+
+if [[ $# -gt 0 ]]; then
+    while [[ $# -gt 0 ]]; do
+        # save backups
+        [[ -e $1 ]] && mv $1 "$1"".bak"
+        curl "${URL}${1}" -o $1
+        shift
+    done
+else
+    for f in ${files[@]}; do
+        # save backups
+        [[ -e $f ]] && mv $f "$f"".bak"
+        curl "${URL}${f}" -o $f
+    done
+fi
 
 # todo : bunch of pkg mgr installations (e.g. git, vim, etc)
