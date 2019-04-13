@@ -16,6 +16,9 @@ sh ~/.fehbg
 # idk where to set this damn resolution
 #xrandr --output eDP-1 --mode 1920x1440
 
+# consider adding this: switches off the monitor backlight when screen is locked (how lock?)
+#xset dpms force off
+
 xflux -z 21230 &
 
 export LANG="en_US.UTF-8"
@@ -25,6 +28,7 @@ export LANG="en_US.UTF-8"
 # NOTE - try this again since i forgot the ending ampersand
 #/opt/src/xwinwrap/xwinwrap -fs -debug -- gifview --geometry 2880x1440 -a ~/Downloads/rainy-cafe.gif &
 
+# really can't get this to work ...
 #conky -c $HOME/.config/conky/conkyrc &
 
 # ~dat sweet transparency~
