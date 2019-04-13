@@ -28,7 +28,12 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
 	sudo xbacklight -inc 10
 
+# for mac laptop keeb
 XF86LaunchA
+	/opt/bin/lock
+
+# for full keebs
+XF86HomePage
 	/opt/bin/lock
 
 #XF86LaunchB
