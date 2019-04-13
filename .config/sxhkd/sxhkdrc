@@ -17,6 +17,11 @@ super + space
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# temporary keybind for testing things
+# popup a calendar with dunst
+super + s
+	notify-send "$(cal|sed "s|\($(date +%d)\)|<span foreground='#ffffff'>\1</span>|")"
+
 #
 # function keys
 #
