@@ -4,47 +4,56 @@
 # _space_id:	change command to get current space
 # new_terminal:	change command to spawn new terminal
 
+ROOT="$HOME/.cache/wal"
+declare -a FILES=(wp sequences colors.sh colors.css colors.json)
+
 _space_id () {
     # (macOS)
 	# prefer newer wm
-    if ! SPACE=$(/usr/local/bin/chunkc tiling::query --desktop id 2>/dev/null); then
-        SPACE=$(/usr/local/bin/kwmc query space active id)
-        [[ $? -ne 0 ]] && exit 1
+    if /usr/local/bin/chunkc tiling::query --desktop id 2>/dev/null; then
+        if /usr/local/bin/kwmc query space active id 2>/dev/null; then
+            echo 1
+        fi
     fi
-	echo $SPACE
 }
 
 _run_wal () {
 	if [[ ! -f "$1" ]]; then exit 1; fi
 
 	wal -sn -i "$1"
+
+    cp "$1" ~/.cache/wal/wp
 }
 
-_cache_wp () {
+# generate a <space> filename
+# e.g. wp -> wp_1, colors.sh -> colors_1.sh
+fname_from_space () {
     SPACE=$1
-    cp $2 ~/.cache/wal/wp_"$SPACE"
+    base=${2%.*} # colors.json -> colors
+    ext=${2##*.} # colors.json -> json
+    if [[ ${base} == ${ext} ]]; then # ext is [wp|sequences] (ie no extension)
+        echo "${base}_${SPACE}"
+    else
+        echo "${base}_${SPACE}.${ext}"
+    fi
 }
 
-_cache_seq () {
-	SPACE=$1
-	cp ~/.cache/wal/sequences ~/.cache/wal/sequences_"$SPACE"
+_cache () {
+    # files to cache found in global array FILES
+    for f in ${FILES[@]}; do
+        f_fname="${ROOT}/$f"
+        t_fname="${ROOT}/$(fname_from_space $1 $f)"
+        cp "$f_fname" "$t_fname"
+    done
 }
 
-_cache_css () {
-	SPACE=$1
-	cp ~/.cache/wal/colors.css ~/.cache/wal/colors_"$SPACE".css
-}
-
-_cache_json() {
-	SPACE=$1
-	cp ~/.cache/wal/colors.json ~/.cache/wal/colors_"$SPACE".json
-}
-
-_cache() {
-    _cache_wp $@
-	_cache_seq $@
-	#_cache_css $@
-	_cache_json $@
+copy () {
+    # files to copy found in global array FILES
+    for f in ${FILES[@]}; do
+        f_fname="${ROOT}/$(fname_from_space $1 $f)"
+        t_fname="${ROOT}/$(fname_from_space $2 $f)"
+        [[ -f "$f_fname" ]] && cp "$f_fname" "$t_fname"
+    done
 }
 
 get_wallpaper () {
@@ -94,8 +103,7 @@ case "$1" in
     -c|--clean)
         rm -f ~/.cache/wal/wp_*
         rm -f ~/.cache/wal/sequences*
-        rm -f ~/.cache/wal/colors_*.css
-        rm -f ~/.cache/wal/colors_*.json
+        rm -f ~/.cache/wal/colors_*
         ;;
     -w|--wallpaper)
         change_wallpaper "$2"
@@ -106,6 +114,10 @@ case "$1" in
         ;;
     -r|--reload)
         reload_colors
+        ;;
+    --copy)
+        [[ -z $2 || -z $3 ]] && echo 'Two arguments required.' && exit 1
+        copy $2 $3
         ;;
     -n|--new)
         new_terminal
