@@ -8,8 +8,9 @@ _space_id () {
     # (macOS)
 	# prefer newer wm
     if ! SPACE=$(/usr/local/bin/chunkc tiling::query --desktop id 2>/dev/null); then
-        SPACE=$(/usr/local/bin/kwmc query space active id)
-        [[ $? -ne 0 ]] && exit 1
+        if ! SPACE=$(/usr/local/bin/kwmc query space active id 2>/dev/null); then
+            SPACE=1
+        fi
     fi
 	echo $SPACE
 }
