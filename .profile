@@ -41,6 +41,13 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh;
 fi
 
+# perl
+#export PATH="$HOME/perl5/bin:$PATH"
+#export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB"
+#export PERL_LOCAL_LIB_ROOT="$HOME/perl5:$PERL_LOCAL_LIB_ROOT"
+#export PERL_MB_OPT="--install_base \"$HOME/perl5\""
+#export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
+
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
 
