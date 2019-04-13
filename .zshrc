@@ -86,6 +86,8 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
+bindkey '^ ' autosuggest-execute
+
 # autopushd		: make cd act like pushd (alias doesn't work properly)
 # pushdminus	: use -1 instead of +1
 # pushdsilent	: prevents printing stack on each cd

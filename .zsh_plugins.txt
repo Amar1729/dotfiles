@@ -17,6 +17,9 @@ rupa/z
 # bundles (and env vars)
 zsh-users/zsh-syntax-highlighting
 
+# fish-like autosuggestions
+zsh-users/zsh-autosuggestions
+
 #antigen bundle kennethreitz/autoenv
 #AUTOENV_ENV_FILENAME="env"
 
