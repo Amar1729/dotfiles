@@ -29,6 +29,7 @@ export PATH="/opt/bin:$HOME/.bin:$PATH"
 
 # add pip user installs
 #export PATH="$PATH:$HOME/Library/Python/3.7/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # add fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
