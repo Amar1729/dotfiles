@@ -94,9 +94,4 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
-# aliases for easier changing dir up
-alias ...='../..'
-alias ....='../../..'
-alias .....='../../../..'
-
 (cat $HOME/.cache/wal/sequences &)
