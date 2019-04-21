@@ -28,7 +28,10 @@ spwhitt/nix-zsh-completions
 zsh-users/zsh-autosuggestions
 
 # put this here
-amar1729/chunkwm-zsh-completions
+amar1729/chunkwm-zsh-completions kind:fpath
+
+# simple custom completions (tmux-a)
+https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
 
 # my own theme
 #https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
