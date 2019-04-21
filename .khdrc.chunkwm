@@ -40,7 +40,7 @@ lctrl - a	![
 				kitty,
 				XQuartz,
 				urxvt,
-				VirtualBox VM # doesn't seem to work
+				VirtualBox VM
 			] : khd -p "ctrl - left"
 lctrl - e	![
 				HyperTerm,
@@ -91,22 +91,33 @@ cmd - 0 : khd -w "amar.paul@jhuapl.edu"
 cmd - 0x35 : khd -e "reload"
 
 # manually defined since lcmd+shift+n sends a window to a desktop
-rcmd + shift - 3		: screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
-rcmd + shift - 4 -> 	: chunkc border::clear
+rcmd + shift - 3
+    : screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
+rcmd + shift - 4
+    -> : chunkc border::clear
 
 # save current layout (?)
-ctrl + alt - w			: chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+ctrl + alt - w
+    : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
-cmd - return			: ~/.bin/wp -n
-cmd + shift - return	: open -na Google\ Chrome
-cmd + ctrl - return		: open ~/
-cmd + alt + ctrl - l	: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
+cmd - return
+    : ~/.bin/wp -n
+cmd + shift - return
+    : open -na Google\ Chrome
+cmd + ctrl - return
+    : open ~/
 
-# float next window to be tiled
-alt - c : chunkc set window_float_next 1
+cmd + alt + ctrl - l
+    : ~/.bin/lock
+    #: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
 
 # chunkwm really doesn't like iterm2 dropdown: make it floating then drop it down
-alt + shift - space		: chunkc set window_float_next 1; khd -p "alt - space"
+alt + shift - space
+    : chunkc set window_float_next 1; khd -p "alt - space"
+
+# float next window to be tiled
+# idea: make this alt-f, and change alt-c to cycle window (when cycle includes floating)
+alt - c : chunkc set window_float_next 1
 
 # focus windows
 alt - n : chunkc tiling::window --focus next
@@ -145,17 +156,17 @@ cmd + shift - k : chunkc tiling::window --warp north
 cmd + shift - l : chunkc tiling::window --warp east
 
 # set insertion point for focused container
-lcmd + ctrl - space	: chunkc tiling::window --use-insertion-point cancel
-lcmd + ctrl - h : chunkc tiling::window --use-insertion-point west
-lcmd + ctrl - j : chunkc tiling::window --use-insertion-point south
-lcmd + ctrl - k : chunkc tiling::window --use-insertion-point north
-lcmd + ctrl - l : chunkc tiling::window --use-insertion-point east
+lcmd + ctrl - space : chunkc tiling::window --use-insertion-point cancel
+lcmd + ctrl - h     : chunkc tiling::window --use-insertion-point west
+lcmd + ctrl - j     : chunkc tiling::window --use-insertion-point south
+lcmd + ctrl - k     : chunkc tiling::window --use-insertion-point north
+lcmd + ctrl - l     : chunkc tiling::window --use-insertion-point east
 
 # deal with floating windows! (this is a bash workaround)
-cmd + shift - left	: ~/.config/scripts/chunk_float.sh move -x
-cmd + shift - right	: ~/.config/scripts/chunk_float.sh move +x
-cmd + shift - up	: ~/.config/scripts/chunk_float.sh move -y
-cmd + shift - down	: ~/.config/scripts/chunk_float.sh move +y
+cmd + shift - left  : ~/.config/scripts/chunk_float.sh move -x
+cmd + shift - right : ~/.config/scripts/chunk_float.sh move +x
+cmd + shift - up    : ~/.config/scripts/chunk_float.sh move -y
+cmd + shift - down  : ~/.config/scripts/chunk_float.sh move +y
 
 # send window to desktop and follow focus
 lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
@@ -182,41 +193,41 @@ ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::mon
 
 
 # toggle on/off padding
-alt - a :			chunkc tiling::desktop --toggle offset
-alt + shift - a :	chunkc tiling::desktop --toggle offset
+alt - a         : chunkc tiling::desktop --toggle offset
+alt + shift - a : chunkc tiling::desktop --toggle offset
 
 # toggle window split type (like a container rotation)
-alt - e			: chunkc tiling::window --toggle split
+#alt - e         : chunkc tiling::window --toggle split
 
 # rotate tree
-tree - r : chunkc tiling::desktop --rotate 90
+tree - r        : chunkc tiling::desktop --rotate 90
 
 # toggle window fullscreen
-lcmd - g : chunkc tiling::window --toggle fullscreen
-tree - f : chunkc tiling::window --toggle fullscreen
+lcmd - g        : chunkc tiling::window --toggle fullscreen
+tree - f        : chunkc tiling::window --toggle fullscreen
 
 # toggle window native fullscreen
-tree + shift - f : chunkc tiling::window --toggle native-fullscreen
+tree + shift - f: chunkc tiling::window --toggle native-fullscreen
 
 # toggle window parent zoom
-tree - p : chunkc tiling::window --toggle parent
+tree - p        : chunkc tiling::window --toggle parent
 
 # Helpful presets for floating windows (see bash script for locations):
 # toggles floating, sends to center of screen
-lcmd + shift - g:	~/.config/scripts/chunk_float.sh preset 0
-tree - g		:	~/.config/scripts/chunk_float.sh preset 0
+lcmd + shift - g: ~/.config/scripts/chunk_float.sh preset 0
+tree - g        : ~/.config/scripts/chunk_float.sh preset 0
 # keep window where it is
-tree + shift - g:	chunkc tiling::window --toggle float
-tree - q		:	~/.config/scripts/chunk_float.sh preset 1
-tree - w		:	~/.config/scripts/chunk_float.sh preset 2
-tree - e		:	~/.config/scripts/chunk_float.sh preset 3
-tree + alt - g	:	~/.config/scripts/chunk_float.sh preset 4
+tree + shift - g: chunkc tiling::window --toggle float
+tree - q        : ~/.config/scripts/chunk_float.sh preset 1
+tree - w        : ~/.config/scripts/chunk_float.sh preset 2
+tree - e        : ~/.config/scripts/chunk_float.sh preset 3
+tree + alt - g  : ~/.config/scripts/chunk_float.sh preset 4
 
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
-#tree - s		: chunkc tiling::window --toggle sticky;\
-#				  ~/.config/scripts/chunk_float.sh preset 1
-tree - s		: chunkc tiling::window --toggle sticky
+#tree - s        : chunkc tiling::window --toggle sticky;\
+#                ~/.config/scripts/chunk_float.sh preset 1
+tree - s        : chunkc tiling::window --toggle sticky
 
 
 ####
@@ -224,21 +235,22 @@ tree - s		: chunkc tiling::window --toggle sticky
 ####
 
 space - s : khd -e "mode activate default"; ~/.bin/spongify --copy
+space - h : khd -e "mode activate default"; khd -w "¯\_(ツ)_/¯"
 
-# as of chunkwm, is this necessary?
 # I use ctrl-d to exit shell and to close tmux panes
-space + ctrl - d		[HyperTerm,Terminal,iTerm,iTerm2]	->	:	khd -e "mode activate default"
+space + ctrl - d    [HyperTerm,Terminal,iTerm,iTerm2]
+                    -> : khd -e "mode activate default"
 
 # change layout of desktop
 space - b : chunkc tiling::desktop --layout bsp
 space - m : chunkc tiling::desktop --layout monocle
 space - f : chunkc tiling::desktop --layout float
 
-space - p :			chunkc tiling::desktop --padding inc;\
-					chunkc tiling::desktop --gap inc;\
+space - p           : chunkc tiling::desktop --padding inc;\
+                    chunkc tiling::desktop --gap inc;\
 
-space + shift - p : chunkc tiling::desktop --padding dec;\
-					chunkc tiling::desktop --gap dec;\
+space + shift - p   : chunkc tiling::desktop --padding dec;\
+                      chunkc tiling::desktop --gap dec;\
 
-space - left		: chunkc tiling::desktop --annihilate
-space - right		: chunkc tiling::desktop --create
+space - left        : chunkc tiling::desktop --annihilate
+space - right       : chunkc tiling::desktop --create
