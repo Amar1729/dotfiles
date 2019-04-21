@@ -74,10 +74,11 @@ lctrl - u	[
 				Firefox
 			] : khd -p "lctrl + shift - a"; khd -p " - delete"
 
-rcmd - l	![
-				Google Chrome,
-				Firefox
-			] : ~/.bin/lock
+# stop making tabs in terminal emulator
+# (attempting new tmux pane isnt trivial if not in tmux)
+cmd - t     [
+            iTerm2,Kitty,Alacritty
+            ] : tput bel # khd -p "shift - down"
 
 cmd - 9 : khd -w "amar.paul16@gmail.com"
 cmd - 0 : khd -w "amar.paul@jhuapl.edu"
