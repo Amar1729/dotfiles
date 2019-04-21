@@ -157,7 +157,15 @@ preset () {
 }
 
 move () {
-    if [[ -z "$2" ]]; then SIZE="50"; else SIZE="$2"; fi
+    if [[ -z "$2" ]]; then
+        if [[ $1 == *"x" ]];then
+            SIZE="25"
+        else
+            SIZE="50"
+        fi
+    else
+        SIZE="$2"
+    fi
 
     case "$1" in
         *x) dim_attr="x"; bound="$(get_pos mx)" ;;
