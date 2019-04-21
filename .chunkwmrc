@@ -87,7 +87,7 @@ chunkc set preselect_border_radius       0
 chunkc set focused_border_color          0xffebdbb2
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         0
-chunkc set focused_border_skip_floating  1
+chunkc set focused_border_skip_floating  0
 
 #
 # NOTE: the following are config variables for the chunkwm-ffm plugin.
@@ -116,7 +116,6 @@ chunkc tiling::rule --owner Finder --name \"Trash\" --state float
 # system stuff
 chunkc tiling::rule --owner Finder --state float
 chunkc tiling::rule --owner Finder --name Copy --state float
-chunkc tiling::rule --owner \"App Store\" --state float
 chunkc tiling::rule --owner \"System Properties\" --state float
 chunkc tiling::rule --owner Calculator --state float
 chunkc tiling::rule --owner \"Disk Utility\" --state float
@@ -127,6 +126,8 @@ chunkc tiling::rule --owner \"Google Chrome\" --name \"Google Hangouts\" --state
 chunkc tiling::rule --owner Firefox --name \"Session Manager - Restore Session\" --state float
 chunkc tiling::rule --owner Firefox --name \"Install user style\" --state float
 chunkc tiling::rule --owner python --state float
+
+chunkc tiling::rule --owner Harmony --subrole AXStandardWindow --state tile
 
 # work stuff
 chunkc tiling::rule --owner \"Microsoft Outlook\" --name \"1 Reminder\" --state float
