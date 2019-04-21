@@ -1,4 +1,9 @@
 
+# put some fzf-related overrides here too
+export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
+export FZF_DEFAULT_OPTS='--ansi'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # fuzzy find file content (open results with <Enter>)
 fgr() {
 	local line
