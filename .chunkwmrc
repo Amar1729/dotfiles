@@ -34,11 +34,11 @@ chunkc core::hotload 0
 #
 
 chunkc set global_desktop_mode           bsp
-chunkc set global_desktop_offset_top     60
-chunkc set global_desktop_offset_bottom  35
-chunkc set global_desktop_offset_left    40
-chunkc set global_desktop_offset_right   40
-chunkc set global_desktop_offset_gap     40
+chunkc set global_desktop_offset_top     30
+chunkc set global_desktop_offset_bottom  5
+chunkc set global_desktop_offset_left    5
+chunkc set global_desktop_offset_right   5
+chunkc set global_desktop_offset_gap     5
 
 chunkc set 1_desktop_mode				monocle
 #chunkc set focused_border_skip_monocle 1
