@@ -138,6 +138,9 @@ set mouse=a
 " zsh-style tab completion
 set wildmenu
 set wildmode=full
+" list everything if you can, then 'full' cycles through matches
+" tried this, too much output
+"set wildmode=list,full
 
 " case-insensitive, smart search for /, ?
 set ignorecase smartcase
@@ -396,8 +399,8 @@ function! AirlineInit()
 endfunction
 "autocmd VimEnter * call AirlineInit()
 let g:airline_section_x = ""
-let g:airline_section_y = "%v"
-let g:airline_section_z = '%l/%L'
+let g:airline_section_y = ''
+let g:airline_section_z = '%v:%l/%L'
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
@@ -427,7 +430,7 @@ if $EDITOR_LOOK == 'block'
   let g:airline_left_sep = '▊▌▎▏'
   let g:airline_left_alt_sep = '▏▎'
   let g:airline_right_sep = '▏▎▌▊'
-  let g:airline_left_alt_sep = '▎▏'
+  let g:airline_right_alt_sep = '▎▏'
 else
   " default: airline style
   let g:airline_left_sep = ''
