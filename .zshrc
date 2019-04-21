@@ -45,7 +45,16 @@ setopt EXTENDED_HISTORY
 
 # don't write invalid commands into history (they are still cached locally)
 # wip: _also_ ignore failed cmds?
-zshaddhistory () { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+zshaddhistory () {
+	if whence ${${(z)1}[1]} >| /dev/null; then
+		# blacklist certain commands from history
+		if [[ ${${(z)1}[1]} =~ "(pass|z)" ]]; then
+			return 1
+		fi
+	else
+		return 1
+	fi
+}
 
 # auto-source virtualenvs
 chpwd () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
@@ -58,7 +67,12 @@ preexec () { print '' }
 # case sensitive needs to be off; '_-' interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-fpath=(~/.zsh/completions $fpath)
+# this doesnt work anymore, don't know why (is it because i switched to antibody?)
+#fpath=(~/.zsh/completions $fpath) # using $HOME doesn't work either
+# apparently this is necessary now (antibody changes?)
+# putting just #compdef tmux-a at top of _tmux-a doesnt work
+source ~/.zsh/completions/_tmux-a 2>/dev/null
+compdef _tmux-a tmux-a
 
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -91,6 +105,9 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
+
+# better globs
+setopt extendedglob
 
 # plugin-specific
 bindkey '^ ' autosuggest-execute
