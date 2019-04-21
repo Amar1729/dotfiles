@@ -20,6 +20,7 @@ export GPG_TTY
 #DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # homebrew changes
+export HOMEBREW_NO_AUTO_UPDATE=1
 [[ $(uname) == 'Darwin' ]] && \
 [[ -n $DEFAULT_PATH ]] && \
 	export PATH="/usr/local/sbin:/usr/local/bin:$DEFAULT_PATH" && \
