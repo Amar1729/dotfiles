@@ -9,6 +9,7 @@
 	c = clone
 	d = diff
 	ds = diff --staged
+	dt = difftool
 	co = checkout
 	ci = commit
 	st = status
@@ -76,3 +77,6 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[diff]
+	tool = vimdiff
