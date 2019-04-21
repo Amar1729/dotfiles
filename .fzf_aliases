@@ -69,3 +69,18 @@ _fzf_complete_pass() {
         sed -e 's/\(.*\)\.gpg/\1/'
   )
 }
+
+# fshow_preview - git commit browser with previews
+fshow_preview() {
+
+	local _gitLogLineToHash="echo -n {1} | head -1"
+	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+	local _viewPreview="$_gitLogLineToHash | xargs -I % sh -c '(git show --stat --color=always % && echo '' && git show --color=always %) | diff-so-fancy'"
+
+    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewPreview" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | pbcopy"
+}
