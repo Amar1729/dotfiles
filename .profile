@@ -124,3 +124,7 @@ if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
 fi
 
 END
+
+# https://silvae86.github.io/sysadmin/mac/osx/mojave/beta/libxml2/2018/07/05/fixing-missing-headers-for-homebrew-in-mac-osx-mojave/
+# fix missing headers on osx (e.g. libxml)
+#sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
