@@ -3,6 +3,14 @@
 export TERM="xterm-256color"
 export EDITOR="nvim"
 
+# disable 'git status' looking for untracked files in my zsh prompt
+# (i would like this to be configurable on the fly somehow)
+# has to exported before loading plugins
+# double-check this: i'm actually not sure if this works with my theme currently
+
+# we're going to default to untracking these (speed up creation of new shells)
+export DISABLE_UNTRACKED_FILES_DIRTY=true
+
 # plugins: moving to antibody from antigen
 ANTIBODY_HOME="$(antibody home)"
 DISABLE_AUTO_UPDATE="true"
@@ -57,7 +65,23 @@ zshaddhistory () {
 }
 
 # auto-source virtualenvs
-chpwd () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_venv () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_git_size () {
+	if GIT=$(git rev-parse --git-dir 2>/dev/null); then
+		SIZE=$(du -s "${GIT}" | awk '{print $1}')
+
+		if [[ $SIZE -gt 2000000 ]]; then
+			export DISABLE_UNTRACKED_FILES_DIRTY=true
+		else
+			export DISABLE_UNTRACKED_FILES_DIRTY=false
+		fi
+	fi
+}
+
+chpwd () {
+	chpwd_venv
+	chpwd_git_size
+}
 
 # newlines before and after command output
 precmd () { print '' }
@@ -81,6 +105,19 @@ zmodload zsh/complist
 insert-first-word () { zle insert-last-word -- -1 1 }
 zle -N insert-first-word
 bindkey '^[,' insert-first-word
+
+# o shit this is cool
+alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
+
+# https://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+# expand aliases inline
+globalias () {
+	zle _expand_alias
+	zle expand-word
+	zle self-insert
+}
+zle -N globalias
+bindkey ' ' globalias
 
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search

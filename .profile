@@ -39,6 +39,9 @@ export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
+# use sccache
+export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
+
 # go stuff
 export GOPATH="${HOME}/.go"
 export GOROOT=/usr/local/opt/go/libexec

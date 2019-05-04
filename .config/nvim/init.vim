@@ -234,7 +234,7 @@ autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " auto-compile rust files
-autocmd BufWritePost *.rs !cargo run
+"autocmd BufWritePost *.rs !cargo run
 
 " Deal with status bar (necessary?)
 
@@ -317,7 +317,7 @@ vnoremap <leader>d	:Linediff<CR>
 
 " neomake settings
 " how to lint with python3?
-" let g:neomake_python_pylint_exe = 'python3'
+let g:neomake_python_pylint_exe = 'python3'
 
 " When writing a buffer, and on normal mode changes (after 750ms).
 call neomake#configure#automake('nw', 750)
