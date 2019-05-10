@@ -91,12 +91,9 @@ preexec () { print '' }
 # case sensitive needs to be off; '_-' interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-# this doesnt work anymore, don't know why (is it because i switched to antibody?)
-#fpath=(~/.zsh/completions $fpath) # using $HOME doesn't work either
-# apparently this is necessary now (antibody changes?)
-# putting just #compdef tmux-a at top of _tmux-a doesnt work
-source ~/.zsh/completions/_tmux-a 2>/dev/null
-compdef _tmux-a tmux-a
+# some custom completions, and make sure $fpath gets loaded properly
+fpath+=~/.zsh/completions
+compinit -i
 
 zstyle ':completion:*' menu select
 zmodload zsh/complist
