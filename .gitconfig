@@ -18,6 +18,8 @@
 	br = branch
 	m = merge
 	ma = merge --abort
+	rc = rebase --continue
+	ra = rebase --abort
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
