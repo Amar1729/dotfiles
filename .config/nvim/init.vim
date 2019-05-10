@@ -190,8 +190,8 @@ nmap <leader>N :bprev<CR>
 nmap <leader>m :tabn<CR>
 nmap <leader>M :tabp<CR>
 
-" Cycle through splits (in same window)
-nmap <leader>w <C-W><C-W>
+" Remove all trailing whitespace (takes a second)
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " force kill those damn term bufs
 nmap <leader>d :bd!<CR>
