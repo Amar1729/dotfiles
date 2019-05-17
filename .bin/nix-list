@@ -8,6 +8,10 @@
 op="$1"
 [[ -z "$op" ]] && op="-R"
 
+_name () {
+    fd --maxdepth 1 --type d "$1-?[^-]*$" /nix/store
+}
+
 # Args:
 #   -R - shows list of installed pkgs
 #   --tree - shows list of installed pkgs as ascii art tree output
@@ -48,6 +52,8 @@ _depth () {
 if [[ "$op" == "--depth" ]]; then
     [[ -z "$2" ]] && echo "Require arg to --depth" && exit 1
     _depth $2
+elif [[ "$op" == "--name" ]]; then
+    _name $2
 else
     _default $op
 fi

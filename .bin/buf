@@ -5,7 +5,8 @@
 BUFFER_FILE=/tmp/buffer-copy-files
 
 copy () {
-    readlink -f "$@" > $BUFFER_FILE
+    #readlink -f "$@" > $BUFFER_FILE
+    realpath "$@" > $BUFFER_FILE
 }
 
 paste () {

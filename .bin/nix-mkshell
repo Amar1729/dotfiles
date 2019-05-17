@@ -2,20 +2,17 @@
 
 # Easily create a simple shell.nix/default.nix file with buildInputs as shell args
 
-FILE="$1"
-shift
-
-cat >> $FILE << EOF
-with import <nixpkgs> {};
+printf "with import <nixpkgs> {};
 
 with pkgs;
 stdenv.mkDerivation rec {
-  name = "env";
+  name = \"env\";
   buildInputs = [
-    $@
-  ];
+"
+while [[ $# -gt 0 ]]; do printf "    $1\n"; shift; done
+printf "  ];
 
   shellHook = ''
   '';
 }
-EOF
+"

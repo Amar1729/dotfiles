@@ -1,5 +1,8 @@
-# load oh-my-zsh's library
+
+# oh-my-zsh stuff
 robbyrussell/oh-my-zsh
+# not sure if this works yet!
+robbyrussell/oh-my-zsh path:lib/git.zsh
 
 # open GitHub from cli
 peterhurford/git-it-on.zsh
@@ -7,7 +10,8 @@ peterhurford/git-it-on.zsh
 # good ch dir backward (helpful for very nested projects)
 Tarrasch/zsh-bd
 
-# ranking+searching of directories
+# ranking of directories
+#export _Z_DATA="$HOME/.cache/z"
 rupa/z
 
 # include a notification for long-running commands or nonzero return codes
@@ -17,21 +21,18 @@ rupa/z
 # bundles (and env vars)
 zsh-users/zsh-syntax-highlighting
 
-# fish-like autosuggestions
+# nix zsh completions
+spwhitt/nix-zsh-completions
+
+# fish-like command suggestions
 zsh-users/zsh-autosuggestions
 
-#antigen bundle kennethreitz/autoenv
-#AUTOENV_ENV_FILENAME="env"
+# put this here
+amar1729/chunkwm-zsh-completions kind:fpath
 
-# my theme:
-#	style similar to powerlevel9k 
-#	doesn't include virtualenvs in the first slice
-#	DOES truncate dirpath to last 2 (or 25 chars)
-#	- no battery status (i don't need this)
-#	simpler vcs
-#	TODO:
-#		vcs: sha hash, working dir status, upstream status, commits ahead, etc ...
-#	note - I liked pure theme. possible to create fork/temp for 'pure' work?
+# simple custom completions (tmux-a)
+https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
 
-#https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 # airline style
-https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # simple
+# my own theme
+#https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # amar_simple

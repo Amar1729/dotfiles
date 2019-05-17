@@ -1,6 +1,11 @@
 # Amar Paul's .profile
 # using this for sourcing external scripts, exports, PATH changes
 
+#    
+#export EDITOR_LOOK="carot"
+# ▏▎▍▌▋▊▉█
+export EDITOR_LOOK="block"
+
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
 # try to use pinentry-ncurses in terminal, pinentry-mac otherwise?
@@ -15,6 +20,7 @@ export GPG_TTY
 #DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
 # homebrew changes
+export HOMEBREW_NO_AUTO_UPDATE=1
 [[ $(uname) == 'Darwin' ]] && \
 [[ -n $DEFAULT_PATH ]] && \
 	export PATH="/usr/local/sbin:/usr/local/bin:$DEFAULT_PATH" && \
@@ -36,6 +42,14 @@ export PATH="$PATH:$HOME/.local/bin"
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
+
+# use sccache
+export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
+
+# go stuff
+export GOPATH="${HOME}/.go"
+export GOROOT=/usr/local/opt/go/libexec
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # nix
 # arch pkg: had to manually create user profile:
@@ -126,3 +140,7 @@ if [[ -d /Users/Amar/Ubertooth && 0 -eq 1 ]]; then
 fi
 
 END
+
+# https://silvae86.github.io/sysadmin/mac/osx/mojave/beta/libxml2/2018/07/05/fixing-missing-headers-for-homebrew-in-mac-osx-mojave/
+# fix missing headers on osx (e.g. libxml)
+#sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /

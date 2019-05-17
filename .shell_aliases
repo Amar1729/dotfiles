@@ -8,15 +8,17 @@
 ####
 
 # ls, grep, mkdir, tmux improvements
-alias ll="ls -lhFG"
+alias ls="exa"
+alias ll="ls -l"
 alias la="ll -a"
-alias lt="ll -t"
+alias lt="ll -s time"
 alias grep="grep --color=auto"
 alias fgrep="fgrep --color=auto"
 alias egrep="egrep --color=auto"
 alias ggrep="ggrep --color=auto"
-alias less="less -i -FX"
+alias less="less -i"
 alias cclear="cd; clear"
+alias rsync='rsync -avh --partial --progress'
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
 # should the -p flag be included?

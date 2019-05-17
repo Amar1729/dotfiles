@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# put some fzf-related overrides here too
+export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
+export FZF_DEFAULT_OPTS='--ansi'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
 # fuzzy find file content (open results with <Enter>)
 fgr() {
 	local line
@@ -54,4 +59,29 @@ fstash() {
             git stash show -p $sha
         fi
     done
+}
+
+# pass completion suggested by @d4ndo (#362) (slightly modified)
+_fzf_complete_pass() {
+  _fzf_complete '+m' "$@" < <(
+    local pwdir=${PASSWORD_STORE_DIR-~/.password-store/}
+    find "$pwdir" -name "*.gpg" -print |
+        sed -e "s#${pwdir}/\{0,1\}##" |
+        sed -e 's/\(.*\)\.gpg/\1/'
+  )
+}
+
+# fshow_preview - git commit browser with previews
+fshow_preview() {
+
+	local _gitLogLineToHash="echo -n {1} | head -1"
+	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+	local _viewPreview="$_gitLogLineToHash | xargs -I % sh -c '(git show --stat --color=always % && echo '' && git show --color=always %) | diff-so-fancy'"
+
+    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewPreview" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | pbcopy"
 }

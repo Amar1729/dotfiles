@@ -23,6 +23,14 @@ git checkout master
 
 echo "Make sure to set global git uname/email"
 
-brew install python python@2
-brew install zsh antigen neovim
-brew install tmux
+brew install python # python@2
+brew install zsh getantibody/tap/antibody neovim tmux
+
+# important defaults cmds
+_defaults () {
+    defaults write com.apple.finder CreateDesktop true
+    defaults write org.macosforge.xquartz.X11 app_to_run /usr/local/bin/urxvt
+    defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+    defaults write com.apple.dock no-bouncing -bool TRUE
+    sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool NO
+}

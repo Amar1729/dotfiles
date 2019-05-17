@@ -19,13 +19,11 @@ print_info() {
     #info "Resolution" resolution
     #info "DE" de
     info "WM" wm
-	#prin "WM" "kwm"
     #info "WM Theme" wm_theme
     #info "Theme" theme
     #info "Icons" icons
     info "Terminal" term
     info "Terminal Font" term_font
-	#prin "Font" "Fantasque Sans Mono"
     #info "CPU" cpu
     #info "GPU" gpu
     #info "Memory" memory

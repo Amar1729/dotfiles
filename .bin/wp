@@ -1,25 +1,31 @@
 #!/bin/bash
 
-# wp: do a bunch of stuff! 
-# A bunch of scripts to aid in window-manager, ricing, profiling etc setup
-# Note - lots of these functions are probably Mac-specific
+# wp: a wrapper script mostly for pywal and fetch oneliners
+# Note - most wallpaper-changing functions are mac-specific (for nowf)
 
 _usage() {
-    printf "wp: Tool for on-the-fly screen changes.\n"
+    printf "wp: Tool for on-the-fly colorscheme changes.\n"
     printf "Usage:\n"
-    printf "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE, cache colors\n"
+    printf "\twp --clean \t\t\tClear out manually-cached pywal files (e.g. colors_1.sh)\n"
+    printf "\twp -w|--wallpaper FILE\t\tSet wallpaper to FILE and cache colors\n"
+    printf "\twp --wo|--wallpaper-only FILE\tJust set wallpaper to FILE\n"
     printf "\twp -n|--new \t\t\tNew iTerm window with default profile\n"
     printf "\twp -r|--reload \t\t\tLoad space-specific colorscheme\n"
     printf "\twp -b|--both FILE\t\tSet wallpaper and reload colors\n"
-    printf "\twp -f|--file NUMBER\t\tAttempt to load .cache/wal/sequences_NUMBER\n"
+    printf "\twp -c|--copy ID_src ID2_dest\tCopy sequences_ID_src to sequences_ID_dest\n"
+    printf "\twp -f|--file ID\t\t\tAttempt to load .cache/wal/sequences_ID\n"
     printf "\t\t\t\t\t\tNote - reloading too soon might not work for complex images\n"
+    printf "\n"
     printf "\twp -t|--transparency REAL\tSet transparency of terminal (0.0 to 1.0)\n"
     printf "\twp --tg|--transparency-get\tGet the current terminal's transparency (0.0 to 1.0)\n"
+    printf "\twp --pixelate\t\t\tSet background of term to pixelated version of current wallpaper\n"
+    printf "\t\t\t\t\t\t- requires iTerm2 on mac\n"
+    printf "\t\t\t\t\t\t- requires ffmpeg with frei0r\n"
     # todo complete day/night/toggle
 }
 
 case "$1" in
-    -c|--clean)
+    --clean)
         ~/.bin/unique_space.sh --clean
         ;;
     -w|--wallpaper)
@@ -33,6 +39,9 @@ case "$1" in
         ;;
     -n|--new)
         ~/.bin/unique_space.sh -n
+        ;;
+    -c|--copy)
+        ~/.bin/unique_space.sh --copy $2 $3
         ;;
     -r|--reload)
         ~/.bin/unique_space.sh -r

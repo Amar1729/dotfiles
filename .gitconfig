@@ -9,6 +9,7 @@
 	c = clone
 	d = diff
 	ds = diff --staged
+	dt = difftool
 	co = checkout
 	ci = commit
 	st = status
@@ -17,6 +18,8 @@
 	br = branch
 	m = merge
 	ma = merge --abort
+	rc = rebase --continue
+	ra = rebase --abort
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
@@ -42,8 +45,11 @@
 	editor = nvim
 	excludesfile = ~/.gitignore_global
 	pager = less -FX
-	# slighlty fancier diff pager
-	#pager = diff-so-fancy | less --tabs=4 -RFX
+	# problem here:
+	# using `less -FX` turns to cat for onepage input (-F), and doesn't send termcap deinit (-X)
+	#	however, the lack of termcap init (-X) means you cant scroll w/ mouse on longer pages
+	# changing to `less -F` sends termcap deinit which clears the page (useless) :/
+	# so either you can scroll on long input, or you keep results around for short bois
 
 [color "branch"]
 	current = yellow bold
@@ -70,9 +76,13 @@
 
 [pager]
 	stash = false
+	#diff = diff-so-fancy | less --tabs=4 -R
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+[diff]
+	tool = vimdiff

@@ -144,6 +144,9 @@ set foldcolumn=2
 " zsh-style tab completion
 set wildmenu
 set wildmode=full
+" list everything if you can, then 'full' cycles through matches
+" tried this, too much output
+"set wildmode=list,full
 
 " case-insensitive, smart search for /, ?
 set ignorecase smartcase
@@ -199,8 +202,8 @@ nmap <leader>N :bprev<CR>
 nmap <leader>m :tabn<CR>
 nmap <leader>M :tabp<CR>
 
-" Cycle through splits (in same window)
-nmap <leader>w <C-W><C-W>
+" Remove all trailing whitespace (takes a second)
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " force kill those damn term bufs
 nmap <leader>d :bd!<CR>
@@ -244,7 +247,7 @@ autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 "autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " auto-compile rust files
-autocmd BufWritePost *.rs !cargo run
+"autocmd BufWritePost *.rs !cargo run
 
 " Deal with status bar (necessary?)
 
@@ -379,7 +382,7 @@ vnoremap <leader>d	:Linediff<CR>
 
 " neomake settings
 " how to lint with python3?
-" let g:neomake_python_pylint_exe = 'python3'
+let g:neomake_python_pylint_exe = 'python3'
 
 " When writing a buffer, and on normal mode changes (after 750ms).
 "call neomake#configure#automake('nw', 750)
@@ -461,8 +464,8 @@ function! AirlineInit()
 endfunction
 "autocmd VimEnter * call AirlineInit()
 let g:airline_section_x = ""
-let g:airline_section_y = "%v"
-let g:airline_section_z = '%l/%L'
+let g:airline_section_y = ''
+let g:airline_section_z = '%v:%l/%L'
 let g:airline_section_error = ''
 let g:airline_section_warning = ''
 
@@ -487,11 +490,20 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" airline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+if $EDITOR_LOOK == 'block'
+  " decreasing block style
+  let g:airline_left_sep = '▊▌▎▏'
+  let g:airline_left_alt_sep = '▏▎'
+  let g:airline_right_sep = '▏▎▌▊'
+  let g:airline_right_alt_sep = '▎▏'
+else
+  " default: airline style
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+endif
+
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''

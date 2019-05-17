@@ -3,16 +3,25 @@
 export TERM="xterm-256color"
 export EDITOR="nvim"
 
+# disable 'git status' looking for untracked files in my zsh prompt
+# (i would like this to be configurable on the fly somehow)
+# has to exported before loading plugins
+# double-check this: i'm actually not sure if this works with my theme currently
+
+# we're going to default to untracking these (speed up creation of new shells)
+export DISABLE_UNTRACKED_FILES_DIRTY=true
+
 # plugins: moving to antibody from antigen
 ANTIBODY_HOME="$(antibody home)"
 DISABLE_AUTO_UPDATE="true"
 
+# for now use omz for better completions: todo remove this BLOAT
 export ZSH="$ANTIBODY_HOME"/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh
 export _Z_DATA="$HOME/.cache/z"
 
 # statically load plugins. generate with:
-# antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
-source ~/.zsh_plugins.sh
+# antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
+source ~/.zsh_plugins.zsh
 
 # User configuration
 
@@ -42,15 +51,37 @@ setopt EXTENDED_HISTORY
 
 # zsh: other look-and-feel, configs, aliases
 
-# complex look-and-feel (airline theme to zsh prompt, vim, and tmux) by default
-export COMPLEX=1
-
 # don't write invalid commands into history (they are still cached locally)
 # wip: _also_ ignore failed cmds?
-zshaddhistory () { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+zshaddhistory () {
+	if whence ${${(z)1}[1]} >| /dev/null; then
+		# blacklist certain commands from history
+		if [[ ${${(z)1}[1]} =~ "(pass|z)" ]]; then
+			return 1
+		fi
+	else
+		return 1
+	fi
+}
 
 # auto-source virtualenvs
-chpwd () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_venv () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_git_size () {
+	if GIT=$(git rev-parse --git-dir 2>/dev/null); then
+		SIZE=$(du -s "${GIT}" | awk '{print $1}')
+
+		if [[ $SIZE -gt 2000000 ]]; then
+			export DISABLE_UNTRACKED_FILES_DIRTY=true
+		else
+			export DISABLE_UNTRACKED_FILES_DIRTY=false
+		fi
+	fi
+}
+
+chpwd () {
+	chpwd_venv
+	chpwd_git_size
+}
 
 # newlines before and after command output
 precmd () { print '' }
@@ -60,7 +91,9 @@ preexec () { print '' }
 # case sensitive needs to be off; '_-' interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-fpath=(~/.zsh/completions $fpath)
+# some custom completions, and make sure $fpath gets loaded properly
+fpath+=~/.zsh/completions
+compinit -i
 
 zstyle ':completion:*' menu select
 zmodload zsh/complist
@@ -69,6 +102,19 @@ zmodload zsh/complist
 insert-first-word () { zle insert-last-word -- -1 1 }
 zle -N insert-first-word
 bindkey '^[,' insert-first-word
+
+# o shit this is cool
+alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
+
+# https://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+# expand aliases inline
+globalias () {
+	zle _expand_alias
+	zle expand-word
+	zle self-insert
+}
+zle -N globalias
+bindkey ' ' globalias
 
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search
@@ -96,4 +142,12 @@ DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
 alias dh='dirs -v'
 
+# better globs
+setopt extendedglob
+
+# plugin-specific
+bindkey '^ ' autosuggest-execute
+
+# dynamic colors with (a wrapper for) pywal!
+#(wp -r &)
 (cat $HOME/.cache/wal/sequences &)
