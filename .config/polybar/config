@@ -239,6 +239,10 @@ type = internal/pulseaudio
 format-volume = <ramp-volume> <label-volume>
 format-volume-padding = 2
 
+format-muted = <label-muted>
+format-muted-padding = 2
+label-muted = 🔇 0%
+
 ramp-volume-foreground = ${colors.primary}
 ramp-volume-0 = 🔈
 ramp-volume-1 = 🔉
