@@ -4,7 +4,7 @@ URL='https://raw.githubusercontent.com/Amar1729/dotfiles/simple/'
 
 declare -a files=(
 .bash_profile
-.bashrc
+.amarrc
 .gitconfig
 .gitignore_global
 .inputrc
