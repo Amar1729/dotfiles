@@ -38,6 +38,8 @@ export PATH="$PATH:$HOME/.local/bin"
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
 # nix
+# arch pkg: had to manually create user profile:
+# ln -s /nix/var/nix/profiles/default/ /nix/var/nix/profiles/per-user/$USER/profile
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh;
 fi
