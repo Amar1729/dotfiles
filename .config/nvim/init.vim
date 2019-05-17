@@ -6,15 +6,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/Amar/.config/nvim//repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/Amar/.config/nvim/')
-  call dein#begin('/Users/Amar/.config/nvim/')
+if dein#load_state('~/.cache/dein/')
+  call dein#begin('~/.cache/dein/')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/Amar/.config/nvim//repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
 
   " Themes:
