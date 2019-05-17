@@ -1,4 +1,4 @@
-" Amar's (simple) .vimrc
+" better .vimrc
 " no plugins for low-pkg systems
 
 " Spin up default plugins if you don't install neovim
@@ -25,6 +25,7 @@ set number
 
 set autoindent noexpandtab tabstop=4 shiftwidth=4
 set incsearch hlsearch
+set ignorecase smartcase
 
 set mouse=a
 

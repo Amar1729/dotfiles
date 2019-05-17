@@ -10,6 +10,8 @@
 	br = branch
 	m = merge
 	ma = merge --abort
+	rc = rebase --continue
+	ra = rebase --abort
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
@@ -18,6 +20,8 @@
 	sts = stash
 	sta = stash apply
 	std = stash drop
+
+	short = rev-parse --short HEAD
 
 	# nicely formatted history (includes all branches)
 	hist = log --graph --abbrev-commit --decorate --all --date=short \
@@ -32,7 +36,6 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
-	pager = less -F -X
 
 [color "branch"]
 	current = yellow bold

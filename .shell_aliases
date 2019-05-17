@@ -8,6 +8,7 @@
 
 # ls, grep, mkdir, tmux improvements
 #alias ls='/bin/ls' # may be necessary
+alias ls='ls --color=auto'
 alias ll="ls -lhFG"
 alias la="ll -a"
 alias lt="ll -t"
