@@ -1,24 +1,45 @@
-# Amar Paul's .bashrc
-# 	Login shells:							.bash_profile
-#	nonlogin (i.e. open shell once in):		.bashrc
-# On Mac (Terminal and iTerm2) all shells are login shells
-# good explanation: http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
-#
-# For Mac, file hierarchy is:
-# .bash_profile > .bash_login > .profile 
-#
-# This .bashrc is sourced from .bash_profile (wanted to keep everything together)
+#!/usr/bin/env bash
 
 # read .profile
 # avoid feedback loop! (if .profile sources us upon login shells)
 # only source this if you modify it, take out the `. .bashrc`, and put pathfixes there (i.e. dont)
 #[[ -r ~/.profile ]] && source ~/.profile
 
+# respect original bashrc, but overload with my own stuff
+#[[ -x ~/.bashrc ]] && . ~/.bashrc
+
 # shell aliases
-[[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
+[[ -r ~/.shell_aliases ]] && . ~/.shell_aliases
 
 # and temporary aliases
-[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
+[[ -r ~/.bash_aliases_tmp ]] && . ~/.bash_aliases_tmp
+
+export IS_AMAR=1
+
+if [[ -z $TMUX ]]; then
+# yea u like that rice
+printf "\n"
+printf "Unlocking developer mode...\n\n"
+fi
+
+# make sure i have a tmux session on this box
+if ! tmux has-session -t amar 2>/dev/null; then
+    tmux new-session -d -s amar
+    printf "Created a tmux session for amar.\n" >&2
+fi
+# make sure tmux sources proper file if im amar
+tmux set-option -s -t amar default-command "bash --rcfile /root/.amarrc"
+
+export EDITOR=vim
+
+export PATH="$PATH:$HOME/.local/bin"
+
+alias ls="/bin/ls --color=auto"
+alias ll="/bin/ls --color=auto -lhFG"
+alias la="ll -a"
+alias lt="ll -t"
+
+alias grep='grep --color=auto'
 
 ####
 ## bash-specific settings
@@ -32,17 +53,21 @@ bind Space:magic-space
 ####
 
 shopt -s histappend
-export HISTCONTROL=ignoreboth
-export HISTSIZE=9999
+export HISTCONTROL='erasedups:ignoreboth'
+export HISTSIZE=100000
 export HISTFILESIZE=100000
+export HISTFILE="$HOME/.histfile_amar"
 
 ####
 ## Change prompt: PS1 and pre/post command
 ####
 
-# Helpful: http://blog.taylormcgann.com/tag/prompt-color/
+# use this for proper erasing duplicates and shared history
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
 #   white name, red directory
 export PS1="\[\033[1;37m\]\u\[\033[1m\] : \[\033[1;31m\]\W\[\033[0m\] $ "
+#export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\][amar]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \$ '
 # default ps1 on debian systems : somehow my escape codes can sometimes screw up terms?
 # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
