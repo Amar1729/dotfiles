@@ -33,6 +33,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 # my changes
 export PATH="/opt/bin:$HOME/.bin:$PATH"
 
+[[ -d ~/.local/bin ]] && export PATH="$PATH:$HOME/.local/bin"
+
 # add pip user installs
 #export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 export PATH="$PATH:$HOME/.local/bin"
