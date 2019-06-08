@@ -1,4 +1,5 @@
 ! defaults: floating window, similar look to mac spotlight
 
 rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi
-rofi.font: Iosevka 16
+!rofi.font: Iosevka 16
+rofi.font: Fantasque Sans Mono 16
