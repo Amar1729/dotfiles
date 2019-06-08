@@ -30,6 +30,9 @@ zsh-users/zsh-autosuggestions
 # put this here
 amar1729/chunkwm-zsh-completions kind:fpath
 
+# ipfs completions
+aramboi/zsh-ipfs
+
 # simple custom completions (tmux-a)
 https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
 
