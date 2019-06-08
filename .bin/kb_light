@@ -5,6 +5,10 @@
 
 cachefile=/tmp/_kbd_brightness
 
+# not sure about this?
+max=255
+min=0
+
 [[ ! -e $cachefile ]] && echo '40' > $cachefile
 
 max=255
