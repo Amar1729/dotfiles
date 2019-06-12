@@ -4,6 +4,9 @@ robbyrussell/oh-my-zsh
 # not sure if this works yet!
 robbyrussell/oh-my-zsh path:lib/git.zsh
 
+# completions (bunch of BLOAT try to pare this down)
+zsh-users/zsh-completions kind:fpath path:src
+
 # open GitHub from cli
 peterhurford/git-it-on.zsh
 
@@ -22,7 +25,7 @@ rupa/z
 zsh-users/zsh-syntax-highlighting
 
 # nix zsh completions
-spwhitt/nix-zsh-completions
+spwhitt/nix-zsh-completions kind:fpath
 
 # fish-like command suggestions
 zsh-users/zsh-autosuggestions
