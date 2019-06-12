@@ -160,6 +160,10 @@ set autoread
 " persistent undo!
 au BufWritePre * setlocal undofile
 
+" make sure pwd is in directory of current file
+set autochdir
+"autocmd BufEnter * silent! lcd %:p:h
+
 " file explorer sidebar
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
