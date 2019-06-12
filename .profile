@@ -31,7 +31,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 [[ -d /snap/bin ]] && emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
 # my changes
-export PATH="/opt/bin:$HOME/.bin:$PATH"
+export PATH="$PATH:/opt/bin:$HOME/.bin"
 
 [[ -d ~/.local/bin ]] && export PATH="$PATH:$HOME/.local/bin"
 
