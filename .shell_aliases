@@ -108,6 +108,9 @@ python3 () {
 	fi
 }
 
+# erase duplicate history (useful for some VMs)
+#alias clear_hist_dupes="cat $HOME/.bash_history|nl|sort -k 2|uniq -f1|sort -n|cut -f2|nl"
+
 [[ -r ~/.fzf_aliases ]] && source ~/.fzf_aliases
 
 ####
