@@ -51,6 +51,13 @@ Files (macOS and Ubuntu branches differ)
 ### Changes to browsers (Chrome and Firefox)
 #### Userstyles, Extensions, Plugins, and Apps
 ##### userstyles/scripts
+* [dark-gitlab-theme](https://userstyles.org/styles/164877/dark-gitlab-theme)
+  * dark bg: `3c3836`
+  * darker bg: `282828`
+  * light text: `ebdbb2`
+  * lighter text: `f1fbc7`
+  * accent color: `98971a`
+    * or `b8bb26` for lighter green?
 * Chrome ([stylus](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne) and [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
   * [Messenger Convo List Hover Toggle](http://userstyles.org/styles/120562)
