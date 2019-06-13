@@ -7,11 +7,13 @@
 "Plug 'tpope/vim-sensible'
 "Plug 'morhetz/gruvbox'
 "Plug 'davidhalter/jedi-vim'
+"Plug('dylanaraps/wal.vim')
 "
 "call plug#end()
 
 "colorscheme zenburn
 "colorscheme gruvbox
+"colorscheme wal
 
 " need this shit
 set modeline
