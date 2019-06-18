@@ -115,6 +115,11 @@ python3 () {
 	fi
 }
 
+# colorize brew formulae to stdout
+brew-hcat () {
+	brew cat $1 | highlight --syntax=ruby
+}
+
 # erase duplicate history (useful for some VMs)
 #alias clear_hist_dupes="cat $HOME/.bash_history|nl|sort -k 2|uniq -f1|sort -n|cut -f2|nl"
 
