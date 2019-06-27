@@ -11,7 +11,7 @@
 			"selector": "text.tex.latex"
 		}
 	],
-	"color_scheme": "Packages/gruvbox/gruvbox (Dark) (Soft).tmTheme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
 	"file_exclude_patterns":
 	[
 		"*.pyc",
