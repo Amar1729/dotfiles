@@ -107,6 +107,8 @@ chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
 
+# my own plugin for floating window mgmt
+chunkc core::load float.so
 
 # rules for tiling
 # does this need axDialog or something?

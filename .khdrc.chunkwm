@@ -132,16 +132,24 @@ lcmd - l : chunkc tiling::window --focus east
 shift + alt - 0 : chunkc tiling::desktop --equalize
 
 # increase region size (floating or nonfloating)
-lalt - h : ~/.config/scripts/chunk_resize_mgr.sh --increase west
-lalt - j : ~/.config/scripts/chunk_resize_mgr.sh --increase south
-lalt - k : ~/.config/scripts/chunk_resize_mgr.sh --increase north
-lalt - l : ~/.config/scripts/chunk_resize_mgr.sh --increase east
+lalt - h :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west  && chunkc float::window --inc west
+lalt - j :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south && chunkc float::window --inc south
+lalt - k :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north && chunkc float::window --inc north
+lalt - l :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east  && chunkc float::window --inc east
 
 # decrease region size (floating or nonfloating)
-shift + lalt - h : ~/.config/scripts/chunk_resize_mgr.sh --decrease west
-shift + lalt - j : ~/.config/scripts/chunk_resize_mgr.sh --decrease south
-shift + lalt - k : ~/.config/scripts/chunk_resize_mgr.sh --decrease north
-shift + lalt - l : ~/.config/scripts/chunk_resize_mgr.sh --decrease east
+shift + lalt - h :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west  && chunkc float::window --dec west
+shift + lalt - j :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south && chunkc float::window --dec south
+shift + lalt - k :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north && chunkc float::window --dec north
+shift + lalt - l :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east  && chunkc float::window --dec east
 
 # swap window
 ctrl + lalt - h : chunkc tiling::window --swap west
@@ -162,11 +170,11 @@ lcmd + ctrl - j     : chunkc tiling::window --use-insertion-point south
 lcmd + ctrl - k     : chunkc tiling::window --use-insertion-point north
 lcmd + ctrl - l     : chunkc tiling::window --use-insertion-point east
 
-# deal with floating windows! (this is a bash workaround)
-cmd + shift - left  : ~/.config/scripts/chunk_float.sh move -x
-cmd + shift - right : ~/.config/scripts/chunk_float.sh move +x
-cmd + shift - up    : ~/.config/scripts/chunk_float.sh move -y
-cmd + shift - down  : ~/.config/scripts/chunk_float.sh move +y
+# move around floating windows
+cmd + shift - left  : chunkc float::window --move west
+cmd + shift - down  : chunkc float::window --move south
+cmd + shift - up    : chunkc float::window --move north
+cmd + shift - right : chunkc float::window --move east
 
 # send window to desktop and follow focus
 lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
