@@ -44,7 +44,8 @@ case "$1" in
         ~/.bin/unique_space.sh --copy $2 $3
         ;;
     -r|--reload)
-        ~/.bin/unique_space.sh -r
+        cat $(~/.bin/unique_space.sh -r)
+        printf "\033]Plecdbb2\033\\"
         ;;
     -b|--both)
         $0 -w "$2"
@@ -53,6 +54,7 @@ case "$1" in
         ;;
     -f|--file)
         cat ~/.cache/wal/sequences_"$2"
+        printf "\033]Plecdbb2\033\\"
         ;;
     --pixelate)
         ~/.bin/pxl-bg $(~/.bin/unique_space.sh --get-wallpaper)
