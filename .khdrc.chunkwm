@@ -16,13 +16,13 @@ khd mode space restore default
 
 # old colors:
 # black: 0xaa282828 (focused color)
-# green: 0xcc98971a 
+# green: 0xcc98971a
 # white: 0x77fbf1c7
 #khd mode default	on_enter chunkc set_focused_border_color 0xaa282828; chunkc border::color 0xaa282828
 khd mode default	on_enter chunkc set_focused_border_color 0xffebdbb2; chunkc border::color 0xffebdbb2
-khd mode tree		on_enter chunkc set_focused_border_color 0xcc458588; chunkc border::color 0xcc458588 
-khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286 
-#khd mode tmux		on_enter chunkc set_focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93 
+khd mode tree		on_enter chunkc set_focused_border_color 0xcc458588; chunkc border::color 0xcc458588
+khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286
+#khd mode tmux		on_enter chunkc set_focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93
 
 # toggle between modes
 ctrl - d			:	khd -e "mode activate space"
@@ -204,6 +204,9 @@ ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::mon
 alt - a         : chunkc tiling::desktop --toggle offset
 alt + shift - a : chunkc tiling::desktop --toggle offset
 
+alt - t			: chunkc tiling::window --toggle float
+tree + shift - g: chunkc tiling::window --toggle float
+
 # toggle window split type (like a container rotation)
 #alt - e         : chunkc tiling::window --toggle split
 
@@ -220,21 +223,18 @@ tree + shift - f: chunkc tiling::window --toggle native-fullscreen
 # toggle window parent zoom
 tree - p        : chunkc tiling::window --toggle parent
 
-# Helpful presets for floating windows (see bash script for locations):
-# toggles floating, sends to center of screen
-lcmd + shift - g: ~/.config/scripts/chunk_float.sh preset 0
-tree - g        : ~/.config/scripts/chunk_float.sh preset 0
-# keep window where it is
-tree + shift - g: chunkc tiling::window --toggle float
-tree - q        : ~/.config/scripts/chunk_float.sh preset 1
-tree - w        : ~/.config/scripts/chunk_float.sh preset 2
-tree - e        : ~/.config/scripts/chunk_float.sh preset 3
-tree + alt - g  : ~/.config/scripts/chunk_float.sh preset 4
+# presets for floating windows
+lcmd + shift - g: chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - g		: chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - q 		: chunkc float::window --absolute 0.55x0.10:0.95x0.45
+tree - w 		: chunkc float::window --absolute 0.05x0.10:0.45x0.45
+tree - e 		: chunkc float::window --absolute 0.05x0.60:0.45x0.95
+tree + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
 
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
 #tree - s        : chunkc tiling::window --toggle sticky;\
-#                ~/.config/scripts/chunk_float.sh preset 1
+#                chunkc float::window --absolute 0.25x0.25:0.75x0.75
 tree - s        : chunkc tiling::window --toggle sticky
 
 
