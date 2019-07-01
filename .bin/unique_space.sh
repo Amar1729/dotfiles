@@ -91,12 +91,9 @@ reload_colors () {
 		DEFAULT=~/.cache/wal/sequences
 	fi
 
-	if [[ -f $FILE ]]
-	then
-		(cat $FILE &)
-	else
-		(cat $DEFAULT &)
-	fi
+    local RES=$FILE
+	[[ ! -f $FILE ]] && RES=$DEFAULT
+    echo $RES
 }
 
 case "$1" in
