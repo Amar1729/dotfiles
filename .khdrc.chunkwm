@@ -9,6 +9,10 @@ khd mode space prefix on
 khd mode space timeout 0.5
 khd mode space restore default
 
+khd mode sender prefix on
+khd mode sender timeout 2.0
+khd mode sender restore default
+
 # Mode `tmux` not complete (keep this commented)
 #khd mode tmux prefix on
 #khd mode tmux timeout 1
@@ -18,16 +22,17 @@ khd mode space restore default
 # black: 0xaa282828 (focused color)
 # green: 0xcc98971a
 # white: 0x77fbf1c7
-#khd mode default	on_enter chunkc set_focused_border_color 0xaa282828; chunkc border::color 0xaa282828
 khd mode default	on_enter chunkc set_focused_border_color 0xffebdbb2; chunkc border::color 0xffebdbb2
-khd mode tree		on_enter chunkc set_focused_border_color 0xcc458588; chunkc border::color 0xcc458588
+khd mode tree		on_enter chunkc set focused_border_color 0xcc458588; chunkc border::color 0xcc458588
 khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286
-#khd mode tmux		on_enter chunkc set_focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93
+#khd mode tmux		on_enter chunkc set focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93
+khd mode sender 	on_enter chunkc set focused_border_color 0xcc98971a; chunkc border::color 0xcc98971a
 
 # toggle between modes
 ctrl - d			:	khd -e "mode activate space"
 ctrl - f			:	khd -e "mode activate tree"
 #ctrl - a			:	khd -e "mode activate tmux"
+tree - s 			:	khd -e "mode activate sender"
 
 
 # remap ctrl+a / ctrl+e -> start/end of line
@@ -234,8 +239,8 @@ tree + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
 #tree - s        : chunkc tiling::window --toggle sticky;\
-#                chunkc float::window --absolute 0.25x0.25:0.75x0.75
-tree - s        : chunkc tiling::window --toggle sticky
+#                ~/.config/scripts/chunk_float.sh preset 1
+#tree - s        : chunkc tiling::window --toggle sticky
 
 
 ####
@@ -262,3 +267,18 @@ space + shift - p   : chunkc tiling::desktop --padding dec;\
 
 space - left        : chunkc tiling::desktop --annihilate
 space - right       : chunkc tiling::desktop --create
+
+
+###
+## Sender
+###
+
+# simply send lots of windows to other desktops
+sender - 1 : chunkc tiling::window -d 1
+sender - 2 : chunkc tiling::window -d 2
+sender - 3 : chunkc tiling::window -d 3
+sender - 4 : chunkc tiling::window -d 4
+sender - 5 : chunkc tiling::window -d 5
+sender - 6 : chunkc tiling::window -d 6
+
+sender - 0x35 : khd -e "mode activate default"
