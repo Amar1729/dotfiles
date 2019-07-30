@@ -105,8 +105,13 @@ rcmd + shift - 4
 ctrl + alt - w
     : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 
-cmd - return
+# outlook uses cmd+enter to send emails
+lcmd - return
     : ~/.bin/wp -n
+rcmd - return
+    ![ Microsoft Outlook ]
+    : ~/.bin/wp -n
+
 cmd + shift - return
     : open -na Google\ Chrome
 cmd + ctrl - return
