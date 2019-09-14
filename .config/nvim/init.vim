@@ -221,6 +221,8 @@ nmap <leader><Space> :noh<CR>
 " for exiting nvim terminal mode
 tnoremap <Esc> <C-\><C-n>
 
+" toggle folds with space
+nnoremap <space> za
 
 """
 " Augroups
