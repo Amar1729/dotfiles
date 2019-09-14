@@ -95,6 +95,9 @@ HYPHEN_INSENSITIVE="true"
 fpath+=~/.zsh/completions
 compinit -i
 
+# omz conflicts with common user alias mcd
+compdef -d mcd
+
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
