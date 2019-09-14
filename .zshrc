@@ -31,6 +31,13 @@ source ~/.zsh_plugins.zsh
 # shell aliases
 [[ -r ~/.shell_aliases ]] && source ~/.shell_aliases
 
+# a few zsh-specific aliases
+
+alias dh='dirs -v'
+
+# filter on bool $f: needs to be expanded inline to work
+alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
+
 # History
 
 HISTCONTROL=ignoreboth
@@ -106,9 +113,6 @@ insert-first-word () { zle insert-last-word -- -1 1 }
 zle -N insert-first-word
 bindkey '^[,' insert-first-word
 
-# o shit this is cool
-alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
-
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
@@ -140,7 +144,6 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 # pushdtohome	: `pushd` to ~/
 DIRSTACKSIZE=8
 setopt autopushd pushdminus pushdsilent pushdtohome
-alias dh='dirs -v'
 
 # better globs
 setopt extendedglob
