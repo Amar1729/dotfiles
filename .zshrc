@@ -126,6 +126,15 @@ bindkey "^N" down-line-or-beginning-search
 # temporarily clear cmd so i can inspect, ls, man, etc
 bindkey '^q' push-line-or-edit
 
+# for hardcore scripting: surround line with $()
+bindkey -s "^[o" '^a$(^e)^a'
+
+# save output
+bindkey -s '^o' '> output.txt'
+
+# easier echo to a cmd
+bindkey -s "^X^G^O" "^aecho '^e'"
+
 # Upon menu completion, enter directories with ctrl-o
 bindkey -M menuselect '^o' accept-and-infer-next-history
 
