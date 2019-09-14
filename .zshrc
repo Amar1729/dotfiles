@@ -38,16 +38,28 @@ alias dh='dirs -v'
 # filter on bool $f: needs to be expanded inline to work
 alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
 
+# zsh options
+
+# autopushd     : make cd act like pushd (alias doesn't work properly)
+# pushdminus    : use -1 instead of +1
+# pushdsilent   : prevents printing stack on each cd
+# pushdtohome   : `pushd` to ~/
+DIRSTACKSIZE=8
+setopt autopushd pushdminus pushdsilent pushdtohome
+
+# better globs
+setopt extendedglob
+
 # History
 
 HISTCONTROL=ignoreboth
 HISTFILESIZE=1000000
-HISTSIZE=10000000			# number of history lines kept internally
-SAVEHIST=10000000			# max number of history lines saved
-setopt APPEND_HISTORY		# history appends to existing file
-setopt HIST_REDUCE_BLANKS	# trim multiple insgnificant blanks in history
-setopt HIST_IGNORE_ALL_DUPS	# ignore ALL duplicates (even if not immediately previous)
-setopt histignoredups		# ignore duplicates during search
+HISTSIZE=10000000           # number of history lines kept internally
+SAVEHIST=10000000           # max number of history lines saved
+setopt APPEND_HISTORY       # history appends to existing file
+setopt HIST_REDUCE_BLANKS   # trim multiple insgnificant blanks in history
+setopt HIST_IGNORE_ALL_DUPS # ignore ALL duplicates (even if not immediately previous)
+setopt histignoredups       # ignore duplicates during search
 
 # ignore if beginning with space
 setopt HIST_IGNORE_SPACE
@@ -108,6 +120,9 @@ compdef -d mcd
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 
+# bindkey mappings, custom functions, and notes
+# use ^Xa to expand aliases
+
 # alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
 insert-first-word () { zle insert-last-word -- -1 1 }
 zle -N insert-first-word
@@ -118,40 +133,28 @@ bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
 
 # temporarily clear cmd so i can inspect, ls, man, etc
-bindkey '^q' push-line-or-edit
+bindkey "^q" push-line-or-edit
 
 # for hardcore scripting: surround line with $()
 bindkey -s "^[o" '^a$(^e)^a'
 
 # save output
-bindkey -s '^o' '> output.txt'
+bindkey -s "^o" '> output.txt'
 
 # easier echo to a cmd
 bindkey -s "^X^G^O" "^aecho '^e'"
 
 # Upon menu completion, enter directories with ctrl-o
-bindkey -M menuselect '^o' accept-and-infer-next-history
+bindkey -M menuselect "^o" accept-and-infer-next-history
 
 # use the vi navigation keys in menu completion
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-bindkey '^ ' autosuggest-execute
-
-# autopushd		: make cd act like pushd (alias doesn't work properly)
-# pushdminus	: use -1 instead of +1
-# pushdsilent	: prevents printing stack on each cd
-# pushdtohome	: `pushd` to ~/
-DIRSTACKSIZE=8
-setopt autopushd pushdminus pushdsilent pushdtohome
-
-# better globs
-setopt extendedglob
+bindkey -M menuselect "h" vi-backward-char
+bindkey -M menuselect "k" vi-up-line-or-history
+bindkey -M menuselect "l" vi-forward-char
+bindkey -M menuselect "j" vi-down-line-or-history
 
 # plugin-specific
-bindkey '^ ' autosuggest-execute
+bindkey "^ " autosuggest-execute
 
 # dynamic colors with (a wrapper for) pywal!
 #(wp -r &)
