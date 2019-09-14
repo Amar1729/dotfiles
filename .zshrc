@@ -109,16 +109,6 @@ bindkey '^[,' insert-first-word
 # o shit this is cool
 alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
 
-# https://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
-# expand aliases inline
-globalias () {
-	zle _expand_alias
-	zle expand-word
-	zle self-insert
-}
-zle -N globalias
-bindkey ' ' globalias
-
 # Use ctrl-p/n for up/down arrow (instead of default prev/next cmds)
 bindkey "^P" up-line-or-beginning-search
 bindkey "^N" down-line-or-beginning-search
