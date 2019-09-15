@@ -59,9 +59,22 @@ fi
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
+# add bundled gems
+[[ -d $HOME/.local/rubygems ]] && export PATH="$PATH:$HOME/.local/rubygems"
+
+# java helper script (manage sdks)
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# why doesnt this work
+alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
+
 # add calibre cli
 [[ -d /Applications/calibre.app ]] && \
 export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS/"
+
+# mypy lxml stubs (static type analysis for python)
+export MYPYPATH="$HOME/.cache/mypy/lxml-stubs"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
