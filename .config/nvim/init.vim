@@ -37,6 +37,9 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('racer-rust/vim-racer')
+
+  " for showing function signatures in commad line
+  call dein#add('Shougo/echodoc.vim')
   
   " async linting
   call dein#add('neomake/neomake')
@@ -98,6 +101,11 @@ if dein#load_state('~/.cache/dein/')
 
   " nix expression language
   call dein#add('LnL7/vim-nix')
+
+  " only seems to work in vim currently, not nvim
+  if has('nvim') == 0
+    call dein#add('artur-shaik/vim-javacomplete2')
+  endif
 
   " Required:
   call dein#end()
@@ -164,6 +172,9 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 20
+
+" make sure vim8 can delete things (???)
+set backspace=indent,eol,start
 
 
 """
