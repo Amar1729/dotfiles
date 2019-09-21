@@ -326,7 +326,7 @@ let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/u
 let g:python3_host_prog='/usr/bin/python3'
 
 " Rust Auto-Complete-ER
-let g:racer_cmd = "/Users/Amar/.cargo/bin/racer"
+let g:racer_cmd='~/.cargo/bin/racer'
 
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
