@@ -1,8 +1,9 @@
 
 # oh-my-zsh stuff
-robbyrussell/oh-my-zsh
-# not sure if this works yet!
-robbyrussell/oh-my-zsh path:lib/git.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/completion.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/history.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
 
 # completions (bunch of BLOAT try to pare this down)
 zsh-users/zsh-completions kind:fpath path:src

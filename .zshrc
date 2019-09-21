@@ -3,6 +3,9 @@
 export TERM="xterm-256color"
 export EDITOR="nvim"
 
+# Load all stock functions (from $fpath files) called below.
+autoload -U compaudit compinit
+
 # disable 'git status' looking for untracked files in my zsh prompt
 # (i would like this to be configurable on the fly somehow)
 # has to exported before loading plugins
@@ -20,7 +23,7 @@ export ZSH="$ANTIBODY_HOME"/https-COLON--SLASH--SLASH-github.com-SLASH-robbyruss
 export _Z_DATA="$HOME/.cache/z"
 
 # statically load plugins. generate with:
-# antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+# antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
 source ~/.zsh_plugins.zsh
 
 # User configuration
