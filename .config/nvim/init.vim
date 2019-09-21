@@ -315,7 +315,7 @@ let g:python_host_prog='/usr/local/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
 
 " Rust Auto-Complete-ER
-let g:racer_cmd = "/Users/Amar/.cargo/bin/racer"
+let g:racer_cmd='~/.cargo/bin/racer'
 
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
