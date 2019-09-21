@@ -298,8 +298,10 @@ set statusline=%t
 
 " gitgutter
 set updatetime=100
-nmap ghn <Plug>GitGutterNextHunk
-nmap ghp <Plug>GitGutterPrevHunk
+nmap ghn <Plug>(GitGutterNextHunk)
+nmap ghp <Plug>(GitGutterPrevHunk)
+nmap <leader>hu <Plug>(GitGutterUndoHunk)
+nmap <leader>hs <Plug>(GitGutterStageHunk)
 
 
 " deoplete settings
