@@ -1,0 +1,11 @@
+# oh-my-zsh stuff
+robbyrussell/oh-my-zsh kind:zsh path:lib/completion.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/history.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
+#Tarrasch/zsh-bd
+#rupa/z
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+#https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath # tmux-a
+https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # amar_simple
