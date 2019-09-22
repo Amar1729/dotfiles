@@ -19,6 +19,7 @@ alias ggrep="ggrep --color=auto"
 alias less="less -i"
 alias cclear="cd; clear"
 alias rsync='rsync -avh --partial --progress'
+alias dusort="du -sh *|sort -h"
 
 # Make new directory and immediately cd into it (from Nate Landau's, link below)
 # should the -p flag be included?
