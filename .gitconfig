@@ -24,6 +24,9 @@
 	pr = pull --rebase
 	rv = remote -v
 	rH = reset HEAD
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
 
 	sts = stash
 	sta = stash apply
