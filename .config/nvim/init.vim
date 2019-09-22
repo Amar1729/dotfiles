@@ -50,6 +50,12 @@ if dein#load_state('~/.cache/dein/')
   " snippets are separated from the engine
   "call dein#add('honza/vim-snippets')
 
+  " use these for deoplete to work in vim8
+  if has('nvim') == 0
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
 
   " Quality of life:
 
@@ -104,7 +110,7 @@ if dein#load_state('~/.cache/dein/')
   " sxhkd
   call dein#add('kovetskiy/sxhkd-vim')
 
-  " only seems to work in vim currently, not nvim
+  " only seems to work in vim8 currently, but not nvim
   if has('nvim') == 0
     call dein#add('artur-shaik/vim-javacomplete2')
   endif
