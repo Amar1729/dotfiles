@@ -10,12 +10,13 @@ Note - there are two branches in this repo (`master` for macOS, and `ubuntu` for
 
 Well these are my dotfiles. Most of these files are well-commented, so feel free to look through the repo.  
 * Shell: the bulk of my aliases are in `.shell_aliases` (`zsh` and `bash` compatible!)
-  * Using `zsh` with [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh/) and [antigen](https://github.com/zsh-users/antigen) for plugins and plugin management, respectively
+  * Shell: `zsh`
+    * Plugin Manager: [antibody](https://getantibody.github.io/)
 * Workflow:
   * [iTerm2 beta](https://www.iterm2.com/downloads.html) as my terminal emulator
-  * [Neovim](https://github.com/neovim/neovim) (using [dein](https://github.com/Shougo/dein.vim) as a plugin manager)
+  * [Neovim](https://github.com/neovim/neovim)
+    * Plugin Manager: [dein](https://github.com/Shougo/dein.vim)
   * [Tmux](https://github.com/tmux/tmux)
-  * Sublime Text with [Package Control](https://packagecontrol.io/) - I only really use this for LaTeX or website development
   * [Pass](https://www.passwordstore.org/) for password management
 * Window Management:
   * [chunkwm](https://github.com/koekeishiya/chunkwm/) and the hotkey daemon [khd](https://github.com/koekeishiya/khd)
@@ -27,7 +28,8 @@ Well these are my dotfiles. Most of these files are well-commented, so feel free
 <a name="shell"></a>
 ## Shell
 Files: `.shell_aliases`, `.zshrc`, `.bashrc`, `.profile`, `.config/scripts/ricing.sh`
-* `oh-my-zsh` is used to add plugins; `antigen` is used to easily mange those plugins. They can both be installed easily, and further setup is simple.
+* `antibody` is used to manage plugins
+* note for zsh users: `oh-my-zsh` has been (mostly) REMOVED from my dotfiles, since I see it as bloat.
 
 Note on `bash`, `zsh`, and `fish`:  
 `fish` and `zsh` are both great alternatives to `bash`. `zsh` is a superset of `bash` so you don't lose the knowledge of pure `bash` if you switch (important if you `ssh` a lot); `fish` isn't, but has better defaults so you don't *have* to configure it out-of-the-box.
@@ -37,14 +39,13 @@ Note on `bash`, `zsh`, and `fish`:
 Files:
 * `.config/nvim/init.vim`
 * `.tmux.conf`, `.tmux-osx.conf`
-* `.config/sublime 3/*`
 
-And check out my [.gitconfig](.gitconfig) for some helpful aliases. Most useful for me are `core.excludesfile` and the `alias`es for common commands like `commit`.
+And check out my [.gitconfig](.gitconfig) for some helpful aliases. Most useful for me are the `alias`es for common commands like `commit`.
 
 <a name="wms"></a>
 ## Window Management
 Files (macOS and Ubuntu branches differ)
-* `.khd`, `.chunkwmrc`
+* `.khdrc`, `.chunkwmrc`
 * `.config/ubersicht/widgets/*`
 
 <a name="browsers"></a>
