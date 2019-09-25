@@ -43,12 +43,13 @@ alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; 
 
 # zsh options
 
-# autopushd     : make cd act like pushd (alias doesn't work properly)
-# pushdminus    : use -1 instead of +1
-# pushdsilent   : prevents printing stack on each cd
-# pushdtohome   : `pushd` to ~/
+# autopushd         : make cd act like pushd (alias doesn't work properly)
+# pushdminus        : use -1 instead of +1
+# pushdsilent       : prevents printing stack on each cd
+# pushdtohome       : `pushd` to ~/
+# pushdignoredups   : dont add duplicates to stack
 DIRSTACKSIZE=8
-setopt autopushd pushdminus pushdsilent pushdtohome
+setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
 
 # better globs
 setopt extendedglob
