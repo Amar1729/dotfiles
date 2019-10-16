@@ -54,6 +54,9 @@ setopt autopushd pushdminus pushdsilent pushdtohome pushdignoredups
 # better globs
 setopt extendedglob
 
+# allow comments (i.e. ending with '#')
+setopt interactivecomments
+
 # History
 
 HISTCONTROL=ignoreboth
