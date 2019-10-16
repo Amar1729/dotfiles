@@ -13,6 +13,10 @@ khd mode sender prefix on
 khd mode sender timeout 2.0
 khd mode sender restore default
 
+khd mode float prefix on
+khd mode float timeout 0.5
+khd mode float restore default
+
 # Mode `tmux` not complete (keep this commented)
 #khd mode tmux prefix on
 #khd mode tmux timeout 1
@@ -27,6 +31,7 @@ khd mode tree		on_enter chunkc set focused_border_color 0xcc458588; chunkc borde
 khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286
 #khd mode tmux		on_enter chunkc set focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93
 khd mode sender 	on_enter chunkc set focused_border_color 0xcc98971a; chunkc border::color 0xcc98971a
+khd mode float  	on_enter chunkc set focused_border_color 0xcc98971a; chunkc border::color 0xcc98971a
 
 # toggle between modes
 ctrl - d			:	khd -e "mode activate space"
@@ -204,6 +209,13 @@ ctrl + shift - 1 : chunkc tiling::window --send-to-monitor 1; chunkc tiling::mon
 ctrl + shift - 2 : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
 
+# toggle float AND enter floating mode (immediately send to a float preset)
+alt - t			: chunkc tiling::window --toggle float; khd -e "mode activate float"
+float - g       : chunkc float::window --absolute 0.25x0.25:0.75x0.75
+float - q 		: chunkc float::window --absolute 0.55x0.10:0.95x0.45
+float - w 		: chunkc float::window --absolute 0.05x0.10:0.45x0.45
+float - e 		: chunkc float::window --absolute 0.05x0.60:0.45x0.95
+float + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
 
 ####
 ## Tree
@@ -214,7 +226,6 @@ ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::mon
 alt - a         : chunkc tiling::desktop --toggle offset
 alt + shift - a : chunkc tiling::desktop --toggle offset
 
-alt - t			: chunkc tiling::window --toggle float
 tree + shift - g: chunkc tiling::window --toggle float
 
 # toggle window split type (like a container rotation)
