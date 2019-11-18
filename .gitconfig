@@ -20,6 +20,7 @@
 	ma = merge --abort
 	rc = rebase --continue
 	ra = rebase --abort
+	rs = rebase --skip
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
@@ -31,6 +32,7 @@
 	sts = stash
 	sta = stash apply
 	std = stash drop
+	stl = stash list
 
 	short = rev-parse --short HEAD
 
