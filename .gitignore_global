@@ -16,6 +16,8 @@ env/
 venv*
 __pycache__/
 *.egg-info
+*.eggs
+.tox
 
 # Object files
 *.o
@@ -23,3 +25,4 @@ __pycache__/
 *.so
 .ctags
 tags
+.mypy_cache
