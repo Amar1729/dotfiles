@@ -7,6 +7,11 @@ robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
 # completions (bunch of BLOAT try to pare this down)
 zsh-users/zsh-completions kind:fpath path:src
 
+# docker completions
+# https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+docker/cli kind:fpath path:contrib/completion/zsh
+docker/compose kind:fpath path:contrib/completion/zsh
+
 # open GitHub from cli
 peterhurford/git-it-on.zsh
 
