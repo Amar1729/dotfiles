@@ -1,7 +1,6 @@
 
 # oh-my-zsh stuff
 robbyrussell/oh-my-zsh kind:zsh path:lib/completion.zsh
-robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh
 robbyrussell/oh-my-zsh kind:zsh path:lib/history.zsh
 robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
 
