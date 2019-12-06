@@ -11,7 +11,7 @@ clock () {
 alias ql='qlmanage -p 2>/dev/null'
 
 # fix broken virtualenv (when brew updates python)
-fix-env () { gfind "$1" -type l -xtype l -delete }
+fix-env () { gfind "$1" -type l -xtype l -delete; virtualenv -p python3 "$1"; }
 
 abri () { open -a Abricotine "$@" }
 
