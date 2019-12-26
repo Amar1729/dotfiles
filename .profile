@@ -35,8 +35,11 @@ export PATH="$PATH:/opt/bin:$HOME/.bin"
 # add pip user installs
 export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 
-# add fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# add fzf (default bindings, and my own aliases)
+[[ $SHELL == *"zsh" ]]  && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
+[[ $SHELL == *"bash" ]] && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
+
+[[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
