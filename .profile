@@ -12,6 +12,8 @@ export EDITOR_LOOK="block"
 GPG_TTY=$(tty)
 export GPG_TTY
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ####
 ## PATH changes
 ####
