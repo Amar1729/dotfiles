@@ -41,15 +41,18 @@ export PATH="$PATH:/opt/bin:$HOME/.bin"
 #export PATH="$PATH:$HOME/Library/Python/3.7/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
-# add fzf
+# add fzf (default bindings, and my own aliases)
 if [[ -n "$ZSH" ]]; then
     # for now - unfortunately, this hack is required to stop
     # lightdm's Xsession wrapper from sourcing us and incorrectly
     # trying to source zsh bindings. it'll fail, and lightdm won't
     # correctly start up X.
     # (currently, $ZSH is set inside my .zshrc)
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
+else
+    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
 fi
+[[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
