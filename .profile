@@ -76,6 +76,9 @@ export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS
 # mypy lxml stubs (static type analysis for python)
 export MYPYPATH="$HOME/.cache/mypy/lxml-stubs"
 
+# theme spotify
+export SPICETIFY_CONFIG="$HOME/.config/spicetify/"
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
