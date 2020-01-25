@@ -323,7 +323,13 @@ let g:python_host_prog='/usr/local/bin/python'
 let g:python3_host_prog='/usr/local/bin/python3'
 
 " Rust Auto-Complete-ER
-let g:racer_cmd='~/.cargo/bin/racer'
+" requires: `racer` in PATH and RUST_SRC_PATH (rustup component add rust-src) set
+" let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_insert_paren = 1
+let g:racer_disable_errors = 1
+
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
 
 " close the deoplete preview window on autocomplete
 autocmd CompleteDone * pclose
