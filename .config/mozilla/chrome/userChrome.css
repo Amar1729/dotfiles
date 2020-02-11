@@ -1,5 +1,6 @@
 html#main-window {
-	--color-bg: #1e1f29;
+	--color-bg: #2a2228;
+	--color-fg: #ffe0b2;
 	--toolbar-bgcolor: var(--color-bg) !important;
 
 	--gap-between-tabs: 5px;
@@ -17,12 +18,12 @@ html#main-window {
 	--urlbar-text-weight: 700;
 
 	/* Firefox variables */
-	--lwt-toolbar-field-focus-color: #a1ffb6 !important;
-	--lwt-toolbar-field-color: #fefefa !important;
+	--lwt-toolbar-field-focus-color:  var(--color-fg)  !important;
+	--lwt-toolbar-field-color: #d1b892 !important;
 	--lwt-toolbar-field-background-color: var(--color-bg) !important;
 
-	--arrowpanel-background: #1e1f29 !important;
-	--arrowpanel-color: white !important;
+	--arrowpanel-background: #261f23 !important;
+	--arrowpanel-color: var(--color-fg) !important;
 	--arrowpanel-border-color: transparent !important;
 }
 
@@ -40,6 +41,10 @@ html#main-window {
 	padding-right: 10px !important;
 }
 
+#nav-bar-overflow-button, .toolbarbutton-icon {
+	fill: var(--lwt-toolbar-field-color);
+}
+
 /* Bookmarks bar tweaks */
 #PlacesToolbar {
 	align-items: center !important;
@@ -49,6 +54,7 @@ html#main-window {
 	font-weight: 700 !important;
 	justify-content: center !important;
 }
+
 
 /* Custom back and forward buttons */
 #back-button {
@@ -85,7 +91,7 @@ html#main-window {
 /* Url bar suggestions' selected row */
 .urlbarView:not(.megabar) .urlbarView-row:not([type="tip"])[selected],
 .urlbarView.megabar .urlbarView-row:not([type="tip"])[selected] > .urlbarView-row-inner {
-	background: #f9ff99 !important;
+	background: #fff59d !important;
 	color: black !important;
 	fill-opacity: 1;
 }
@@ -125,7 +131,7 @@ html#main-window {
 
 /* Hacky way to make the url input bar centered */
 input#urlbar-input {
-	caret-color: transparent !important;
+	caret-color: #ffe0b2 !important;
 	font-family: var(--urlbar-text-font) !important;
 	font-size: var(--urlbar-text-size) !important;
 	font-weight: var(--urlbar-text-weight) !important;
@@ -172,13 +178,13 @@ input#urlbar-input {
 
 .tabbrowser-tab:hover {
 	background-color: none !important;
-	background-image: linear-gradient(to left, #c97dff, #ff8989) !important;
+	background-image: linear-gradient(to left, #cb6f75, #b54d3a) !important;
 	color: black !important;
 }
 
 .tabbrowser-tab[selected="true"] {
 	background-color: none !important;
-	background-image: linear-gradient(to left, #a1ffb6, #f9ff99) !important;
+	background-image: linear-gradient(to left, #fff59d,#c05057) !important;
 	color: black !important;
 	font-weight: var(--tab-font-weight) !important;
 }
@@ -196,11 +202,11 @@ input#urlbar-input {
 }
 
 .tabbrowser-tab[pinned="true"][selected="true"] {
-	background-image: linear-gradient(to left, #a1ffb6, #a1ffb6) !important;
+	background-image: linear-gradient(to left, #df8038, #df8038) !important;
 }
 
 .tabbrowser-tab[pinned="true"] {
-	background-image: linear-gradient(to left, #ffc386, #ffc386) !important;
+	background-image: linear-gradient(to left, #ffcc80, #ffcc80) !important;
 	color: #1d1d1d !important;
 	max-width: var(--tab-height) !important;
 	min-width: var(--tab-height) !important;
