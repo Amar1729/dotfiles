@@ -18,6 +18,9 @@ __pycache__/
 *.egg-info
 *.eggs
 .tox
+.mypy_cache
+.coverage*
+htmlcov/
 
 # Object files
 *.o
@@ -25,4 +28,3 @@ __pycache__/
 *.so
 .ctags
 tags
-.mypy_cache
