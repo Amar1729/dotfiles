@@ -180,8 +180,11 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 20
 
 " make sure vim8 can delete things (???)
-set backspace=indent,eol,start
-
+" not sure why i need to manually set some of these things
+if has('nvim') == 0
+    set backspace=indent,eol,start
+    set incsearch hlsearch
+endif
 
 """
 " Personal definitions
