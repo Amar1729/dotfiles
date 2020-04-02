@@ -1,3 +1,11 @@
+c.InteractiveShell.confirm_exit = False
+c.TerminalInteractiveShell.extra_open_editor_shortcuts = True
+c.InteractiveShell.editor = 'vim'
+# c.TerminalInteractiveShell.editing_mode = 'vi'
+
+# default history/load: 10e4
+c.InteractiveShell.history_length = 1000000
+c.InteractiveShell.history_load_length = 1000000
 
 # some custom ipython settings - i don't like the In/Out line prompts
 
