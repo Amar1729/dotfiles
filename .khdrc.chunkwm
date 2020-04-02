@@ -225,7 +225,9 @@ float + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
 
 # toggle on/off padding
 alt - a         : chunkc tiling::desktop --toggle offset
-alt + shift - a : chunkc tiling::desktop --toggle offset
+
+# toggle float
+alt - t         : chunkc tiling::window --toggle float
 
 tree + shift - g: chunkc tiling::window --toggle float
 
@@ -239,9 +241,6 @@ tree - r        : chunkc tiling::desktop --rotate 90
 lcmd - g        : chunkc tiling::window --toggle fullscreen
 tree - f        : chunkc tiling::window --toggle fullscreen
 
-# toggle window native fullscreen
-tree + shift - f: chunkc tiling::window --toggle native-fullscreen
-
 # toggle window parent zoom
 tree - p        : chunkc tiling::window --toggle parent
 
@@ -252,6 +251,8 @@ tree - q 		: chunkc float::window --absolute 0.55x0.10:0.95x0.45
 tree - w 		: chunkc float::window --absolute 0.05x0.10:0.45x0.45
 tree - e 		: chunkc float::window --absolute 0.05x0.60:0.45x0.95
 tree + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
+tree - left     : chunkc float::window --absolute 0.0x0.0:0.5x1.0
+tree - right    : chunkc float::window --absolute 0.5x0.0:1.0x1.0
 
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
