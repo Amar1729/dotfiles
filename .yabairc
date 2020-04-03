@@ -1,0 +1,51 @@
+#!/usr/bin/env sh
+
+# bar settings
+yabai -m config status_bar                   off
+
+# global settings
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          autofocus
+
+yabai -m config window_topmost               off
+yabai -m config window_opacity               off
+yabai -m config window_shadow                off
+yabai -m config window_border                on
+yabai -m config window_border_width          3
+yabai -m config window_border_radius         0.0
+yabai -m config active_window_border_color   0xffebdbb2
+yabai -m config normal_window_border_color   0xff505050
+yabai -m config insert_window_border_color   0xffd75f5f
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.90
+
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 off
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                resize
+
+# general space settings
+yabai -m config layout                       bsp
+yabai -m config top_padding                  30
+yabai -m config bottom_padding               5
+yabai -m config left_padding                 5
+yabai -m config right_padding                5
+yabai -m config window_gap                   5
+
+# float system apps
+yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Calculator$" manage=off
+yabai -m rule --add app="^Disk Utility$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+
+# float user apps
+yabai -m rule --add app="^Google Chrome$" manage=off
+yabai -m rule --add app="^python$" manage=off
+yabai -m rule --add app="^python$" manage=off
+yabai -m rule --add app="^python3$" manage=off
+yabai -m rule --add app="^Karabine$" manage=off
+yabai -m rule --add app="^Font Book$" manage=off
+yabai -m rule --add app="^Harmony$" manage=off
+
+echo "yabai configuration loaded.."
