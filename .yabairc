@@ -40,7 +40,6 @@ yabai -m rule --add app="^Disk Utility$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
 
 # float user apps
-yabai -m rule --add app="^Google Chrome$" manage=off
 yabai -m rule --add app="^python$" manage=off
 yabai -m rule --add app="^python$" manage=off
 yabai -m rule --add app="^python3$" manage=off
