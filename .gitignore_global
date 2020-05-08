@@ -14,12 +14,13 @@
 *.pyc
 env/
 venv*
+.venv/
 __pycache__/
 *.egg-info
 *.eggs
 .tox
 .mypy_cache
-.coverage*
+.coverage
 htmlcov/
 
 # Object files
