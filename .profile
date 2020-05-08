@@ -29,11 +29,12 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 	unset DEFAULT_PATH || \
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
-# my changes
-export PATH="$PATH:/opt/bin:$HOME/.bin"
-
 # add pip user installs
-export PATH="$PATH:$HOME/Library/Python/3.7/bin"
+# FUCK this use pipx instead
+export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Python/3.7/bin"
+
+# my changes
+export PATH="$PATH:/opt/prefix/bin:$HOME/.bin"
 
 # add fzf (default bindings, and my own aliases)
 [[ $SHELL == *"zsh" ]]  && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
