@@ -32,14 +32,12 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 # add snap path on ubuntu
 [[ -d /snap/bin ]] && emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
-# my changes
-export PATH="$PATH:/opt/bin:$HOME/.bin"
-
-[[ -d ~/.local/bin ]] && export PATH="$PATH:$HOME/.local/bin"
-
 # add pip user installs
-#export PATH="$PATH:$HOME/Library/Python/3.7/bin"
-export PATH="$PATH:$HOME/.local/bin"
+# FUCK this use pipx instead
+export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Python/3.7/bin"
+
+# my changes
+export PATH="$PATH:/opt/bin:$PATH:/opt/prefix/bin:$HOME/.bin"
 
 # add fzf (default bindings, and my own aliases)
 if [[ -n "$ZSH" ]]; then
