@@ -77,7 +77,7 @@ alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
 
 # add calibre cli
 [[ -d /Applications/calibre.app ]] && \
-export PATH="$PATH:/Applications/calibre.app/Contents/console.app/Contents/MacOS/"
+export PATH="$PATH:/Applications/calibre.app/Contents/MacOS/"
 
 # mypy lxml stubs (static type analysis for python)
 export MYPYPATH="$HOME/.cache/mypy/lxml-stubs"
