@@ -1,5 +1,13 @@
 
 # oh-my-zsh stuff
+# note: i don't load the entire omz library.
+# if you want to use an oh-my-zsh theme, you may have to:
+# load colors:
+# autoload -U colors && colors
+# expand prompt:
+# setopt prompt_subst
+# helper functions for vcs that many themes use:
+# robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh
 robbyrussell/oh-my-zsh kind:zsh path:lib/completion.zsh
 robbyrussell/oh-my-zsh kind:zsh path:lib/history.zsh
 robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
