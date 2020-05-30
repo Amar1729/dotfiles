@@ -4,7 +4,7 @@ export TERM="xterm-256color"
 export EDITOR="nvim"
 
 # Load all stock functions (from $fpath files) called below.
-autoload -U compaudit compinit
+autoload -Uz compinit
 
 # disable 'git status' looking for untracked files in my zsh prompt
 # (i would like this to be configurable on the fly somehow)
