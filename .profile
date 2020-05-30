@@ -45,8 +45,12 @@ export PATH="$PATH:/opt/prefix/bin:$HOME/.bin"
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 
-# use sccache
-export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
+# use sccache to cache rust compilation objects
+[[ -x $HOME/.cargo/bin/sccache ]] && export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
+
+# $(rustc --print sysroot) -> "$HOME/.rustup/toolchains/nightly-x86_64-apple-darwin"
+# export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export RUST_SRC_PATH="$HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src"
 
 # go stuff
 export GOPATH="${HOME}/.go"
