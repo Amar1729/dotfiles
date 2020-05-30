@@ -70,7 +70,16 @@ fi
 
 # java helper script (manage sdks)
 export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# https://gist.github.com/Amar1729/294c6e310b191405bf8fceb72e96b399 for explanation
+sdk () {
+    # "metaprogramming" lol - source init if sdk currently looks like this sdk function
+    # (i.e. lazy-load)
+    if [[ "$(which sdk | wc -l)" -le 10 ]]; then
+        unset -f sdk
+        source "$SDKMAN_DIR/bin/sdkman-init.sh"
+    fi
+    sdk "$@"
+}
 
 # why doesnt this work
 alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
