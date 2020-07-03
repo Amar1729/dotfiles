@@ -30,7 +30,7 @@ scrolling:
 font:
   # normal (can also specify bold and italic)
   normal:
-    family: Iosevka
+    family: Fantasque Sans Mono
 
   # Point size
   size: 8.0
