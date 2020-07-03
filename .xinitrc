@@ -1,6 +1,10 @@
 # Amar Paul's xinitrc
 
 xrdb ~/.Xresources
+# note - i have some rebindings e.g. caps lock -> escape here.
+# these obviously will only work inside x sessions; use loadkeys
+# for rebinding system-wide (e.g. a multi-user.terminal?)
+xmodmap ~/.Xmodmap
 sh ~/.fehbg
 
 #xset +fp ~/.fonts

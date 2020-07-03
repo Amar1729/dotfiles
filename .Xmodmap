@@ -1,3 +1,7 @@
+! rebind caps lock -> escape
+! rebind shift + caps lock -> caps lock
+clear Lock
+keycode 0x42 = Escape Caps_Lock
 
 ! Stop! so, keys cant belong two two different mod groups at once?
 ! And bspwm group 'super' seems to pull from the default group for Super/Hper: mod4
