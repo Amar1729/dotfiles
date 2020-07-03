@@ -7,6 +7,10 @@ super + Return
 	alacritty
 #urxvtc
 
+# alt-tab-like application quick switcher
+super + Tab
+	rofi -show-icons -show window
+
 # program launcher
 # make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
 #rofi -modi "drun" -sidebar-mode -show drun
