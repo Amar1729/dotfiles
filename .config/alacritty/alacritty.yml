@@ -27,15 +27,6 @@ scrolling:
   # Number of lines the viewport will move for every line scrolled
   multiplier: 3
 
-  # scroll for alternate buffer
-  faux_multiplier: 3
-
-  # Scroll to the bottom when new text is written to the terminal.
-  auto_scroll: true
-
-# Spaces per Tab (changes require restart)
-tabspaces: 8
-
 font:
   # normal (can also specify bold and italic)
   normal:
