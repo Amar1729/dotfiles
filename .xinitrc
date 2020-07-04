@@ -44,6 +44,8 @@ autocutsel -selection PRIMARY -fork
 # touch gestures
 libinput-gestures-setup start
 
+dunst &
+
 exec >>~/.xsession-errors 2>&1
 
 # I think this should be daemonized
