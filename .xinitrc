@@ -36,7 +36,7 @@ export LANG="en_US.UTF-8"
 #conky -c $HOME/.config/conky/conkyrc &
 
 # ~dat sweet transparency~
-compton -b --shadow --no-dnd-shadow --shadow-radius=30 --shadow-opacity=0.9
+picom -b --shadow --no-dnd-shadow --shadow-radius=30 --shadow-opacity=0.9
 
 #autocutsel -fork
 autocutsel -selection PRIMARY -fork
