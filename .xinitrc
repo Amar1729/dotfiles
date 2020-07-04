@@ -1,11 +1,13 @@
 # Amar Paul's xinitrc
 
+export LANG="en_US.UTF-8"
+
 xrdb ~/.Xresources
+
 # note - i have some rebindings e.g. caps lock -> escape here.
 # these obviously will only work inside x sessions; use loadkeys
 # for rebinding system-wide (e.g. a multi-user.terminal?)
 xmodmap ~/.Xmodmap
-sh ~/.fehbg
 
 #xset +fp ~/.fonts
     # https://github.com/sunaku/tamzen-font
@@ -13,6 +15,7 @@ sh ~/.fehbg
     #xset +fp ~/.fonts/tamzen-font/dfont/
 #xset fp rehash
 #xset -b
+
 xsetroot -cursor_name left_ptr
 
 # try setting resolution here?
@@ -23,9 +26,17 @@ xsetroot -cursor_name left_ptr
 # consider adding this: switches off the monitor backlight when screen is locked (how lock?)
 #xset dpms force off
 
+sh ~/.fehbg
+
 xflux -z 21230 &
 
-export LANG="en_US.UTF-8"
+#autocutsel -fork
+autocutsel -selection PRIMARY -fork
+
+# touch gestures
+libinput-gestures-setup start
+
+dunst &
 
 # giview shows this as its own window
 # xwinwrap just gets confused (hangs) on trying to display the gif
@@ -37,14 +48,6 @@ export LANG="en_US.UTF-8"
 
 # ~dat sweet transparency~
 picom -b --shadow --no-dnd-shadow --shadow-radius=30 --shadow-opacity=0.9
-
-#autocutsel -fork
-autocutsel -selection PRIMARY -fork
-
-# touch gestures
-libinput-gestures-setup start
-
-dunst &
 
 exec >>~/.xsession-errors 2>&1
 
