@@ -13,7 +13,7 @@ sh ~/.fehbg
     #xset +fp ~/.fonts/tamzen-font/dfont/
 #xset fp rehash
 #xset -b
-#xsetroot -cursor_name left_ptr
+xsetroot -cursor_name left_ptr
 
 # try setting resolution here?
 # nope! doesn't work ...
