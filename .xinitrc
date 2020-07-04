@@ -48,9 +48,6 @@ dunst &
 
 exec >>~/.xsession-errors 2>&1
 
-# I think this should be daemonized
-urxvtd &
-
 # Here
 # we
 #   gooooooooo
