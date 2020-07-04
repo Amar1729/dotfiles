@@ -1,0 +1,13 @@
+# execute this xinitrc with `nvidia-xrun`
+# useful for computers that have multiple (e.g. integrated/dedicated) gpus
+# nvidia-xrun will start an xsession using the NVIDIA GPU on board, from which
+# you can start steam/lutris etc
+
+if [ $# -gt 0 ]; then
+    $*
+else
+    # ~/.nvidia-settings-rc can be generated initially with:
+    # nvidia-settings --rewrite-config-file
+    nvidia-settings --load-config-only &
+    . ~/.xinitrc
+fi
