@@ -30,12 +30,16 @@ super + s
 # function keys
 #
 
-#acpilight: xbacklight requires sudo!
+# note: these bindings use (newer) acpilight, not xorg-xbacklight
+# acpilight: xbacklight requires sudo!
+# i gave all users write permission to the backlight device:
+# chmod a+w /sys/class/backlight/intel_backlight/brightness
+# (initially 644 permissions)
 XF86MonBrightnessDown
-	sudo xbacklight -dec 10
+	xbacklight -dec 10
 
 XF86MonBrightnessUp
-	sudo xbacklight -inc 10
+	xbacklight -inc 10
 
 # for mac laptop keeb
 XF86LaunchA
