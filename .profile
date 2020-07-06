@@ -40,7 +40,14 @@ export PATH="/opt/bin:$HOME/.bin:$PATH"
 export PATH="$PATH:$HOME/.local/bin"
 
 # add fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -n "$ZSH" ]]; then
+    # for now - unfortunately, this hack is required to stop
+    # lightdm's Xsession wrapper from sourcing us and incorrectly
+    # trying to source zsh bindings. it'll fail, and lightdm won't
+    # correctly start up X.
+    # (currently, $ZSH is set inside my .zshrc)
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
