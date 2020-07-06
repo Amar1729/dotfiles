@@ -1,0 +1,101 @@
+--[[
+Conky, a system monitor, based on torsmo
+
+Any original torsmo code is licensed under the BSD license
+
+All code written since the fork of torsmo is licensed under the GPL
+
+Please see COPYING for details
+
+Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+Copyright (c) 2005-2019 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+]]
+
+conky.config = {
+    color4 = 'EF5A29',
+
+    alignment = 'top_right',
+    background = true,
+    border_width = 1,
+    cpu_avg_samples = 2,
+    default_color = 'white',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+    draw_borders = false,
+    draw_graph_borders = false,
+    draw_outline = false,
+    draw_shades = false,
+    use_xft = true,
+    font = 'Iosevka:size=14',
+    gap_x = 40,
+    gap_y = 20,
+    minimum_height = 600,
+    minimum_width = 400,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_ncurses = false,
+    out_to_stderr = false,
+    out_to_x = true,
+    extra_newline = false,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    show_graph_scale = false,
+    show_graph_range = false,
+    lua_load = '~/.config/conky-gpu/conky_draw.lua',
+    lua_draw_hook_pre = 'main'
+}
+
+conky.text = [[
+${color4}SYSTEM ${hr 2}
+
+${voffset 90}${goto 110}CPU
+${voffset 16}${goto 110}cpu0
+${goto 110}cpu1
+
+${voffset -94}${goto 310}MEM
+${voffset 16}${goto 310}ddr4
+${goto 310}swap
+
+${voffset 50}
+${goto 110}GPU
+${goto 110}${exec "~/.config/conky-gpu/gpu.sh"}
+${voffset 8}${goto 110}freq
+${goto 110}temp
+${voffset -144}${goto 240}TEMP
+${goto 200}${alignr}${execgraph "~/.config/conky-gpu/gpu.sh --temp" 20,200 4B1B0C FF5C2B 100}
+${voffset 40}${goto 240}MEM
+${goto 200}${alignr}${execgraph "~/.config/conky-gpu/gpu.sh --mem" 20,200 4B1B0C FF5C2B 100}
+
+${voffset 70}${goto 110}DISK
+${voffset 8}${goto 110}root
+${goto 110}internal
+${voffset 10}
+${if_up wlp2s0}WIFI ${alignr}${addr wlp2s0}
+${color1}UP${alignr}$color2${upspeed wlp2s0} / ${totalup wlp2s0} ${upspeedgraph wlp2s0 20,210 4B1B0C FF5C2B 100 -l}
+${color1}DOWN${alignr}$color2${downspeed wlp2s0} / ${totaldown wlp2s0} ${downspeedgraph wlp2s0 20,210 324D23 77B753 100 -l}
+${endif}
+${if_up enp3s0f1}ETHERNET - ${addr enp3s0f1}
+${color1}UP${alignr}$color2${upspeed enp3s0f1} / ${totalup enp3s0f1} ${upspeedgraph enp3s0f1 20,210 4B1B0C FF5C2B 100 -l}
+${color1}DOWN${alignr}$color2${downspeed enp3s0f1} / ${totaldown enp3s0f1} ${downspeedgraph enp3s0f1 20,210 324D23 77B753 100 -l}
+${endif}
+${color4}${hr 2}
+]]
