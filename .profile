@@ -56,9 +56,9 @@ fi
 export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
 
 # go stuff
-export GOPATH="${HOME}/.go"
-export GOROOT=/usr/local/opt/go/libexec
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+# export GOPATH="${HOME}/.go"
+# export GOROOT=/usr/local/opt/go/libexec
+# export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # nix
 # arch pkg: had to manually create user profile:
