@@ -3,6 +3,12 @@
 # nvidia-xrun will start an xsession using the NVIDIA GPU on board, from which
 # you can start steam/lutris etc
 
+# note:
+# apparently, i may be able to use these lines to make X use nvidia gpu at init:
+# https://bbs.archlinux.org/viewtopic.php?id=240229
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
+# xrandr --auto
+
 if [ $# -gt 0 ]; then
     $*
 else
