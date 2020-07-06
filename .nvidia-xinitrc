@@ -9,5 +9,9 @@ else
     # ~/.nvidia-settings-rc can be generated initially with:
     # nvidia-settings --rewrite-config-file
     nvidia-settings --load-config-only &
+
+    # only load this up while running under GPU
+    conky -c ~/.config/conky-gpu/conkyrc
+
     . ~/.xinitrc
 fi

@@ -28,9 +28,6 @@ dunst &
 # NOTE - try this again since i forgot the ending ampersand
 #/opt/src/xwinwrap/xwinwrap -fs -debug -- gifview --geometry 2880x1440 -a ~/Downloads/rainy-cafe.gif &
 
-# really can't get this to work ...
-#conky -c $HOME/.config/conky/conkyrc &
-
 # ~dat sweet transparency~
 picom -b --shadow --no-dnd-shadow --shadow-radius=30 --shadow-opacity=0.9
 
