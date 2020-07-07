@@ -3,8 +3,39 @@
 -- properties, go to https://github.com/fisadev/conky-draw/
 -- (and be sure to use the lastest version)
 
+font = 'Iosevka';
+font_size = '14';
+fg = 0xEF5A29;
+
 elements = {
     -- cpu
+    {
+        kind = 'static_text',
+        text = 'CPU',
+        from = {x = 110, y = 140},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'cpu0',
+        from = {x = 110, y = 185},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'cpu1',
+        from = {x = 110, y = 200},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
     {
         kind = 'ring_graph',
         conky_value = 'cpu cpu0',
@@ -42,6 +73,33 @@ elements = {
 
     -- memory
     {
+        kind = 'static_text',
+        text = 'MEM',
+        from = {x = 310, y = 140},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'ddr4',
+        from = {x = 310, y = 185},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'swap',
+        from = {x = 310, y = 200},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
         kind = 'ring_graph',
         conky_value = 'memperc /',
         center = {x = 300, y = 120},
@@ -77,6 +135,42 @@ elements = {
     },
 
     -- gpu
+    {
+        kind = 'static_text',
+        text = 'GPU',
+        from = {x = 110, y = 310},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'variable_text',
+        conky_value = 'exec ~/.config/conky-gpu/gpu.sh',
+        from = {x = 110, y = 325},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'freq',
+        from = {x = 110, y = 355},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'temp',
+        from = {x = 110, y = 370},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
     {
         -- gpu cpu freq
         kind = 'ring_graph',
@@ -121,6 +215,33 @@ elements = {
     },
 
     -- disk
+    {
+        kind = 'static_text',
+        text = 'DISK',
+        from = {x = 110, y = 480},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'root',
+        from = {x = 110, y = 525},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
+    {
+        kind = 'static_text',
+        text = 'internal',
+        from = {x = 110, y = 540},
+
+        font = font,
+        font_size = font_size,
+        color = fg,
+    },
     {
         kind = 'ring_graph',
         conky_value = 'fs_used_perc /',
