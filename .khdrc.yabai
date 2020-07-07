@@ -9,6 +9,10 @@ khd mode space prefix on
 khd mode space timeout 0.5
 khd mode space restore default
 
+khd mode tmux prefix on
+khd mode tmux timeout 1
+khd mode tmux restore default
+
 # old colors:
 # black: 0xaa282828 (focused color)
 # green: 0xcc98971a
@@ -21,7 +25,15 @@ khd mode space		on_enter yabai -m config active_window_border_color 0xccb16286
 ctrl - d			:	khd -e "mode activate space"
 ctrl - f			:	khd -e "mode activate tree"
 tree - s 			:	khd -e "mode activate sender"
+ctrl - a         -> :   ctrl - a ; khd -e "mode activate tmux"
 
+tmux + ctrl - s -> : khd -e "mode activate default"
+tmux + ctrl - d -> : khd -e "mode activate default"
+tmux + ctrl - f -> : khd -e "mode activate default"
+tmux + ctrl - g -> : khd -e "mode activate default"
+tmux + ctrl - u -> : khd -e "mode activate default"
+tmux + alt - h -> : khd -e "mode activate default"
+tmux + alt - i -> : khd -e "mode activate default"
 
 # remap ctrl+a / ctrl+e -> start/end of line
 lctrl - a	![
