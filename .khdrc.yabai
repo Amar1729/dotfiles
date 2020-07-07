@@ -89,6 +89,9 @@ rcmd + shift - 3
 # rcmd + shift - 4
 #     -> : chunkc border::clear
 
+# take a screenshot and try to recognize text
+rcmd + shift - 6 : ~/.bin/ocr
+
 # outlook uses cmd+enter to send emails
 # assumes wp is in PATH
 lcmd - return
