@@ -93,21 +93,19 @@ alias init-pw='pwgen -cnyB1 -r \`\"\; 15'
 
 # overwrite `python` and `python3` to always open better REPL (if it's installed)
 python () {
-	which ipython > /dev/null
-	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
-		ipython
-	else
-		command python "$@"
-	fi
+    if command -v ipython >/dev/null && [[ "$#" -eq 0 ]]; then
+        ipython
+    else
+        command python "$@"
+    fi
 }
 
 python3 () {
-	which ipython > /dev/null
-	if [[ "$?" -eq 0 && "$#" -eq 0 ]]; then
-		ipython
-	else
-		command python3 "$@"
-	fi
+    if command -v ipython >/dev/null && [[ "$#" -eq 0 ]]; then
+        ipython
+    else
+        command python3 "$@"
+    fi
 }
 
 # colorize brew formulae to stdout
