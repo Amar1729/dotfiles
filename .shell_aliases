@@ -43,27 +43,6 @@ alias diff='colordiff'
 # set better defaults for highlight
 alias highlight='highlight -O xterm256 --style=zenburn --force'
 
-# use `highlight` for colorized cat
-hcat () {
-
-  while [[ $# -gt 0 ]]; do
-    case "$1" in
-      -n)
-        ARGS="-l"
-        ;;
-      *rc|*profile)
-        highlight "$ARGS" --syntax=conf -i "$1"
-        ;;
-      *)
-        highlight "$ARGS" -i "$1"
-        ;;
-    esac
-    shift
-  done
-
-  unset ARGS
-}
-
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {
@@ -110,7 +89,13 @@ python3 () {
 
 # colorize brew formulae to stdout
 brew-hcat () {
-	brew cat $1 | highlight --syntax=ruby
+    if command -v bat >/dev/null; then
+        brew cat "$1" | bat --language=ruby
+    elif command -v highlight >/dev/null; then
+        brew cat "$1" | highlight --syntax=ruby
+    else
+        brew cat "$1"
+    fi
 }
 
 # erase duplicate history (useful for some VMs)
