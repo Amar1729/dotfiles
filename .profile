@@ -8,9 +8,13 @@ export EDITOR_LOOK="block"
 
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
-# try to use pinentry-ncurses in terminal, pinentry-mac otherwise?
-GPG_TTY=$(tty)
-export GPG_TTY
+# use pinentry-ncurses in terminal, pinentry-mac otherwise
+export PINENTRY_USER_DATA='USE_TTY=1'
+# (may have to reload gpg after updating pinentry programs)
+# gpgconf --kill gpg-agent
+# gpgconf --launch gpg-agent
+# gpg-connect-agent updatestartuptty /bye > /dev/null
+# gpg-connect-agent reloadagent /bye
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
