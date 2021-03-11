@@ -46,10 +46,8 @@ alias highlight='highlight -O xterm256 --style=zenburn --force'
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {
-	sessions=`tmux list-sessions 2>/dev/null`
 	# if there are tmux sessions, connect to the last one or the one specified by $1
-	if [[ $? -eq 0 ]]
-	then
+	if tmux list-sessions 2>/dev/null; then
 		# if there's an argument given then connect to given session
 		if [[ -n "$1" ]]
 		then
