@@ -91,3 +91,9 @@
 
 [diff]
 	tool = vimdiff
+
+[pull]
+	ff = only
+
+[init]
+	defaultBranch = main
