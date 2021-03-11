@@ -1,5 +1,7 @@
-
 # Amar's global gitignore file
+
+# system stuff
+.vagrant/
 
 # Mac/editing (tmp) stuff
 .DS_Store
