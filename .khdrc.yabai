@@ -254,9 +254,9 @@ space + ctrl - d    [HyperTerm,Terminal,iTerm,iTerm2]
                     -> : khd -e "mode activate default"
 
 # change layout of desktop
-space - b : yabai -m space --layout bsp
-space - f : yabai -m space --layout float
-space - m : ~/.bin/yabai-monocle "$(yabai -m query --spaces --space|jq '.index')"
+space - b : yabai -m space --layout bsp; ~/.bin/yabai-monocle --rm curr
+space - f : yabai -m space --layout float; ~/.bin/yabai-monocle --rm curr
+space - m : ~/.bin/yabai-monocle curr
 
 # space - p           : chunkc tiling::desktop --padding inc;\
 #                     chunkc tiling::desktop --gap inc;\
