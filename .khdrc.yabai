@@ -169,10 +169,10 @@ ctrl + lalt - k : yabai -m window --swap north
 ctrl + lalt - l : yabai -m window --swap east
 
 # reinsert window
-cmd + shift - h : yabai -m window --warp west
-cmd + shift - j : yabai -m window --warp south
-cmd + shift - k : yabai -m window --warp north
-cmd + shift - l : yabai -m window --warp east
+lcmd + shift - h : yabai -m window --warp west
+lcmd + shift - j : yabai -m window --warp south
+lcmd + shift - k : yabai -m window --warp north
+lcmd + shift - l : yabai -m window --warp east
 
 # set insertion point for focused container
 lcmd + ctrl - h     : yabai -m window --insert west
