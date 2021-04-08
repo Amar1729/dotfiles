@@ -51,6 +51,17 @@ yabai -m signal --add event=window_focused \
 yabai -m signal --add event=display_changed \
     action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"simple-bar-spaces-jsx\"'"
 
+# borders are timing out oddly (being redrawn behind app windows?) for me.
+# these signals to toggle borders off/on on window change seem to resolve issue.
+
+yabai -m signal --add event=application_front_switched \
+    action="yabai -m config window_border off; yabai -m config window_border on" \
+    label=window-border-reset-front_switched
+
+yabai -m signal --add event=window_focused \
+    action="yabai -m config window_border off; yabai -m config window_border on" \
+    label=window-border-reset-focused
+
 # float system apps
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
