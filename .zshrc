@@ -89,7 +89,7 @@ setopt EXTENDED_HISTORY
 zshaddhistory () {
 	if whence ${${(z)1}[1]} >| /dev/null; then
 		# blacklist certain commands from history
-		if [[ ${${(z)1}[1]} =~ "(pass|z)" ]]; then
+		if [[ ${${(z)1}[1]} =~ "^(pass|z)" ]]; then
 			return 1
 		fi
 	else
