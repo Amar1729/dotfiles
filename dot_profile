@@ -43,9 +43,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 	unset DEFAULT_PATH || \
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
-# add pip user installs
-# FUCK this use pipx instead
-export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Python/3.7/bin"
+# use pipx instead of pip for all cli tools
+export PATH="$PATH:$HOME/.local/bin"
 
 # my changes
 export PATH="$PATH:/opt/prefix/bin:$HOME/.bin"
