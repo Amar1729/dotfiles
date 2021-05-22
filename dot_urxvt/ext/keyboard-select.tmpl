@@ -1,3 +1,4 @@
+{{ if (eq .chezmoi.os "linux") -}}
 #! perl -w
 # Author:   Bert Muennich
 # Website:  http://www.github.com/muennich/urxvt-perls
@@ -604,3 +605,4 @@ sub calc_span {
 
 	return ($br, $bc, $er, $ec);
 }
+{{- end }}

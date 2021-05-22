@@ -1,3 +1,4 @@
+{{ if (eq .chezmoi.os "linux") -}}
 #!/usr/bin/perl
 # Author:   Bert Muennich
 # Website:  http://www.github.com/muennich/urxvt-perls
@@ -116,3 +117,4 @@ sub sel_grab {
 	()
 }
 
+{{- end }}

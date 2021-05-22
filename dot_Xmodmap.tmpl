@@ -1,3 +1,4 @@
+{{ if (eq .chezmoi.os "linux") -}}
 ! rebind caps lock -> escape
 ! rebind shift + caps lock -> caps lock
 clear Lock
@@ -19,3 +20,4 @@ keycode 0x42 = Escape Caps_Lock
 !
 !add mod3 = Super_L Hyper_L
 !add mod4 = Super_R Hyper_R
+{{- end }}

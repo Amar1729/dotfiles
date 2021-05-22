@@ -1,3 +1,4 @@
+{{ if (eq .chezmoi.os "linux") -}}
 # xinitrc
 # after sourcing .xprofile, set up daemons (e.g. picom, dunst) and start window manager
 
@@ -37,3 +38,4 @@ exec >>~/.xsession-errors 2>&1
 # we
 #   gooooooooo
 exec bspwm -c $HOME/.config/bspwm/bspwmrc
+{{- end }}
