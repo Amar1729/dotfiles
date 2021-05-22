@@ -1,4 +1,4 @@
-#! /usr/bin/env
+#! /usr/bin/env bash
 
 # install stuff on a system depending on what pkg managers we have installed
 
@@ -138,7 +138,7 @@ post_package () {
     # neovim+dein
     mkdir -p ~/.config/nvim/
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/.config/nvim/installer.sh
-	sh ~/.config/nvim/installer.sh "$HOME/.cache"
+	sh ~/.config/nvim/installer.sh "$HOME/.cache/dein"
 }
 
 main () {
