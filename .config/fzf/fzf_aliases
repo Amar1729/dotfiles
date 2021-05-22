@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # put some fzf-related overrides here too
 export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'

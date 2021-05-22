@@ -1,5 +1,6 @@
 # General shell aliases. Source from .bashrc or .zshrc
 
+# just temporary aliases, nothing to see here
 [[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
 
 ####
@@ -28,7 +29,6 @@ mcd () { mkdir -p "$1" && cd "$1"; }
 # Use neovim instead of vim
 alias vi="nvim"
 alias vim="nvim"
-alias gvim="/usr/local/bin/vim"
 vimdiff () { nvim -d "$@" ;}
 
 # copy with a progress bar.
@@ -39,6 +39,11 @@ alias jcat='python -m json.tool'
 
 # colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
 alias diff='colordiff'
+
+# nice terminal clock
+clock () {
+	watch -t -n 1 date +%T
+}
 
 # set better defaults for highlight
 alias highlight='highlight -O xterm256 --style=zenburn --force'

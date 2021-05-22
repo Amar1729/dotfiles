@@ -1,0 +1,24 @@
+! .Xresources config !
+! removed a lot of stuff from here in favor of alacritty
+
+! using pywal for colors (keep gruvbox as backup)
+#include ".cache/wal/colors.Xresources"
+!#include ".config/xresources/gruvbox-dark.xresources"
+
+! maybe this doesn't work on my '09 mbp because of weird resolution?
+! finally figured out font naming (use fc-match)
+!URxvt.font: xft:Fantasque Sans Mono:size=18:antialias=true
+URxvt.font: xft:Iosevka:size=18
+
+*transparent: true
+*shading: 30
+
+*scrollBar: false
+*internalBorder: 40
+
+! backward/forward a word (alt)
+! be wary of changing these - i think lack of oh-my-zsh may mess things up? not sure tbh
+!URxvt.keysym.M-Left:	\033[1;5D
+URxvt.keysym.M-Left:	\033b
+!URxvt.keysym.M-Right:	\033[1;5C
+URxvt.keysym.M-Right:	\033f

@@ -3,59 +3,102 @@
 #
 
 # terminal emulator
-# windelicato - mod1 + shift + Return
-mod1 + Return
-	urxvt
+super + Return
+	alacritty
+#urxvtc
 
-# What is this?
-#mod1 + ctrl + Return
-#	 bspc rule -a urxvtc -o pseudo_tiled=on && urxvtc
+# alt-tab-like application quick switcher
+super + Tab
+	rofi -show-icons -show window
 
 # program launcher
-# watch out! OS X - Cmd+Space is Sherlock
-mod2 + space
-	dmenu_run
+# make sure to install the rofi calc plugin: svenstaro/rofi-calc (use this line before that's installed:)
+#rofi -modi "drun" -sidebar-mode -show drun
+super + space
+	rofi -modi "drun,calc" -sidebar-mode -show drun
 
 # make sxhkd reload its configuration files:
-mod1 + Escape
+super + Escape
 	pkill -USR1 -x sxhkd
+
+# temporary keybind for testing things
+# popup a calendar with dunst
+super + s
+	notify-send "$(cal|sed "s|\($(date +%d)\)|<span foreground='#ffffff'>\1</span>|")"
+
+#
+# function keys
+#
+
+# note: these bindings use (newer) acpilight, not xorg-xbacklight
+# acpilight: xbacklight requires sudo!
+# i gave all users write permission to the backlight device:
+# chmod a+w /sys/class/backlight/intel_backlight/brightness
+# (initially 644 permissions)
+XF86MonBrightnessDown
+	xbacklight -dec 10
+
+XF86MonBrightnessUp
+	xbacklight -inc 10
+
+# for mac laptop keeb
+XF86LaunchA
+	/opt/bin/lock
+
+# for full keebs
+XF86HomePage
+	/opt/bin/lock
+
+#XF86LaunchB
+
+shift + XF86LaunchB
+	scrot -e 'mv $f ~/images' && notify-send "Screenshot taken"
+
+XF86KbdBrightnessDown
+	~/.bin/kb_light -d
+
+XF86KbdBrightnessUp
+	~/.bin/kb_light -i
+
+#XF86AudioPrev
+#XF86AudioPlay
+#XF86AudioNext
+
+XF86AudioRaiseVolume
+	amixer set 'Master' 5%+
+
+XF86AudioLowerVolume
+	amixer set 'Master' 5%-
+
+XF86AudioMute
+	amixer -D pulse set 'Master' 1+ toggle
 
 #
 # bspwm hotkeys
 #
 
 # quit bspwm normally
-# Watch out! OS X - Cmd+Alt+Esc is force quit applications
-# (just stick with killing xquartz with Cmd+q)
-mod1 + mod2 + Escape
+super + alt + Escape
 	bspc quit
 
 # close and kill
-mod1 + {_,shift + }w
+super + {_,shift + }w
 	bspc node -{c,k}
 
 # alternate between the tiled and monocle layout
-mod1 + m
+super + m
 	bspc desktop -l next
-
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-mod1 + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
-
-# swap the current node and the biggest node
-mod1 + g
-	bspc node -s biggest
 
 #
 # state/flags
 #
 
 # set the window state
-mod1 + {t,shift + t,s,f}
+super + {t,shift + t,shift + g,g}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-mod1 + ctrl + {x,y,z}
+super + ctrl + {x,y,z}
 	bspc node -g {locked,sticky,private}
 
 #
@@ -63,55 +106,58 @@ mod1 + ctrl + {x,y,z}
 #
 
 # focus the node in the given direction
-# Watch out! OS X - Cmd+h is hide
-mod2 + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
 
-# focus the node for the given path jump
-mod1 + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+# focus the next/previous node in the current desktop
+alt + {_,shift + }n
+	bspc node -f {next,prev}.local
 
-# focus the next/previous node
-# Watch out! OS X - Cmd+c is copy
-mod2 + {_,shift + }c
-	bspc node -f {next,prev}
+# focus the next/previous desktop in the current monitor (mouse)
+shift + {button8,button9}
+	bspc desktop -f {prev,next}.local
 
-# focus the next/previous desktop
-mod1 + bracket{left,right}
-	bspc desktop -f {prev,next}
-
-# focus the last node/desktop
-mod1 + {grave,Tab}
-	bspc {node,desktop} -f last
-
-# focus the older or newer node in the focus history
-mod1 + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
-	bspc wm -h on
+# focus the next/previous desktop in the current monitor (keyboard)
+super + {Left,Right}
+	bspc desktop -f {prev,next}.local
 
 # focus or send to the given desktop
-mod1 + {_,shift + }{1-9,0}
+super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+
+# swap windows
+ctrl + alt + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# reinsert windows (odd that this is so complicated)
+# (note) there's no way to have 1-to-many braces assignment (?) ^
+super + shift + h
+	bspc node west -p south && bspc node focused -n west
+super + shift + j
+	bspc node south -p east && bspc node focused -n south
+super + shift + k
+	bspc node north -p east && bspc node focused -n north
+super + shift + l
+	bspc node east -p south && bspc node focused -n east
 
 #
 # preselect
 #
 
 # preselect the direction
-mod1 + ctrl + {h,j,k,l}
+super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-mod1 + ctrl + {1-9}
+super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-mod1 + ctrl + space
+super + ctrl + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-mod1 + ctrl + shift + space
+super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
@@ -119,14 +165,13 @@ mod1 + ctrl + shift + space
 #
 
 # expand a window by moving one of its side outward
-mod1 + mod2 + {h,j,k,l}
+alt + {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-mod1 + mod2 + shift + {h,j,k,l}
+alt + shift + {l,k,j,h}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # move a floating window
-# Watch out! OS X - Cmd+Arrow is bound to Spaces nav
-mod2 + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + shift + {Left,Down,Up,Right}
+	bspc node -v {-40 0,0 40,0 -40,40 0}

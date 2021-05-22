@@ -28,6 +28,8 @@ export LESS_TERMCAP_se=$(printf '\e[0m')            #  leave standout           
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;4m')    # enter underline           mode
 export LESS_TERMCAP_ue=$(printf '\e[0m')            #  leave underline
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ####
 ## PATH changes
 ####
@@ -43,17 +45,27 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 	unset DEFAULT_PATH || \
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
+# add snap path on ubuntu
+[[ -d /snap/bin ]] && emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+
 # add pip user installs
 # FUCK this use pipx instead
 export PATH="$PATH:$HOME/.local/bin:$HOME/Library/Python/3.7/bin"
 
 # my changes
-export PATH="$PATH:/opt/prefix/bin:$HOME/.bin"
+export PATH="$PATH:/opt/bin:$PATH:/opt/prefix/bin:$HOME/.bin"
 
 # add fzf (default bindings, and my own aliases)
-[[ $SHELL == *"zsh" ]]  && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
-[[ $SHELL == *"bash" ]] && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
-
+if [[ -n "$ZSH" ]]; then
+    # for now - unfortunately, this hack is required to stop
+    # lightdm's Xsession wrapper from sourcing us and incorrectly
+    # trying to source zsh bindings. it'll fail, and lightdm won't
+    # correctly start up X.
+    # (currently, $ZSH is set inside my .zshrc)
+    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
+else
+    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
+fi
 [[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
 # Add cargo (Rust) stuff
@@ -67,14 +79,23 @@ export PATH="$PATH:/opt/prefix/bin:$HOME/.bin"
 export RUST_SRC_PATH="$HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust/src"
 
 # go stuff
-export GOPATH="${HOME}/.go"
-export GOROOT=/usr/local/opt/go/libexec
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+# export GOPATH="${HOME}/.go"
+# export GOROOT=/usr/local/opt/go/libexec
+# export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 # nix
+# arch pkg: had to manually create user profile:
+# ln -s /nix/var/nix/profiles/default/ /nix/var/nix/profiles/per-user/$USER/profile
 if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh;
 fi
+
+# perl
+#export PATH="$HOME/perl5/bin:$PATH"
+#export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB"
+#export PERL_LOCAL_LIB_ROOT="$HOME/perl5:$PERL_LOCAL_LIB_ROOT"
+#export PERL_MB_OPT="--install_base \"$HOME/perl5\""
+#export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 [[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"

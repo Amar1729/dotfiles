@@ -42,13 +42,19 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('Shougo/echodoc.vim')
   
   " async linting
-  call dein#add('neomake/neomake')
+  "call dein#add('neomake/neomake')
 
   " code snippet engine
-  call dein#add('SirVer/ultisnips')
+  "call dein#add('SirVer/ultisnips')
 
   " snippets are separated from the engine
-  call dein#add('honza/vim-snippets')
+  "call dein#add('honza/vim-snippets')
+
+  " use these for deoplete to work in vim8
+  if has('nvim') == 0
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
 
   " use these for deoplete to work in vim8
   if has('nvim') == 0
@@ -72,41 +78,48 @@ if dein#load_state('~/.cache/dein/')
   "call dein#add('FredKSchott/CoVim')
 
   " nice completion of (x)html tags
-  call dein#add('tpope/vim-ragtag')
+  "call dein#add('tpope/vim-ragtag')
 
   " (vim plugin) minimap
-  call dein#add('severin-lemaignan/vim-minimap')
+  "call dein#add('severin-lemaignan/vim-minimap')
 
   " vimwiki
-  call dein#add('vimwiki/vimwiki')
+  "call dein#add('vimwiki/vimwiki')
 
   " fzf support
-  call dein#add('/usr/local/opt/fzf')
   call dein#add('junegunn/fzf.vim')
 
   " line diffing
-  call dein#add('AndrewRadev/linediff.vim')
+  "call dein#add('AndrewRadev/linediff.vim')
 
   " Language-specific syntax support, completions:
 
-  " Live LaTeX previewing
-  "call dein#add('xuhdev/vim-latex-live-preview')
+"  " Live LaTeX previewing
+"  "call dein#add('xuhdev/vim-latex-live-preview')
+"
+"  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
+"  "call dein#add('donRaphaco/neotex')
+"  " no, I think this only works for vim?
+"
+"  " Syntax highlighting for coffeescript
+"  call dein#add('kchmck/vim-coffee-script')
+"
+"  " Support for Julia
+"  call dein#add('JuliaEditorSupport/julia-vim')
+"
+"  " toml syntax
+"  call dein#add('cespare/vim-toml')
+"
+"  " nix expression language
+"  call dein#add('LnL7/vim-nix')
 
-  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
-  "call dein#add('donRaphaco/neotex')
-  " no, I think this only works for vim?
+  " sxhkd
+  call dein#add('kovetskiy/sxhkd-vim')
 
-  " Syntax highlighting for coffeescript
-  call dein#add('kchmck/vim-coffee-script')
-
-  " Support for Julia
-  call dein#add('JuliaEditorSupport/julia-vim')
-
-  " toml syntax
-  call dein#add('cespare/vim-toml')
-
-  " nix expression language
-  call dein#add('LnL7/vim-nix')
+  " only seems to work in vim8 currently, but not nvim
+  if has('nvim') == 0
+    call dein#add('artur-shaik/vim-javacomplete2')
+  endif
 
   " only seems to work in vim8 currently, but not nvim
   if has('nvim') == 0
@@ -148,6 +161,10 @@ set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
 
 " allow mouse control
 set mouse=a
+
+" override some defaults (only needed on ubuntu?)
+set foldmethod=manual
+set foldcolumn=2
 
 " zsh-style tab completion
 set wildmenu
@@ -193,16 +210,22 @@ endif
 let mapleader=","
 
 " Copy to clipboard (mac uses * register: linux uses + reg)
-vnoremap <leader>y "*y
-nnoremap <leader>Y "*yg_
-nnoremap <leader>y "*y
-nnoremap <leader>yy "*yy
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
 
-" Paste from clipboard
-nnoremap <leader>p "*p
-nnoremap <leader>P "*P
-vnoremap <leader>p "*p
-vnoremap <leader>P "*P
+" Paste from system: clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" Paste from system: primary
+nnoremap <leader><C-p> "*p
+nnoremap <leader><C-P> "*P
+vnoremap <leader><C-p> "*p
+vnoremap <leader><C-P> "*P
 
 " Buffer control
 
@@ -258,7 +281,7 @@ augroup END
 autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
 
 " disable linting for temporary .py files
-autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
+"autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
 " auto-compile rust files
 "autocmd BufWritePost *.rs !cargo run
@@ -304,7 +327,6 @@ set statusline=%t
 " Plugin Settings and Keybinds
 """
 
-
 " gitgutter
 set updatetime=100
 nmap ghn <Plug>(GitGutterNextHunk)
@@ -317,13 +339,13 @@ nmap <leader>hs <Plug>(GitGutterStageHunk)
 let g:deoplete#enable_at_startup=1
 
 " completion engines
-let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+"let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 " this will chang with each upgrade! symlink?
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include'
 
 " python info for deoplete
-let g:python_host_prog='/usr/local/bin/python'
-let g:python3_host_prog='/usr/local/bin/python3'
+"let g:python_host_prog='/usr/bin/python'
+let g:python3_host_prog='/usr/bin/python3'
 
 " Rust Auto-Complete-ER
 " requires: `racer` in PATH and RUST_SRC_PATH (rustup component add rust-src) set
@@ -340,6 +362,59 @@ autocmd CompleteDone * pclose
 " deoplete tab-complete:
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
 
+" neomake settings
+" how to lint with python3?
+" let g:neomake_python_pylint_exe = 'python3'
+
+" When writing a buffer, and on normal mode changes (after 750ms).
+"call neomake#configure#automake('nw', 750)
+"let g:neomake_error_sign =   {'text' : 'x', 'texthl' : 'NeomakeErrorSign'}
+"let g:neomake_warning_sign = {'text' : '!', 'texthl' : 'NeomakeWarningSign'}
+"let g:neomake_message_sign = {'text' : '>', 'texthl' : 'NeomakeMessageSign'}
+"let g:neomake_info_sign =    {'text' : 'i', 'texthl' : 'NeomakeInfoSign'}
+
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+
+" TODO chromatica settings
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#enable_at_startup=1
+
+
+" vim-minimap settings
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+
+
+""""
+" don't know about merging this stuff, don't use latex much anymore?
+"
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+nnoremap <leader>L :LLPStartPreview<CR>
+" live previewing currently broken?
+"autocmd TextChanged,TextChangedI *tex silent :LLPStartPreview 
+
+" latex live stuff
+" update time
+autocmd Filetype tex setl updatetime=5
+nnoremap <F12> :LLPStartPreview<CR>
+
+" change from default evince
+" actually i think evince is fine?
+"let g:livepreview_previewer = 'mupdf'
+
+""""
+
+" neotex settings
+"let g:neotex_enabled = 0
+
 
 " ultisnip settings
 " <c-j>, <c-k> : jump forward, backward, respectively
@@ -355,7 +430,7 @@ vnoremap <leader>d	:Linediff<CR>
 let g:neomake_python_pylint_exe = 'python3'
 
 " When writing a buffer, and on normal mode changes (after 750ms).
-call neomake#configure#automake('nw', 750)
+"call neomake#configure#automake('nw', 750)
 
 " red
 hi NeomakeErrorSign ctermfg=1

@@ -1,0 +1,14 @@
+# Shell aliases - linux-specific
+
+# lock script: symlinked into /opt/bin as "lock"
+
+# battery power
+alias batt="acpi -b"
+
+# copy/paste
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -o"
+
+# put this here for now:
+# * trackpad - dont have tap-to-click
+# * gesture support (arch) : libinput-gestures

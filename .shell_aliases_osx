@@ -3,10 +3,6 @@
 alias lr="gls -lhFG -a --color=auto \
           --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"
 
-clock () {
-	watch -t -n 1 date +%T
-}
-
 # quick look alias
 alias ql='qlmanage -p 2>/dev/null'
 
