@@ -1,0 +1,235 @@
+# General shell aliases. Source from .bashrc or .zshrc
+
+# just temporary aliases, nothing to see here
+[[ -r ~/.bash_aliases_tmp ]] && source ~/.bash_aliases_tmp
+
+####
+## Common aliases, command improvements:
+####
+
+# ls, grep, mkdir, tmux improvements
+alias ls="exa"
+alias ll="ls -l"
+alias la="ll -a"
+alias lt="ll -s time"
+alias l1="ls -1"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+alias ggrep="ggrep --color=auto"
+alias less="less -i"
+alias cclear="cd; clear"
+alias rsync='rsync -avh --partial --progress'
+alias dusort="du -sh *|sort -h"
+
+# Make new directory and immediately cd into it (from Nate Landau's, link below)
+# should the -p flag be included?
+mcd () { mkdir -p "$1" && cd "$1"; }
+
+# Use neovim instead of vim
+alias vi="nvim"
+alias vim="nvim"
+vimdiff () { nvim -d "$@" ;}
+
+# copy with a progress bar.
+alias cpv="rsync -avzh --progress --"
+
+# pretty-print json
+alias jcat='python -m json.tool'
+
+# colorize diff output (use colordiff instead of diff --color, problems with -y, side-by-side)
+alias diff='colordiff'
+
+# nice terminal clock
+clock () {
+	watch -t -n 1 date +%T
+}
+
+# set better defaults for highlight
+alias highlight='highlight -O xterm256 --style=zenburn --force'
+
+# tmux-a [index]	: attaches to the index of given session
+# tmux-a			: tries to attach to last session; if none active, creates new one
+tmux-a () {
+	# if there are tmux sessions, connect to the last one or the one specified by $1
+	if tmux list-sessions 2>/dev/null; then
+		# if there's an argument given then connect to given session
+		if [[ -n "$1" ]]
+		then
+			tmux attach -t "$1"
+			#return $?
+		else
+			# no argument, and tmux is running: attach to the most recent session
+			tmux attach
+			#return $?
+		fi
+	else
+		# tmux isn't running: start it up
+		tmux
+		#return 0
+	fi
+}
+
+# Generate a password before plugging into `pass`
+alias init-pw='pwgen -cnyB1 -r \`\"\;\#\[\]\\ 15'
+
+# overwrite `python` and `python3` to always open better REPL (if it's installed)
+python () {
+    if command -v ipython >/dev/null && [[ "$#" -eq 0 ]]; then
+        ipython
+    else
+        command python "$@"
+    fi
+}
+
+python3 () {
+    if command -v ipython >/dev/null && [[ "$#" -eq 0 ]]; then
+        ipython
+    else
+        command python3 "$@"
+    fi
+}
+
+# colorize brew formulae to stdout
+brew-hcat () {
+    if command -v bat >/dev/null; then
+        brew cat "$1" | bat --language=ruby
+    elif command -v highlight >/dev/null; then
+        brew cat "$1" | highlight --syntax=ruby
+    else
+        brew cat "$1"
+    fi
+}
+
+# erase duplicate history (useful for some VMs)
+#alias clear_hist_dupes="cat $HOME/.bash_history|nl|sort -k 2|uniq -f1|sort -n|cut -f2|nl"
+
+####
+## aliases/functions that are mac or linux specific
+####
+
+{{ if (eq .chezmoi.os "darwin") -}}
+# mac-specific aliases
+
+alias lr="gls -lhFG -a --color=auto \
+          --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"
+
+# quick look alias
+alias ql='qlmanage -p 2>/dev/null'
+
+# fix broken virtualenv (when brew updates python)
+fix-env () {
+    gfind "$1" -type l -xtype l -delete
+    echo -e "Recreating virtualenv: $1\n"
+    if [[ -x "$1"/bin/python3 ]]; then
+        virtualenv -p python3 "$1"
+    else
+        virtualenv -p python2 "$1"
+    fi
+}
+
+abri () { open -a Abricotine "$@" }
+
+# get battery status (this is only used when I'm running very low power, no bar)
+alias power="pmset -g batt | egrep -o '([0-9]+\%).*?;.*?;'"
+
+# control wifi
+wifi () {
+	if [[ -n "$1" ]]; then
+		case "$1" in
+			"status")
+				networksetup -getairportnetwork en0
+				;;
+			"on"|"off")
+				networksetup -setairportpower en0 "$1"
+				;;
+			*)
+				echo "Not valid option: ""$1" && echo "{on|off|status}" && return 1
+				;;
+		esac
+	else
+		# with no argument, just toggle
+		STATUS="$(networksetup -getairportpower en0|cut -f4 -d ' ')"
+		if [[ $STATUS == "Off" ]]; then
+			networksetup -setairportpower en0 on && echo "turning wifi on..."
+		else
+			networksetup -setairportpower en0 off && echo "turning wifi off..."
+		fi
+	fi
+}
+
+# Show hidden files (default: false)
+export FINDER_SHOW_HIDDEN=1
+toggleFinderHidden () {
+	if [[ $FINDER_SHOW_HIDDEN -eq 0 ]]
+	then
+		export FINDER_SHOW_HIDDEN=1
+		defaults write com.apple.finder ShowAllFiles true
+		killall Finder
+	else
+		export FINDER_SHOW_HIDDEN=0
+		defaults write com.apple.finder ShowAllFiles false
+		killall Finder
+	fi
+}
+
+# Show desktop icons by default
+export DESKTOP_SHOW=1
+toggleDesktop () {
+	if [[ $DESKTOP_SHOW -eq 0 ]]
+	then
+		export DESKTOP_SHOW=1
+		defaults write com.apple.finder CreateDesktop true
+		killall Finder
+	else
+		export DESKTOP_SHOW=0
+		defaults write com.apple.finder CreateDesktop false
+		killall Finder
+	fi
+}
+
+# hardcore ricing stuff (lol)
+# http://tex.stackexchange.com/questions/43057/macosx-pdf-viewer-automatic-reload-on-file-modification
+# setup Skim for vim latex pdf previewing
+# defaults write -app Skim SKAutoReloadFileUpdate -boolean true
+#
+# http://stackoverflow.com/questions/1264210/does-mac-x11-have-the-xtest-extension
+# xtest for xQuartz?
+# defaults write org.x.X11 enable_test_extensions -boolean true
+
+####
+# Following suggestions are from:
+# http://natelandau.com/my-mac-osx-bash_profile/
+
+# Prevent power button from immediately sleeping display
+alias PowerSleepOff='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no'
+alias PowerSleepOn='defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool yes'
+
+# Move default screencap location (only have to run this once, but saved here just in case)
+# Where I want them saved:
+alias picDls='defaults write com.apple.screencapture location ~/Downloads/; killall SystemUIServer'
+# Actual default:
+alias picDef='defaults write com.apple.screencapture location ~/Desktop/; killall SystemUIServer'
+
+# Recursively delete .DS_Store files
+alias delDS="find . -type f -name '*.DS_Store' -ls -delete"
+
+####
+## End of Nate Landau's suggestions
+####
+{{ else if (eq .chezmoi.os "linux") -}}
+# Shell aliases - linux-specific
+
+# lock script: symlinked into /opt/bin as "lock"
+
+# battery power
+alias batt="acpi -b"
+
+# copy/paste
+alias pbcopy="xclip -selection clipboard"
+alias pbpaste="xclip -o"
+
+# put this here for now:
+# * trackpad - dont have tap-to-click
+# * gesture support (arch) : libinput-gestures
+{{- end }}
