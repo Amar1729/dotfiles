@@ -8,13 +8,6 @@
 ## Look and feel
 ####
 
-# Source OS X aliases (for example, source `reattach-to-namespace` for opening files)
-if-shell 'test "$(uname)" = "Darwin"' \
-	'source ~/.tmux-osx.conf'
-
-if-shell 'test "$(uname)" = "Linux"' \
-	'source ~/.tmux-linux.conf'
-
 # Enable mouse mode and scrolling
 # https://ryanfb.github.io/etc/2015/10/19/tmux_mouse_mode_on_el_capitan.html
 set -g mouse on
