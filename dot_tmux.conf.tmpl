@@ -8,9 +8,10 @@
 ## Look and feel
 ####
 
-# Source OS X aliases (for example, source `reattach-to-namespace` for opening files)
-if-shell 'test "$(uname)" = "Darwin"' \
-	'source ~/.tmux-osx.conf'
+{{ if (eq .chezmoi.os "darwin") -}}
+# reattach to Quartz window server (commands like `open` or `subl`)
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+{{- end }}
 
 # Enable mouse mode and scrolling
 set -g mouse on
