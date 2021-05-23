@@ -1,0 +1,5 @@
+# add this to a CSS injector for google.com searches
+# (to prevent the stupid half-second popup after coming back from a link):
+.s + div, .exp-outline { 
+        display: none;
+}
