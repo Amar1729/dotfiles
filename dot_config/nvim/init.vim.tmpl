@@ -124,7 +124,7 @@ if dein#load_state('~/.cache/dein/')
   " sxhkd
   call dein#add('kovetskiy/sxhkd-vim')
 {{- end }}
-
+{{ if .work }}
   " hjson (ELK documents)
   call dein#add('hjson/vim-hjson')
 
@@ -135,6 +135,7 @@ if dein#load_state('~/.cache/dein/')
 
   " antlr files (.g4 and .g3)
   call dein#add('dylon/vim-antlr')
+{{- end }}
 
   " powershell (ugh)
   call dein#add('PProvost/vim-ps1')
