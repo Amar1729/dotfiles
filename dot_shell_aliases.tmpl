@@ -8,7 +8,7 @@
 ####
 
 # ls, grep, mkdir, tmux improvements
-alias ls="exa"
+alias ls="exa --git"
 alias ll="ls -l"
 alias la="ll -a"
 alias lt="ll -s time"
@@ -45,9 +45,6 @@ alias diff='colordiff'
 clock () {
 	watch -t -n 1 date +%T
 }
-
-# set better defaults for highlight
-alias highlight='highlight -O xterm256 --style=zenburn --force'
 
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
@@ -91,15 +88,25 @@ python3 () {
     fi
 }
 
-# colorize brew formulae to stdout
-brew-hcat () {
-    if command -v bat >/dev/null; then
-        brew cat "$1" | bat --language=ruby
-    elif command -v highlight >/dev/null; then
-        brew cat "$1" | highlight --syntax=ruby
-    else
-        brew cat "$1"
-    fi
+watch () {
+    while :; do
+        clear
+        echo "$@"
+        "$@"
+        sleep 2
+    done
+}
+
+function ssh-forward () {
+    local -a args
+    local server
+    server="$1"
+    shift
+    while [[ $# -gt 0 ]]; do
+        args+="-L${1}:localhost:${1}"
+        shift
+    done
+    ssh "${args[@]}" "$server"
 }
 
 # erase duplicate history (useful for some VMs)
@@ -112,6 +119,8 @@ brew-hcat () {
 
 {{ if (eq .chezmoi.os "darwin") -}}
 # mac-specific aliases
+
+alias brew-ui="brew uses --installed"
 
 alias lr="gls -lhFG -a --color=auto \
           --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"

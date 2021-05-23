@@ -7,7 +7,7 @@ yabai -m config focus_follows_mouse          autoraise
 yabai -m config window_topmost               off
 yabai -m config window_opacity               off
 yabai -m config window_shadow                off
-yabai -m config window_border                on
+yabai -m config window_border                off
 yabai -m config active_window_border_color   0xffebdbb2
 yabai -m config normal_window_border_color   0xff505050
 yabai -m config insert_feedback_color        0xffd75f5f
@@ -47,13 +47,14 @@ yabai -m signal --add event=display_changed \
 # borders are timing out oddly (being redrawn behind app windows?) for me.
 # these signals to toggle borders off/on on window change seem to resolve issue.
 
-yabai -m signal --add event=application_front_switched \
-    action="yabai -m config window_border off; yabai -m config window_border on" \
-    label=window-border-reset-front_switched
-
-yabai -m signal --add event=window_focused \
-    action="yabai -m config window_border off; yabai -m config window_border on" \
-    label=window-border-reset-focused
+# borders are doing weird things in yabai right now. disable until fixed.
+# yabai -m signal --add event=application_front_switched \
+#     action="yabai -m config window_border off; yabai -m config window_border on" \
+#     label=window-border-reset-front_switched
+#
+# yabai -m signal --add event=window_focused \
+#     action="yabai -m config window_border off; yabai -m config window_border on" \
+#     label=window-border-reset-focused
 
 # float system apps
 yabai -m rule --add app="^System Preferences$" manage=off
@@ -68,7 +69,20 @@ yabai -m rule --add app="^python$" manage=off
 yabai -m rule --add app="^python$" manage=off
 yabai -m rule --add app="^python3$" manage=off
 yabai -m rule --add app="^Karabine$" manage=off
+yabai -m rule --add app="^Karabiner" manage=off
+# "app":"Karabiner-Elements",
+# "title":"Karabiner-Elements Preferences",
 yabai -m rule --add app="^Font Book$" manage=off
 yabai -m rule --add app="^Harmony$" manage=off
+yabai -m rule --add app="^Docker Desktop$" manage=off
+
+# manage work apps
+yabai -m rule --add app="^Microsoft Outlook$" grid=90:160:1:1:158:88
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
+yabai -m rule --add app="^Pulse Secure$" manage=off
+yabai -m rule --add app="^Oracle VM VirtualBox Manager$" manage=off
+yabai -m rule --add app="^VirtualBox$" manage=off
+yabai -m rule --add app="^VirtualBox VM$" manage=off
+yabai -m rule --add app="^zoom.us$" manage=off
 
 echo "yabai configuration loaded.."

@@ -82,7 +82,7 @@ setopt EXTENDED_HISTORY
 zshaddhistory () {
 	if whence ${${(z)1}[1]} >| /dev/null; then
 		# blacklist certain commands from history
-		if [[ ${${(z)1}[1]} =~ "^(pass|z)" ]]; then
+		if [[ ${${(z)1}[1]} =~ "(pass|z)" ]]; then
 			return 1
 		fi
 	else
@@ -121,11 +121,12 @@ HYPHEN_INSENSITIVE="true"
 fpath+=~/.zsh/completions
 
 # https://gist.github.com/ctechols/ca1035271ad134841284
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-
-compinit -C
+# (if we modify fpath ourselves, compinit should be done AFTER)
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+	compinit -i
+else
+	compinit -C
+fi
 
 # omz conflicts with common user alias mcd
 compdef -d mcd

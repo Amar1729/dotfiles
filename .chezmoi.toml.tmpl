@@ -1,0 +1,11 @@
+{{- $email := promptString "email" -}}
+{{- $git_user := promptString "git_user" -}}
+{{- $work := promptBool "work computer" -}}
+
+[data]
+    email = {{ $email | quote }}
+    git_user = {{ $git_user | quote }}
+    work = {{ $work }}
+
+[diff]
+	pager = "less -FX"

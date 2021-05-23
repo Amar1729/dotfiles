@@ -2,7 +2,7 @@
 
 # put some fzf-related overrides here too
 export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
-export FZF_DEFAULT_OPTS='--ansi'
+export FZF_DEFAULT_OPTS='--ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 __git_log () {
@@ -44,35 +44,6 @@ ftags() {
             -c "silent tag $(cut -f2 <<< "$line")"
 }
 
-# fstash - easier way to deal with stashes
-# type fstash to get a list of your stashes
-# enter shows you the contents of the stash
-# ctrl-d shows a diff of the stash against your current HEAD
-# ctrl-b checks the stash out as a branch, for easier merging
-fstash() {
-    local out q k sha
-    while out=$(
-        git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
-        fzf --ansi --no-sort --query="$q" --print-query \
-        --expect=ctrl-d,ctrl-b);
-    do
-        mapfile -t out <<< "$out"
-        q="${out[0]}"
-        k="${out[1]}"
-        sha="${out[-1]}"
-        sha="${sha%% *}"
-        [[ -z "$sha" ]] && continue
-        if [[ "$k" == 'ctrl-d' ]]; then
-            git diff $sha
-        elif [[ "$k" == 'ctrl-b' ]]; then
-            git stash branch "stash-$sha" $sha
-            break;
-        else
-            git stash show -p $sha
-        fi
-    done
-}
-
 # pass completion suggested by @d4ndo (#362) (slightly modified)
 _fzf_complete_pass() {
   _fzf_complete '+m' "$@" < <(
@@ -104,11 +75,11 @@ _fzf_complete_git() {
     # these are commands I commonly call on commit hashes.
     # cp->cherry-pick, co->checkout
 
-    if [[ $ARGS == 'git cp'* || \
-          $ARGS == 'git cherry-pick'* || \
-          $ARGS == 'git co'* || \
-          $ARGS == 'git checkout'* || \
-          $ARGS == 'git reset'* ]]; then
+    if [[ $ARGS == *'git cp'* || \
+          $ARGS == *'git cherry-pick'* || \
+          $ARGS == *'git co '* || \
+          $ARGS == *'git checkout'* || \
+          $ARGS == *'git reset'* ]]; then
         _fzf_complete "--reverse --multi" "$@" < <(__git_log)
     else
         eval "zle ${fzf_default_completion:-expand-or-complete}"

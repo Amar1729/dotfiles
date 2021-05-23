@@ -1,17 +1,23 @@
 README.md
 .config/simple-rc
+.config/packages
 
 {{- if ne .chezmoi.os "darwin" }}
 
 Library/
+.config/bspwm/bspwmrc_darwin
+.config/sxhkd/sxhkd_darwin
 .config/iterm2
 .config/ubersicht
 .chunkwmrc
 .khdrc.*
+.xinitrc_darwin
 .yabairc
 
 {{ else if ne .chezmoi.os "linux" }}
 
+.config/bspwm/bspwmrc_linux
+.config/sxhkd/sxhkd_linux
 .config/pip
 .config/conky-gpu
 .config/dunst
@@ -22,5 +28,6 @@ Library/
 .config/scripts/lock.sh
 .config/xresources
 .urxvt
+.xinitrc_linux
 
 {{ end }}

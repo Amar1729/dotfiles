@@ -15,6 +15,29 @@ highlight link khdComment  Comment
 syntax keyword khdKeyword khd kwmc
 highlight link khdKeyword Keyword
 
+" -- yabai stuff
+
+syntax keyword khdKeyword yabai
+highlight link khdKeyword Keyword
+
+syntax match khdKey '[lr]\?cmd'
+syntax match khdKey '[lr]\?alt'
+syntax match khdKey '[lr]\?ctrl'
+syntax match khdKey '[lr]\?shift'
+highlight link khdKey Keyword
+
+syntax match khdLiteral '\<[0-9a-zA-Z]\>' contained display
+syntax match khdLiteral '\<0x\d\d\>' contained display
+syntax keyword khdLiteral return left right up down contained
+highlight link khdLiteral Constant
+
+" syntax region khdHotKey start='^\s*[\S]' end='\<:\>' contains=khdKey,khdLiteral
+" syntax region khdHotKey start='^' end=' :\>' contains=khdKey,khdLiteral
+
+syntax region khdCommand start='khdHotKey:' end='$'
+
+" --
+
 syntax keyword khdFunction config rule mode reload
 highlight link khdFunction Identifier
 

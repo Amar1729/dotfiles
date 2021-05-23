@@ -45,6 +45,8 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 	unset DEFAULT_PATH || \
 	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 
+export HOMEBREW_BAT=1
+
 # use pipx instead of pip for all cli tools
 export PATH="$PATH:$HOME/.local/bin"
 
@@ -66,6 +68,8 @@ else
     [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
 fi
 [[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
+
+[[ -d "$XDG_CONFIG_HOME/fzf" ]] && export PATH="$XDG_CONFIG_HOME/fzf:$PATH"
 
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
@@ -122,6 +126,9 @@ sdk () {
 # why doesnt this work
 alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
 
+# haskell
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+
 # add calibre cli
 [[ -d /Applications/calibre.app ]] && \
 export PATH="$PATH:/Applications/calibre.app/Contents/MacOS/"
@@ -138,6 +145,11 @@ export SPICETIFY_CONFIG="$HOME/.config/spicetify/"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# pyenv
+if command pyenv &>/dev/null; then
+    eval "$(pyenv init -)"
+fi
 
 # comment out the rest of this, but keep it around?
 : << 'END'
