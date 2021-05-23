@@ -9,7 +9,11 @@ html#main-window {
 	--tab-font: "Cantarell", sans-serif;
 	--tab-font-weight: 700;
 	--tab-height: 27px; /* original 32px */
+{{- if (eq .chezmoi.os "darwin") }}
+	--tabs-container-height: 75px; /* original 140px */
+{{- else if (eq .chezmoi.os "linux") }}
 	--tabs-container-height: 70px; /* original 140px */
+{{- end }}
 
 	--urlbar-container-margin: 0px;
 	--urlbar-list-width: 60%;
