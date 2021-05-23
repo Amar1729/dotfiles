@@ -46,9 +46,6 @@ clock () {
 	watch -t -n 1 date +%T
 }
 
-# set better defaults for highlight
-alias highlight='highlight -O xterm256 --style=zenburn --force'
-
 # tmux-a [index]	: attaches to the index of given session
 # tmux-a			: tries to attach to last session; if none active, creates new one
 tmux-a () {
@@ -91,17 +88,6 @@ python3 () {
     fi
 }
 
-# colorize brew formulae to stdout
-brew-hcat () {
-    if command -v bat >/dev/null; then
-        brew cat "$1" | bat --language=ruby
-    elif command -v highlight >/dev/null; then
-        brew cat "$1" | highlight --syntax=ruby
-    else
-        brew cat "$1"
-    fi
-}
-
 # erase duplicate history (useful for some VMs)
 #alias clear_hist_dupes="cat $HOME/.bash_history|nl|sort -k 2|uniq -f1|sort -n|cut -f2|nl"
 
@@ -112,6 +98,8 @@ brew-hcat () {
 
 {{ if (eq .chezmoi.os "darwin") -}}
 # mac-specific aliases
+
+alias brew-ui="brew uses --installed"
 
 alias lr="gls -lhFG -a --color=auto \
           --ignore={'*.py[c|o]','__pycache__','*.o','*.so','*~','Icon?',.DS_Store}"

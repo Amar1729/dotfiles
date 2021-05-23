@@ -6,6 +6,13 @@ export EDITOR="nvim"
 # Load all stock functions (from $fpath files) called below.
 autoload -Uz compinit
 
+# https://gist.github.com/ctechols/ca1035271ad134841284
+for dump in ~/.zcompdump(N.mh+24); do
+    compinit
+done
+
+compinit -C
+
 # disable 'git status' looking for untracked files in my zsh prompt
 # (i would like this to be configurable on the fly somehow)
 # has to exported before loading plugins
@@ -82,7 +89,7 @@ setopt EXTENDED_HISTORY
 zshaddhistory () {
 	if whence ${${(z)1}[1]} >| /dev/null; then
 		# blacklist certain commands from history
-		if [[ ${${(z)1}[1]} =~ "^(pass|z)" ]]; then
+		if [[ ${${(z)1}[1]} =~ "(pass|z)" ]]; then
 			return 1
 		fi
 	else
@@ -119,13 +126,6 @@ HYPHEN_INSENSITIVE="true"
 
 # some custom completions, and make sure $fpath gets loaded properly
 fpath+=~/.zsh/completions
-
-# https://gist.github.com/ctechols/ca1035271ad134841284
-for dump in ~/.zcompdump(N.mh+24); do
-    compinit
-done
-
-compinit -C
 
 # omz conflicts with common user alias mcd
 compdef -d mcd

@@ -257,8 +257,8 @@ tree - right    : chunkc float::window --absolute 0.5x0.0:1.0x1.0
 # toggle sticky and float, then resize to picture-in-picture size
 # note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
 #tree - s        : chunkc tiling::window --toggle sticky;\
-#                ~/.config/scripts/chunk_float.sh preset 1
-#tree - s        : chunkc tiling::window --toggle sticky
+#                chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - s        : chunkc tiling::window --toggle sticky
 
 
 ####

@@ -128,9 +128,17 @@ chunkc tiling::rule --owner \"Activity Monitor\" --state float
 
 # apps to float
 chunkc tiling::rule --owner \"Google Chrome\" --name \"Google Hangouts\" --state float
-chunkc tiling::rule --owner Firefox --name \"Session Manager - Restore Session\" --state float
-chunkc tiling::rule --owner Firefox --name \"Install user style\" --state float
+# firefox not tiling?
+chunkc tiling::rule --owner Firefox --subrole AXStandardWindow --state tile
+# chunkc tiling::rule --owner Firefox --name \"Session Manager - Restore Session\" --state float
+# chunkc tiling::rule --owner Firefox --name \"Install user style\" --state float
+chunkc tiling::rule --owner Firefox --name \"Software Update\" --state float
+chunkc tiling::rule --owner Firefox --name \"<unknown>\" --state float
 chunkc tiling::rule --owner python --state float
+chunkc tiling::rule --owner "python" --state tile
+chunkc tiling::rule --owner "python3" --state tile
+chunkc tiling::rule --owner "Karabiner-Elements" --state float
+chunkc tiling::rule --owner "Font Book" --state float
 
 chunkc tiling::rule --owner Harmony --subrole AXStandardWindow --state tile
 
@@ -146,7 +154,7 @@ chunkc tiling::rule --owner \"Microsoft Remote Desktop\" --state float
 chunkc tiling::rule --owner kinetis-design-studio --name \"Build Project\" --state float
 chunkc tiling::rule --owner Abricotine --state float
 chunkc tiling::rule --owner \"MCUXpresso IDE\" --state float
-chunkc tiling::rule --owner \"Pulse Secure\" --state float
+chunkc tiling::rule --owner \"Pulse Secure\" --state float --grid-layout 2560:1600:400:640:800:1280
 chunkc tiling::rule --owner \"Oracle VM VirtualBox Manager\" --state float
 chunkc tiling::rule --owner \"VirtualBox\" --state float
 chunkc tiling::rule --owner \"VirtualBox VM\" --state float

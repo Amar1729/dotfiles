@@ -58,13 +58,9 @@ mac () {
         cat ./brew.txt | xargs brew install
     fi
 
-    # important defaults cmds
-    # hide icons on the desktop:
-    defaults write com.apple.finder CreateDesktop true
-    defaults write org.macosforge.xquartz.X11 app_to_run /usr/local/bin/urxvt
-    defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
-    defaults write com.apple.dock no-bouncing -bool TRUE
-    sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool NO
+    if [[ -x ./defaults.sh ]]; then
+        ./defaults.sh
+    fi
 }
 
 _linux () {
