@@ -69,6 +69,8 @@ else
 fi
 [[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
+[[ -d "$XDG_CONFIG_HOME/fzf" ]] && export PATH="$XDG_CONFIG_HOME/fzf:$PATH"
+
 # Add cargo (Rust) stuff
 [[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
 

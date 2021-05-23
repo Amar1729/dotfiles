@@ -1,0 +1,41 @@
+#! /usr/bin/env bash
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+__fstash() {
+    local out key msg sha ref
+    while out=$(
+        git stash list --color=always \
+        --pretty="%C(yellow)%h | %C(red)%gd | %Cgreen%cr %C(blue)%gs" |
+            fzf --ansi --multi \
+            --preview="git stash show {1} -p --color=always" \
+            --expect=ctrl-b,ctrl-d,ctrl-a
+    );
+    do
+        key=$(head -1 <<< "$out")
+        msg=$(head -2 <<< "$out" | tail -1)
+        IFS="| " read -r -a msg <<< "$msg"
+        sha="${msg[0]}"
+        sha="${sha%% *}"
+        ref="${msg[1]}"
+
+        [[ -z "$sha" ]] && continue
+
+        if [[ "$key" == 'ctrl-b' ]]; then
+            git stash branch "stash-$sha" "$sha"
+        elif [[ "$key" == 'ctrl-d' ]]; then
+            git stash drop "$ref"
+        elif [[ "$key" == 'ctrl-a' ]]; then
+            git stash apply "$ref"
+        else
+            git stash show -p "$sha"
+        fi
+
+        break
+    done
+}
+
+__fstash
