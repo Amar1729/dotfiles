@@ -11,6 +11,7 @@ Library/
 .config/ubersicht
 .chunkwmrc
 .khdrc.*
+.xinitrc_darwin
 .yabairc
 
 {{ else if ne .chezmoi.os "linux" }}
@@ -27,5 +28,6 @@ Library/
 .config/scripts/lock.sh
 .config/xresources
 .urxvt
+.xinitrc_linux
 
 {{ end }}
