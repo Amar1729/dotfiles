@@ -12,13 +12,14 @@ Library/
 
 {{ else if ne .chezmoi.os "linux" }}
 
-.config/pip/pip.conf
+.config/pip
 .config/conky-gpu
 .config/dunst
 .config/libinput-gestures.conf
 .config/picom
 .config/polybar
 .config/rofi
+.config/scripts/lock.sh
 .config/xresources
 .urxvt
 
