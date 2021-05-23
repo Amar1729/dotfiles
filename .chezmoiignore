@@ -3,10 +3,23 @@ README.md
 
 {{- if ne .chezmoi.os "darwin" }}
 
-Library/Application Support/pip/pip.conf
+Library/
+.config/iterm2
+.config/ubersicht
+.chunkwmrc
+.khdrc.*
+.yabairc
 
 {{ else if ne .chezmoi.os "linux" }}
 
 .config/pip/pip.conf
+.config/conky-gpu
+.config/dunst
+.config/libinput-gestures.conf
+.config/picom
+.config/polybar
+.config/rofi
+.config/xresources
+.urxvt
 
 {{ end }}
