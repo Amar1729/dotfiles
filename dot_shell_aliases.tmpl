@@ -8,7 +8,7 @@
 ####
 
 # ls, grep, mkdir, tmux improvements
-alias ls="exa"
+alias ls="exa --git"
 alias ll="ls -l"
 alias la="ll -a"
 alias lt="ll -s time"
@@ -86,6 +86,27 @@ python3 () {
     else
         command python3 "$@"
     fi
+}
+
+watch () {
+    while :; do
+        clear
+        echo "$@"
+        "$@"
+        sleep 2
+    done
+}
+
+function ssh-forward () {
+    local -a args
+    local server
+    server="$1"
+    shift
+    while [[ $# -gt 0 ]]; do
+        args+="-L${1}:localhost:${1}"
+        shift
+    done
+    ssh "${args[@]}" "$server"
 }
 
 # erase duplicate history (useful for some VMs)
