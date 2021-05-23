@@ -5,6 +5,7 @@ README.md
 {{- if ne .chezmoi.os "darwin" }}
 
 Library/
+.config/bspwm/bspwmrc_darwin
 .config/iterm2
 .config/ubersicht
 .chunkwmrc
@@ -13,6 +14,7 @@ Library/
 
 {{ else if ne .chezmoi.os "linux" }}
 
+.config/bspwm/bspwmrc_linux
 .config/pip
 .config/conky-gpu
 .config/dunst
