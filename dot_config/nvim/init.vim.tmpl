@@ -83,7 +83,7 @@ if dein#load_state('~/.cache/dein/')
   " (vim plugin) minimap
   "call dein#add('severin-lemaignan/vim-minimap')
 
-  " vimwiki
+  " vim wiki
   call dein#add('vimwiki/vimwiki')
 
   " fzf support
@@ -91,6 +91,13 @@ if dein#load_state('~/.cache/dein/')
 
   " line diffing
   call dein#add('AndrewRadev/linediff.vim')
+
+  " typewriter
+  "call dein#add('Amar1729/vimty')
+
+  " show current context (e.g. function defn)
+  call dein#add('wellle/context.vim')
+
 
   " Language-specific syntax support, completions:
 
@@ -118,10 +125,22 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('kovetskiy/sxhkd-vim')
 {{- end }}
 
+  " hjson (ELK documents)
+  call dein#add('hjson/vim-hjson')
+
   " only seems to work in vim8 currently, but not nvim
   if has('nvim') == 0
     call dein#add('artur-shaik/vim-javacomplete2')
   endif
+
+  " antlr files (.g4 and .g3)
+  call dein#add('dylon/vim-antlr')
+
+  " powershell (ugh)
+  call dein#add('PProvost/vim-ps1')
+
+  " haskell
+  call dein#add('neovimhaskell/haskell-vim')
 
   " Required:
   call dein#end()
@@ -201,6 +220,12 @@ if has('nvim') == 0
     set backspace=indent,eol,start
     set incsearch hlsearch
 endif
+
+" spell check
+" dont spell-check by default, it's a bit noisy in codefiles
+set nospell spelllang=en_us
+
+au BufEnter *.txt,*.md,*.tex :set spell
 
 """
 " Personal definitions
@@ -290,7 +315,7 @@ augroup JsonPrettify
   autocmd BufWinEnter *.json silent! %!python -m json.tool
 augroup END
 
-autocmd BufNewFile,BufRead {kwmrc,.khdrc} set syntax=kwm
+autocmd BufNewFile,BufRead {.chunkwmrc,kwmrc,.khdrc} set syntax=kwm
 
 " disable linting for temporary .py files
 autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
@@ -341,6 +366,11 @@ set statusline=%t
 
 
 " gitgutter
+augroup GitGutterRefresh
+  autocmd!
+  autocmd BufWinEnter * silent! :GitGutter
+augroup END
+
 set updatetime=100
 nmap ghn <Plug>(GitGutterNextHunk)
 nmap ghp <Plug>(GitGutterPrevHunk)
@@ -357,7 +387,8 @@ let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/
 let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include'
 
 " python info for deoplete
-let g:python_host_prog='/usr/local/bin/python'
+" gtfo py2
+let g:python_host_prog=''
 let g:python3_host_prog='/usr/local/bin/python3'
 
 " Rust Auto-Complete-ER
@@ -386,8 +417,7 @@ vnoremap <leader>d	:Linediff<CR>
 
 
 " neomake settings
-" how to lint with python3?
-let g:neomake_python_pylint_exe = 'python3'
+let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'vulture']
 
 " When writing a buffer, and on normal mode changes (after 750ms).
 call neomake#configure#automake('nw', 750)
@@ -418,15 +448,24 @@ let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
 let g:chromatica#enable_at_startup=1
 
 
+" vimwiki settings
+let wiki_1 = {}
+let wiki_1.path = '~/Dropbox/wiki/'
+"let wiki_1.html_template = '~/public_html/template.tpl'
+"let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+
+let wiki_2 = {}
+let wiki_2.path = '~/Documents/Personal/work_wiki/'
+"let wiki_2.index = 'main'
+
+let g:vimwiki_list = [wiki_1, wiki_2]
+
+
 " vim-minimap settings
 let g:minimap_show='<leader>ms'
 let g:minimap_update='<leader>mu'
 let g:minimap_close='<leader>gc'
 let g:minimap_toggle='<leader>gt'
-
-
-" vimwiki path
-let g:vimwiki_list = [{'path': '~/Dropbox/wiki/'}]
 
 
 """"
@@ -451,6 +490,14 @@ nnoremap <F12> :LLPStartPreview<CR>
 
 " neotex settings
 "let g:neotex_enabled = 0
+
+
+" vim-antlr settings
+augroup SetAntlr
+  autocmd!
+  au BufRead,BufNewFile *.g set filetype=antlr3
+  au BufRead,BufNewFile *.g4 set filetype=antlr4
+augroup END
 
 
 " airline-vim, airline-vim-themes settings
