@@ -1,0 +1,12 @@
+README.md
+.config/simple-rc
+
+{{- if ne .chezmoi.os "darwin" }}
+
+Library/Application Support/pip/pip.conf
+
+{{ else if ne .chezmoi.os "linux" }}
+
+.config/pip/pip.conf
+
+{{ end }}

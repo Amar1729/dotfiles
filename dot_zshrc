@@ -170,4 +170,5 @@ bindkey -M menuselect "j" vi-down-line-or-history
 bindkey "^ " autosuggest-execute
 
 # dynamic colors with (a wrapper for) pywal!
-(wp -r &)
+#(wp -r &)
+(cat $HOME/.cache/wal/sequences &)
