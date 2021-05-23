@@ -76,4 +76,13 @@ yabai -m rule --add app="^Font Book$" manage=off
 yabai -m rule --add app="^Harmony$" manage=off
 yabai -m rule --add app="^Docker Desktop$" manage=off
 
+# manage work apps
+yabai -m rule --add app="^Microsoft Outlook$" grid=90:160:1:1:158:88
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
+yabai -m rule --add app="^Pulse Secure$" manage=off
+yabai -m rule --add app="^Oracle VM VirtualBox Manager$" manage=off
+yabai -m rule --add app="^VirtualBox$" manage=off
+yabai -m rule --add app="^VirtualBox VM$" manage=off
+yabai -m rule --add app="^zoom.us$" manage=off
+
 echo "yabai configuration loaded.."
