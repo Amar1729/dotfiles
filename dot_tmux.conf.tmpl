@@ -90,7 +90,11 @@ setw -g mode-keys vi
 
 # Setup 'v' to begin selection as in Vim, and 'y' to copy
 bind-key -T copy-mode-vi v send -X begin-selection
+{{ if (eq .chezmoi.os "darwin") -}}
+bind-key -T copy-mode-vi y send -X copy-pipe "pbcopy"
+{{ else if (eq .chezmoi.os "linux") -}}
 bind-key -T copy-mode-vi y send -X copy-pipe "xclip -sel clipboard"
+{{- end }}
 
 # Update default binding of `Enter` to also use copy-pipe
 #	(don't think I need this)
