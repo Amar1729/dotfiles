@@ -147,7 +147,7 @@ export SPICETIFY_CONFIG="$HOME/.config/spicetify/"
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 # pyenv
-if command pyenv &>/dev/null; then
+if command -v pyenv &>/dev/null; then
     eval "$(pyenv init -)"
 fi
 
