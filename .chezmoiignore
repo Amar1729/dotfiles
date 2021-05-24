@@ -17,7 +17,7 @@ Library/
 {{ else if ne .chezmoi.os "linux" }}
 
 .config/bspwm/bspwmrc_linux
-.config/sxhkd/sxhkd_linux
+.config/sxhkd/sxhkdrc_linux
 .config/pip
 .config/conky-gpu
 .config/dunst
