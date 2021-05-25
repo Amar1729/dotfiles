@@ -8,6 +8,10 @@ export EDITOR_LOOK="block"
 
 # Keep path fixes here: source from .bashrc or .zshrc separately
 
+# GPG_TTY should always be set
+# https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
+GPG_TTY=$(tty)
+export GPG_TTY
 # use pinentry-ncurses in terminal, pinentry-mac otherwise
 export PINENTRY_USER_DATA='USE_TTY=1'
 # (may have to reload gpg after updating pinentry programs)
@@ -27,8 +31,6 @@ export LESS_TERMCAP_so=$(printf '\e[01;33m')        # enter standout            
 export LESS_TERMCAP_se=$(printf '\e[0m')            #  leave standout           mode
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;4m')    # enter underline           mode
 export LESS_TERMCAP_ue=$(printf '\e[0m')            #  leave underline
-
-export XDG_CONFIG_HOME="$HOME/.config"
 
 ####
 ## PATH changes
