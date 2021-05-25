@@ -186,11 +186,9 @@ set foldcolumn=2
 {{- end }}
 
 " zsh-style tab completion
-set wildmenu
-set wildmode=full
-" list everything if you can, then 'full' cycles through matches
-" tried this, too much output
-"set wildmode=list,full
+" complete to longest common substring (list:longest) then show completions in
+" statusline (full)
+set wildmode=list:longest,full
 
 " case-insensitive, smart search for /, ?
 set ignorecase smartcase
