@@ -13,6 +13,8 @@ xcode-select install
 # generate with `brew bundle dump`
 brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
 
+/usr/local/bin/pip3 install --user pynvim jedi
+
 {{ if .work -}}
     brew bundle --no-lock --file="${PKG_DIR}/Brewfile-work"
 {{- end }}
