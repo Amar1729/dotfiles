@@ -1,0 +1,302 @@
+# hopefully we can still do lalt
+# can we still do passthroughs?
+
+khd mode tree prefix on
+khd mode tree timeout 0.5
+khd mode tree restore default
+
+khd mode space prefix on
+khd mode space timeout 0.5
+khd mode space restore default
+
+khd mode sender prefix on
+khd mode sender timeout 2.0
+khd mode sender restore default
+
+khd mode float prefix on
+khd mode float timeout 0.5
+khd mode float restore default
+
+# Mode `tmux` not complete (keep this commented)
+#khd mode tmux prefix on
+#khd mode tmux timeout 1
+#khd mode tmux restore default
+
+# old colors:
+# black: 0xaa282828 (focused color)
+# green: 0xcc98971a
+# white: 0x77fbf1c7
+khd mode default	on_enter chunkc set_focused_border_color 0xffebdbb2; chunkc border::color 0xffebdbb2
+khd mode tree		on_enter chunkc set focused_border_color 0xcc458588; chunkc border::color 0xcc458588
+khd mode space		on_enter chunkc set_focused_border_color 0xccb16286; chunkc border::color 0xccb16286
+#khd mode tmux		on_enter chunkc set focused_border_color 0xcc7b4b93; chunkc border::color 0xcc7b4b93
+khd mode sender 	on_enter chunkc set focused_border_color 0xcc98971a; chunkc border::color 0xcc98971a
+khd mode float  	on_enter chunkc set focused_border_color 0xcc98971a; chunkc border::color 0xcc98971a
+
+# toggle between modes
+ctrl - d			:	khd -e "mode activate space"
+ctrl - f			:	khd -e "mode activate tree"
+#ctrl - a			:	khd -e "mode activate tmux"
+tree - s 			:	khd -e "mode activate sender"
+
+
+# remap ctrl+a / ctrl+e -> start/end of line
+lctrl - a	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt,
+				VirtualBox VM
+			] : khd -p "ctrl - left"
+lctrl - e	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt,
+				VirtualBox VM
+			] : khd -p "ctrl - right"
+
+# remap ctrl+u -> delete from cursor to start of line
+lctrl - u	![
+				HyperTerm,
+				Terminal,
+				iTerm,
+				iTerm2,
+				Microsoft Remote Desktop,
+				kitty,
+				XQuartz,
+				urxvt,
+				Google Chrome,
+				VirtualBox VM
+			] : khd -p "ctrl + shift - left"; khd -p " - delete"
+
+# this only works in url bar ???
+lctrl - u	[
+				Google Chrome,
+				Firefox
+			] : khd -p "lctrl + shift - a"; khd -p " - delete"
+
+# stop making tabs in terminal emulator
+# (attempting new tmux pane isnt trivial if not in tmux)
+cmd - t     [
+            iTerm2,Kitty,Alacritty
+            ] : tput bel # khd -p "shift - down"
+
+cmd - 9 : khd -w "amar.paul16@gmail.com"
+cmd - 0 : khd -w "amar.paul@jhuapl.edu"
+
+####
+## Defaults
+####
+
+# reload config: cmd+esc
+cmd - 0x35 : khd -e "reload"
+
+# manually defined since lcmd+shift+n sends a window to a desktop
+rcmd + shift - 3
+    : screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
+rcmd + shift - 4
+    -> : chunkc border::clear
+
+# save current layout (?)
+ctrl + alt - w
+    : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+
+# outlook uses cmd+enter to send emails
+# assumes wp is in PATH
+lcmd - return
+    : wp -n
+rcmd - return
+    ![ Microsoft Outlook ]
+    : wp -n
+
+cmd + shift - return
+    : open -na Google\ Chrome
+cmd + ctrl - return
+    : open ~/
+
+cmd + alt + ctrl - l
+    : ~/.bin/lock
+    #: open -a /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app
+
+# chunkwm really doesn't like iterm2 dropdown: make it floating then drop it down
+alt + shift - space
+    : chunkc set window_float_next 1; khd -p "alt - space"
+
+# float next window to be tiled
+# idea: make this alt-f, and change alt-c to cycle window (when cycle includes floating)
+alt - c : chunkc set window_float_next 1
+
+# focus windows
+alt - n : chunkc tiling::window --focus next
+alt - m : chunkc tiling::window --focus prev
+
+lcmd - h : chunkc tiling::window --focus west
+lcmd - j : chunkc tiling::window --focus south
+lcmd - k : chunkc tiling::window --focus north
+lcmd - l : chunkc tiling::window --focus east
+
+# equalize size of windows
+shift + alt - 0 : chunkc tiling::desktop --equalize
+
+# increase region size (floating or nonfloating)
+lalt - h :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west  && chunkc float::window --inc west
+lalt - j :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south && chunkc float::window --inc south
+lalt - k :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north && chunkc float::window --inc north
+lalt - l :
+	chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east  && chunkc float::window --inc east
+
+# decrease region size (floating or nonfloating)
+shift + lalt - h :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge west  && chunkc float::window --dec west
+shift + lalt - j :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge south && chunkc float::window --dec south
+shift + lalt - k :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge north && chunkc float::window --dec north
+shift + lalt - l :
+	chunkc tiling::window --use-temporary-ratio -0.1 --adjust-window-edge east  && chunkc float::window --dec east
+
+# swap window
+ctrl + lalt - h : chunkc tiling::window --swap west
+ctrl + lalt - j : chunkc tiling::window --swap south
+ctrl + lalt - k : chunkc tiling::window --swap north
+ctrl + lalt - l : chunkc tiling::window --swap east
+
+# reinsert window
+cmd + shift - h : chunkc tiling::window --warp west
+cmd + shift - j : chunkc tiling::window --warp south
+cmd + shift - k : chunkc tiling::window --warp north
+cmd + shift - l : chunkc tiling::window --warp east
+
+# set insertion point for focused container
+lcmd + ctrl - space : chunkc tiling::window --use-insertion-point cancel
+lcmd + ctrl - h     : chunkc tiling::window --use-insertion-point west
+lcmd + ctrl - j     : chunkc tiling::window --use-insertion-point south
+lcmd + ctrl - k     : chunkc tiling::window --use-insertion-point north
+lcmd + ctrl - l     : chunkc tiling::window --use-insertion-point east
+
+# move around floating windows
+cmd + shift - left  : chunkc float::window --move west
+cmd + shift - down  : chunkc float::window --move south
+cmd + shift - up    : chunkc float::window --move north
+cmd + shift - right : chunkc float::window --move east
+
+# send window to desktop and follow focus
+lcmd + shift - 1 : chunkc tiling::window -d 1; khd -p "cmd - 1"
+lcmd + shift - 2 : chunkc tiling::window -d 2; khd -p "cmd - 2"
+lcmd + shift - 3 : chunkc tiling::window -d 3; khd -p "cmd - 3"
+lcmd + shift - 4 : chunkc tiling::window -d 4; khd -p "cmd - 4"
+lcmd + shift - 5 : chunkc tiling::window -d 5; khd -p "cmd - 5"
+lcmd + shift - 6 : chunkc tiling::window -d 6; khd -p "cmd - 6"
+
+# focus monitor
+ctrl - 1 : chunkc tiling::monitor -f 1
+ctrl - 2 : chunkc tiling::monitor -f 2
+ctrl - 3 : chunkc tiling::monitor -f 3
+
+# send window to monitor and follow focus
+ctrl + shift - 1 : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
+ctrl + shift - 2 : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+ctrl + shift - 3 : chunkc tiling::window --send-to-monitor 3; chunkc tiling::monitor -f 3
+
+# toggle float AND enter floating mode (immediately send to a float preset)
+alt - t			: chunkc tiling::window --toggle float; khd -e "mode activate float"
+float - g       : chunkc float::window --absolute 0.25x0.25:0.75x0.75
+float - q 		: chunkc float::window --absolute 0.55x0.10:0.95x0.45
+float - w 		: chunkc float::window --absolute 0.05x0.10:0.45x0.45
+float - e 		: chunkc float::window --absolute 0.05x0.60:0.45x0.95
+float + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
+
+####
+## Tree
+####
+
+
+# toggle on/off padding
+alt - a         : chunkc tiling::desktop --toggle offset
+
+# toggle float
+alt - t         : chunkc tiling::window --toggle float
+
+tree + shift - g: chunkc tiling::window --toggle float
+
+# toggle window split type (like a container rotation)
+#alt - e         : chunkc tiling::window --toggle split
+
+# rotate tree
+tree - r        : chunkc tiling::desktop --rotate 90
+
+# toggle window fullscreen
+lcmd - g        : chunkc tiling::window --toggle fullscreen
+tree - f        : chunkc tiling::window --toggle fullscreen
+
+# toggle window parent zoom
+tree - p        : chunkc tiling::window --toggle parent
+
+# presets for floating windows
+lcmd + shift - g: chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - g		: chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - q 		: chunkc float::window --absolute 0.55x0.10:0.95x0.45
+tree - w 		: chunkc float::window --absolute 0.05x0.10:0.45x0.45
+tree - e 		: chunkc float::window --absolute 0.05x0.60:0.45x0.95
+tree + alt - g	: chunkc float::window --absolute 0.30x0.05:0.70x0.95
+tree - left     : chunkc float::window --absolute 0.0x0.0:0.5x1.0
+tree - right    : chunkc float::window --absolute 0.5x0.0:1.0x1.0
+
+# toggle sticky and float, then resize to picture-in-picture size
+# note - this doesn't unfloat when you un-sticky it (this is my preferred behavior)
+#tree - s        : chunkc tiling::window --toggle sticky;\
+#                chunkc float::window --absolute 0.25x0.25:0.75x0.75
+tree - s        : chunkc tiling::window --toggle sticky
+
+
+####
+## Space
+####
+
+space - s : khd -e "mode activate default"; ~/.bin/spongify --copy
+space - h : khd -e "mode activate default"; khd -w "¯\_(ツ)_/¯"
+
+# I use ctrl-d to exit shell and to close tmux panes
+space + ctrl - d    [HyperTerm,Terminal,iTerm,iTerm2]
+                    -> : khd -e "mode activate default"
+
+# change layout of desktop
+space - b : chunkc tiling::desktop --layout bsp
+space - m : chunkc tiling::desktop --layout monocle
+space - f : chunkc tiling::desktop --layout float
+
+space - p           : chunkc tiling::desktop --padding inc;\
+                    chunkc tiling::desktop --gap inc;\
+
+space + shift - p   : chunkc tiling::desktop --padding dec;\
+                      chunkc tiling::desktop --gap dec;\
+
+space - left        : chunkc tiling::desktop --annihilate
+space - right       : chunkc tiling::desktop --create
+
+
+###
+## Sender
+###
+
+# simply send lots of windows to other desktops
+sender - 1 : chunkc tiling::window -d 1
+sender - 2 : chunkc tiling::window -d 2
+sender - 3 : chunkc tiling::window -d 3
+sender - 4 : chunkc tiling::window -d 4
+sender - 5 : chunkc tiling::window -d 5
+sender - 6 : chunkc tiling::window -d 6
+
+sender - 0x35 : khd -e "mode activate default"

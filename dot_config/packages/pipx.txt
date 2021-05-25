@@ -1,0 +1,9 @@
+black
+black-macchiato
+flake8
+grip
+mypy
+pywal
+tox
+virtualenv
+vulture

@@ -1,0 +1,57 @@
+
+# oh-my-zsh stuff
+# note: i don't load the entire omz library.
+# if you want to use an oh-my-zsh theme, you may have to:
+# load colors:
+# autoload -U colors && colors
+# expand prompt:
+# setopt prompt_subst
+# helper functions for vcs that many themes use:
+# robbyrussell/oh-my-zsh kind:zsh path:lib/git.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/completion.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/history.zsh
+robbyrussell/oh-my-zsh kind:zsh path:lib/key-bindings.zsh
+
+# completions (bunch of BLOAT try to pare this down)
+zsh-users/zsh-completions kind:fpath path:src
+
+# docker completions
+# https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+docker/cli kind:fpath path:contrib/completion/zsh
+docker/compose kind:fpath path:contrib/completion/zsh
+
+# open GitHub from cli
+peterhurford/git-it-on.zsh
+
+# good ch dir backward (helpful for very nested projects)
+Tarrasch/zsh-bd
+
+# ranking of directories
+#export _Z_DATA="$HOME/.cache/z"
+rupa/z
+
+# include a notification for long-running commands or nonzero return codes
+# make sure to install terminal-notifier (Mac) or notify-send (Linux)
+#marzocchi/zsh-notify
+
+# bundles (and env vars)
+zsh-users/zsh-syntax-highlighting
+
+# nix zsh completions
+spwhitt/nix-zsh-completions kind:fpath
+
+# fish-like command suggestions
+zsh-users/zsh-autosuggestions
+
+# put this here
+amar1729/chunkwm-zsh-completions kind:fpath
+
+# macOS window manager
+amar1729/yabai-zsh-completions kind:fpath
+
+# simple custom completions (tmux-a)
+https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
+
+# my own theme
+#https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
+https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # amar_simple

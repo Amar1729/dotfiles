@@ -1,0 +1,107 @@
+#!/bin/bash
+
+# put some fzf-related overrides here too
+export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
+export FZF_DEFAULT_OPTS='--ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+__git_log () {
+    # format str implies:
+    #  --abbrev-commit
+    #  --decorate
+    git log \
+        --color=always \
+        --graph \
+        --all \
+        --date=short \
+        --format="%C(bold blue)%h%C(reset) %C(green)%ad%C(reset) | %C(white)%s %C(red)[%an] %C(bold yellow)%d"
+}
+
+# fuzzy find file content (open results with <Enter>)
+fgr() {
+	local line
+    line=$(
+        ggrep --line-buffered --color=never -r '' * |
+        fzf --nth=1,2
+    ) && ${EDITOR:-vim} $(echo "${line%%:*}")
+}
+
+# fuzzy completion with 'z' when called without args
+unalias z 2> /dev/null
+z() {
+  [ $# -gt 0 ] && _z "$*" && return
+  cd "$(_z -l 2>&1 | fzf --height 40% --nth 2.. --reverse --inline-info +s --tac --query "${*##-* }" | sed 's/^[0-9,.]* *//')"
+}
+
+# ftags - search ctags
+ftags() {
+	local line
+    [ -e tags ] &&
+        line=$(
+            awk 'BEGIN { FS="\t" } !/^!/ {print toupper($4)"\t"$1"\t"$2"\t"$3}' tags |
+            cut -c1-80 | fzf --nth=1,2
+        ) && ${EDITOR:-vim} $(cut -f3 <<< "$line") -c "set nocst" \
+            -c "silent tag $(cut -f2 <<< "$line")"
+}
+
+# pass completion suggested by @d4ndo (#362) (slightly modified)
+_fzf_complete_pass() {
+  _fzf_complete '+m' "$@" < <(
+    local pwdir=${PASSWORD_STORE_DIR-~/.password-store/}
+    find "$pwdir" -name "*.gpg" -print |
+        sed -e "s#${pwdir}/\{0,1\}##" |
+        sed -e 's/\(.*\)\.gpg/\1/'
+  )
+}
+
+# fshow_preview - git commit browser with previews
+fshow_preview() {
+
+	local _gitLogLineToHash="echo -n {1} | head -1"
+	local _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy'"
+	local _viewPreview="$_gitLogLineToHash | xargs -I % sh -c '(git show --stat --color=always % && echo '' && git show --color=always %) | diff-so-fancy'"
+
+    git log --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr% C(auto)%an" |
+        fzf --no-sort --reverse --tiebreak=index --no-multi \
+            --ansi --preview="$_viewPreview" \
+                --header "enter to view, alt-y to copy hash" \
+                --bind "enter:execute:$_viewGitLogLine   | less -R" \
+                --bind "alt-y:execute:$_gitLogLineToHash | pbcopy"
+}
+
+_fzf_complete_git() {
+    ARGS="$@"
+
+    # these are commands I commonly call on commit hashes.
+    # cp->cherry-pick, co->checkout
+
+    if [[ $ARGS == *'git cp'* || \
+          $ARGS == *'git cherry-pick'* || \
+          $ARGS == *'git co '* || \
+          $ARGS == *'git checkout'* || \
+          $ARGS == *'git reset'* ]]; then
+        _fzf_complete "--reverse --multi" "$@" < <(__git_log)
+    else
+        eval "zle ${fzf_default_completion:-expand-or-complete}"
+    fi
+}
+
+_fzf_complete_git_post() {
+    sed -e 's/^[^a-z0-9]*//' | awk '{print $1}'
+}
+
+gh () {
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
+    local item
+    __git_log |
+    fzf --height '50%' "$@" --border --ansi --no-sort --reverse --multi |
+    grep -o "[a-f0-9]\{7,\}" |
+    head -n1 |
+    while read item; do echo -n "${(q)item} "; done
+}
+
+if [[ $SHELL == *"zsh" ]]; then
+    fzf-gh-widget () { local result="$(gh)"; zle reset-prompt; LBUFFER+="$result" }
+    zle -N fzf-gh-widget
+    bindkey '^G^H' fzf-gh-widget
+fi

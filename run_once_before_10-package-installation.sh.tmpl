@@ -1,0 +1,24 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ if (eq .chezmoi.os "darwin") -}}
+
+xcode-select install
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# generate with `brew bundle dump`
+brew bundle --no-lock --file="$(chezmoi source-path)/dot_config/packages/Brewfile"
+
+{{ if .work -}}
+    brew bundle --no-lock --file="$(chezmoi source-path)/dot_config/packages/Brewfile-work"
+{{- end }}
+
+{{- end }}
+
+# install pipx pkgs
+# generate with `pipx list|grep package|awk '{print $2}'`
+cat "$(chezmoi source-path)/dot_config/packages/pipx.txt" | xargs -n1 pipx install
+
+# cargo install racer sccache

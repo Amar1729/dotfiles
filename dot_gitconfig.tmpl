@@ -1,0 +1,99 @@
+# lots of ideas taken from
+# https://gist.github.com/pksunkara/988716
+
+[user]
+	name = {{ .git_user }}
+	email = {{ .email }}
+
+[alias]
+	c = clone
+	d = diff
+	ds = diff --staged
+	dt = difftool
+	co = checkout
+	ci = commit
+	st = status
+	stb = status -sb
+	stn = status -sb -uno
+	br = branch
+	m = merge
+	ma = merge --abort
+	rc = rebase --continue
+	ra = rebase --abort
+	rs = rebase --skip
+	p = pull
+	pr = pull --rebase
+	rv = remote -v
+	rH = reset HEAD
+	cp = cherry-pick
+	cpa = cherry-pick --abort
+	cpc = cherry-pick --continue
+
+	sts = stash
+	sta = stash apply
+	std = stash drop
+	stl = stash list
+
+	short = rev-parse --short HEAD
+
+	# nicely formatted history (includes all branches)
+	hist = log --graph --abbrev-commit --decorate --all --date=short \
+		 --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%ad%C(reset) | %C(white)%s%C(reset) %C(dim green)[%an]%C(reset) %C(bold yellow)%d%C(reset)'
+	# history of specific branch
+	histb = log --graph --abbrev-commit --decorate \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)'
+	# longer format for really looking through history
+	histl = log --graph --abbrev-commit --decorate --all \
+		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+	pager = less -FX
+	# problem here:
+	# using `less -FX` turns to cat for onepage input (-F), and doesn't send termcap deinit (-X)
+	#	however, the lack of termcap init (-X) means you cant scroll w/ mouse on longer pages
+	# changing to `less -F` sends termcap deinit which clears the page (useless) :/
+	# so either you can scroll on long input, or you keep results around for short bois
+
+[color "branch"]
+	current = yellow bold
+	local = green bold
+	remote = cyan bold
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[color "status"]
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
+
+[pager]
+	stash = false
+	#diff = diff-so-fancy | less --tabs=4 -R
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[diff]
+	tool = vimdiff
+
+[pull]
+	ff = only
+
+[init]
+	defaultBranch = main
