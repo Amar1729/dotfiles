@@ -10,7 +10,7 @@ Library/
 .config/iterm2
 .config/ubersicht
 .chunkwmrc
-.khdrc.*
+.khdrc
 .xinitrc_darwin
 .yabairc
 
