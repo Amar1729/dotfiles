@@ -5,10 +5,16 @@ set -eo pipefail
 # bundle zsh plugins
 antibody bundle < "$HOME/.zsh_plugins.txt" > "$HOME/.zsh_plugins.zsh"
 
+# change to zsh
+chsh -s $(which zsh) $(whoami)
+
 # dein - plugin mgr for vim
 curl -sSL -o /tmp/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
 sh /tmp/installer.sh "$HOME/.cache/dein"
 rm /tmp/installer.sh
+
+# install plugins for neovim
+nvim -c ":q"
 
 # tmux plugin manager
 mkdir -p "$HOME/.tmux/plugins/"
