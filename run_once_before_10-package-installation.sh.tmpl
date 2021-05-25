@@ -2,6 +2,8 @@
 
 set -eufo pipefail
 
+PKG_DIR="$("$HOME"/bin/chezmoi" source-path)"/dot_config/packages
+
 {{ if (eq .chezmoi.os "darwin") -}}
 
 xcode-select install
@@ -9,16 +11,16 @@ xcode-select install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # generate with `brew bundle dump`
-brew bundle --no-lock --file="$(chezmoi source-path)/dot_config/packages/Brewfile"
+brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
 
 {{ if .work -}}
-    brew bundle --no-lock --file="$(chezmoi source-path)/dot_config/packages/Brewfile-work"
+    brew bundle --no-lock --file="${PKG_DIR}/Brewfile-work"
 {{- end }}
 
 {{- end }}
 
 # install pipx pkgs
 # generate with `pipx list|grep package|awk '{print $2}'`
-cat "$(chezmoi source-path)/dot_config/packages/pipx.txt" | xargs -n1 pipx install
+cat "${PKG_DIR}/pipx.txt" | xargs -n1 pipx install
 
 # cargo install racer sccache
