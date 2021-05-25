@@ -17,6 +17,23 @@ brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
     brew bundle --no-lock --file="${PKG_DIR}/Brewfile-work"
 {{- end }}
 
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   if (eq .chezmoi.osRelease.id "arch") -}}
+
+sudo pacman -Syu
+sudo pacman -S --needed - < "${PKG_DIR}/arch-pacman.txt"
+
+{
+    [[ -d /tmp/yay ]] && rm -rf /tmp/yay
+    git clone https://aur.archlinux.org/yay-git.git /tmp/yay
+    cd /tmp/yay
+    makepkg -si
+}
+
+yay -S --needed - < "${PKG_DIR}/arch-aur.txt"
+
+{{-   end }}
+
 {{- end }}
 
 # install pipx pkgs
