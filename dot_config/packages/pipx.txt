@@ -3,7 +3,7 @@ black-macchiato
 flake8
 grip
 mypy
-pywal
+git+git://github.com/dylanaraps/pywal.git
 tox
 virtualenv
 vulture
