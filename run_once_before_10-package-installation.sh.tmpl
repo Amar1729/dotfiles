@@ -6,9 +6,11 @@ PKG_DIR="$("$HOME"/bin/chezmoi source-path)"/dot_config/packages
 
 {{ if (eq .chezmoi.os "darwin") -}}
 
-xcode-select install
+xcode-select --install || true
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 # generate with `brew bundle dump`
 brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
@@ -25,12 +27,12 @@ brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
 sudo pacman -Syu
 sudo pacman -S --needed - < "${PKG_DIR}/arch-pacman.txt"
 
-{
+if ! command -v yay; then
     [[ -d /tmp/yay ]] && rm -rf /tmp/yay
     git clone https://aur.archlinux.org/yay-git.git /tmp/yay
     cd /tmp/yay
     makepkg -si
-}
+fi
 
 yay -S --needed - < "${PKG_DIR}/arch-aur.txt"
 
@@ -40,6 +42,11 @@ yay -S --needed - < "${PKG_DIR}/arch-aur.txt"
 
 # install pipx pkgs
 # generate with `pipx list|grep package|awk '{print $2}'`
-cat "${PKG_DIR}/pipx.txt" | xargs -n1 pipx install
+PIPX_CURRENT="$(pipx list | grep package | awk '{print $2}')"
+while read -r pkg || [[ -n "$pkg" ]]; do
+    if ! grep "^${pkg}$" <<< "$PIPX_CURRENT" &>/dev/null; then
+        pipx install --force "$pkg"
+    fi
+done < "${PKG_DIR}/pipx.txt"
 
 # cargo install racer sccache
