@@ -382,7 +382,11 @@ let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/u
 " python info for deoplete
 " gtfo py2
 let g:python_host_prog=''
+{{ if (eq .chezmoi.os "darwin") -}}
 let g:python3_host_prog='/usr/local/bin/python3'
+{{ else if (eq .chezmoi.os "linux") -}}
+let g:python3_host_prog='/usr/bin/python3'
+{{- end }}
 
 " Rust Auto-Complete-ER
 " requires: `racer` in PATH and RUST_SRC_PATH (rustup component add rust-src) set
