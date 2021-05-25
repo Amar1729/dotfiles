@@ -1,11 +1,26 @@
 {{- $email := promptString "email" -}}
 {{- $git_user := promptString "git_user" -}}
 {{- $work := promptBool "work computer" -}}
+{{- $server_shortname := promptString "personal server shortname" -}}
+{{- $server_name := promptString "personal server fqdn" -}}
+{{- $server_port := promptInt "personal server port" -}}
 
 [data]
     email = {{ $email | quote }}
     git_user = {{ $git_user | quote }}
     work = {{ $work }}
+    server_shortname = {{ $server_shortname | quote }}
+    server_name = {{ $server_name | quote }}
+    server_port = {{ $server_port }}
+
+{{ if .work }}
+{{- $imap_user := promptString "imap_user" -}}
+{{- $imap_folder := promptString "imap_folder" -}}
+
+    imap_user = {{ $imap_user | quote }}
+    imap_folder = {{ $imap_folder | quote }}
+    work_mattermost = ""
+{{- end }}
 
 [diff]
 	pager = "less -FX"
