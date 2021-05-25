@@ -1,7 +1,6 @@
 [mattermost]
-user: paula1
-host: mattermost.jhuapl.edu
-team: iacd
+user: {{ .chezmoi.username }}
+host: {{ .work_mattermost }}
 passcmd: security find-generic-password -s mattermost -w
 
 urlOpenCommand = open
