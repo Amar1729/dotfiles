@@ -25,6 +25,8 @@ brew bundle --no-lock --file="${PKG_DIR}/Brewfile"
 
 {{ if .work -}}
     brew bundle --no-lock --file="${PKG_DIR}/Brewfile-work"
+{{ else -}}
+    brew bundle --no-lock --file="${PKG_DIR}/Brewfile-personal"
 {{- end }}
 
 /usr/local/bin/pip3 install --user pynvim jedi
