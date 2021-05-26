@@ -1,7 +1,6 @@
 black
 black-macchiato
 flake8
-grip
 mypy
 git+git://github.com/dylanaraps/pywal.git
 tox
