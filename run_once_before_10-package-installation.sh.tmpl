@@ -2,7 +2,15 @@
 
 set -eufo pipefail
 
-PKG_DIR="$("$HOME"/bin/chezmoi source-path)"/dot_config/packages
+function chezmoi () {
+    if [[ -x "$HOME/bin/chezmoi" ]]; then
+        "$HOME/bin/chezmoi" "$@"
+    else
+        command chezmoi "$@"
+    fi
+}
+
+PKG_DIR="$(chezmoi source-path)"/dot_config/packages
 
 {{ if (eq .chezmoi.os "darwin") -}}
 
