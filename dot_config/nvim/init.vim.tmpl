@@ -352,6 +352,11 @@ nnoremap <S-h> :call CycleHiddenAll()<CR>
 hi StatusLine cterm=None ctermfg=1 ctermbg=None
 set statusline=%t
 
+" templates for common languages
+augroup templates
+    autocmd BufNewFile *.py 0r ~/.config/nvim/templates/skeleton.py
+augroup end
+
 
 """
 " Plugin Settings and Keybinds
