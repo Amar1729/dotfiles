@@ -1,9 +1,32 @@
-{{- $email := promptString "email" -}}
-{{- $git_user := promptString "git_user" -}}
-{{- $work := promptBool "work computer" -}}
-{{- $server_shortname := promptString "personal server shortname" -}}
-{{- $server_name := promptString "personal server fqdn" -}}
-{{- $server_port := promptInt "personal server port" -}}
+{{- $email := get . "email" -}}
+{{- if not $email -}}
+{{-   $email := promptString "email" -}}
+{{- end -}}
+
+{{- $git_user := get . "git_user" -}}
+{{- if not $git_user -}}
+{{-   $git_user := promptString "git_user" -}}
+{{- end -}}
+
+{{- $work := get . "work" -}}
+{{- if not $work -}}
+{{-   $work := promptBool "work computer" -}}
+{{- end -}}
+
+{{- $server_shortname := get . "server_shortname" -}}
+{{- if not $server_shortname -}}
+{{-   $server_shortname := promptString "personal server shortname" -}}
+{{- end -}}
+
+{{- $server_name := get . "server_name" -}}
+{{- if not $server_name -}}
+{{-   $server_name := promptString "personal server fqdn" -}}
+{{- end -}}
+
+{{- $server_port := get . "server_port" -}}
+{{- if not $server_port -}}
+{{-   $server_port := promptInt "personal server port" -}}
+{{- end -}}
 
 [data]
     email = {{ $email | quote }}
@@ -13,9 +36,16 @@
     server_name = {{ $server_name | quote }}
     server_port = {{ $server_port }}
 
-{{ if .work }}
-{{- $imap_user := promptString "imap_user" -}}
-{{- $imap_folder := promptString "imap_folder" -}}
+{{- if .work }}
+{{- $imap_user := get . "imap_user" -}}
+{{- if not $imap_user -}}
+{{-     $imap_user := promptString "imap_user" }}
+{{- end }}
+
+{{- $imap_folder := get . "imap_folder" -}}
+{{- if not $imap_folder -}}
+{{-   $imap_folder := promptString "imap_folder" }}
+{{- end }}
 
     imap_user = {{ $imap_user | quote }}
     imap_folder = {{ $imap_folder | quote }}
