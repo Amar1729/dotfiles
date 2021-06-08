@@ -39,6 +39,19 @@ export LESS_TERMCAP_ue=$(printf '\e[0m')            #  leave underline
 # use this to fix if the path gets weird?
 #DEFAULT_PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 
+# https://gist.github.com/JohnArchieMckown/dfb8220faa8e45a167dc
+pathmunge () {
+    if [ -e "$1" ]; then
+        if ! echo "$PATH" | grep -E -q "(^|:)$1($|:)" ; then
+            if [ "$2" = "after" ] ; then
+                PATH=$PATH:$1
+            else
+                PATH=$1:$PATH
+            fi
+        fi
+    fi
+}
+
 # homebrew changes
 export HOMEBREW_NO_AUTO_UPDATE=1
 [[ $(uname) == 'Darwin' ]] && \
@@ -50,13 +63,15 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_BAT=1
 
 # use pipx instead of pip for all cli tools
-export PATH="$PATH:$HOME/.local/bin"
+pathmunge "$HOME/.local/bin" "after"
 
 # add snap path on ubuntu
 [[ -d /snap/bin ]] && emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
 
 # my changes
-export PATH="$PATH:/opt/bin:$PATH:/opt/prefix/bin:$HOME/.bin"
+pathmunge "/opt/bin" "after"
+pathmunge "/opt/prefix/bin" "after"
+pathmunge "$HOME/.bin" "after"
 
 # add fzf (default bindings, and my own aliases)
 if [[ -n "$ZSH" ]]; then
@@ -71,10 +86,10 @@ else
 fi
 [[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
-[[ -d "$XDG_CONFIG_HOME/fzf" ]] && export PATH="$XDG_CONFIG_HOME/fzf:$PATH"
+pathmunge "$XDG_CONFIG_HOME/fzf" "after"
 
 # Add cargo (Rust) stuff
-[[ -d $HOME/.cargo/bin ]] && export PATH="$HOME/.cargo/bin:$PATH"
+pathmunge "$HOME/.cargo/bin" "after"
 
 # use sccache to cache rust compilation objects
 [[ -x $HOME/.cargo/bin/sccache ]] && export RUSTC_WRAPPER=$HOME/.cargo/bin/sccache
@@ -86,7 +101,8 @@ export RUST_SRC_PATH="$HOME/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/r
 # go stuff
 export GOPATH="${HOME}/.go"
 export GOROOT=/usr/local/opt/go/libexec
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+pathmunge "${GOPATH}/bin" "after"
+pathmunge "${GOROOT}/bin" "after"
 
 # nix
 # arch pkg: had to manually create user profile:
@@ -103,14 +119,14 @@ fi
 #export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-[[ -d $HOME/.rvm/bin ]] && export PATH="$PATH:$HOME/.rvm/bin"
+pathmunge "$HOME/.rvm/bin" "after"
 
 # keep this?
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 # add bundled gems
-[[ -d $HOME/.local/rubygems ]] && export PATH="$PATH:$HOME/.local/rubygems"
+pathmunge "$HOME/.local/rubygems" "after"
 
 # java helper script (manage sdks)
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -132,8 +148,7 @@ alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
 [ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # add calibre cli
-[[ -d /Applications/calibre.app ]] && \
-export PATH="$PATH:/Applications/calibre.app/Contents/MacOS/"
+pathmunge "/Applications/calibre.app/Contents/MacOS/" "after"
 
 # mypy lxml stubs (static type analysis for python)
 export MYPYPATH="$HOME/.cache/mypy/lxml-stubs"
