@@ -9,21 +9,30 @@ antibody bundle < "$HOME/.zsh_plugins.txt" > "$HOME/.zsh_plugins.zsh"
 chsh -s $(which zsh) $(whoami)
 
 # dein - plugin mgr for vim
+if ! -d "$HOME/.cache/dein"; then
 curl -sSL -o /tmp/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
 sh /tmp/installer.sh "$HOME/.cache/dein"
 rm /tmp/installer.sh
+fi
 
 # install plugins for neovim
 nvim -c ":q"
 
 # tmux plugin manager
+if ! -d "$HOME/.tmux/plugins/"; then
 mkdir -p "$HOME/.tmux/plugins/"
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
 
 # random scripts i've written
+if ! -d "$HOME/.bin"; then
 git clone https://github.com/Amar1729/bin.git "$HOME/.bin"
+fi
 
 {{ if (eq .chezmoi.os "darwin") -}}
 # ubersicht bar
+if ! -d "$HOME/.config/ubersicht/widgets/simple-bar"; then
+mkdir -p "$HOME/.config/ubersicht/widgets/"
 git clone https://github.com/Jean-Tinland/simple-bar.git "$HOME/.config/ubersicht/widgets/simple-bar"
+fi
 {{ end -}}
