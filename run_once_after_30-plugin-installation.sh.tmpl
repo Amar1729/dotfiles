@@ -24,6 +24,11 @@ mkdir -p "$HOME/.tmux/plugins/"
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
+poetry config virtualenvs.in-project true
+{{ if .work -}}
+poetry config certificates.proxied_pypi.cert "$HOME/.certs/full_cert.crt"
+{{- end }}
+
 # random scripts i've written
 if ! -d "$HOME/.bin"; then
 git clone https://github.com/Amar1729/bin.git "$HOME/.bin"
