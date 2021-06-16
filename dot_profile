@@ -165,7 +165,9 @@ export SPICETIFY_CONFIG="$HOME/.config/spicetify/"
 
 # pyenv
 if command -v pyenv &>/dev/null; then
-    eval "$(pyenv init -)"
+    export PYENV_ROOT="$HOME/.pyenv"
+    pathmunge "$PYENV_ROOT/bin"
+    eval "$(pyenv init --path)"
 fi
 
 # comment out the rest of this, but keep it around?
