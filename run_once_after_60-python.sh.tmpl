@@ -1,0 +1,15 @@
+{{ if .work -}}
+#! /usr/bin/env bash
+
+set -e
+
+mkdir -p "$HOME/.certs"
+
+openssl s_client -connect pypi.org:443 -showcerts </dev/null 2>/dev/null | sed -e '/-----BEGIN/,/-----END/!d' > "$HOME/.certs/pypi.crt"
+
+printf "Internal URL from which to pull a proxy cert: "
+read INTERNAL
+openssl s_client -connect "$INTERNAL":443 -showcerts </dev/null 2>/dev/null | sed -e '/-----BEGIN/,/-----END/!d' > "$HOME/.certs/internal.crt"
+
+cat "$HOME"/.certs/{pypi.crt,internal.crt} > "$HOME/.certs/full_cert.crt"
+{{- end}}
