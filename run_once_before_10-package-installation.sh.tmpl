@@ -40,8 +40,8 @@ sudo pacman -S --needed - < "${PKG_DIR}/arch-pacman.txt"
 if ! command -v yay; then
     [[ -d /tmp/yay ]] && rm -rf /tmp/yay
     git clone https://aur.archlinux.org/yay-git.git /tmp/yay
-    cd /tmp/yay
-    makepkg -si
+    ( cd /tmp/yay && makepkg -si )
+    rm -rf /tmp/yay
 fi
 
 yay -S --needed - < "${PKG_DIR}/arch-aur.txt"
