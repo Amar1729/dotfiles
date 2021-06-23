@@ -1,5 +1,9 @@
 # Amar's Dotfiles
 
+```
+sh -c "$(curl -fsLS git.io/chezmoi)" -- init --apply Amar1729
+```
+
 These dotfiles are managed by [`chezmoi`](https://github.com/twpayne/chezmoi/). I used to use git manually, but tracking changes across multiple branches for different operating systems/flavors became a huge pain once I was frequently cherry-picking and tagging to avoid merging. See the homepage for more details!
 
 One benefit of `chezmoi` is that this repo - the "source state" - is managed directly renaming certain files in a specific way. "Dot" files (such as `.bashrc`) in the target state are named as `dot_bashrc` in the source state.
@@ -19,8 +23,6 @@ Another benefit is that all files can be managed in one branch, using `chezmoi`'
 
 * [`.khdrc`](./dot_khdrc.yabai)
 * [`.yabairc`](./executable_dot_yabairc)
-* [`.khdrc`](./dot_khdrc.chunkwm)
-* [`.chunkwmrc`](./executable_dot_chunkwmrc)
 * [`.config/ubersicht/widgets/`](./dot_config/ubersicht/widgets/)
 
 ### macOS
@@ -41,8 +43,6 @@ Another benefit is that all files can be managed in one branch, using `chezmoi`'
 * [`.profile`](./dot_profile)
 * [`.shell_aliases`](./dot_shell_aliases.tmpl)
 * [fzf bindings](./dot_config/fzf)
-* [`.bashrc`](./dot_bashrc) (legacy)
-* [`.bash_profile`](./dot_bash_profile) (legacy)
 
 `zsh` plugins are managed by [antibody](https://getantibody.github.io/):
 ```
@@ -83,11 +83,12 @@ I also use a repository of small scripts I write myself: [bin](https://github.co
   * lighter text: `f1fbc7`
   * accent color: `98971a`
     * or `b8bb26` for lighter green?
-* Chrome ([stylus](https://chrome.google.com/webstore/detail/stylus/clngdbkpkpeebahjckkjfobafhncgmne) and [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en))
+* Firefox (Stylus) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
+
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
   * [userstyles.org - blue custom](https://userstyles.org/styles/118410/userstyles-org-blue-custom)
   * [reddit - hide sidebar](https://userstyles.org/styles/142862/reddit-hide-sidebar-for-low-screen-width)
-* Firefox (Stylus) and [GreaseMonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/))
+
   * [Github Dark Wide Transparent](https://userstyles.org/styles/126131/github-dark-wide-transparent)
   * [Reddit Slate Nights (Fixed, Custom Fork) - Dark](https://userstyles.org/styles/123908/reddit-slate-nights-fixed-custom-fork-dark)
   * [SOUNDCLOUD NIGHTMODE REIMAGINED](https://userstyles.org/styles/136523/soundcloud-nightmode-reimagined)
