@@ -26,15 +26,17 @@ __fstash() {
 
         if [[ "$key" == 'ctrl-b' ]]; then
             git stash branch "stash-$sha" "$sha"
+            break
         elif [[ "$key" == 'ctrl-d' ]]; then
             git stash drop "$ref"
+            sleep 0.5
         elif [[ "$key" == 'ctrl-a' ]]; then
             git stash apply "$ref"
+            break
         else
             git stash show -p "$sha"
+            break
         fi
-
-        break
     done
 }
 
