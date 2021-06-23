@@ -11,6 +11,7 @@
 	ds = diff --staged
 	dt = difftool
 	co = checkout
+	s = switch
 	ci = commit
 	st = status
 	stb = status -sb
@@ -24,7 +25,7 @@
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
-	rH = reset HEAD
+	rH = restore --staged --worktree .
 	cp = cherry-pick
 	cpa = cherry-pick --abort
 	cpc = cherry-pick --continue
