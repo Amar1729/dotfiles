@@ -64,7 +64,6 @@ export HOMEBREW_BAT=1
 
 # use pipx instead of pip for all cli tools
 pathmunge "$HOME/.local/bin" "after"
-export PIP_CERT="$HOME"/.certs/full_cert.crt
 
 # add snap path on ubuntu
 [[ -d /snap/bin ]] && emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
