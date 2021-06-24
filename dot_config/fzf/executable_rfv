@@ -2,7 +2,7 @@
 
 # 1. Search for text in files using Ripgrep
 # 2. Interactively restart Ripgrep with reload action
-# 3. Open the file in Vim
+# 3. Open the file in $EDITOR
 RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
 INITIAL_QUERY="${*:-}"
 IFS=: read -ra selected < <(
@@ -14,4 +14,4 @@ IFS=: read -ra selected < <(
       --preview 'bat --color=always {1} --highlight-line {2}' \
       --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
 )
-[ -n "${selected[0]}" ] && vim "${selected[0]}" "+${selected[1]}"
+[ -n "${selected[0]}" ] && $EDITOR "${selected[0]}" "+${selected[1]}"
