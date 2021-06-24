@@ -85,4 +85,8 @@ yabai -m rule --add app="^VirtualBox$" manage=off
 yabai -m rule --add app="^VirtualBox VM$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
 
+# load limelight (window border system from yabai v2.4.3)
+killall limelight >/dev/null
+limelight >/dev/null &
+
 echo "yabai configuration loaded.."

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+limelight -m config width 2
+
+# dont color inactive windows
+limelight -m config normal_color 0xaa000000
+limelight -m config active_color 0xffebdbb2
