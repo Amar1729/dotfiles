@@ -116,10 +116,6 @@ chpwd () {
 precmd () { print '' }
 preexec () { print '' }
 
-# CASE_SENSITIVE="true"
-# case sensitive needs to be off; '_-' interchangeable.
-HYPHEN_INSENSITIVE="true"
-
 # some custom completions, and make sure $fpath gets loaded properly
 fpath+=~/.zsh/completions
 
@@ -133,6 +129,9 @@ fi
 
 # omz conflicts with common user alias mcd
 compdef -d mcd
+
+# case- and hyphen-insensitive matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
 
 zstyle ':completion:*' menu select
 zmodload zsh/complist
