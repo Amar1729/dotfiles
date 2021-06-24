@@ -237,7 +237,7 @@ tree - p        : yabai -m window --toggle zoom-parent
 lcmd + shift - g : yabai -m window --grid 100:100:25:25:50:50
 tree - q         : yabai -m window --grid 100:100:25:2:50:93
 
-tree + ctrl -f -> : ctrl - f
+tree + ctrl - f -> : ctrl - f
 
 
 ####
