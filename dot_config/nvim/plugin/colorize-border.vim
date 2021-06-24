@@ -9,9 +9,13 @@ let s:color_red = "0xccd75f5f"
 
 let s:os_type = system("uname -s")
 
+" let s:cmd = "chunkc border::color"
+" let s:cmd = "yabai -m config active_window_border_color"
+let s:cmd = "limelight -m config active_color"
+
 function ColorizeBorder()
     if s:os_type =~ "Darwin"
-        silent! execute("!chunkc border::color " . s:color_red)
+        silent! execute("!" . s:cmd . " " . s:color_red)
     else
         echom "not implemented for Linux"
     endif
@@ -19,7 +23,7 @@ endfunction
 
 function UnColorizeBorder()
     if s:os_type =~ "Darwin"
-        silent! execute("!chunkc border::color " . s:color_wht)
+        silent! execute("!" . s:cmd . " " . s:color_wht)
     else
         echom "not implemented for Linux"
     endif
@@ -29,5 +33,4 @@ augroup change_borders
   autocmd!
   autocmd InsertEnter * :call ColorizeBorder()
   autocmd InsertLeave * :call UnColorizeBorder()
-  " autocmd VimLeave * :silent! execute "!chunkc border::color 0xffebdbb2"
 augroup END
