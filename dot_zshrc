@@ -14,6 +14,9 @@ autoload -Uz compinit
 # we're going to default to untracking these (speed up creation of new shells)
 export DISABLE_UNTRACKED_FILES_DIRTY=true
 
+# use async for autosuggestions
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+
 # plugins: moving to antibody from antigen
 ANTIBODY_HOME="$(antibody home)"
 DISABLE_AUTO_UPDATE="true"
