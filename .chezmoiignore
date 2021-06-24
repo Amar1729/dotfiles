@@ -25,7 +25,6 @@ Library/
 
 .config/bspwm/bspwmrc_linux
 .config/sxhkd/sxhkdrc_linux
-.config/pip
 .config/conky-gpu
 .config/dunst
 .config/libinput-gestures.conf

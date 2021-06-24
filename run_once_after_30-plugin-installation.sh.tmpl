@@ -24,6 +24,7 @@ mkdir -p "$HOME/.tmux/plugins/"
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
 
+pip3 config set list.format freeze
 poetry config virtualenvs.in-project true
 {{ if .work -}}
 poetry config certificates.proxied_pypi.cert "$HOME/.certs/full_cert.crt"
