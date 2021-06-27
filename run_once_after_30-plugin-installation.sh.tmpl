@@ -19,7 +19,7 @@ fi
 nvim -c ":q"
 
 # tmux plugin manager
-if ! -d "$HOME/.tmux/plugins/"; then
+if [[ ! -d "$HOME/.tmux/plugins/" ]]; then
 mkdir -p "$HOME/.tmux/plugins/"
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi
@@ -31,13 +31,13 @@ poetry config certificates.proxied_pypi.cert "$HOME/.certs/full_cert.crt"
 {{- end }}
 
 # random scripts i've written
-if ! -d "$HOME/.bin"; then
+if [[ ! -d "$HOME/.bin" ]]; then
 git clone https://github.com/Amar1729/bin.git "$HOME/.bin"
 fi
 
 {{ if (eq .chezmoi.os "darwin") -}}
 # ubersicht bar
-if ! -d "$HOME/.config/ubersicht/widgets/simple-bar"; then
+if [[ ! -d "$HOME/.config/ubersicht/widgets/simple-bar" ]]; then
 mkdir -p "$HOME/.config/ubersicht/widgets/"
 git clone https://github.com/Jean-Tinland/simple-bar.git "$HOME/.config/ubersicht/widgets/simple-bar"
 fi
