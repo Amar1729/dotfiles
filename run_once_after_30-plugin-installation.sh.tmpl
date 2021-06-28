@@ -6,6 +6,11 @@ set -eo pipefail
 antibody bundle < "$HOME/.zsh_plugins.txt" > "$HOME/.zsh_plugins.zsh"
 
 # change to zsh
+if [[ -f /etc/shells ]]; then
+    if ! grep "$(which zsh)" /etc/shells; then
+        which zsh | sudo tee -a /etc/shells
+    fi
+fi
 chsh -s $(which zsh) $(whoami)
 
 # dein - plugin mgr for vim
