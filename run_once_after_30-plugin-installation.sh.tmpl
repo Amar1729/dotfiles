@@ -9,7 +9,7 @@ antibody bundle < "$HOME/.zsh_plugins.txt" > "$HOME/.zsh_plugins.zsh"
 chsh -s $(which zsh) $(whoami)
 
 # dein - plugin mgr for vim
-if ! -d "$HOME/.cache/dein"; then
+if [[ ! -d "$HOME/.cache/dein" ]]; then
 curl -sSL -o /tmp/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
 sh /tmp/installer.sh "$HOME/.cache/dein"
 rm /tmp/installer.sh
