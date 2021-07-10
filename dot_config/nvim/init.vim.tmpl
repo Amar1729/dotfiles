@@ -223,6 +223,8 @@ set nospell spelllang=en_us
 
 au BufEnter *.txt,*.md,*.tex setlocal spell
 
+set splitbelow splitright
+
 """
 " Personal definitions
 """
@@ -293,6 +295,9 @@ nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
+
+nnoremap <leader>ev :vsp ~/.local/share/chezmoi/dot_config/nvim/init.vim.tmpl<CR>
+nnoremap <leader>rc :so ~/.config/nvim/init.vim<CR>
 
 """
 " Augroups
