@@ -285,6 +285,12 @@ tnoremap <Esc> <C-\><C-n>
 " toggle folds with space
 nnoremap <space> za
 
+" move lines
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
 """
 " Augroups
 """
@@ -411,7 +417,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ultisnip settings
 " <c-j>, <c-k> : jump forward, backward, respectively
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<c-n>"
 
 
 " mappings for Linediff
