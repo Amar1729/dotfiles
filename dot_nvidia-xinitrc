@@ -1,4 +1,3 @@
-{{ if (eq .chezmoi.os "linux") -}}
 # execute this xinitrc with `nvidia-xrun`
 # useful for computers that have multiple (e.g. integrated/dedicated) gpus
 # nvidia-xrun will start an xsession using the NVIDIA GPU on board, from which
@@ -22,4 +21,3 @@ else
 
     . ~/.xinitrc
 fi
-{{- end }}

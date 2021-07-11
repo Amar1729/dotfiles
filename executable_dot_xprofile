@@ -1,4 +1,3 @@
-{{ if (eq .chezmoi.os "linux") -}}
 # source from .xinitrc
 # contains general "profile" things e.g. keybinds
 
@@ -19,4 +18,3 @@ xmodmap ~/.Xmodmap
 #xset -b
 
 xsetroot -cursor_name left_ptr
-{{- end }}

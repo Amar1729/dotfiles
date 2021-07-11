@@ -33,7 +33,11 @@ Library/
 .config/rofi
 .config/scripts/lock.sh
 .config/xresources
+.nvidia-xinitrc
 .urxvt
+.Xmodmap
+.Xresources
 .xinitrc_linux
+.xprofile
 
 {{ end }}
