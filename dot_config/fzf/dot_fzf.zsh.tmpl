@@ -1,11 +1,10 @@
 # Setup fzf
-# ---------
-# (fzf installed into /usr/bin on arch, so this is unecessary)
-#if [[ ! "$PATH" == */usr/bin* ]]; then
-#    export PATH="$PATH:/usr/bin"
-#fi
 
+{{ if (eq .chezmoi.os "darwin") -}}
+PREFIX=/usr/local/opt/fzf/shell
+{{ else if (eq .chezmoi.os "linux") -}}
 PREFIX=/usr/share/fzf
+{{- end }}
 
 # Auto-completion
 # ---------------
