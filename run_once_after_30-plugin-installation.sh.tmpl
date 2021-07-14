@@ -11,7 +11,12 @@ if [[ -f /etc/shells ]]; then
         which zsh | sudo tee -a /etc/shells
     fi
 fi
-chsh -s $(which zsh) $(whoami)
+
+if [[ -z "$SHELL" ]]; then
+    if [[ "$SHELL" != *"zsh" ]]; then
+        chsh -s $(which zsh) $(whoami)
+    fi
+fi
 
 # dein - plugin mgr for vim
 if [[ ! -d "$HOME/.cache/dein" ]]; then
@@ -52,7 +57,7 @@ fi
 {{ if (eq .chezmoi.os "darwin") -}}
 (
     for profile in "$HOME/Library/Application Support/Firefox/Profiles"/*.default-*; do
-        ln -sfv "$HOME/.config/mozilla/chrome" "$profile"/chrome
+        ln -sfv "$HOME/.config/mozilla/chrome" "$profile"
     done
 )
 # need to add (eq .chezmoi.os "linux")
