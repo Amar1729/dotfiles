@@ -47,3 +47,13 @@ mkdir -p "$HOME/.config/ubersicht/widgets/"
 git clone https://github.com/Jean-Tinland/simple-bar.git "$HOME/.config/ubersicht/widgets/simple-bar"
 fi
 {{ end -}}
+
+# firefox minimal style
+{{ if (eq .chezmoi.os "darwin") -}}
+(
+    for profile in "$HOME/Library/Application Support/Firefox/Profiles"/*.default-*; do
+        ln -sfv "$HOME/.config/mozilla/chrome" "$profile"/chrome
+    done
+)
+# need to add (eq .chezmoi.os "linux")
+{{ end -}}
