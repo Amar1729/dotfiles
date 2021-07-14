@@ -44,6 +44,10 @@ alias dh='dirs -v'
 # filter on bool $f: needs to be expanded inline to work
 alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; done'
 
+# commands for which zsh globbing gets in the way
+alias curl='noglob curl'
+alias wget='noglob wget'
+
 # zsh options
 
 # autopushd         : make cd act like pushd (alias doesn't work properly)
