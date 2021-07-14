@@ -96,6 +96,11 @@ def generate_manipulators():
             for directive in generate_vi_mode(trigger, from_key, to_key, mods):
                 yield directive
 
+        if trigger == trigger_key_movemt:
+            fk = tk = "delete_or_backspace"
+            for directive in generate_vi_mode(trigger, fk, tk, mods):
+                yield directive
+
 def main():
     return {
         'title': 'Personal rules (@amar1729) vi_expanded_mode',
