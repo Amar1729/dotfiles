@@ -74,19 +74,11 @@ pathmunge "/opt/prefix/bin" "after"
 pathmunge "$HOME/.bin" "after"
 
 # add fzf (default bindings, and my own aliases)
-if [[ -n "$ZSH" ]]; then
-    # for now - unfortunately, this hack is required to stop
-    # lightdm's Xsession wrapper from sourcing us and incorrectly
-    # trying to source zsh bindings. it'll fail, and lightdm won't
-    # correctly start up X.
-    # (currently, $ZSH is set inside my .zshrc)
-    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
-else
-    [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
-fi
-[[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
+[[ $SHELL == *"zsh" ]]  && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.zsh" ]]  && source "$XDG_CONFIG_HOME/fzf/.fzf.zsh"
+[[ $SHELL == *"bash" ]] && [[ -f "$XDG_CONFIG_HOME/fzf/.fzf.bash" ]] && source "$XDG_CONFIG_HOME/fzf/.fzf.bash"
 
 pathmunge "$XDG_CONFIG_HOME/fzf" "after"
+[[ -r "$XDG_CONFIG_HOME/fzf/fzf_aliases" ]] && source "$XDG_CONFIG_HOME/fzf/fzf_aliases"
 
 # Add cargo (Rust) stuff
 pathmunge "$HOME/.cargo/bin" "after"
