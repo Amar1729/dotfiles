@@ -111,19 +111,8 @@ if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
 	. ~/.nix-profile/etc/profile.d/nix.sh;
 fi
 
-# perl
-#export PATH="$HOME/perl5/bin:$PATH"
-#export PERL5LIB="$HOME/perl5/lib/perl5:$PERL5LIB"
-#export PERL_LOCAL_LIB_ROOT="$HOME/perl5:$PERL_LOCAL_LIB_ROOT"
-#export PERL_MB_OPT="--install_base \"$HOME/perl5\""
-#export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 pathmunge "$HOME/.rvm/bin" "after"
-
-# keep this?
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
 # add bundled gems
 pathmunge "$HOME/.local/rubygems" "after"
@@ -143,9 +132,6 @@ sdk () {
 
 # why doesnt this work
 alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
-
-# haskell
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
 
 # add calibre cli
 pathmunge "/Applications/calibre.app/Contents/MacOS/" "after"
