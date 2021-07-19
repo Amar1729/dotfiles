@@ -114,18 +114,14 @@ cmd + alt + ctrl - l
 # alt - c : chunkc set window_float_next 1
 # TODO - does this have an analogue in yabai?
 
-# god i hate this, but cycle through windows
-# cycle forwards
-alt - n : yabai -m query --spaces \
-  | jq -re ".[] | select(.visible == 1).index" \
-  | xargs -I{} yabai -m query --windows --space {} \
-  | jq -sre "add | map(select(.floating == 0)) | sort_by(.display, .frame.x, .frame.y, .id) | reverse | nth(index(map(select(.focused == 1))) - 1).id" \
-  | xargs -I{} yabai -m window --focus {}
+# cycle - IGNORE floating windows
+alt - n : yabai -m query --windows --space \
+    | jq -sr "add | map(select(.floating == 0)) | sort_by(.frame.x, .frame.y, .id) | reverse" \
+    | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['focused'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
+    | xargs -I{} yabai -m window --focus {}
 
-# cycle backwards
-alt - m : yabai -m query --spaces \
-  | jq -re ".[] | select(.visible == 1).index" \
-  | xargs -I{} yabai -m query --windows --space {} \
+# cycle WITHOUT ignoring floating windows
+alt - m : yabai -m query --windows --space \
   | jq -sre "add |  sort_by(.display, .frame.x, .frame.y, .id) | nth(index(map(select(.focused == 1))) - 1).id" \
   | xargs -I{} yabai -m window --focus {}
 
