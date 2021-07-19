@@ -234,7 +234,7 @@ tree + ctrl - f -> : ctrl - f
 space - s : khd -e "mode activate default"; ~/.bin/spongify --copy
 space - l : khd -e "mode activate default"; ~/.bin/spacify --copy
 space - h : khd -e "mode activate default"; khd -w "¯\_(ツ)_/¯"
-#space - f : khd -e "mode activate default"; khd -w "what fuck you"
+space - v : khd -e "mode activate default"; ~/.bin/codify
 
 # I use ctrl-d to exit shell and to close tmux panes
 space + ctrl - d    [HyperTerm,Terminal,iTerm,iTerm2]
