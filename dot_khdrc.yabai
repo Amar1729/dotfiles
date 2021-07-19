@@ -13,9 +13,9 @@ khd mode space restore default
 # black: 0xaa282828 (focused color)
 # green: 0xcc98971a
 # white: 0x77fbf1c7
-khd mode default	on_enter yabai -m config active_window_border_color 0xffebdbb2
-khd mode tree		on_enter yabai -m config active_window_border_color 0xcc458588
-khd mode space		on_enter yabai -m config active_window_border_color 0xccb16286
+khd mode default	on_enter limelight -m config active_color 0xffebdbb2
+khd mode tree		on_enter limelight -m config active_color 0xcc458588
+khd mode space		on_enter limelight -m config active_color 0xccb16286
 
 # toggle between modes
 ctrl - d			:	khd -e "mode activate space"
