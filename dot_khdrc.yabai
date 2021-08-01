@@ -85,8 +85,10 @@ cmd - 0x35 : khd -e "reload"
 # manually defined since lcmd+shift+n sends a window to a desktop
 rcmd + shift - 3
     : screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
-# rcmd + shift - 4
-#     -> : chunkc border::clear
+
+# accompanied by a signal that resets border colors on space_change
+rcmd + shift - 4
+    -> : limelight -m config active_color 0xaa000000
 
 # take a screenshot and try to recognize text
 rcmd + shift - 6 : ~/.bin/ocr

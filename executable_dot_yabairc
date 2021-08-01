@@ -28,6 +28,10 @@ yabai -m config window_gap                   5
 # "monocle" mode for space 1
 ~/.bin/yabai-monocle 1
 
+yabai -m signal --add event=space_changed \
+    action="limelight -m config active_color 0xffebdbb2" \
+    label=reborder-after-clear
+
 # borders are timing out oddly (being redrawn behind app windows?) for me.
 # these signals to toggle borders off/on on window change seem to resolve issue.
 
