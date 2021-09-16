@@ -31,9 +31,14 @@ font:
   # normal (can also specify bold and italic)
   normal:
     family: Fantasque Sans Mono
+    # family: Iosevka
 
   # Point size
+  {{ if (eq .chezmoi.os "darwin") -}}
+  size: 14.0
+  {{ else -}}
   size: 8.0
+  {{- end }}
 
   # Thin stroke font rendering (retina displays, macOS only)
   use_thin_strokes: true
@@ -46,15 +51,30 @@ colors:
     # Keep cursor white to prevent missing it over parens
     cursor: '0xebdbb2'
 
+{{ if (eq .chezmoi.os "darwin") -}}
+# https://github.com/dylanaraps/pywal/pull/611
+import:
+  - ~/.cache/wal/colors-alacritty.yml
+{{- end }}
+
 background_opacity: 0.8 # (0.0 to 1.0)
 
 # Mouse stuff
 mouse_bindings:
   - { mouse: Right, action: PasteSelection }
 
-mouse:
-  url:
-    modifiers: Super
+hints:
+  enabled:
+    - regex: "(mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-\u009F<>\" {-}\\^⟨⟩`]+"
+      {{ if (eq .chezmoi.os "darwin") -}}
+      command: open
+      {{ else -}}
+      command: xdg-open
+      {{- end -}}
+      post_processing: true
+      mouse:
+        enabled: true
+        mods: Super
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -75,7 +95,9 @@ key_bindings:
   - { key: Insert,   mods: Shift,         action: PasteSelection   }
   - { key: Key0,     mods: Control,       action: ResetFontSize    }
   - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+{{ if (eq .chezmoi.os "linux") -}}
   - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+{{- end }}
 
   # (macOS only)
   #- { key: Key0,   mods: Command, action: ResetFontSize    }
