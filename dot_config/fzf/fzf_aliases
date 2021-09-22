@@ -4,6 +4,7 @@
 export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
 export FZF_DEFAULT_OPTS='--ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd -t d --ignore-file ~/.gitignore_global'
 
 __git_log () {
     # format str implies:
