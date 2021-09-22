@@ -1,1 +1,2 @@
 --theme="ansi"
+--map-syntax="*.tmux.conf":Tmux
