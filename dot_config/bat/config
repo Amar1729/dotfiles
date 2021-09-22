@@ -1,2 +1,3 @@
 --theme="ansi"
 --map-syntax="*.tmux.conf":Tmux
+--map-syntax="Dockerfile*":Dockerfile
