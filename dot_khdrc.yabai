@@ -24,6 +24,7 @@ tree - s 			:	khd -e "mode activate sender"
 
 # remap ctrl+a / ctrl+e -> start/end of line
 lctrl - a	![
+				Alacritty,
 				HyperTerm,
 				Terminal,
 				iTerm,
@@ -35,6 +36,7 @@ lctrl - a	![
 				VirtualBox VM
 			] : khd -p "ctrl - left"
 lctrl - e	![
+				Alacritty,
 				HyperTerm,
 				Terminal,
 				iTerm,
@@ -48,6 +50,7 @@ lctrl - e	![
 
 # remap ctrl+u -> delete from cursor to start of line
 lctrl - u	![
+				Alacritty,
 				HyperTerm,
 				Terminal,
 				iTerm,
