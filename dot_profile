@@ -42,7 +42,7 @@ export LESS_TERMCAP_ue=$(printf '\e[0m')            #  leave underline
 # https://gist.github.com/JohnArchieMckown/dfb8220faa8e45a167dc
 pathmunge () {
     if [ -e "$1" ]; then
-        if ! echo "$PATH" | grep -E -q "(^|:)$1($|:)" ; then
+        if ! [[ "$PATH" = *"$1"* ]]; then
             if [ "$2" = "after" ] ; then
                 PATH=$PATH:$1
             else
