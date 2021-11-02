@@ -25,7 +25,8 @@
 	p = pull
 	pr = pull --rebase
 	rv = remote -v
-	rH = restore --staged --worktree .
+	# unstaged staged changes, but don't remove them (use --worktree,-W for that)
+	rH = restore --staged
 	cp = cherry-pick
 	cpa = cherry-pick --abort
 	cpc = cherry-pick --continue
@@ -101,3 +102,6 @@
 
 [init]
 	defaultBranch = main
+
+[rerere]
+    enabled = true
