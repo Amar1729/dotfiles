@@ -1,0 +1,21 @@
+{{ if (eq .chezmoi.os "darwin") -}}
+{{ if .work -}}
+#! /usr/bin/python2.7
+
+# set default mailto: link handler without having to sign into the damn mail.app
+# https://apple.stackexchange.com/questions/261881/set-default-mail-client-in-osx-without-adding-an-email-account
+# https://developer.apple.com/documentation/coreservices/1447760-lssetdefaulthandlerforurlscheme
+
+import LaunchServices
+result = LaunchServices.LSSetDefaultHandlerForURLScheme(
+    "mailto",
+    "com.microsoft.Outlook"
+)
+print(
+    "Result: %d (%s)" % (
+        result,
+        "Success" if result == 0 else "Error"
+    )
+)
+{{- end }}
+{{- end }}
