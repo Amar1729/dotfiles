@@ -47,6 +47,7 @@ alias _filter='for f in ${arr[@]}; do if func $f &>/dev/null; then echo $f; fi; 
 # commands for which zsh globbing gets in the way
 alias curl='noglob curl'
 alias wget='noglob wget'
+alias git='noglob git'
 
 # zsh options
 
