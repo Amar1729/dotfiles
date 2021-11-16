@@ -6,6 +6,7 @@ README.md
 {{- if not .work }}
 
 .config/matterhorn
+./run_once_after_90-mobymac.sh
 
 {{- end }}
 
