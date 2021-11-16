@@ -1,0 +1,141 @@
+.blacklist [
+    "Microsoft Outlook"
+]
+
+:: default : limelight -m config active_color 0xffebdbb2
+:: tree : limelight -m config active_color 0xcc458588
+
+ctrl - f ; tree
+tree < ctrl - f ; default
+
+cmd - 9 : skhd --text "amar.paul16@gmail.com"
+cmd - 0 : skhd --text "amar.paul@jhuapl.edu"
+
+default, tree < cmd - 0x35 : skhd --reload; pkill limelight; limelight -c ~/.limelightrc >/dev/null &
+tree < cmd - 0x35 ; default
+
+rcmd + shift - 3
+    : screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
+
+# accompanied by a signal that resets border colors on space_change
+rcmd + shift - 4
+    -> : limelight -m config active_color 0xaa000000
+
+# take a screenshot and try to recognize text
+rcmd + shift - 6 : ~/.bin/ocr
+
+cmd - return
+    : wp -n
+    # : open -a Alacritty
+
+cmd + ctrl - return : open ~/
+
+cmd + alt + ctrl - l : ~/.bin/lock
+
+# cycle - IGNORE floating windows
+alt - n : yabai -m query --windows --space \
+    | jq -sr "add | map(select(.floating == 0)) | sort_by(.frame.x, .frame.y, .id) | reverse" \
+    | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['focused'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
+    | xargs -I{} yabai -m window --focus {}
+
+# cycle WITHOUT ignoring floating windows
+alt - m : yabai -m query --windows --space \
+  | jq -sre "add |  sort_by(.display, .frame.x, .frame.y, .id) | nth(index(map(select(.focused == 1))) - 1).id" \
+  | xargs -I{} yabai -m window --focus {}
+
+lcmd - h : yabai -m window --focus west
+lcmd - j : yabai -m window --focus south
+lcmd - k : yabai -m window --focus north
+lcmd - l : yabai -m window --focus east
+
+# equalize size of windows
+shift + alt - 0 : yabai -m space --balance
+
+# increase region size (floating or nonfloating)
+lalt - h : yabai -m window --resize left:-30:0
+lalt - j : yabai -m window --resize bottom:0:30
+lalt - k : yabai -m window --resize top:0:-30
+lalt - l : yabai -m window --resize right:30:0
+
+# decrease region size (floating or nonfloating)
+shift + lalt - h : yabai -m window --resize left:30:0
+shift + lalt - j : yabai -m window --resize bottom:0:-30
+shift + lalt - k : yabai -m window --resize top:0:30
+shift + lalt - l : yabai -m window --resize right:-30:0
+
+# swap window
+ctrl + lalt - h : yabai -m window --swap west
+ctrl + lalt - j : yabai -m window --swap south
+ctrl + lalt - k : yabai -m window --swap north
+ctrl + lalt - l : yabai -m window --swap east
+
+# reinsert window
+lcmd + shift - h : yabai -m window --warp west
+lcmd + shift - j : yabai -m window --warp south
+lcmd + shift - k : yabai -m window --warp north
+lcmd + shift - l : yabai -m window --warp east
+
+# set insertion point for focused container
+lcmd + ctrl - h     : yabai -m window --insert west
+lcmd + ctrl - j     : yabai -m window --insert south
+lcmd + ctrl - k     : yabai -m window --insert north
+lcmd + ctrl - l     : yabai -m window --insert east
+
+# move around floating windows
+cmd + shift - left  : yabai -m window --move rel:-30:0
+cmd + shift - down  : yabai -m window --move rel:0:30
+cmd + shift - up    : yabai -m window --move rel:0:-30
+cmd + shift - right : yabai -m window --move rel:30:0
+
+# send window to desktop and follow focus
+lcmd + shift - 1 : yabai -m window --space 1; skhd --key "cmd - 1"
+lcmd + shift - 2 : yabai -m window --space 2; skhd --key "cmd - 2"
+lcmd + shift - 3 : yabai -m window --space 3; skhd --key "cmd - 3"
+lcmd + shift - 4 : yabai -m window --space 4; skhd --key "cmd - 4"
+lcmd + shift - 5 : yabai -m window --space 5; skhd --key "cmd - 5"
+lcmd + shift - 6 : yabai -m window --space 6; skhd --key "cmd - 6"
+
+# focus monitor
+ctrl - 1 : yabai -m display --focus 1
+ctrl - 2 : yabai -m display --focus 2
+ctrl - 3 : yabai -m display --focus 3
+
+# send window to monitor (don't follow focus)
+ctrl + shift - 1 : yabai -m window --display 1
+ctrl + shift - 2 : yabai -m window --display 2
+ctrl + shift - 3 : yabai -m window --display 3
+
+
+####
+## Tree
+####
+
+# toggle float
+alt - t         : yabai -m window --toggle float
+
+# center a floating window
+alt - c         : ~/.bin/yabai-center
+
+# toggle window split type (like a container rotation)
+alt - e         : yabai -m window --toggle split
+
+# toggle window fullscreen
+lcmd - g        : yabai -m window --toggle zoom-fullscreen
+
+# toggle window parent zoom
+tree < p        : yabai -m window --toggle zoom-parent
+
+# presets for floating windows
+lcmd + shift - g : yabai -m window --grid 100:100:25:25:50:50
+tree < q         : yabai -m window --grid 100:100:57:6:37:42
+tree < e         : yabai -m window --grid 100:100:25:2:50:93
+
+tree < s : ~/.bin/spongify --copy
+tree < l : ~/.bin/spacify --copy
+tree < h : skhd --text "¯\_(ツ)_/¯"
+tree < v : ~/.bin/codify
+
+# change layout of desktop
+tree < b : yabai -m space --layout bsp; ~/.bin/yabai-monocle --rm curr
+tree < shift - f : yabai -m space --layout float; ~/.bin/yabai-monocle --rm curr
+tree < m : ~/.bin/yabai-monocle curr

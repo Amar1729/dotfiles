@@ -21,14 +21,13 @@ Another benefit is that all files can be managed in one branch, using `chezmoi`'
 
 ## Window Management
 
-* [`.khdrc`](./dot_khdrc.yabai)
+* [`.skhdrc`](./dot_skhdrc)
 * [`.yabairc`](./executable_dot_yabairc)
 * [`.config/ubersicht/widgets/`](./dot_config/ubersicht/widgets/)
 
 ### macOS
 
-* [yabai](https://github.com/koekeishiya/yabai/) and the hotkey daemon [khd](https://github.com/koekeishiya/khd)
-  * `khd` is deprecated - the author recommends switching to [skhd](https://github.com/koekeishiya/skhd), but I haven't yet
+* [yabai](https://github.com/koekeishiya/yabai/) and the hotkey daemon [`skhd`](https://github.com/koekeishiya/skhd)
   * [Uebersicht](http://tracesof.net/uebersicht/), a neat tool for the display of html/css/js widgets directly on the desktop. This program is managing the custom toolbar you might see in a lot of Mac OS rices (and mine!)
 
 ### linux
