@@ -325,8 +325,6 @@ augroup JsonPrettify
   autocmd BufWinEnter *.json silent! %!python -m json.tool
 augroup END
 
-autocmd BufNewFile,BufRead {.chunkwmrc,kwmrc,.khdrc} set syntax=kwm
-
 " disable linting for temporary .py files
 autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
 
