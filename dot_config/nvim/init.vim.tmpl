@@ -95,6 +95,11 @@ if dein#load_state('~/.cache/dein/')
   " use git from inside vim
   call dein#add('tpope/vim-fugitive')
 
+  " plugins for movement
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('justinmk/vim-sneak')
+  call dein#add('bkad/CamelCaseMotion')
+
 
   " Language-specific syntax support, completions:
 
@@ -528,6 +533,24 @@ augroup SetAntlr
   au BufRead,BufNewFile *.g set filetype=antlr3
   au BufRead,BufNewFile *.g4 set filetype=antlr4
 augroup END
+
+
+" CamelCaseMotion settings
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 
 " airline-vim, airline-vim-themes settings
