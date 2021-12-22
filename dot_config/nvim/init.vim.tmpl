@@ -411,7 +411,11 @@ let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/u
 " gtfo py2
 let g:python_host_prog=''
 {{ if (eq .chezmoi.os "darwin") -}}
+{{ if (eq .chezmoi.arch "arm64") -}}
+let g:python3_host_prog='/opt/homebrew/bin/python3'
+{{ else -}}
 let g:python3_host_prog='/usr/local/bin/python3'
+{{- end }}
 {{ else if (eq .chezmoi.os "linux") -}}
 let g:python3_host_prog='/usr/bin/python3'
 {{- end }}

@@ -1,7 +1,11 @@
 # Setup fzf
 
 {{ if (eq .chezmoi.os "darwin") -}}
+{{ if (eq .chezmoi.arch "arm64") -}}
+PREFIX=/opt/homebrew/opt/fzf/shell
+{{ else -}}
 PREFIX=/usr/local/opt/fzf/shell
+{{- end }}
 {{ else if (eq .chezmoi.os "linux") -}}
 PREFIX=/usr/share/fzf
 {{- end }}

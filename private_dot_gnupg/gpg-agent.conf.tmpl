@@ -1,0 +1,5 @@
+{{ if (eq .chezmoi.arch "arm64") -}}
+pinentry-program /opt/homebrew/bin/pinentry-prefer-tty
+{{ else -}}
+pinentry-program /usr/local/bin/pinentry-prefer-tty
+{{- end }}
