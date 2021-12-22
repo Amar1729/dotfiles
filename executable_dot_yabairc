@@ -51,6 +51,7 @@ yabai -m rule --add app="^Calculator$" manage=off
 yabai -m rule --add app="^Disk Utility$" manage=off
 yabai -m rule --add app="^Activity Monitor$" manage=off
 yabai -m rule --add app="^Installer$" manage=off
+yabai -m rule --add app="^System Information$" manage=off
 
 # float user apps
 yabai -m rule --add app="^python$" manage=off
