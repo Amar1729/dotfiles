@@ -80,8 +80,13 @@ if dein#load_state('~/.cache/dein/')
   " vim wiki
   call dein#add('vimwiki/vimwiki')
 
-  " fzf support
-  call dein#add('junegunn/fzf.vim')
+  " fzf support (setting runtimepath seems more stable than adding fzf.vim
+  " plugin)
+{{ if (eq .chezmoi.arch "arm64") -}}
+  set runtimepath+=/opt/homebrew/opt/fzf
+{{ else -}}
+  set runtimepath+=/usr/local/opt/fzf
+{{- end }}
 
   " line diffing
   call dein#add('AndrewRadev/linediff.vim')
