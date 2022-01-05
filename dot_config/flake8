@@ -1,3 +1,0 @@
-[flake8]
-# ignore: line too long
-ignore = E501
