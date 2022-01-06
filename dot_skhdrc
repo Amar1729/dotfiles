@@ -25,8 +25,8 @@ rcmd + shift - 4
 rcmd + shift - 6 : ~/.bin/ocr
 
 cmd - return
-    : wp -n
-    # : open -a Alacritty
+    : if ! alacritty msg create-window; then open -a /Applications/Alacritty.app; fi
+    # : wp -n
 
 cmd + ctrl - return : open ~/
 
