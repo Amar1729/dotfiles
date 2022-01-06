@@ -21,6 +21,8 @@ window:
   # Window decorations
   decorations: none
 
+  opacity: 0.8
+
 scrolling:
   history: 500
 
@@ -56,8 +58,6 @@ colors:
 import:
   - ~/.cache/wal/colors-alacritty.yml
 {{- end }}
-
-background_opacity: 0.8 # (0.0 to 1.0)
 
 # Mouse stuff
 mouse_bindings:
@@ -110,6 +110,9 @@ key_bindings:
   #- { key: H,      mods: Command, action: Hide             }
   #- { key: Q,      mods: Command, action: Quit             }
   #- { key: W,      mods: Command, action: Quit             }
+
+  # is this macos only?
+  - { key: N,        mods: Command, action: CreateNewWindow                  }
 
   - { key: Comma,    mods: Alt,     chars: "\x1b,"                           }
   - { key: Period,   mods: Alt,     chars: "\x1b."                           }
