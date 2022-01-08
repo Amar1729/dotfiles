@@ -54,13 +54,19 @@ pathmunge () {
 
 # homebrew changes
 export HOMEBREW_NO_AUTO_UPDATE=1
-[[ $(uname) == 'Darwin' ]] && \
-[[ -n $DEFAULT_PATH ]] && \
-	export PATH="/usr/local/sbin:/usr/local/bin:$DEFAULT_PATH" && \
-	unset DEFAULT_PATH || \
-	export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
-
 export HOMEBREW_BAT=1
+
+if [[ $(uname) == 'Darwin' ]]; then
+    if [[ ! -r "$HOME/.brew" ]]; then
+        if ! /opt/homebrew/bin/brew shellenv > "$HOME/.brew"; then
+            if ! /usr/local/bin/brew shellenv > "$HOME/.brew"; then
+                echo "'brew' not found" >&2
+            fi
+        fi
+    fi
+
+    source "$HOME/.brew"
+fi
 
 # use pipx instead of pip for all cli tools
 pathmunge "$HOME/.local/bin" "after"
