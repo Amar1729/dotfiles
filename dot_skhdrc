@@ -1,7 +1,3 @@
-.blacklist [
-    "Microsoft Outlook"
-]
-
 :: default : limelight -m config active_color 0xffebdbb2
 :: tree : limelight -m config active_color 0xcc458588
 
@@ -24,9 +20,11 @@ rcmd + shift - 4
 # take a screenshot and try to recognize text
 rcmd + shift - 6 : ~/.bin/ocr
 
-cmd - return
-    : if ! alacritty msg create-window; then open -a /Applications/Alacritty.app; fi
-    # : wp -n
+# ignore outlook for this command (send email) but don't blacklist it for other things (ctrl - number)
+cmd - return [
+    "Microsoft Outlook"     ~
+    *                       : if ! alacritty msg create-window; then open -a /Applications/Alacritty.app; fi
+]
 
 cmd + ctrl - return : open ~/
 
