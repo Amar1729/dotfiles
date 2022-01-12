@@ -130,12 +130,12 @@ lcmd + shift - g : yabai -m window --grid 100:100:25:25:50:50
 tree < q         : yabai -m window --grid 100:100:57:6:37:42
 tree < e         : yabai -m window --grid 100:100:25:2:50:93
 
-tree < s : ~/.bin/spongify --copy
-tree < l : ~/.bin/spacify --copy
-tree < h : skhd --text "¯\_(ツ)_/¯"
-tree < v : ~/.bin/codify
+tree < s : skhd --key "ctrl - f"; ~/.bin/spongify --copy
+tree < l : skhd --key "ctrl - f"; ~/.bin/spacify --copy
+tree < h : skhd --key "ctrl - f"; skhd --text "¯\_(ツ)_/¯"
+tree < v : skhd --key "ctrl - f"; ~/.bin/codify
 
 # change layout of desktop
-tree < b : yabai -m space --layout bsp; ~/.bin/yabai-monocle --rm curr
-tree < shift - f : yabai -m space --layout float; ~/.bin/yabai-monocle --rm curr
-tree < m : ~/.bin/yabai-monocle curr
+tree < b : yabai -m space --layout bsp; ~/.bin/yabai-monocle --rm curr; skhd --key "ctrl - f"
+tree < shift - f : yabai -m space --layout float; ~/.bin/yabai-monocle --rm curr; skhd --key "ctrl - f"
+tree < m : ~/.bin/yabai-monocle curr; skhd --key "ctrl - f"
