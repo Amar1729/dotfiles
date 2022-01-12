@@ -153,6 +153,12 @@ if dein#load_state('~/.cache/dein/')
   " chezmoi templating/support
   call dein#add('alker0/chezmoi.vim')
 
+{{- if (eq .chezmoi.os "darwin") }}
+
+  " skhd
+  call dein#add('amar1729/skhd-vim-syntax')
+{{- end }}
+
   " Required:
   call dein#end()
   call dein#save_state()
