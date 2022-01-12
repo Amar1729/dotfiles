@@ -56,6 +56,7 @@ fi
 # firefox minimal style
 {{ if (eq .chezmoi.os "darwin") -}}
 (
+    open -a Firefox
     for profile in "$HOME/Library/Application Support/Firefox/Profiles"/*.default-*; do
         ln -sfv "$HOME/.config/mozilla/chrome" "$profile"
     done
