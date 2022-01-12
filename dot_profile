@@ -128,9 +128,6 @@ sdk () {
     sdk "$@"
 }
 
-# why doesnt this work
-alias mvn="~/.sdkman/candidates/maven/3.5.4/bin/mvn"
-
 # add calibre cli
 pathmunge "/Applications/calibre.app/Contents/MacOS/" "after"
 
