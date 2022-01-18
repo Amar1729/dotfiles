@@ -158,6 +158,7 @@ set -g @plugin 'tmux-plugins/tmux-sessionist' # better mgmt of sessions
 set -g @plugin 'tmux-plugins/tmux-resurrect' # save/restore tmux state
 set -g @plugin 'nhdaly/tmux-better-mouse-mode' # better scrolling
 set -g @plugin 'tmux-plugins/tmux-continuum' # automatic save/restore tmux state (depends on tmux-resurrect)
+set -g @plugin 'tmux-plugins/tmux-open' # open urls from tmux (needed on current alacritty)
 
 set -g @resurrect-save 'S'
 set -g @resurrect-restore 'R'
@@ -166,6 +167,8 @@ set -g @resurrect-strategy-nvim 'session'
 set -g @emulate-scroll-for-no-mouse-alternate-buffer 'on'
 
 set -g @continuum-restore 'on'
+
+set -g @open-S 'https://www.duckduckgo.com/?q='
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
