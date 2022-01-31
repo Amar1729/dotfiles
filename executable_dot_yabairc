@@ -44,6 +44,10 @@ yabai -m signal --add event=space_changed \
 #     action="yabai -m config window_border off; yabai -m config window_border on" \
 #     label=window-border-reset-focused
 
+yabai -m signal --add event=space_changed \
+    action="wp --alacritty" \
+    label=alacritty-color-reload
+
 # float system apps
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
