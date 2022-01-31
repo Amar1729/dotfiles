@@ -32,6 +32,9 @@ if dein#load_state('~/.cache/dein/')
 
   " Engines, code style:
 
+  " use treesitter for language features
+  call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
+
   " deoplete for nvim
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-clang')
@@ -169,7 +172,6 @@ endif
 
 " Required:
 filetype plugin indent on
-syntax enable
 
 " If you want to install not installed plugins on startup.
 " (Annoying when you're testing lots of different plugins)
@@ -398,6 +400,32 @@ augroup end
 """
 " Plugin Settings and Keybinds
 """
+
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- "all" | "maintainers" | {"list of languages"}
+  ensure_installed = "maintained",
+  sync_install = false,
+
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+
+  incremental_selection = {
+      -- default keymaps: init / node inc / scope inc / node dec
+      -- gnn / grn / grc / grm
+      enable = true,
+  },
+
+  indent = {
+      enable = true,
+  }
+}
+EOF
 
 
 " gitsigns
