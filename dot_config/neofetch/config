@@ -19,7 +19,7 @@ print_info() {
     info "Resolution" resolution
     info "DE" de
     #info "WM" wm
-    prin "WM" "chunkwm"
+    prin "WM" "yabai"
     #info "WM Theme" wm_theme
     #info "Theme" theme
     info "Icons" icons
