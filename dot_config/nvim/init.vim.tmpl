@@ -59,8 +59,11 @@ if dein#load_state('~/.cache/dein/')
 
   " Quality of life:
 
-  " git gutter
-  call dein#add('airblade/vim-gitgutter')
+  " requried for some lua plugins
+  call dein#add('nvim-lua/plenary.nvim')
+
+  " (lua) git signs (replaced airblade/gitgutter)
+  call dein#add('lewis6991/gitsigns.nvim')
 
   " continuous highlighting, better incsearch
   call dein#add('haya14busa/incsearch.vim')
@@ -397,17 +400,23 @@ augroup end
 """
 
 
-" gitgutter
-augroup GitGutterRefresh
-  autocmd!
-  autocmd BufWinEnter * silent! :GitGutter
-augroup END
+" gitsigns
+lua require('gitsigns').setup({
+\    numhl = true,
+\    current_line_blame = true,
+\    current_line_blame_opts = {delay = 500},
+\ })
 
-set updatetime=100
-nmap ghn <Plug>(GitGutterNextHunk)
-nmap ghp <Plug>(GitGutterPrevHunk)
-nmap <leader>hu <Plug>(GitGutterUndoHunk)
-nmap <leader>hs <Plug>(GitGutterStageHunk)
+highlight link GitSignsCurrentLineBlame String
+" use leader for next/prev hunk commands, otherwise conflicts with python.vim
+" movement
+nmap ghn :Gitsigns next_hunk<CR>
+nmap ghp :Gitsigns prev_hunk<CR>
+nmap <leader>hs :Gitsigns stage_hunk<CR>
+vmap <leader>hs :'<'>Gitsigns stage_hunk<CR>
+nmap <leader>hu :Gitsigns undo_stage_hunk<CR>
+nmap <leader>hp :Gitsigns preview_hunk<CR>
+nmap <leader>hrp :Gitsigns toggle_current_line_blame<CR>
 
 
 " deoplete settings
