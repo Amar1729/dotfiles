@@ -108,6 +108,9 @@ ctrl + shift - 3 : yabai -m window --display 3
 ## Tree
 ####
 
+# dropdown
+lalt - space    : ~/.bin/floatng-alacritty
+
 # toggle float
 alt - t         : yabai -m window --toggle float
 
