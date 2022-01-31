@@ -440,9 +440,12 @@ highlight link GitSignsCurrentLineBlame String
 " movement
 nmap ghn :Gitsigns next_hunk<CR>
 nmap ghp :Gitsigns prev_hunk<CR>
+
 nmap <leader>hs :Gitsigns stage_hunk<CR>
 vmap <leader>hs :'<'>Gitsigns stage_hunk<CR>
-nmap <leader>hu :Gitsigns undo_stage_hunk<CR>
+nmap <leader>hu :Gitsigns reset_hunk<CR>
+vmap <leader>hu :'<'>Gitsigns reset_hunk<CR>
+nmap <leader>huu :Gitsigns undo_stage_hunk<CR>
 nmap <leader>hp :Gitsigns preview_hunk<CR>
 nmap <leader>hrp :Gitsigns toggle_current_line_blame<CR>
 
