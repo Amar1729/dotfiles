@@ -396,6 +396,9 @@ augroup templates
     autocmd BufNewFile *.py 0r ~/.config/nvim/templates/skeleton.py
 augroup end
 
+" auto-write changes to chezmoi files
+autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
+
 
 """
 " Plugin Settings and Keybinds
