@@ -98,6 +98,9 @@ function ssh-forward () {
 
 alias c=chezmoi
 
+# temporary - ignore maven ssl through proxy
+alias mvn="mvn -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true"
+
 ####
 ## aliases/functions that are mac or linux specific
 ## templating managed by chezmoi based on .chezmoi.os
