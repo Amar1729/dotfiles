@@ -1,0 +1,180 @@
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('~/.cache/dein/')
+  call dein#begin('~/.cache/dein/')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+
+  " Themes:
+
+  " gruvbox colorscheme
+  call dein#add('morhetz/gruvbox')
+
+  " pywal vim colorscheme
+  call dein#add('dylanaraps/wal.vim')
+
+  " powerline that works with neovim
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
+
+
+  " Engines, code style:
+
+  " use treesitter for language features
+  call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
+
+  " deoplete for nvim
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-clang')
+  call dein#add('zchee/deoplete-jedi')
+  call dein#add('racer-rust/vim-racer')
+
+  " for showing function signatures in commad line
+  call dein#add('Shougo/echodoc.vim')
+  
+  " async linting
+  call dein#add('neomake/neomake')
+
+  " code snippet engine
+  call dein#add('SirVer/ultisnips')
+
+  " snippets are separated from the engine
+  call dein#add('honza/vim-snippets')
+
+  " use these for deoplete to work in vim8
+  if has('nvim') == 0
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+
+  " Quality of life:
+
+  " requried for some lua plugins
+  call dein#add('nvim-lua/plenary.nvim')
+
+  " (lua) git signs (replaced airblade/gitgutter)
+  call dein#add('lewis6991/gitsigns.nvim')
+
+  " continuous highlighting, better incsearch
+  call dein#add('haya14busa/incsearch.vim')
+
+  " for surrounding phrases with characters
+  call dein#add('tpope/vim-surround')
+
+  " collab editing
+  "call dein#add('FredKSchott/CoVim')
+
+  " nice completion of (x)html tags
+  call dein#add('tpope/vim-ragtag')
+
+  " (vim plugin) minimap
+  "call dein#add('severin-lemaignan/vim-minimap')
+
+  " vim wiki
+  call dein#add('vimwiki/vimwiki')
+
+  " fzf support (setting runtimepath seems more stable than adding fzf.vim
+  " plugin)
+{{ if (eq .chezmoi.arch "arm64") -}}
+  set runtimepath+=/opt/homebrew/opt/fzf
+{{ else -}}
+  set runtimepath+=/usr/local/opt/fzf
+{{- end }}
+
+  " line diffing
+  call dein#add('AndrewRadev/linediff.vim')
+
+  " typewriter
+  "call dein#add('Amar1729/vimty')
+
+  " show current context (e.g. function defn)
+  call dein#add('wellle/context.vim')
+
+  " use git from inside vim
+  call dein#add('tpope/vim-fugitive')
+
+  " plugins for movement
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('justinmk/vim-sneak')
+  call dein#add('bkad/CamelCaseMotion')
+
+
+  " Language-specific syntax support, completions:
+
+  " Live LaTeX previewing
+  "call dein#add('xuhdev/vim-latex-live-preview')
+
+  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
+  "call dein#add('donRaphaco/neotex')
+  " no, I think this only works for vim?
+
+  " Syntax highlighting for coffeescript
+  call dein#add('kchmck/vim-coffee-script')
+
+  " Support for Julia
+  call dein#add('JuliaEditorSupport/julia-vim')
+
+  " toml syntax
+  call dein#add('cespare/vim-toml')
+
+  " nix expression language
+  call dein#add('LnL7/vim-nix')
+
+{{- if (eq .chezmoi.os "linux") }}
+  " sxhkd
+  call dein#add('kovetskiy/sxhkd-vim')
+{{- end }}
+{{ if .work }}
+  " hjson (ELK documents)
+  call dein#add('hjson/vim-hjson')
+
+  " only seems to work in vim8 currently, but not nvim
+  if has('nvim') == 0
+    call dein#add('artur-shaik/vim-javacomplete2')
+  endif
+
+  " antlr files (.g4 and .g3)
+  call dein#add('dylon/vim-antlr')
+{{- end }}
+
+  " powershell (ugh)
+  call dein#add('PProvost/vim-ps1')
+
+  " haskell
+  call dein#add('neovimhaskell/haskell-vim')
+
+  " chezmoi templating/support
+  call dein#add('alker0/chezmoi.vim')
+
+{{- if (eq .chezmoi.os "darwin") }}
+
+  " skhd
+  call dein#add('amar1729/skhd-vim-syntax')
+{{- end }}
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+
+" If you want to install not installed plugins on startup.
+" (Annoying when you're testing lots of different plugins)
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------

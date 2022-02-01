@@ -1,0 +1,183 @@
+"""
+" General plugin settings and keybinds
+"""
+
+
+" treesitter
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  -- "all" | "maintainers" | {"list of languages"}
+  ensure_installed = "maintained",
+  sync_install = false,
+
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+
+  incremental_selection = {
+      -- default keymaps: init / node inc / scope inc / node dec
+      -- gnn / grn / grc / grm
+      enable = true,
+  },
+
+  indent = {
+      enable = true,
+  }
+}
+EOF
+
+
+" gitsigns
+lua require('gitsigns').setup({
+\    numhl = true,
+\    current_line_blame = true,
+\    current_line_blame_opts = {delay = 500},
+\ })
+
+highlight link GitSignsCurrentLineBlame String
+" use leader for next/prev hunk commands, otherwise conflicts with python.vim
+" movement
+nmap ghn :Gitsigns next_hunk<CR>
+nmap ghp :Gitsigns prev_hunk<CR>
+
+nmap <leader>hs :Gitsigns stage_hunk<CR>
+vmap <leader>hs :'<'>Gitsigns stage_hunk<CR>
+nmap <leader>hu :Gitsigns reset_hunk<CR>
+vmap <leader>hu :'<'>Gitsigns reset_hunk<CR>
+nmap <leader>huu :Gitsigns undo_stage_hunk<CR>
+nmap <leader>hp :Gitsigns preview_hunk<CR>
+nmap <leader>hrp :Gitsigns toggle_current_line_blame<CR>
+
+
+" deoplete settings
+let g:deoplete#enable_at_startup=1
+
+" completion engines
+let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+" this will chang with each upgrade! symlink?
+let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include'
+
+" python info for deoplete
+" gtfo py2
+let g:python_host_prog=''
+{{ if (eq .chezmoi.os "darwin") -}}
+{{ if (eq .chezmoi.arch "arm64") -}}
+let g:python3_host_prog='/opt/homebrew/bin/python3'
+{{ else -}}
+let g:python3_host_prog='/usr/local/bin/python3'
+{{- end }}
+{{ else if (eq .chezmoi.os "linux") -}}
+let g:python3_host_prog='/usr/bin/python3'
+{{- end }}
+
+" Rust Auto-Complete-ER
+" requires: `racer` in PATH and RUST_SRC_PATH (rustup component add rust-src) set
+" let g:racer_cmd = '~/.cargo/bin/racer'
+let g:racer_insert_paren = 1
+let g:racer_disable_errors = 1
+
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" close the deoplete preview window on autocomplete
+autocmd CompleteDone * pclose
+
+" deoplete tab-complete:
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
+
+
+" ultisnip settings
+" <c-j>, <c-k> : jump forward, backward, respectively
+let g:UltiSnipsExpandTrigger="<c-n>"
+
+
+" mappings for Linediff
+vnoremap <leader>d	:Linediff<CR>
+
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+
+" TODO chromatica settings
+let g:chromatica#libclang_path='/usr/local/opt/llvm/lib'
+let g:chromatica#enable_at_startup=1
+
+
+" vimwiki settings
+let wiki_1 = {}
+let wiki_1.path = '~/Dropbox/wiki/'
+"let wiki_1.html_template = '~/public_html/template.tpl'
+"let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+
+let wiki_2 = {}
+let wiki_2.path = '~/Documents/Personal/work_wiki/'
+"let wiki_2.index = 'main'
+
+let g:vimwiki_list = [wiki_1, wiki_2]
+
+
+" vim-minimap settings
+let g:minimap_show='<leader>ms'
+let g:minimap_update='<leader>mu'
+let g:minimap_close='<leader>gc'
+let g:minimap_toggle='<leader>gt'
+
+
+""""
+" don't know about merging this stuff, don't use latex much anymore?
+"
+" vim-latex-live-preview
+let g:livepreview_previewer = 'evince'
+nnoremap <leader>L :LLPStartPreview<CR>
+" live previewing currently broken?
+"autocmd TextChanged,TextChangedI *tex silent :LLPStartPreview 
+
+" latex live stuff
+" update time
+autocmd Filetype tex setl updatetime=5
+nnoremap <F12> :LLPStartPreview<CR>
+
+" change from default evince
+" actually i think evince is fine?
+"let g:livepreview_previewer = 'mupdf'
+
+""""
+
+" neotex settings
+"let g:neotex_enabled = 0
+
+
+" vim-antlr settings
+augroup SetAntlr
+  autocmd!
+  au BufRead,BufNewFile *.g set filetype=antlr3
+  au BufRead,BufNewFile *.g4 set filetype=antlr4
+augroup END
+
+
+" CamelCaseMotion settings
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+
+omap <silent> iw <Plug>CamelCaseMotion_iw
+xmap <silent> iw <Plug>CamelCaseMotion_iw
+omap <silent> ib <Plug>CamelCaseMotion_ib
+xmap <silent> ib <Plug>CamelCaseMotion_ib
+omap <silent> ie <Plug>CamelCaseMotion_ie
+xmap <silent> ie <Plug>CamelCaseMotion_ie
+
+
+" fzf searching
+nnoremap <c-p> :Files<CR>
+nnoremap <c-f> :Rg<CR>

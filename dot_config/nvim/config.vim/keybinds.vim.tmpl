@@ -1,0 +1,78 @@
+"""
+" Personal definitions
+"""
+
+let mapleader=","
+
+" Copy to clipboard (mac uses * register: linux uses + reg)
+{{ if (eq .chezmoi.os "darwin") -}}
+vnoremap <leader>y "*y
+nnoremap <leader>Y "*yg_
+nnoremap <leader>y "*y
+nnoremap <leader>yy "*yy
+
+" Paste from clipboard
+nnoremap <leader>p "*p
+nnoremap <leader>P "*P
+vnoremap <leader>p "*p
+vnoremap <leader>P "*P
+{{ else if (eq .chezmoi.os "linux") -}}
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
+
+" Paste from system: clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" Paste from system: primary
+nnoremap <leader><C-p> "*p
+nnoremap <leader><C-P> "*P
+vnoremap <leader><C-p> "*p
+vnoremap <leader><C-P> "*P
+{{- end }}
+
+" Buffer control
+
+" Cycle through buffers
+nmap <leader>n :bnext<CR>
+nmap <leader>N :bprev<CR>
+
+" Cycle through tabs
+nmap <leader>m :tabn<CR>
+nmap <leader>M :tabp<CR>
+
+" Remove all trailing whitespace (takes a second)
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
+" force kill those damn term bufs
+nmap <leader>d :bd!<CR>
+
+" move to next buffer and kill the previous one (good for keeping window layout)
+nmap <leader>b :bn \| bd # <CR>
+
+" clear highlighted matches from find
+nmap <leader><Space> :noh<CR>
+
+" for exiting nvim terminal mode
+tnoremap <Esc> <C-\><C-n>
+
+" toggle folds with space
+nnoremap <space> za
+
+" move lines
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" edit init.vim or our chezmoi-versioned init.vim
+nnoremap <leader>ev :vsp ~/.local/share/chezmoi/dot_config/nvim/init.vim.tmpl<CR>
+nnoremap <leader>rc :so ~/.config/nvim/init.vim<CR>
+
+" center search result
+nnoremap n nzz
+nnoremap N Nzz
