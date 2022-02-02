@@ -60,6 +60,11 @@ au BufEnter *.txt,*.md,*.tex setlocal spell
 
 set splitbelow splitright
 
+highlight Pmenu ctermbg=Black
+" switch these two around
+highlight PmenuSbar ctermfg=8 ctermbg=8 guibg=White
+highlight PmenuThumb ctermfg=7 ctermbg=6 guibg=Grey
+
 " Colors for - neovim treesitter
 " https://github.com/dylanaraps/wal.vim/pull/34/files
 hi TSInclude ctermbg=NONE ctermfg=5
