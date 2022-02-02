@@ -51,15 +51,7 @@ nmap <leader>hp :Gitsigns preview_hunk<CR>
 nmap <leader>hrp :Gitsigns toggle_current_line_blame<CR>
 
 
-" deoplete settings
-let g:deoplete#enable_at_startup=1
-
-" completion engines
-let g:deoplete#sources#clang#libclang_path='/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-" this will chang with each upgrade! symlink?
-let g:deoplete#sources#clang#clang_header='/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include'
-
-" python info for deoplete
+" python info - is this still required?
 " gtfo py2
 let g:python_host_prog=''
 {{ if (eq .chezmoi.os "darwin") -}}
@@ -80,17 +72,6 @@ let g:racer_disable_errors = 1
 
 au FileType rust nmap gd <Plug>(rust-def)
 au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-" close the deoplete preview window on autocomplete
-autocmd CompleteDone * pclose
-
-" deoplete tab-complete:
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>" 
-
-
-" ultisnip settings
-" <c-j>, <c-k> : jump forward, backward, respectively
-let g:UltiSnipsExpandTrigger="<c-n>"
 
 
 " mappings for Linediff

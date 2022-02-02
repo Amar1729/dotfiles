@@ -33,23 +33,23 @@ if dein#load_state('~/.cache/dein/')
   " use treesitter for language features
   call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
 
-  " deoplete for nvim
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('zchee/deoplete-clang')
-  call dein#add('zchee/deoplete-jedi')
-  call dein#add('racer-rust/vim-racer')
+  " lsp-based code completions
+  call dein#add('neovim/nvim-lspconfig')
+  call dein#add('hrsh7th/cmp-nvim-lsp')
+  call dein#add('hrsh7th/cmp-buffer')
+  call dein#add('hrsh7th/cmp-path')
+  call dein#add('hrsh7th/cmp-cmdline')
+  call dein#add('hrsh7th/nvim-cmp')
+
+  " For vsnip users.
+  call dein#add('hrsh7th/cmp-vsnip')
+  call dein#add('hrsh7th/vim-vsnip')
 
   " for showing function signatures in commad line
   call dein#add('Shougo/echodoc.vim')
   
   " async linting
   call dein#add('neomake/neomake')
-
-  " code snippet engine
-  call dein#add('SirVer/ultisnips')
-
-  " snippets are separated from the engine
-  call dein#add('honza/vim-snippets')
 
   " use these for deoplete to work in vim8
   if has('nvim') == 0
@@ -111,6 +111,10 @@ if dein#load_state('~/.cache/dein/')
 
 
   " Language-specific syntax support, completions:
+
+  " rust (can we use rust-analyzer instead of this, now that we're using
+  " treesitter?)
+  call dein#add('racer-rust/vim-racer')
 
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
