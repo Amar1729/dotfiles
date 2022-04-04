@@ -78,3 +78,7 @@ lspconfig.pyright.setup {}
 lspconfig.solargraph.setup {}
 -- lua
 lspconfig.sumneko_lua.setup {}
+-- ccls/clangd both rely on JSON compilation databases
+-- requires running `bear -- <build cmd>` first
+-- lspconfig.ccls.setup {}
+lspconfig.clangd.setup {}
