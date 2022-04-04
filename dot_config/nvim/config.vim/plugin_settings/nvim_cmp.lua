@@ -53,13 +53,24 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
--- require('lspconfig')['pyright'].setup {
+local lspconfig = require('lspconfig')
+
 --   capabilities = capabilities
--- }
-local servers = { 'pylsp' }
-for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
-    capabilities = capabilities,
-  }
-end
+-- python
+lspconfig['pylsp'].setup({
+    enable = true,
+    settings = {
+        pylsp = {
+            plugins = {
+                configurationSources = { "flake8", "mypy" },
+                flake8 = { enabled = true },
+                mypy = { enabled = false },
+            },
+        },
+    },
+})
+
+-- bash
+lspconfig.bashls.setup { capabilities = capabilities }
+-- python
+lspconfig.pyright.setup {}
