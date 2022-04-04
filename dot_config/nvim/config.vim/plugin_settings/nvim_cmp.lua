@@ -74,3 +74,7 @@ lspconfig['pylsp'].setup({
 lspconfig.bashls.setup { capabilities = capabilities }
 -- python
 lspconfig.pyright.setup {}
+-- ruby
+lspconfig.solargraph.setup {}
+-- lua
+lspconfig.sumneko_lua.setup {}
