@@ -98,6 +98,9 @@ local servers = {
     'solargraph',
     -- lua
     'sumneko_lua',
+    -- java
+        -- needs custom flags
+    -- 'java_language_server',
     -- c/c++
         -- ccls/clangd both rely on JSON compilation databases
         -- requires running `bear -- <build cmd>` first
@@ -129,3 +132,9 @@ lspconfig['pylsp'].setup({
         },
     },
 })
+
+-- java
+lspconfig.java_language_server.setup {
+    on_attach = on_attach,
+    cmd = { os.getenv("HOME") .. "/.cache/java-language-server/dist/lang_server_mac.sh" },
+}
