@@ -32,13 +32,13 @@ cmd + alt + ctrl - l : ~/.bin/lock
 
 # cycle - IGNORE floating windows
 alt - n : yabai -m query --windows --space \
-    | jq -sr "add | map(select(.floating == 0)) | sort_by(.frame.x, .frame.y, .id) | reverse" \
-    | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['focused'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
+    | jq -sr 'add | map(select(.["is-floating"] == false)) | sort_by(.frame.y, .frame.x, .id) | reverse' \
+    | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['has-focus'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
     | xargs -I{} yabai -m window --focus {}
 
 # cycle WITHOUT ignoring floating windows
 alt - m : yabai -m query --windows --space \
-  | jq -sre "add |  sort_by(.display, .frame.x, .frame.y, .id) | nth(index(map(select(.focused == 1))) - 1).id" \
+  | jq -sre 'add |  sort_by(.display, .frame.y, .frame.x, .id) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
   | xargs -I{} yabai -m window --focus {}
 
 lcmd - h : yabai -m window --focus west
@@ -127,7 +127,7 @@ lcmd - g        : yabai -m window --toggle zoom-fullscreen
 tree < p        : yabai -m window --toggle zoom-parent
 
 # presets for floating windows
-lcmd + shift - g : yabai -m window --grid 100:100:25:25:50:50
+lcmd + shift - g : if [[ $(yabai -m query --windows --window | jq '.is-floating') == "true" ]]; then yabai -m window --toggle float; fi; yabai -m window --grid 100:100:25:25:50:50
 tree < q         : yabai -m window --grid 100:100:57:6:37:42
 tree < e         : yabai -m window --grid 100:100:25:2:50:93
 
