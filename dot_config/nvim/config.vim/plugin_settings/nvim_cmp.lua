@@ -45,7 +45,11 @@ cmp.setup({
       -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
-  mapping = {
+  -- cmp.mapping.preset.{insert,cmdline} sets some default bindings.
+  -- see: https://github.com/hrsh7th/nvim-cmp/issues/231#issuecomment-1098175017
+  -- and: https://github.com/hrsh7th/nvim-cmp/commit/93cf84f7deb2bdb640ffbb1d2f8d6d412a7aa558
+  -- TODO - in light of this removal, this bindings could probably be cleaned up in the future.
+  mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -55,7 +59,7 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  },
+  }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- For vsnip users.
@@ -87,7 +91,8 @@ cmp.setup({
 cmp.setup.cmdline('/', {
   sources = {
     { name = 'buffer' }
-  }
+  },
+  mapping = cmp.mapping.preset.cmdline({}),
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -96,7 +101,8 @@ cmp.setup.cmdline(':', {
     { name = 'path' }
   }, {
     { name = 'cmdline' }
-  })
+  }),
+  mapping = cmp.mapping.preset.cmdline({}),
 })
 
 -- Setup lspconfig.
