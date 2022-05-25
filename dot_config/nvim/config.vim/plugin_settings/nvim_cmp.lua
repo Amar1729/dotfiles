@@ -147,8 +147,7 @@ local servers = {
     -- python
         -- needs custom flags
     -- 'pylsp',
-        -- doesn't work
-    -- 'pyright',
+    'pyright',
     -- ruby
     'solargraph',
     -- lua
@@ -161,6 +160,8 @@ local servers = {
         -- requires running `bear -- <build cmd>` first
     -- 'ccls',
     'clangd',
+    -- rust
+    'rust_analyzer',
 }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
