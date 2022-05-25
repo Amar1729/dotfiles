@@ -68,6 +68,7 @@ cmp.setup({
     -- { name = 'snippy' }, -- For snippy users.
   }, {
     { name = 'buffer' },
+    { name = 'path' },
   }),
   formatting = {
     format = function(entry, vim_item)
