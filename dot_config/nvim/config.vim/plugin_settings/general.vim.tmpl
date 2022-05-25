@@ -6,8 +6,9 @@
 " treesitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  -- "all" | "maintainers" | {"list of languages"}
-  ensure_installed = "maintained",
+  -- "all"  | {"list of languages"}
+  ensure_installed = "all",
+  ignore_install = { "phpdoc", "php" },
   sync_install = false,
 
   highlight = {
