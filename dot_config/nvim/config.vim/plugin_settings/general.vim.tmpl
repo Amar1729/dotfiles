@@ -161,3 +161,31 @@ xmap <silent> ie <Plug>CamelCaseMotion_ie
 " fzf searching
 nnoremap <c-p> :Files<CR>
 nnoremap <c-f> :Rg<CR>
+
+
+" LSP Diagnostics - better signs
+sign define DiagnosticSignError text=x
+sign define DiagnosticSignWarn text=!
+sign define DiagnosticSignInfo text=>
+sign define DiagnosticSignHint text=?
+
+" update quickfix
+" in addition to nvim-cmp []d bindings for moving, can still use []q from
+" vim-unimpaired if that's more comfortable
+autocmd DiagnosticChanged * lua vim.diagnostic.setqflist({open = false})
+
+let s:DiagnosticsShown = get(s:, 'DiagnosticsShown', 1)
+function! ToggleVimDiagnostic()
+    if s:DiagnosticsShown == 1
+        lua vim.diagnostic.config({virtual_text = false, underline = false})
+        let s:DiagnosticsShown = 0
+    else
+        lua vim.diagnostic.config({virtual_text = true, underline = true})
+        let s:DiagnosticsShown = 1
+    endif
+endfunction
+
+" let 'yoe' still show gutter diagnostic signs; ']oe' will hide entirely
+nnoremap yoe :call ToggleVimDiagnostic()<CR>
+nnoremap [oe :lua vim.diagnostic.show()<CR>
+nnoremap ]oe :lua vim.diagnostic.hide()<CR>
