@@ -3,6 +3,38 @@ vim.opt.completeopt = "menu,menuone,noselect"
 -- Setup nvim-cmp.
 local cmp = require'cmp'
 
+-- annotate completion candidates in Pmenu (vscode-like)
+-- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-codicons-to-the-menu
+-- had to install nerd-fonts-patched FantasqueSansMono to get this to work:
+-- https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FantasqueSansMono
+local kind_icons = {
+  Text = '  ',
+  Method = '  ',
+  Function = '  ',
+  Constructor = '  ',
+  Field = '  ',
+  Variable = '  ',
+  Class = '  ',
+  Interface = '  ',
+  Module = '  ',
+  Property = '  ',
+  Unit = '  ',
+  Value = '  ',
+  Enum = '  ',
+  Keyword = '  ',
+  Snippet = '  ',
+  Color = '  ',
+  File = '  ',
+  Reference = '  ',
+  Folder = '  ',
+  EnumMember = '  ',
+  Constant = '  ',
+  Struct = '  ',
+  Event = '  ',
+  Operator = '  ',
+  TypeParameter = '  ',
+}
+
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -33,6 +65,22 @@ cmp.setup({
   }, {
     { name = 'buffer' },
   }),
+  formatting = {
+    format = function(entry, vim_item)
+      -- Kind icons
+      -- Concatenate the icons with the name of the item kind
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      -- Source
+      vim_item.menu = ({
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        nvim_lua = "[Lua]",
+        latex_symbols = "[LaTeX]",
+      })[entry.source.name]
+      return vim_item
+    end
+  }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
