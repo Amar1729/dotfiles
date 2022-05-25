@@ -66,6 +66,7 @@ set statusline=%t
 " templates for common languages
 augroup templates
     autocmd BufNewFile *.py 0r ~/.config/nvim/templates/skeleton.py
+    autocmd BufNewFile *.sh 0r ~/.config/nvim/templates/skeleton.bash
 augroup end
 
 " auto-write changes to chezmoi files
