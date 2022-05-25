@@ -172,10 +172,10 @@ lspconfig['pylsp'].setup({
     on_attach = on_attach,
     settings = {
         pylsp = {
+            configurationSources = { "flake8", "mypy" },
             plugins = {
-                configurationSources = { "flake8", "mypy" },
                 flake8 = { enabled = true },
-                mypy = { enabled = false },
+                mypy = { enabled = true },
             },
         },
     },
