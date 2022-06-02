@@ -32,6 +32,7 @@ if dein#load_state('~/.cache/dein/')
 
   " use treesitter for language features
   call dein#add('nvim-treesitter/nvim-treesitter', {'hook_post_update': 'TSUpdate'})
+  call dein#add('nvim-treesitter/nvim-treesitter-context')
 
   " lsp-based code completions
   call dein#add('neovim/nvim-lspconfig')
@@ -94,9 +95,6 @@ if dein#load_state('~/.cache/dein/')
 
   " typewriter
   "call dein#add('Amar1729/vimty')
-
-  " show current context (e.g. function defn)
-  call dein#add('wellle/context.vim')
 
   " use git from inside vim
   call dein#add('tpope/vim-fugitive')
