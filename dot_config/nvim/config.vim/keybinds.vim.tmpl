@@ -35,16 +35,6 @@ vnoremap <leader><C-p> "*p
 vnoremap <leader><C-P> "*P
 {{- end }}
 
-" Buffer control
-
-" Cycle through buffers
-nmap <leader>n :bnext<CR>
-nmap <leader>N :bprev<CR>
-
-" Cycle through tabs
-nmap <leader>m :tabn<CR>
-nmap <leader>M :tabp<CR>
-
 " Remove all trailing whitespace (takes a second)
 nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
@@ -62,12 +52,6 @@ tnoremap <Esc> <C-\><C-n>
 
 " toggle folds with space
 nnoremap <space> za
-
-" move lines
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " edit init.vim or our chezmoi-versioned init.vim
 nnoremap <leader>ev :vsp ~/.local/share/chezmoi/dot_config/nvim/init.vim.tmpl<CR>
