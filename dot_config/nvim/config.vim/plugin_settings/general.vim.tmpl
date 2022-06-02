@@ -31,7 +31,40 @@ require'nvim-treesitter.configs'.setup {
 
   indent = {
       enable = true,
-  }
+  },
+
+  -- provided by nvim-treesitter-textobjects plugin
+  textobjects = {
+      -- todo: neovim provides mappings for jumping over functions
+      -- [[, ]], [m, ]M,
+      -- should i add these as text object movements, or keep them as nvim-provided?
+      move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+              ["]a"] = "@parameter.inner",
+          },
+          goto_next_end = {
+              ["]A"] = "@parameter.outer",
+          },
+          goto_previous_start = {
+              ["[a"] = "@parameter.inner",
+          },
+          goto_previous_end = {
+              ["[A"] = "@parameter.outer",
+          },
+      },
+
+      swap = {
+          enable = true,
+          swap_next = {
+              ["<leader>a"] = "@parameter.inner",
+          },
+          swap_previous = {
+              ["<leader>A"] = "@parameter.inner",
+          },
+      },
+  },
 }
 EOF
 
