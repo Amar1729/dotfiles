@@ -21,6 +21,12 @@ require'nvim-treesitter.configs'.setup {
       -- default keymaps: init / node inc / scope inc / node dec
       -- gnn / grn / grc / grm
       enable = true,
+      keymaps = {
+          init_selection = "<M-n>",
+          node_incremental = "<M-o>",
+          scope_incremental = "<M-p>",
+          node_decremental = "<M-i>",
+      }
   },
 
   indent = {
