@@ -112,10 +112,6 @@ if dein#load_state('~/.cache/dein/')
 
   " Language-specific syntax support, completions:
 
-  " rust (can we use rust-analyzer instead of this, now that we're using
-  " treesitter?)
-  call dein#add('racer-rust/vim-racer')
-
   " Live LaTeX previewing
   "call dein#add('xuhdev/vim-latex-live-preview')
 
@@ -123,40 +119,17 @@ if dein#load_state('~/.cache/dein/')
   "call dein#add('donRaphaco/neotex')
   " no, I think this only works for vim?
 
-  " Syntax highlighting for coffeescript
-  call dein#add('kchmck/vim-coffee-script')
-
-  " Support for Julia
-  call dein#add('JuliaEditorSupport/julia-vim')
-
-  " toml syntax
-  call dein#add('cespare/vim-toml')
-
-  " nix expression language
-  call dein#add('LnL7/vim-nix')
-
 {{- if (eq .chezmoi.os "linux") }}
   " sxhkd
   call dein#add('kovetskiy/sxhkd-vim')
 {{- end }}
 {{ if .work }}
-  " hjson (ELK documents)
-  call dein#add('hjson/vim-hjson')
-
-  " only seems to work in vim8 currently, but not nvim
-  if has('nvim') == 0
-    call dein#add('artur-shaik/vim-javacomplete2')
-  endif
-
   " antlr files (.g4 and .g3)
   call dein#add('dylon/vim-antlr')
 {{- end }}
 
   " powershell (ugh)
   call dein#add('PProvost/vim-ps1')
-
-  " haskell
-  call dein#add('neovimhaskell/haskell-vim')
 
   " chezmoi templating/support
   call dein#add('alker0/chezmoi.vim')

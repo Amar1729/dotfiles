@@ -21,12 +21,6 @@ augroup JsonPrettify
   autocmd BufWinEnter *.json silent! %!python -m json.tool
 augroup END
 
-" disable linting for temporary .py files
-autocmd BufWinEnter *.dis.py :NeomakeDisableBuffer
-
-" auto-compile rust files
-"autocmd BufWritePost *.rs !cargo run
-
 " Deal with status bar (necessary?)
 
 " Cycle status line on command Shift+H
