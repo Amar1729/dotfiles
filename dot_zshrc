@@ -157,6 +157,14 @@ bindkey "^N" down-line-or-beginning-search
 # temporarily clear cmd so i can inspect, ls, man, etc
 bindkey "^q" push-line-or-edit
 
+# override ^U to also copy to clipboard
+copy-and-kill-whole-line () {
+    printf "%s" "$BUFFER" | pbcopy
+    zle kill-whole-line
+}
+zle -N copy-and-kill-whole-line
+bindkey "^U" copy-and-kill-whole-line
+
 # for hardcore scripting: surround line with $()
 bindkey -s "^[o" '^a$(^e)^a'
 
