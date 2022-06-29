@@ -123,7 +123,7 @@ preexec () { print '' }
 
 # some custom completions, and make sure $fpath gets loaded properly
 fpath+=~/.zsh/completions
-fpath+=$(brew --prefix)/share/zsh/site-functions
+fpath+=${HOMEBREW_PREFIX}/share/zsh/site-functions
 
 # https://gist.github.com/ctechols/ca1035271ad134841284
 # (if we modify fpath ourselves, compinit should be done AFTER)
