@@ -58,8 +58,8 @@ export HOMEBREW_BAT=1
 
 if [[ $(uname) == 'Darwin' ]]; then
     if [[ ! -r "$HOME/.brew" ]]; then
-        if ! /opt/homebrew/bin/brew shellenv > "$HOME/.brew"; then
-            if ! /usr/local/bin/brew shellenv > "$HOME/.brew"; then
+        if ! /opt/homebrew/bin/brew shellenv > "$HOME/.brew" 2>/dev/null; then
+            if ! /usr/local/bin/brew shellenv > "$HOME/.brew" 2>/dev/null; then
                 echo "'brew' not found" >&2
             fi
         fi
