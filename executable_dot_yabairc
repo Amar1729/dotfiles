@@ -68,6 +68,10 @@ yabai -m rule --add app="^Karabiner" manage=off
 yabai -m rule --add app="^Font Book$" manage=off
 yabai -m rule --add app="^Harmony$" manage=off
 yabai -m rule --add app="^Docker Desktop$" manage=off
+yabai -m rule --add app="^qemu-system-aarch64" manage=off
+yabai -m rule --add app="^VMware Fusion" manage=off
+yabai -m rule --add app="^VLC" manage=off
+yabai -m rule --add app="^Screen Sharing" manage=off
 
 # manage work apps
 yabai -m rule --add app="^Microsoft Outlook$" grid=90:160:1:1:158:88
@@ -77,6 +81,9 @@ yabai -m rule --add app="^Oracle VM VirtualBox Manager$" manage=off
 yabai -m rule --add app="^VirtualBox$" manage=off
 yabai -m rule --add app="^VirtualBox VM$" manage=off
 yabai -m rule --add app="^zoom.us$" manage=off
+yabai -m rule --add app="Ghidra" title="Ghidra*" manage=off
+yabai -m rule --add app="Approve" title="Approve" manage=off
+yabai -m rule --add app="Microsoft Remote Desktop" manage=off
 
 # load limelight (window border system from yabai v2.4.3)
 killall limelight >/dev/null
