@@ -91,6 +91,7 @@ if dein#load_state('~/.cache/dein/')
 {{ else -}}
   set runtimepath+=/usr/local/opt/fzf
 {{- end }}
+  call dein#add('junegunn/fzf.vim')
 
   " line diffing
   call dein#add('AndrewRadev/linediff.vim')
