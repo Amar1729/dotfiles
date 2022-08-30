@@ -31,3 +31,7 @@ htmlcov/
 *.so
 .ctags
 tags
+
+# ide stuff :/
+.idea
+.vscode
