@@ -120,7 +120,7 @@ ctrl + shift - 3 : yabai -m window --display 3
 lalt - space    : ~/.bin/floatng-alacritty
 
 # toggle float
-alt - t         : yabai -m window --toggle float
+lalt - t         : yabai -m window --toggle float
 
 # center a floating window
 alt - c         : ~/.bin/yabai-center
