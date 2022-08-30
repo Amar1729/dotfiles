@@ -121,8 +121,21 @@ key_bindings:
   # is this macos only?
   - { key: N,        mods: Command, action: CreateNewWindow                  }
 
+  - { key: Key0,     mods: Alt,     chars: "\x1b0"                           }
+  - { key: Key1,     mods: Alt,     chars: "\x1b1"                           }
+  - { key: Key2,     mods: Alt,     chars: "\x1b2"                           }
+  - { key: Key3,     mods: Alt,     chars: "\x1b3"                           }
+  - { key: Key4,     mods: Alt,     chars: "\x1b4"                           }
+  - { key: Key5,     mods: Alt,     chars: "\x1b5"                           }
+  - { key: Key6,     mods: Alt,     chars: "\x1b6"                           }
+  - { key: Key7,     mods: Alt,     chars: "\x1b7"                           }
+  - { key: Key8,     mods: Alt,     chars: "\x1b8"                           }
+  - { key: Key9,     mods: Alt,     chars: "\x1b9"                           }
+  - { key: Space,    mods: Alt,     chars: "\x1b " }
+
   - { key: Comma,    mods: Alt,     chars: "\x1b,"                           }
   - { key: Period,   mods: Alt,     chars: "\x1b."                           }
+  - { key: Slash,    mods: Alt,     chars: "\x1b/"                           }
 
   - { key: A,        mods: Alt,     chars: "\x1ba"                           }
   - { key: B,        mods: Alt,     chars: "\x1bb"                           }
@@ -178,6 +191,10 @@ key_bindings:
   - { key: Y,        mods: Shift|Alt,                       chars: "\x1bY"   }
   - { key: Z,        mods: Shift|Alt,                       chars: "\x1bZ"   }
 
+  - { key: Comma,    mods: Shift|Alt,                       chars: "\x1b<"   }
+  - { key: Period,   mods: Shift|Alt,                       chars: "\x1b>"   }
+  - { key: Slash,    mods: Shift|Alt,                       chars: "\x1b?"   }
+
   - { key: L,        mods: Control, action: ClearLogNotice                   }
   - { key: L,        mods: Control, chars: "\x0c"                            }
   - { key: Home,                    chars: "\x1bOH",        mode: AppCursor  }
@@ -200,13 +217,13 @@ key_bindings:
   - { key: Left,     mods: Shift,   chars: "\x1b[1;2D"                       }
   - { key: Left,     mods: Control, chars: "\x1b[1;5D"                       }
   - { key: Left,     mods: Alt,     chars: "\x1b[1;5D"                       }
-    #  - { key: Left,     mods: Alt,     chars: "\x1b[1;3D"                       }
+# - { key: Left,     mods: Alt,     chars: "\x1b[1;3D"                       }
   - { key: Left,                    chars: "\x1b[D",        mode: ~AppCursor }
   - { key: Left,                    chars: "\x1bOD",        mode: AppCursor  }
   - { key: Right,    mods: Shift,   chars: "\x1b[1;2C"                       }
   - { key: Right,    mods: Control, chars: "\x1b[1;5C"                       }
   - { key: Right,    mods: Alt,     chars: "\x1b[1;5C"                       }
-    #- { key: Right,    mods: Alt,     chars: "\x1b[1;3C"                       }
+# - { key: Right,    mods: Alt,     chars: "\x1b[1;3C"                       }
   - { key: Right,                   chars: "\x1b[C",        mode: ~AppCursor }
   - { key: Right,                   chars: "\x1bOC",        mode: AppCursor  }
   - { key: Up,       mods: Shift,   chars: "\x1b[1;2A"                       }
