@@ -50,6 +50,10 @@
 	histl = log --graph --abbrev-commit --decorate --all \
 		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
 
+    # gitlab/github: pull merge requests
+    lab-mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+    hub-mr = !sh -c 'git fetch $1 pull/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
