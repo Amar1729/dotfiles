@@ -32,15 +32,22 @@ cmd + ctrl - return : open ~/
 cmd + alt + ctrl - l : ~/.bin/lock
 
 # cycle - IGNORE floating windows
-alt - n : yabai -m query --windows --space \
-    | jq -sr 'add | map(select(.["is-floating"] == false)) | sort_by(.frame.y, .frame.x, .id) | reverse' \
+lalt - n : yabai -m query --windows --space \
+    | jq -sr 'add | map(select((.["is-floating"] == false) and (.["is-minimized"] == false))) | sort_by(.frame.x, .frame.y, .id) | reverse' \
     | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['has-focus'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
     | xargs -I{} yabai -m window --focus {}
 
 # cycle WITHOUT ignoring floating windows
-alt - m : yabai -m query --windows --space \
-  | jq -sre 'add |  sort_by(.display, .frame.y, .frame.x, .id) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
+lalt - m : yabai -m query --windows --space \
+  | jq -sr 'add | map(select(.["is-minimized"] == false))' \
+  | jq -sre 'add |  sort_by(.display, .frame.x, .frame.y, .id) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
   | xargs -I{} yabai -m window --focus {}
+
+# cycle across windows spanning multiple displays.
+lalt + shift - m : yabai -m query --windows \
+    | jq -sr 'add | map(select(.["is-visible"] == true))' \
+    | jq -sre 'add |  sort_by(.display, .frame.x, .frame.y, .id) | reverse | nth(index(map(select(.["has-focus"] == true))) - 1).id' \
+    | xargs -I{} yabai -m window --focus {}
 
 lcmd - h : yabai -m window --focus west
 lcmd - j : yabai -m window --focus south
