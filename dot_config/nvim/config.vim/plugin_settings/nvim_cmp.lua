@@ -162,6 +162,8 @@ local servers = {
     'clangd',
     -- rust
     'rust_analyzer',
+    -- go
+    'gopls',
 }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
