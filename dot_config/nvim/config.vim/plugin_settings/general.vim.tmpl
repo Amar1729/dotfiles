@@ -207,6 +207,13 @@ omap <silent> ie <Plug>CamelCaseMotion_ie
 xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 
+" leap.nvim
+lua require('leap').add_default_mappings()
+highlight link LeapBackdrop Comment
+highlight LeapLabelPrimary ctermfg=White ctermbg=Black
+highlight LeapLabelSecondary ctermfg=Red ctermbg=White
+
+
 " telescope searching
 lua <<EOF
 local actions = require("telescope.actions")
