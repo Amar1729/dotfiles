@@ -63,6 +63,8 @@ if dein#load_state('~/.cache/dein/')
   " requried for some lua plugins
   call dein#add('nvim-lua/plenary.nvim')
 
+  call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.x' })
+
   " (lua) git signs (replaced airblade/gitgutter)
   call dein#add('lewis6991/gitsigns.nvim')
 
@@ -80,15 +82,6 @@ if dein#load_state('~/.cache/dein/')
 
   " vim wiki
   call dein#add('vimwiki/vimwiki')
-
-  " fzf support (setting runtimepath seems more stable than adding fzf.vim
-  " plugin)
-{{ if (eq .chezmoi.arch "arm64") -}}
-  set runtimepath+=/opt/homebrew/opt/fzf
-{{ else -}}
-  set runtimepath+=/usr/local/opt/fzf
-{{- end }}
-  call dein#add('junegunn/fzf.vim')
 
   " line diffing
   call dein#add('AndrewRadev/linediff.vim')
