@@ -214,6 +214,33 @@ highlight LeapLabelPrimary ctermfg=White ctermbg=Black
 highlight LeapLabelSecondary ctermfg=Red ctermbg=White
 
 
+" hlslens - immediately search selected text with * or #
+" (note this is more powerful than builtin "search word")
+lua <<EOF
+local hlslens = require('hlslens')
+
+hlslens.setup {
+  calm_down = false,
+  nearest_only = true,
+  virt_priority = 10,
+}
+
+vim.keymap.set("n", "*", "", {
+  callback = function()
+    vim.fn.execute("normal! *N")
+    hlslens.start()
+  end,
+})
+
+vim.keymap.set("n", "#", "", {
+  callback = function()
+    vim.fn.execute("normal! #N")
+    hlslens.start()
+  end,
+})
+EOF
+
+
 " telescope searching
 lua <<EOF
 local actions = require("telescope.actions")
