@@ -89,10 +89,14 @@ anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 " gitsigns
 lua require('gitsigns').setup({
 \    numhl = true,
+\    preview_config = { border = 'none' },
 \    current_line_blame = true,
 \    current_line_blame_opts = {delay = 500},
 \ })
 
+" make a changed line more obvious when diagnostics are on that line
+" (this changes the line number color of the line)
+highlight GitSignsChangeNr ctermfg=white
 highlight link GitSignsCurrentLineBlame String
 
 nmap ]h :Gitsigns next_hunk<CR>zz
@@ -100,10 +104,12 @@ nmap [h :Gitsigns prev_hunk<CR>zz
 
 nmap <leader>hs :Gitsigns stage_hunk<CR>
 vmap <leader>hs :'<'>Gitsigns stage_hunk<CR>
-nmap <leader>hu :Gitsigns reset_hunk<CR>
-vmap <leader>hu :'<'>Gitsigns reset_hunk<CR>
-nmap <leader>huu :Gitsigns undo_stage_hunk<CR>
+nmap <leader>hr :Gitsigns reset_hunk<CR>
+vmap <leader>hr :'<'>Gitsigns reset_hunk<CR>
+nmap <leader>hu :Gitsigns undo_stage_hunk<CR>
 nmap <leader>hp :Gitsigns preview_hunk<CR>
+nmap <leader>hd :Gitsigns diffthis<CR>
+nmap <leader>hD :Gitsigns diffthis ~1<CR>
 nmap yog :Gitsigns toggle_current_line_blame<CR>
 
 
