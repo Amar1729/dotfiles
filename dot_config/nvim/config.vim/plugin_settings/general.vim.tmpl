@@ -75,6 +75,17 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
+" nvim-lspconfig
+" put some LSP actions in right-click popup menu
+unmenu PopUp.Paste
+unmenu PopUp.Select\ All
+unmenu PopUp.-1-
+unmenu PopUp.How-to\ disable\ mouse
+anoremenu PopUp.Diagnostic :lua vim.diagnostic.open_float()<CR>
+anoremenu PopUp.Rename :lua vim.lsp.buf.rename()<CR>
+anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
+
+
 " gitsigns
 lua require('gitsigns').setup({
 \    numhl = true,
