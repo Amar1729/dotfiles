@@ -144,6 +144,14 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+-- restrain a language server (in the case that i'm using multiple for same language)
+local on_attach_restrained = function(client, buffer)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.hoverProvider = false
+    client.server_capabilities.renameProvider = false
+    client.server_capabilities.signatureHelpProvider = false
+end
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
@@ -152,7 +160,8 @@ local servers = {
     -- python
         -- needs custom flags
     -- 'pylsp',
-    'pyright',
+    -- 'pyright',
+    'jedi_language_server',
     -- ruby
     'solargraph',
     -- lua
@@ -182,9 +191,15 @@ for _, lsp in pairs(servers) do
 end
 
 -- python
+lspconfig['pyright'].setup({
+    -- disable several capabilities in favor of jedi_language_server
+    on_attach = on_attach_restrained,
+})
+
 lspconfig['pylsp'].setup({
     enable = true,
-    on_attach = on_attach,
+    -- disable several capabilities in favor of jedi_language_server
+    on_attach = on_attach_restrained,
     settings = {
         pylsp = {
             configurationSources = { "flake8", "mypy" },
