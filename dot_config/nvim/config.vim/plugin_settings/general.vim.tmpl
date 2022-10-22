@@ -86,6 +86,15 @@ anoremenu PopUp.Rename :lua vim.lsp.buf.rename()<CR>
 anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 
 
+" popup lsp_signature automatically
+lua require('lsp_signature').setup({
+\     bind = true,
+\     handler_opts = {
+\         border = "none",
+\     }
+\ })
+
+
 " gitsigns
 lua require('gitsigns').setup({
 \    numhl = true,
