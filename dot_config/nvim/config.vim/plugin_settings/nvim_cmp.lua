@@ -2,6 +2,11 @@ vim.opt.completeopt = "menu,menuone,noselect"
 
 -- Setup nvim-cmp.
 local cmp = require'cmp'
+local feedkeys = require'cmp.utils.feedkeys'
+
+local t = function (str)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
 
 -- annotate completion candidates in Pmenu (vscode-like)
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-add-visual-studio-code-codicons-to-the-menu
@@ -39,10 +44,7 @@ cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      vim.fn["vsnip#anonymous"](args.body)
     end,
   },
   -- cmp.mapping.preset.{insert,cmdline} sets some default bindings.
@@ -59,16 +61,30 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+    -- snippet movement with vsnips (should i upgrade to luasnip?)
+    ['<C-j>'] = cmp.mapping(function (fallback)
+        if vim.fn['vsnip#jumpable'](1) == 1 then
+            feedkeys.call(t"<Plug>(vsnip-jump-next)", "")
+        else
+            fallback()
+        end
+    end, { 'i', 's', 'c' }),
+
+    ['<C-h>'] = cmp.mapping(function (fallback)
+        if vim.fn['vsnip#jumpable'](-1) == 1 then
+            feedkeys.call(t"<Plug>(vsnip-jump-prev)", "")
+        else
+            fallback()
+        end
+    end, { 'i', 's', 'c' }),
+
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
-    { name = 'buffer' },
     { name = 'path' },
+    { name = 'buffer' },
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
   }),
   formatting = {
     format = function(entry, vim_item)
@@ -79,7 +95,7 @@ cmp.setup({
       vim_item.menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
+        vsnip = "[vsnip]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]",
       })[entry.source.name]
