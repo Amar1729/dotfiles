@@ -181,7 +181,7 @@ local servers = {
     -- ruby
     'solargraph',
     -- lua
-    'sumneko_lua',
+    -- 'sumneko_lua',
     -- java
         -- needs custom flags
     -- 'java_language_server',
@@ -231,4 +231,29 @@ lspconfig['pylsp'].setup({
 lspconfig.java_language_server.setup {
     on_attach = on_attach,
     cmd = { os.getenv("HOME") .. "/.cache/java-language-server/dist/lang_server_mac.sh" },
+}
+
+-- lua (primarily for neovim config)
+lspconfig['sumneko_lua'].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = { vim.split(package.path, ';') },
+            },
+            diagnostics = {
+                enable = true,
+                globals = { "vim" },
+            },
+            workspace = {
+                library = {
+                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                },
+                maxPreload = 1000,
+            },
+        }
+    }
 }
