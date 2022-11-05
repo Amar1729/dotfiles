@@ -61,6 +61,13 @@ au BufEnter *.txt,*.md,*.tex setlocal spell
 
 set splitbelow splitright
 
+" identify cursor line number visually
+" cursorlineopt=both (line and number) is too much
+" see plugin/colorize-border.vim for augroups that recolor CursorLineNr on
+" insert enter/leave
+set cursorline cursorlineopt=number
+highlight CursorLineNr cterm=none ctermfg=white
+
 highlight Pmenu ctermbg=Black
 " switch these two around
 highlight PmenuSbar ctermfg=8 ctermbg=8 guibg=White

@@ -3,6 +3,8 @@
 " Based off of:
 " https://stackoverflow.com/questions/15561132/run-command-when-vim-enters-visual-mode
 
+" as of nvim (version?), requires cursorline and at least cursorlineopt=number
+
 function! ReturnHighlightTerm(group, term)
    " Store output of group to variable
    let l:output = execute('hi ' . a:group)
@@ -14,12 +16,12 @@ endfunction
 function! CursorLineNrColorInsert(mode)
     " Insert mode: blue
     if a:mode == "i"
-        highlight CursorLineNr ctermfg=4
+        highlight CursorLineNr ctermfg=1
         highlight CursorLineNr guifg=#268bd2
 
     " Replace mode: red
     elseif a:mode == "r"
-        highlight CursorLineNr ctermfg=1
+        highlight CursorLineNr ctermfg=4
         highlight CursorLineNr guifg=#dc322f
 
     else
