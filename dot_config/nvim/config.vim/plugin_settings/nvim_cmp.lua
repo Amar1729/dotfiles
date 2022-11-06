@@ -82,9 +82,9 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'path' },
-    { name = 'buffer' },
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
+    { name = 'nvim_lsp', keyword_length = 3 },
+    { name = 'buffer', keyword_length = 3 },
+    { name = 'vsnip' , keyword_length = 2 },
   }),
   formatting = {
     format = function(entry, vim_item)
@@ -93,6 +93,7 @@ cmp.setup({
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       -- Source
       vim_item.menu = ({
+        path = "[Path]",
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         vsnip = "[vsnip]",
