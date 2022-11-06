@@ -87,18 +87,12 @@ anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 
 
 " popup lsp_signature automatically
-lua require('lsp_signature').setup({
-\     bind = true,
-\     handler_opts = {
-\         border = "none",
-\     }
-\ })
+lua require('lsp_signature').setup({ bind = true })
 
 
 " gitsigns
 lua require('gitsigns').setup({
 \    numhl = true,
-\    preview_config = { border = 'none' },
 \    current_line_blame = true,
 \    current_line_blame_opts = {delay = 500},
 \ })

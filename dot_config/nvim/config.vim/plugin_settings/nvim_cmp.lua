@@ -172,6 +172,25 @@ local on_attach_restrained = function(client, buffer)
     client.server_capabilities.signatureHelpProvider = false
 end
 
+-- link FloatBorder to StatusLine highlight group
+-- then:
+--   - assign border -> border_chars : FloatBorder highlight group
+--   - override all floating windows with our new explicitly-defined border
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "StatusLine" } )
+
+local border_chars = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+local border = {}
+for i, char in pairs(border_chars) do
+    border[i] = { char, "FloatBorder" }
+end
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, fp_opts, ...)
+  fp_opts = fp_opts or {}
+  fp_opts.border = fp_opts.border or border
+  return orig_util_open_floating_preview(contents, syntax, fp_opts, ...)
+end
+
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
