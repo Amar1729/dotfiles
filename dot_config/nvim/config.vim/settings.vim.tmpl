@@ -54,10 +54,8 @@ if has('nvim') == 0
 endif
 
 " spell check
-" dont spell-check by default, it's a bit noisy in codefiles
-set nospell spelllang=en_us
-
-au BufEnter *.txt,*.md,*.tex setlocal spell
+" treesitter is used to only spell-check comments
+set spell spelllang=en_us
 
 set splitbelow splitright
 
