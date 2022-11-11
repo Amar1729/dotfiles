@@ -28,10 +28,6 @@ yabai -m config window_gap                   5
 # "monocle" mode for space 1
 ~/.bin/yabai-monocle 1
 
-yabai -m signal --add event=space_changed \
-    action="limelight -m config active_color 0xffebdbb2" \
-    label=reborder-after-clear
-
 # borders are timing out oddly (being redrawn behind app windows?) for me.
 # these signals to toggle borders off/on on window change seem to resolve issue.
 
@@ -84,9 +80,5 @@ yabai -m rule --add app="^zoom.us$" manage=off
 yabai -m rule --add app="Ghidra" title="Ghidra*" manage=off
 yabai -m rule --add app="Approve" title="Approve" manage=off
 yabai -m rule --add app="Microsoft Remote Desktop" manage=off
-
-# load limelight (window border system from yabai v2.4.3)
-killall limelight >/dev/null
-limelight >/dev/null &
 
 echo "yabai configuration loaded.."

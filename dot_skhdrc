@@ -1,5 +1,5 @@
-:: default : limelight -m config active_color 0xffebdbb2
-:: tree : limelight -m config active_color 0xcc458588
+:: default
+:: tree
 
 ctrl - f ; tree
 tree < ctrl - f -> ; default
@@ -8,15 +8,11 @@ tree < 0x35 ; default
 cmd - 9 : skhd --text "amar.paul16@gmail.com"
 cmd - 0 : skhd --text "amar.paul@jhuapl.edu"
 
-default, tree < cmd - 0x35 : skhd --reload; pkill limelight; limelight -c ~/.limelightrc >/dev/null &
+default, tree < cmd - 0x35 : skhd --reload
 tree < cmd - 0x35 ; default
 
 rcmd + shift - 3
     : screencapture ~/Downloads/screenshot-$(date +%d%m%y-%H-%M-%S).png
-
-# accompanied by a signal that resets border colors on space_change
-rcmd + shift - 4
-    -> : limelight -m config active_color 0xaa000000
 
 # take a screenshot and try to recognize text
 rcmd + shift - 6 : ~/.bin/ocr
