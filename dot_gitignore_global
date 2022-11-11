@@ -24,6 +24,7 @@ __pycache__/
 .mypy_cache
 .coverage
 htmlcov/
+*.hdf5
 
 # Object files
 *.o
