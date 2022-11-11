@@ -107,16 +107,8 @@ key_bindings:
 {{- end }}
 
   # (macOS only)
-  #- { key: Key0,   mods: Command, action: ResetFontSize    }
-  #- { key: Equals, mods: Command, action: IncreaseFontSize }
-  #- { key: Minus,  mods: Command, action: DecreaseFontSize }
-  #- { key: K,      mods: Command, action: ClearHistory     }
-  #- { key: K,      mods: Command, chars: "\x0c"            }
-  #- { key: V,      mods: Command, action: Paste            }
-  #- { key: C,      mods: Command, action: Copy             }
-  #- { key: H,      mods: Command, action: Hide             }
-  #- { key: Q,      mods: Command, action: Quit             }
-  #- { key: W,      mods: Command, action: Quit             }
+  - { key: Equals,   mods: Shift|Command, action: IncreaseFontSize }
+  - { key: Minus,    mods: Command,       action: DecreaseFontSize }
 
   # is this macos only?
   - { key: N,        mods: Command, action: CreateNewWindow                  }
