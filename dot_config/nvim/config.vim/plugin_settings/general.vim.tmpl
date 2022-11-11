@@ -271,8 +271,11 @@ require("telescope").setup{
         ["<C-u>"] = false
       },
     },
+    extensions = { fzf },
   }
 }
+
+require('telescope').load_extension('fzf')
 
 -- try to find git_files; otherwise fall back to regular find_files
 project_files = function()

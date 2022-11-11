@@ -65,6 +65,7 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('nvim-lua/plenary.nvim')
 
   call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.x' })
+  call dein#add('nvim-telescope/telescope-fzf-native.nvim', { 'build': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' })
 
   " (lua) git signs (replaced airblade/gitgutter)
   call dein#add('lewis6991/gitsigns.nvim')
