@@ -208,6 +208,20 @@ highlight LeapLabelPrimary ctermfg=White ctermbg=Black
 highlight LeapLabelSecondary ctermfg=Red ctermbg=White
 
 
+" setup flit
+lua require('flit').setup({
+\    labeled_modes = "n",
+\        special_keys = {
+\            repeat_search = { "<Enter>" },
+\        },
+\    opts = {
+\        special_keys = {
+\            repeat_search = { "<Enter>" },
+\        }
+\    },
+\ })
+
+
 " hlslens - immediately search selected text with * or #
 " (note this is more powerful than builtin "search word")
 lua <<EOF
