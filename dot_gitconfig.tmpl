@@ -19,6 +19,10 @@
 	br = branch
 	m = merge
 	ma = merge --abort
+    # merge from upstream, if we git --fetch first
+    # HEAD - get branch name
+    # branch_name@{u} - get upstream tracking (e.g. origin/main
+    merge-upstream = !UPSTREAM=$(git rev-parse --abbrev-ref $(git rev-parse --abbrev-ref HEAD)@{u}) && git merge --ff-only "$UPSTREAM"
 	rc = rebase --continue
 	ra = rebase --abort
 	rs = rebase --skip
