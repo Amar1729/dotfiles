@@ -6,6 +6,8 @@ export FZF_DEFAULT_OPTS='--ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd -t d --ignore-file ~/.gitignore_global'
 
+export FZF_CTRL_T_OPTS="--border"
+
 __git_log () {
     # format str implies:
     #  --abbrev-commit
@@ -92,6 +94,7 @@ _fzf_complete_git_post() {
 }
 
 gh () {
+    # fuzzy search commits from `git log`
     git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
     local item
     __git_log |
@@ -101,8 +104,28 @@ gh () {
     while read item; do echo -n "${(q)item} "; done
 }
 
+fgst () {
+    # fuzzy search files from `git status`
+    git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
+
+    header="$(git -c color.status=always status -uno --short --branch | head -n1)"
+
+    command git -c color.status=always status -uno --short |
+        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} \
+            --reverse \
+            $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" \
+            fzf -m --preview="git diff --color=always {-1}" --header="$header" |
+        while read -r item; do
+        echo "$item" | awk '{print $NF}'
+    done
+}
+
 if [[ $SHELL == *"zsh" ]]; then
     fzf-gh-widget () { local result="$(gh)"; zle reset-prompt; LBUFFER+="$result" }
     zle -N fzf-gh-widget
     bindkey '^G^H' fzf-gh-widget
+
+    fzf-git-status-widget () { local result="$(fgst)"; zle reset-prompt; LBUFFER+="$result"; }
+    zle -N fzf-git-status-widget
+    bindkey '^G^S' fzf-git-status-widget
 fi
