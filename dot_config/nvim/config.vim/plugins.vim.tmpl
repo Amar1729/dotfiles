@@ -52,12 +52,6 @@ if dein#load_state('~/.cache/dein/')
   " for calling signature_help while in insert mode
   call dein#add('ray-x/lsp_signature.nvim')
   
-  " use these for deoplete to work in vim8
-  if has('nvim') == 0
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-
 
   " Quality of life:
 
@@ -73,14 +67,8 @@ if dein#load_state('~/.cache/dein/')
   " for surrounding phrases with characters
   call dein#add('tpope/vim-surround')
 
-  " collab editing
-  "call dein#add('FredKSchott/CoVim')
-
   " nice completion of (x)html tags
   call dein#add('tpope/vim-ragtag')
-
-  " (vim plugin) minimap
-  "call dein#add('severin-lemaignan/vim-minimap')
 
   " vim wiki
   call dein#add('vimwiki/vimwiki')
