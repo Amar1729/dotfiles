@@ -90,6 +90,11 @@ anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 lua require('lsp_signature').setup({ bind = true })
 
 
+" use color 2 for the new window border
+lua require('colorful-winsep').setup()
+hi NvimSeparator ctermfg=2
+
+
 " gitsigns
 lua require('gitsigns').setup({
 \    numhl = true,
