@@ -123,6 +123,17 @@ cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline({}),
 })
 
+-- neodev, for setting vim.*
+require('neodev').setup({
+    -- add chezmoi dir to the directories that need vim.* docs from neodev.nvim
+    override = function(root_dir, library)
+        if require('neodev.util').has_file(root_dir, os.getenv('HOME') .. '/.local/share/chezmoi') then
+            library.enabled = true
+            library.plugins = true
+        end
+    end
+})
+
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
@@ -202,7 +213,7 @@ local servers = {
     -- ruby
     'solargraph',
     -- lua
-    -- 'sumneko_lua',
+    'sumneko_lua',
     -- java
         -- needs custom flags
     -- 'java_language_server',
@@ -252,29 +263,4 @@ lspconfig['pylsp'].setup({
 lspconfig.java_language_server.setup {
     on_attach = on_attach,
     cmd = { os.getenv("HOME") .. "/.cache/java-language-server/dist/lang_server_mac.sh" },
-}
-
--- lua (primarily for neovim config)
-lspconfig['sumneko_lua'].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-                path = { vim.split(package.path, ';') },
-            },
-            diagnostics = {
-                enable = true,
-                globals = { "vim" },
-            },
-            workspace = {
-                library = {
-                    [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                    [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                },
-                maxPreload = 1000,
-            },
-        }
-    }
 }
