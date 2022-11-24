@@ -23,7 +23,7 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       keymaps = {
           init_selection = "<M-n>",
-          node_incremental = "<M-o>",
+          node_incremental = "<M-n>",
           scope_incremental = "<M-p>",
           node_decremental = "<M-i>",
       }
@@ -35,6 +35,20 @@ require'nvim-treesitter.configs'.setup {
 
   -- provided by nvim-treesitter-textobjects plugin
   textobjects = {
+      select = {
+          enable = true,
+
+          -- automatically jump forward to textobj
+          lookahead = true,
+
+          keymaps = {
+              ["af"] = "@function.outer",
+              ["if"] = "@function.inner",
+              ["ac"] = "@class.outer",
+              ["ic"] = "@class.inner",
+          },
+      },
+
       -- todo: neovim provides mappings for jumping over functions
       -- [[, ]], [m, ]M,
       -- should i add these as text object movements, or keep them as nvim-provided?
