@@ -121,12 +121,6 @@ bind c new-window -c "#{pane_current_path}"
 # Destroy pane (will destroy window if last pane)
 bind -n M-w kill-pane
 
-# switch panes using Alt-arrow (without prefix)
-bind -n M-h select-pane -L
-bind -n M-j select-pane -D
-bind -n M-k select-pane -U
-bind -n M-l select-pane -R
-
 # Pane resize in all four directions (without prefix)
 bind -nr M-H resize-pane -L 5
 bind -nr M-J resize-pane -D 5
@@ -160,6 +154,7 @@ set -g @plugin 'tmux-plugins/tmux-resurrect' # save/restore tmux state
 set -g @plugin 'nhdaly/tmux-better-mouse-mode' # better scrolling
 set -g @plugin 'tmux-plugins/tmux-continuum' # automatic save/restore tmux state (depends on tmux-resurrect)
 set -g @plugin 'tmux-plugins/tmux-open' # open urls from tmux (needed on current alacritty)
+set -g @plugin 'christoomey/vim-tmux-navigator' # tmux/vim keybindings interop, pane movements
 
 set -g @resurrect-save 'S'
 set -g @resurrect-restore 'R'

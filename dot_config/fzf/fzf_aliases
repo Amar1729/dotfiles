@@ -125,7 +125,7 @@ fgst () {
 if [[ $SHELL == *"zsh" ]]; then
     fzf-gh-widget () { local result="$(gh)"; zle reset-prompt; LBUFFER+="$result" ; }
     zle -N fzf-gh-widget
-    bindkey '^G^H' fzf-gh-widget
+    bindkey '^G^G' fzf-gh-widget
 
     fzf-git-status-widget () { local result="$(fgst)"; zle reset-prompt; LBUFFER+="$result"; }
     zle -N fzf-git-status-widget
