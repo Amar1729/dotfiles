@@ -338,3 +338,5 @@ endfunction
 nnoremap yoe :call ToggleVimDiagnostic()<CR>
 nnoremap [oe :lua vim.diagnostic.show()<CR>
 nnoremap ]oe :lua vim.diagnostic.hide()<CR>
+
+lua require('Comment').setup()
