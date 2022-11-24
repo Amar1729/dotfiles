@@ -1,6 +1,8 @@
 " airline-vim, airline-vim-themes settings
 let g:airline#extensions#branch#enabled = 1
 
+let g:airline_detect_spell = 0
+
 " wip : rename other modes?
 let g:airline_mode_map = {
 	\ 'n' : 'normie',
@@ -17,7 +19,7 @@ let g:airline_mode_map = {
 	\ }
 
 function! AirlineInit()
-	let g:airline_section_a = airline#section#create(['mode','crypt','paste','spell','iminsert'])
+	let g:airline_section_a = airline#section#create(['mode','crypt','paste','iminsert'])
 	"let g:airline_section_b = airline#section#create(['hunks'])
 	let g:airline_section_b = airline#section#create(['%v'])
 	let g:airline_section_x = ""
