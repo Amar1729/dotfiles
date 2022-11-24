@@ -15,12 +15,6 @@ augroup SetSyntaxColor
   autocmd BufWinLeave *rc set syntax=config
 augroup END
 
-" auto-attempt json prettification
-augroup JsonPrettify
-  autocmd!
-  autocmd BufWinEnter *.json silent! %!python -m json.tool
-augroup END
-
 " Deal with status bar (necessary?)
 
 " Cycle status line on command Shift+H
