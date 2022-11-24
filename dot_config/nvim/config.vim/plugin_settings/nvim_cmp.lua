@@ -160,7 +160,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -209,7 +208,6 @@ local servers = {
         -- needs custom flags
     -- 'pylsp',
     -- 'pyright',
-    'jedi_language_server',
     -- ruby
     'solargraph',
     -- lua
@@ -240,14 +238,14 @@ end
 
 -- python
 lspconfig['pyright'].setup({
-    -- disable several capabilities in favor of jedi_language_server
+    -- disable several capabilities in favor of pylsp
     on_attach = on_attach_restrained,
+    capabilities = capabilities,
 })
 
 lspconfig['pylsp'].setup({
     enable = true,
-    -- disable several capabilities in favor of jedi_language_server
-    on_attach = on_attach_restrained,
+    on_attach = on_attach,
     settings = {
         pylsp = {
             configurationSources = { "flake8", "mypy" },
