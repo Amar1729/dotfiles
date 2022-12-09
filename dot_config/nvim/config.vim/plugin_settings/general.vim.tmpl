@@ -108,27 +108,6 @@ lua require('lsp_signature').setup({ bind = true })
 lua require('colorful-winsep').setup()
 
 
-" gitsigns
-lua require('gitsigns').setup({
-\    numhl = true,
-\    current_line_blame = true,
-\    current_line_blame_opts = {delay = 500},
-\ })
-
-nmap ]h :Gitsigns next_hunk<CR>zz
-nmap [h :Gitsigns prev_hunk<CR>zz
-
-nmap <leader>hs :Gitsigns stage_hunk<CR>
-vmap <leader>hs :'<'>Gitsigns stage_hunk<CR>
-nmap <leader>hr :Gitsigns reset_hunk<CR>
-vmap <leader>hr :'<'>Gitsigns reset_hunk<CR>
-nmap <leader>hu :Gitsigns undo_stage_hunk<CR>
-nmap <leader>hp :Gitsigns preview_hunk<CR>
-nmap <leader>hd :Gitsigns diffthis<CR>
-nmap <leader>hD :Gitsigns diffthis ~1<CR>
-nmap yog :Gitsigns toggle_current_line_blame<CR>
-
-
 " python info - is this still required?
 " gtfo py2
 let g:python_host_prog=''
@@ -233,10 +212,5 @@ sign define DiagnosticSignError text=x
 sign define DiagnosticSignWarn text=!
 sign define DiagnosticSignInfo text=>
 sign define DiagnosticSignHint text=?
-
-" update quickfix
-" in addition to nvim-cmp []d bindings for moving, can still use []q from
-" vim-unimpaired if that's more comfortable
-autocmd DiagnosticChanged * lua vim.diagnostic.setqflist({open = false})
 
 lua require('Comment').setup()
