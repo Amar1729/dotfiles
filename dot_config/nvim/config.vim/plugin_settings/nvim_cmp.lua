@@ -180,12 +180,8 @@ local on_attach_restrained = function(client, buffer)
     client.server_capabilities.signatureHelpProvider = false
 end
 
--- link FloatBorder to StatusLine highlight group
--- then:
---   - assign border -> border_chars : FloatBorder highlight group
---   - override all floating windows with our new explicitly-defined border
-vim.api.nvim_set_hl(0, "FloatBorder", { link = "StatusLine" } )
-
+-- assign border -> border_chars
+-- override all floating windows with our new explicitly-defined border
 local border_chars = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 local border = {}
 for i, char in pairs(border_chars) do

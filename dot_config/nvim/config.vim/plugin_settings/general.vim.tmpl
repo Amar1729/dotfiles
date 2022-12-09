@@ -106,7 +106,6 @@ lua require('lsp_signature').setup({ bind = true })
 
 " use color 2 for the new window border
 lua require('colorful-winsep').setup()
-hi NvimSeparator ctermfg=2
 
 
 " gitsigns
@@ -115,11 +114,6 @@ lua require('gitsigns').setup({
 \    current_line_blame = true,
 \    current_line_blame_opts = {delay = 500},
 \ })
-
-" make a changed line more obvious when diagnostics are on that line
-" (this changes the line number color of the line)
-highlight GitSignsChangeNr ctermfg=white
-highlight link GitSignsCurrentLineBlame String
 
 nmap ]h :Gitsigns next_hunk<CR>zz
 nmap [h :Gitsigns prev_hunk<CR>zz
@@ -214,9 +208,6 @@ xmap <silent> ie <Plug>CamelCaseMotion_ie
 
 " leap.nvim
 lua require('leap').add_default_mappings()
-highlight link LeapBackdrop Comment
-highlight LeapLabelPrimary ctermfg=White ctermbg=Black
-highlight LeapLabelSecondary ctermfg=Red ctermbg=White
 
 
 " setup flit

@@ -33,7 +33,4 @@ endfunction
 
 nnoremap <S-h> :call CycleHiddenAll()<CR>
 
-" for the almost-quiet statusbar
-" want the bar itself to be transparent and text to be green.
-hi StatusLine cterm=None ctermfg=1 ctermbg=None
 set statusline=%t

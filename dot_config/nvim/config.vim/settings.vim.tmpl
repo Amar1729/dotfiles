@@ -58,20 +58,4 @@ set splitbelow splitright
 
 " identify cursor line number visually
 " cursorlineopt=both (line and number) is too much
-" see plugin/colorize-border.vim for augroups that recolor CursorLineNr on
-" insert enter/leave
 set cursorline cursorlineopt=number
-highlight CursorLineNr cterm=none ctermfg=white
-
-highlight Pmenu ctermbg=Black
-" switch these two around
-highlight PmenuSbar ctermfg=8 ctermbg=8 guibg=White
-highlight PmenuThumb ctermfg=7 ctermbg=6 guibg=Grey
-
-" Colors for - neovim treesitter
-" https://github.com/dylanaraps/wal.vim/pull/34/files
-hi TSInclude ctermbg=NONE ctermfg=5
-hi TSNamespace ctermbg=NONE ctermfg=4
-hi TSRepeat ctermbg=NONE ctermfg=5
-hi TSOperator ctermbg=NONE ctermfg=4
-"
