@@ -115,7 +115,16 @@ vim.keymap.set({"o", "x"}, "ib", "<Plug>CamelCaseMotion_ib")
 vim.keymap.set({"o", "x"}, "ie", "<Plug>CamelCaseMotion_ie")
 
 -- telescope
-keymap("n", "<c-p>", "<cmd>lua project_files()<CR>")
+
+-- try to find git_files; otherwise fall back to regular find_files
+local project_files = function()
+    local opts = {} -- define here if you want to define something
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then require("telescope.builtin").find_files(opts) end
+end
+
+vim.keymap.set("n", "<c-p>", project_files)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 keymap("n", "<c-f>", "<cmd>Telescope live_grep<CR>")
 keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
 
