@@ -1,0 +1,84 @@
+-- NOTE: mapleader set by core.options
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Helper functions
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+local global_opts = { noremap = true, silent = true }
+
+local keymap = function(mode, lhs, rhs, options)
+    local opts = options or global_opts
+    vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+end
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Vanilla keybindings
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+-- copy to / paste from clipboard
+-- mac uses * register, linux uses + register
+{{ if (eq .chezmoi.os "darwin") -}}
+keymap("v", "<leader>y", '"*y')
+keymap("n", "<leader>Y", '"*yg_')
+keymap("n", "<leader>y", '"*y')
+keymap("n", "<leader>yy", '"*yy')
+
+keymap("n", "<leader>p", '"*p')
+keymap("n", "<leader>P", '"*P')
+keymap("v", "<leader>p", '"*p')
+keymap("v", "<leader>P", '"*P')
+{{ else if (eq .chezmoi.os "linux") -}}
+keymap("v", "<leader>y", '"+y')
+keymap("n", "<leader>Y", '"+yg_')
+keymap("n", "<leader>y", '"+y')
+keymap("n", "<leader>yy", '"+yy')
+
+-- paste from system: clipboard
+keymap("n", "<leader>p", '"+p')
+keymap("n", "<leader>P", '"+P')
+keymap("v", "<leader>p", '"+p')
+keymap("v", "<leader>P", '"+P')
+
+-- paste from system: clipboard
+keymap("n", "<leader><C-p>", '"*p')
+keymap("n", "<leader><C-P>", '"*P')
+keymap("v", "<leader><C-p>", '"*p')
+keymap("v", "<leader><C-P>", '"*P')
+{{- end }}
+
+-- Remove all trailing whitespace (takes a second)
+keymap("n", "<leader>w", "<cmd>let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>")
+
+-- force kill terminal buffers
+keymap("n", "<leader>d", "<cmd>bd!<CR>")
+
+-- move to next buffer and kill the previous one (good for keeping window layout)
+keymap("n", "<leader>b", "<cmd>bn | bd #<CR>")
+
+-- clear highlight matches from find
+keymap("n", "<leader><space>", "<cmd>noh<cr>")
+
+-- for exiting nvim terminal mode
+keymap("t", "<Esc>", "<C-\\><C-n>")
+
+-- toggle folds with space
+keymap("n", "<space>", "za")
+
+-- center search results
+keymap("n", "n", "nzz")
+keymap("n", "N", "Nzz")
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Plugin-provided keybindings
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+-- several plugins have their keymaps defined during setup() or as on_attach:
+-- tree-sitter
+-- nvim-cmp
+-- gitsigns
+
+-- LSP
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
