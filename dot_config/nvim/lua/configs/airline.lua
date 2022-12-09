@@ -1,3 +1,6 @@
+-- just run this whole config as vim.cmd for now
+vim.cmd [[
+
 " airline-vim, airline-vim-themes settings
 let g:airline#extensions#branch#enabled = 1
 
@@ -83,3 +86,5 @@ let g:airline_theme='term'
 let g:airline#extensions#tabline#enabled = 1		" Enable list of buffers
 let g:airline#extensions#tabline#fnamemod = ':t'	" Show just filename in bufferline
 let g:airline#extensions#tmuxline#enabled = 0		" Don't rewrite my tmux conf!
+
+]]
