@@ -2,15 +2,6 @@
 " Personal Settings
 """
 
-" colorscheme gruvbox
-colorscheme wal
-set background=dark
-set relativenumber number
-set expandtab tabstop=4 softtabstop=4 shiftwidth=4 softtabstop=4
-
-" allow mouse control
-set mouse=a
-
 {{- if (eq .chezmoi.os "linux") }}
 " override some defaults (only needed on ubuntu?)
 set foldmethod=manual
@@ -23,18 +14,6 @@ set foldcolumn=2
 set wildmode=list:longest,full
 " ignore case during completion
 set wildignorecase
-
-" case-insensitive, smart search for /, ?
-set ignorecase smartcase
-
-" hide modified buffers (allow opening of new buffers if current is edited)
-set hidden
-
-" autoread changes made outside vim
-set autoread
-
-" persistent undo!
-set undofile
 
 " file explorer sidebar
 let g:netrw_banner = 0
@@ -49,13 +28,3 @@ if has('nvim') == 0
     set backspace=indent,eol,start
     set incsearch hlsearch
 endif
-
-" spell check
-" treesitter is used to only spell-check comments
-set spell spelllang=en_us
-
-set splitbelow splitright
-
-" identify cursor line number visually
-" cursorlineopt=both (line and number) is too much
-set cursorline cursorlineopt=number
