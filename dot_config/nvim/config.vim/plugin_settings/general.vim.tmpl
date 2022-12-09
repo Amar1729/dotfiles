@@ -156,24 +156,6 @@ let wiki_2.path = '~/Documents/Personal/work_wiki/'
 let g:vimwiki_list = [wiki_1, wiki_2]
 
 
-" CamelCaseMotion settings
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-map <silent> ge <Plug>CamelCaseMotion_ge
-sunmap w
-sunmap b
-sunmap e
-sunmap ge
-
-omap <silent> iw <Plug>CamelCaseMotion_iw
-xmap <silent> iw <Plug>CamelCaseMotion_iw
-omap <silent> ib <Plug>CamelCaseMotion_ib
-xmap <silent> ib <Plug>CamelCaseMotion_ib
-omap <silent> ie <Plug>CamelCaseMotion_ie
-xmap <silent> ie <Plug>CamelCaseMotion_ie
-
-
 " leap.nvim
 lua require('leap').add_default_mappings()
 
@@ -206,20 +188,6 @@ hlslens.setup {
   nearest_only = true,
   virt_priority = 10,
 }
-
-vim.keymap.set("n", "*", "", {
-  callback = function()
-    vim.fn.execute("normal! *N")
-    hlslens.start()
-  end,
-})
-
-vim.keymap.set("n", "#", "", {
-  callback = function()
-    vim.fn.execute("normal! #N")
-    hlslens.start()
-  end,
-})
 EOF
 
 
@@ -257,10 +225,6 @@ project_files = function()
   local ok = pcall(require"telescope.builtin".git_files, opts)
   if not ok then require"telescope.builtin".find_files(opts) end
 end
-
-vim.api.nvim_set_keymap("n", "<c-p>", "<CMD>lua project_files()<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<c-f>", "<CMD>Telescope live_grep<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("n", "<Tab>", "<CMD>Telescope buffers<CR>", {noremap = true, silent = true})
 EOF
 
 
@@ -274,21 +238,5 @@ sign define DiagnosticSignHint text=?
 " in addition to nvim-cmp []d bindings for moving, can still use []q from
 " vim-unimpaired if that's more comfortable
 autocmd DiagnosticChanged * lua vim.diagnostic.setqflist({open = false})
-
-let s:DiagnosticsShown = get(s:, 'DiagnosticsShown', 1)
-function! ToggleVimDiagnostic()
-    if s:DiagnosticsShown == 1
-        lua vim.diagnostic.config({virtual_text = false, underline = false})
-        let s:DiagnosticsShown = 0
-    else
-        lua vim.diagnostic.config({virtual_text = true, underline = true})
-        let s:DiagnosticsShown = 1
-    endif
-endfunction
-
-" let 'yoe' still show gutter diagnostic signs; ']oe' will hide entirely
-nnoremap yoe :call ToggleVimDiagnostic()<CR>
-nnoremap [oe :lua vim.diagnostic.show()<CR>
-nnoremap ]oe :lua vim.diagnostic.hide()<CR>
 
 lua require('Comment').setup()

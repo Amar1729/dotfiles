@@ -82,3 +82,56 @@ vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+-- maybe this should be defined as on_attach?
+local diagnostics_shown = 1
+local toggle_vim_diagnostic = function()
+    if diagnostics_shown == 1 then
+        vim.diagnostic.config({virtual_text = false, underline = false})
+        diagnostics_shown = 0
+    else
+        vim.diagnostic.config({virtual_text = true, underline = true})
+        diagnostics_shown = 1
+    end
+end
+
+-- 'yoe' still show gutter diagnostic signs; ']oe' will hide entirely
+vim.keymap.set("n", "yoe", toggle_vim_diagnostic)
+vim.keymap.set("n", "[oe", vim.diagnostic.show)
+vim.keymap.set("n", "]oe", vim.diagnostic.hide)
+
+-- camelcasemotion
+keymap("", "w", "<Plug>CamelCaseMotion_w")
+keymap("", "b", "<Plug>CamelCaseMotion_b")
+keymap("", "e", "<Plug>CamelCaseMotion_e")
+keymap("", "ge", "<Plug>CamelCaseMotion_ge")
+vim.keymap.del("s", "w")
+vim.keymap.del("s", "b")
+vim.keymap.del("s", "e")
+vim.keymap.del("s", "ge")
+
+vim.keymap.set({"o", "x"}, "iw", "<Plug>CamelCaseMotion_iw")
+vim.keymap.set({"o", "x"}, "ib", "<Plug>CamelCaseMotion_ib")
+vim.keymap.set({"o", "x"}, "ie", "<Plug>CamelCaseMotion_ie")
+
+-- telescope
+keymap("n", "<c-p>", "<cmd>lua project_files()<CR>")
+keymap("n", "<c-f>", "<cmd>Telescope live_grep<CR>")
+keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
+
+-- hlslens
+local hlslens = require('hlslens')
+
+keymap("n", "*", "", {
+    callback = function()
+        vim.fn.execute("normal! *N")
+        hlslens.start()
+    end,
+})
+
+keymap("n", "#", "", {
+    callback = function()
+        vim.fn.execute("normal! #N")
+        hlslens.start()
+    end,
+})
