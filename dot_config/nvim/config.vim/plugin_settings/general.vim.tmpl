@@ -3,15 +3,6 @@
 """
 
 
-unmenu PopUp.Paste
-unmenu PopUp.Select\ All
-unmenu PopUp.-1-
-unmenu PopUp.How-to\ disable\ mouse
-anoremenu PopUp.Diagnostic :lua vim.diagnostic.open_float()<CR>
-anoremenu PopUp.Rename :lua vim.lsp.buf.rename()<CR>
-anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
-
-
 " popup lsp_signature automatically
 lua require('lsp_signature').setup({ bind = true })
 
@@ -81,11 +72,5 @@ hlslens.setup {
 }
 EOF
 
-
-" LSP Diagnostics - better signs
-sign define DiagnosticSignError text=x
-sign define DiagnosticSignWarn text=!
-sign define DiagnosticSignInfo text=>
-sign define DiagnosticSignHint text=?
 
 lua require('Comment').setup()
