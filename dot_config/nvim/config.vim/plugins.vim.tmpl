@@ -78,9 +78,6 @@ if dein#load_state('~/.cache/dein/')
   " vim wiki
   call dein#add('vimwiki/vimwiki')
 
-  " line diffing
-  call dein#add('AndrewRadev/linediff.vim')
-
   " typewriter
   "call dein#add('Amar1729/vimty')
 
@@ -104,14 +101,8 @@ if dein#load_state('~/.cache/dein/')
   call dein#add('numToStr/Comment.nvim')
 
 
+
   " Language-specific syntax support, completions:
-
-  " Live LaTeX previewing
-  "call dein#add('xuhdev/vim-latex-live-preview')
-
-  " Different LaTeX live previewing (vllp currently broken for TeXLive2016 ?)
-  "call dein#add('donRaphaco/neotex')
-  " no, I think this only works for vim?
 
 {{- if (eq .chezmoi.os "linux") }}
   " sxhkd

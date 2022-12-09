@@ -143,10 +143,6 @@ let g:python3_host_prog='/usr/bin/python3'
 {{- end }}
 
 
-" mappings for Linediff
-vnoremap <leader>d	:Linediff<CR>
-
-
 " vimwiki settings
 let wiki_1 = {}
 let wiki_1.path = '~/Dropbox/wiki/'
@@ -158,34 +154,6 @@ let wiki_2.path = '~/Documents/Personal/work_wiki/'
 "let wiki_2.index = 'main'
 
 let g:vimwiki_list = [wiki_1, wiki_2]
-
-
-" vim-minimap settings
-let g:minimap_show='<leader>ms'
-let g:minimap_update='<leader>mu'
-let g:minimap_close='<leader>gc'
-let g:minimap_toggle='<leader>gt'
-
-
-""""
-" don't know about merging this stuff, don't use latex much anymore?
-"
-" vim-latex-live-preview
-let g:livepreview_previewer = 'evince'
-nnoremap <leader>L :LLPStartPreview<CR>
-" live previewing currently broken?
-"autocmd TextChanged,TextChangedI *tex silent :LLPStartPreview 
-
-" latex live stuff
-" update time
-autocmd Filetype tex setl updatetime=5
-nnoremap <F12> :LLPStartPreview<CR>
-
-" change from default evince
-" actually i think evince is fine?
-"let g:livepreview_previewer = 'mupdf'
-
-""""
 
 
 " CamelCaseMotion settings
