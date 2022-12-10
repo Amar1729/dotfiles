@@ -18,15 +18,8 @@ if [[ -z "$SHELL" ]]; then
     fi
 fi
 
-# dein - plugin mgr for vim
-if [[ ! -d "$HOME/.cache/dein" ]]; then
-curl -sSL -o /tmp/installer.sh https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-sh /tmp/installer.sh "$HOME/.cache/dein"
-rm /tmp/installer.sh
-fi
-
-# install plugins for neovim
-nvim -c ":q"
+# install plugins for neovim - not sure best way to do with packer
+# nvim -c ":q"
 
 # tmux plugin manager
 if [[ ! -d "$HOME/.tmux/plugins/" ]]; then
