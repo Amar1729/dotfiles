@@ -69,6 +69,16 @@ cmd("BufWritePost",
     }
 )
 
+-- update quickfix
+-- in addition to nvim-cmp []d bindings for moving, can still use []q from
+-- vim-unimpaired if that's more comfortable (see mappings)
+cmd("DiagnosticChanged",
+    {
+        pattern = "*",
+        callback = function() vim.diagnostic.setqflist({open = false}) end,
+    }
+)
+
 -- auto-write changes to chezmoi files
 cmd("BufWritePost",
     {
