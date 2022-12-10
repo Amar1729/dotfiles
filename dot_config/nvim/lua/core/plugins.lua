@@ -278,6 +278,12 @@ return packer.startup(function(use)
         end
     }
 
+    -- TS-aware split/join
+    use {
+        "Wansmer/treesj",
+        config = function() require "configs.treesj" end,
+    }
+
 
     -- Language-specific syntax support, completions:
 
