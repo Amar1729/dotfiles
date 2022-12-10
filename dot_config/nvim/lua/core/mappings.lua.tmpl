@@ -1,0 +1,165 @@
+-- NOTE: mapleader set by core.options
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Helper functions
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+local global_opts = { noremap = true, silent = true }
+
+local keymap = function(mode, lhs, rhs, options)
+    local opts = options or global_opts
+    vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
+end
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Vanilla keybindings
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+-- copy to / paste from clipboard
+-- mac uses * register, linux uses + register
+{{ if (eq .chezmoi.os "darwin") -}}
+keymap("v", "<leader>y", '"*y')
+keymap("n", "<leader>Y", '"*yg_')
+keymap("n", "<leader>y", '"*y')
+keymap("n", "<leader>yy", '"*yy')
+
+keymap("n", "<leader>p", '"*p')
+keymap("n", "<leader>P", '"*P')
+keymap("v", "<leader>p", '"*p')
+keymap("v", "<leader>P", '"*P')
+{{ else if (eq .chezmoi.os "linux") -}}
+keymap("v", "<leader>y", '"+y')
+keymap("n", "<leader>Y", '"+yg_')
+keymap("n", "<leader>y", '"+y')
+keymap("n", "<leader>yy", '"+yy')
+
+-- paste from system: clipboard
+keymap("n", "<leader>p", '"+p')
+keymap("n", "<leader>P", '"+P')
+keymap("v", "<leader>p", '"+p')
+keymap("v", "<leader>P", '"+P')
+
+-- paste from system: clipboard
+keymap("n", "<leader><C-p>", '"*p')
+keymap("n", "<leader><C-P>", '"*P')
+keymap("v", "<leader><C-p>", '"*p')
+keymap("v", "<leader><C-P>", '"*P')
+{{- end }}
+
+-- Remove all trailing whitespace (takes a second)
+keymap("n", "<leader>w", "<cmd>let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>")
+
+-- force kill terminal buffers
+keymap("n", "<leader>d", "<cmd>bd!<CR>")
+
+-- move to next buffer and kill the previous one (good for keeping window layout)
+-- shift and close previously-open buffer
+keymap("n", "<leader>b", "<cmd>bn | bd #<CR>")
+-- TODO: improve these buf close bindings
+-- ASSUMES that the previous jump is in a different buffer
+-- i normally use this as closing a buffer opened as a result of jump-to-def or
+-- similar
+-- nmap <leader>b <C-o> \| :bd # <CR>
+
+-- clear highlight matches from find
+keymap("n", "<leader><space>", "<cmd>noh<cr>")
+
+-- for exiting nvim terminal mode
+keymap("t", "<Esc>", "<C-\\><C-n>")
+
+-- toggle folds with space
+keymap("n", "<space>", "za")
+
+-- center search results
+keymap("n", "n", "nzz")
+keymap("n", "N", "Nzz")
+
+-- LSP (note lsp is built-in functionality)
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+-- maybe this should be defined as on_attach?
+local diagnostics_shown = 1
+local toggle_vim_diagnostic = function()
+    if diagnostics_shown == 1 then
+        vim.diagnostic.config({virtual_text = false, underline = false})
+        diagnostics_shown = 0
+    else
+        vim.diagnostic.config({virtual_text = true, underline = true})
+        diagnostics_shown = 1
+    end
+end
+
+-- 'yoe' still show gutter diagnostic signs; ']oe' will hide entirely
+vim.keymap.set("n", "yoe", toggle_vim_diagnostic)
+vim.keymap.set("n", "[oe", vim.diagnostic.show)
+vim.keymap.set("n", "]oe", vim.diagnostic.hide)
+
+-- override right-click popupmenu with some LSP stuff
+-- (is there a lua equivalent yet for unmenu and amenu?)
+vim.cmd([[ 
+unmenu PopUp.Paste
+unmenu PopUp.Select\ All
+unmenu PopUp.-1-
+unmenu PopUp.How-to\ disable\ mouse
+anoremenu PopUp.Diagnostic :lua vim.diagnostic.open_float()<CR>
+anoremenu PopUp.Rename :lua vim.lsp.buf.rename()<CR>
+anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
+]])
+
+
+-- ---- ---- ---- ---- ---- ---- ---- ----
+-- ---- Plugin-provided keybindings
+-- ---- ---- ---- ---- ---- ---- ---- ----
+
+-- several plugins have their keymaps defined during setup() or as on_attach:
+-- tree-sitter
+-- nvim-cmp
+-- gitsigns
+
+-- camelcasemotion
+keymap("", "w", "<Plug>CamelCaseMotion_w")
+keymap("", "b", "<Plug>CamelCaseMotion_b")
+keymap("", "e", "<Plug>CamelCaseMotion_e")
+keymap("", "ge", "<Plug>CamelCaseMotion_ge")
+vim.keymap.del("s", "w")
+vim.keymap.del("s", "b")
+vim.keymap.del("s", "e")
+vim.keymap.del("s", "ge")
+
+vim.keymap.set({"o", "x"}, "iw", "<Plug>CamelCaseMotion_iw")
+vim.keymap.set({"o", "x"}, "ib", "<Plug>CamelCaseMotion_ib")
+vim.keymap.set({"o", "x"}, "ie", "<Plug>CamelCaseMotion_ie")
+
+-- telescope
+
+-- try to find git_files; otherwise fall back to regular find_files
+local project_files = function()
+    local opts = {} -- define here if you want to define something
+    local ok = pcall(require("telescope.builtin").git_files, opts)
+    if not ok then require("telescope.builtin").find_files(opts) end
+end
+
+vim.keymap.set("n", "<c-p>", project_files)
+keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
+keymap("n", "<c-f>", "<cmd>Telescope live_grep<CR>")
+keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
+
+-- hlslens
+local hlslens = require('hlslens')
+
+keymap("n", "*", "", {
+    callback = function()
+        vim.fn.execute("normal! *N")
+        hlslens.start()
+    end,
+})
+
+keymap("n", "#", "", {
+    callback = function()
+        vim.fn.execute("normal! #N")
+        hlslens.start()
+    end,
+})
