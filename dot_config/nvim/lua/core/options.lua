@@ -1,6 +1,10 @@
 -- vim.cmd.colorscheme("gruvbox")
 vim.cmd.colorscheme("wal")
 
+-- from old dein plugins file (do i still want these settings?):
+-- set nocompatible
+-- filetype plugin on
+
 local options = {
     g = {
         mapleader = ",",

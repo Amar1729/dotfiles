@@ -59,6 +59,16 @@ make_template_cmd("*.sh", "bash")
 -- ---- Plugin-provided autocmds
 -- ---- ---- ---- ---- ---- ---- ---- ----
 
+-- re-compile upon updates to plugin configuration
+local group_packer = group("PackerUserConfig", opts)
+cmd("BufWritePost",
+    {
+        group = group_packer,
+        pattern = "plugins.lua",
+        command = "source <afile> | PackerCompile",
+    }
+)
+
 -- auto-write changes to chezmoi files
 cmd("BufWritePost",
     {

@@ -17,13 +17,9 @@ for files in config_list
 endfor
 
 " prep for lua switchover
+lua require "core.plugins"
+
 lua require "core.options"
 lua require "core.autocmds"
 lua require "core.mappings"
 lua require "core.highlights"
-
-" once i migrate plugin config, these won't be included here
-lua require "configs.airline"
-lua require "configs.gitsigns"
-lua require "configs.treesitter"
-lua require "configs.telescope"
