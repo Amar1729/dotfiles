@@ -54,8 +54,7 @@ I also use a repository of small scripts I write myself: [bin](https://github.co
 
 
 ## Terminal Emulator
-* [iTerm2 beta](https://www.iterm2.com/downloads.html) on macOS
-* [alacritty](https://github.com/alacritty/alacritty/) on linux
+* [alacritty](https://github.com/alacritty/alacritty/)
 
 
 ## Workflow
@@ -65,7 +64,7 @@ I also use a repository of small scripts I write myself: [bin](https://github.co
 * [`.gitconfig`](./dot_gitconfig.tmpl)
 
 * [Neovim](https://github.com/neovim/neovim)
-  * Plugin Manager: [dein](https://github.com/Shougo/dein.vim)
+  * Plugin Manager: [packer](https://github.com/wbthomason/packer.nvim)
 * [Tmux](https://github.com/tmux/tmux)
 * [Pass](https://www.passwordstore.org/) for password management
 
