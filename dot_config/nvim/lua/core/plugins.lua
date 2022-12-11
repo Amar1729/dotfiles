@@ -168,13 +168,18 @@ return packer.startup(function(use)
             "nvim-lua/plenary.nvim",
         },
         config = function() require "configs.telescope" end,
-        -- this loads after fzf-native so it can register an extension in its config
-        after = "telescope-fzf-native.nvim",
+        -- this loads after telescope extensions so it can register them in its config
+        after = { "telescope-fzf-native.nvim", "telescope-luasnip.nvim" },
     }
 
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    }
+
+    -- search luasnip snippets from inside telescope
+    use {
+        "benfowler/telescope-luasnip.nvim",
     }
 
     -- (lua) git signs (replaced airblade/gitgutter)
