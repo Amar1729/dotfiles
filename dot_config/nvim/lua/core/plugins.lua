@@ -135,20 +135,16 @@ return packer.startup(function(use)
         after = {"nvim-lspconfig", "nvim-cmp"},
     }
 
-    -- For vsnip users.
+    -- snippets for nvim-cmp, and use vscode snips from friendly-snippets
     use {
-        "hrsh7th/cmp-vsnip",
-        after = {"nvim-lspconfig", "nvim-cmp"},
+        "L3MON4D3/LuaSnip",
+        tag = "v1.*",
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
     }
-
-    use {
-        "hrsh7th/vim-vsnip",
-        after = {"nvim-lspconfig", "nvim-cmp"},
-    }
-    use {
-        "rafamadriz/friendly-snippets",
-        after = {"nvim-lspconfig", "nvim-cmp"},
-    }
+    use { "saadparwaiz1/cmp_luasnip" }
+    use { "rafamadriz/friendly-snippets" }
 
     -- for calling signature_help while in insert mode
     use {

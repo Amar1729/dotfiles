@@ -4,10 +4,17 @@ vim.opt.completeopt = "menu,menuone,noselect"
 -- Setup nvim-cmp.
 local cmp = require("cmp")
 local map = cmp.mapping
-local feedkeys = require("cmp.utils.feedkeys")
+local luasnip = require("luasnip")
 
 local t = function (str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+-- defined by nvim-cmp's example mappings for luasnip
+-- i don't really understand the point of this function
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 -- annotate completion candidates in Pmenu (vscode-like)
@@ -44,9 +51,8 @@ local kind_icons = {
 
 cmp.setup({
     snippet = {
-        -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
 
@@ -65,18 +71,23 @@ cmp.setup({
         }),
         ["<CR>"] = map.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
-        -- snippet movement with vsnips (should i upgrade to luasnip?)
         ["<C-j>"] = map(function (fallback)
-            if vim.fn["vsnip#jumpable"](1) == 1 then
-                feedkeys.call(t"<Plug>(vsnip-jump-next)", "")
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
         end, { "i", "s", "c" }),
 
         ["<C-h>"] = map(function (fallback)
-            if vim.fn["vsnip#jumpable"](-1) == 1 then
-                feedkeys.call(t"<Plug>(vsnip-jump-prev)", "")
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -88,7 +99,7 @@ cmp.setup({
         { name = "path" },
         { name = "nvim_lsp", keyword_length = 3 },
         { name = "buffer", keyword_length = 3 },
-        { name = "vsnip" , keyword_length = 2 },
+        { name = "luasnip", keyword_length = 2 },
     }),
 
     formatting = {
@@ -101,7 +112,7 @@ cmp.setup({
                 path = "[Path]",
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
-                vsnip = "[vsnip]",
+                luasnip = "[luasnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[LaTeX]",
             })[entry.source.name]
