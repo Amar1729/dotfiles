@@ -66,7 +66,6 @@ return packer.startup(function(use)
 
     use {
         "nvim-zh/colorful-winsep.nvim",
-        commit = "9a47493",
         config = function()
             require("colorful-winsep").setup()
 
