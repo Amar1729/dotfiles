@@ -49,7 +49,8 @@ return packer.startup(function(use)
     -- let packer manage itself
     use {"wbthomason/packer.nvim"}
 
-    -- Themes:
+    -- ---- Theming and UI changes
+    -- ---- ---- ---- ---- ---- ----
 
     -- gruvbox colorscheme
     -- use {"morhetz/gruvbox"}
@@ -64,6 +65,7 @@ return packer.startup(function(use)
     }
     use {"vim-airline/vim-airline-themes"}
 
+    -- re-color window split borders
     use {
         "nvim-zh/colorful-winsep.nvim",
         config = function()
@@ -80,7 +82,8 @@ return packer.startup(function(use)
     }
 
 
-    -- Engines, code style:
+    -- ---- Tree-Sitter
+    -- ---- ---- ---- ---- ---- ----
 
     -- use tree-sitter for language features
     use {
@@ -104,7 +107,12 @@ return packer.startup(function(use)
         after = "nvim-treesitter",
     }
 
-    -- lsp-based code completions
+    -- ---- Language-Server Protocol (LSP) plugins + Completions (nvim-cmp)
+    -- Note: LSP functionality is built-in to neovim. these plugins simply enhance its ux
+    -- Since completion setup is tied closely with LSP, I keep them in the same section.
+    -- ---- ---- ---- ---- ---- ----
+
+    -- standard configs for popular LSP servers
     use {
         "neovim/nvim-lspconfig",
     }
@@ -145,7 +153,7 @@ return packer.startup(function(use)
     use { "saadparwaiz1/cmp_luasnip" }
     use { "rafamadriz/friendly-snippets" }
 
-    -- for calling signature_help while in insert mode
+    -- auto-popup signature_help while in insert mode inside a method's param list
     use {
         "ray-x/lsp_signature.nvim",
         after = "nvim-lspconfig",
@@ -155,11 +163,13 @@ return packer.startup(function(use)
     }
 
 
-    -- Quality of life:
+    -- ---- UX changes and add-ons
+    -- ---- ---- ---- ---- ---- ----
 
-    -- tmux/vim interop
-    use {"christoomey/vim-tmux-navigator"}
+    -- repeat motions from plugins and elsewhere
+    use { "tpope/vim-repeat" }
 
+    -- telescope - arbitrary fuzzy-searching over lists (e.g. buffers or files in workspace)
     use {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
@@ -181,58 +191,32 @@ return packer.startup(function(use)
         "benfowler/telescope-luasnip.nvim",
     }
 
-    -- (lua) git signs (replaced airblade/gitgutter)
+    -- git signs in gutter, management of hunks ;) and simple diff views
     use {
         "lewis6991/gitsigns.nvim",
         config = function() require "configs.gitsigns" end,
     }
 
-    -- use git from inside vim
-    use {"tpope/vim-fugitive"}
-
-    -- for surrounding phrases with characters
-    use {"tpope/vim-surround"}
-
-    -- TS-aware commenting
-    use {
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
-    }
-
-    -- nice completion of xhtml tags
-    use {"tpope/vim-ragtag"}
-
-    -- vim wiki
-    use {
-        "vimwiki/vimwiki",
-        config = function()
-            vim.cmd([[
-            let wiki_1 = {}
-            let wiki_1.path = '~/Dropbox/wiki/'
-            "let wiki_1.html_template = '~/public_html/template.tpl'
-            "let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
-
-            let wiki_2 = {}
-            let wiki_2.path = '~/Documents/Personal/work_wiki/'
-            "let wiki_2.index = 'main'
-
-            let g:vimwiki_list = [wiki_1, wiki_2]
-            ]])
-        end,
-    }
+    -- use git from inside vim (e.g. `:Git commit`)
+    use { "tpope/vim-fugitive" }
 
     -- typewriter
     --use "Amar1729/vimty"}
 
-    -- general improvements
-    use {"tpope/vim-unimpaired"}
-    use {"tpope/vim-repeat"}
 
-    -- plugins for movement
-    use {"bkad/CamelCaseMotion"}
+    -- ---- Movement
+    -- ---- ---- ---- ---- ---- ----
 
+    -- many consistent bindings for movement and simple manipulations
+    use { "tpope/vim-unimpaired" }
+
+    -- tmux/vim interop
+    use { "christoomey/vim-tmux-navigator" }
+
+    -- jump through CamelCase, snake_case words better
+    use { "bkad/CamelCaseMotion" }
+
+    -- digraph-based search through visible buffer
     use {
         "ggandor/leap.nvim",
         config = function()
@@ -240,6 +224,7 @@ return packer.startup(function(use)
         end,
     }
 
+    -- multi-line f/t
     use {
         "ggandor/flit.nvim",
         after = "leap.nvim",
@@ -258,6 +243,7 @@ return packer.startup(function(use)
         end,
     }
 
+    -- actions from a distance, using leap
     use {
         "ggandor/leap-spooky.nvim",
         after = "leap.nvim",
@@ -278,6 +264,21 @@ return packer.startup(function(use)
         end
     }
 
+
+    -- ---- Text Manipulation
+    -- ---- ---- ---- ---- ---- ----
+
+    -- for surrounding phrases with characters
+    use { "tpope/vim-surround" }
+
+    -- TS-aware commenting
+    use {
+        "numToStr/Comment.nvim",
+        config = function()
+            require("Comment").setup()
+        end,
+    }
+
     -- TS-aware split/join
     use {
         "Wansmer/treesj",
@@ -285,7 +286,27 @@ return packer.startup(function(use)
     }
 
 
-    -- Language-specific syntax support, completions:
+    -- ---- Language-specific syntax support, completions:
+    -- ---- ---- ---- ---- ---- ----
+
+    -- vim wiki
+    use {
+        "vimwiki/vimwiki",
+        config = function()
+            vim.cmd([[
+            let wiki_1 = {}
+            let wiki_1.path = '~/Dropbox/wiki/'
+            "let wiki_1.html_template = '~/public_html/template.tpl'
+            "let wiki_1.nested_syntaxes = {'python': 'python', 'c++': 'cpp'}
+
+            let wiki_2 = {}
+            let wiki_2.path = '~/Documents/Personal/work_wiki/'
+            "let wiki_2.index = 'main'
+
+            let g:vimwiki_list = [wiki_1, wiki_2]
+            ]])
+        end,
+    }
 
     -- chezmoi templating/support
     use {"alker0/chezmoi.vim"}
@@ -295,6 +316,9 @@ return packer.startup(function(use)
         "folke/neodev.nvim",
         config = function() require "configs.neodev" end,
     }
+
+    -- nice completion of xhtml tags
+    use { "tpope/vim-ragtag" }
 
     -- sxhkd
     use {
