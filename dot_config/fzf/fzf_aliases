@@ -1,9 +1,14 @@
 #!/bin/bash
 
 # put some fzf-related overrides here too
-export FZF_DEFAULT_COMMAND='fd -I --type file --color=always'
-export FZF_DEFAULT_OPTS='--ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_COMMAND='fd -I --ignore-file ~/.gitignore_global --type file --color=always'
+# --color options modified from what pywal generates by default
+export FZF_DEFAULT_OPTS='
+    --ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"
+    --color fg:7,hl:1,fg+:2,hl+:255
+    --color info:3,marker:1,pointer:3,spinner:1,gutter:7
+'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND --ignore-file ~/.gitignore_global"
 export FZF_ALT_C_COMMAND='fd -t d --ignore-file ~/.gitignore_global'
 
 export FZF_CTRL_T_OPTS="--border"
