@@ -22,6 +22,9 @@ export PINENTRY_USER_DATA='USE_TTY=1'
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# assign ls colors - set this just to make sure fd uses our colors
+export LS_COLORS=""
+
 # assign colors to man pages
 export LESS="-R"
 export LESS_TERMCAP_mb=$(printf '\e[01;31m')        # enter blinking            mode
