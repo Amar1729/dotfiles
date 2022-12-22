@@ -52,13 +52,16 @@ local options = {
 
 
 -- LSP Diagnostics - better signs
--- (is there a lua equivalent for `:sign` ?)
-vim.cmd [[
-sign define DiagnosticSignError text=x
-sign define DiagnosticSignWarn text=!
-sign define DiagnosticSignInfo text=>
-sign define DiagnosticSignHint text=?
-]]
+local signs = {
+    DiagnosticSignError = "x",
+    DiagnosticSignWarn = "!",
+    DiagnosticSignInfo = ">",
+    DiagnosticSignHint = "?",
+}
+
+for name, icon in pairs(signs) do
+    vim.fn.sign_define(name, { text = icon, texthl = name })
+end
 
 
 --- Set vim options with a nested table like API with the format vim.<first_key>.<second_key>.<value>
