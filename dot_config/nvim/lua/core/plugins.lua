@@ -312,10 +312,8 @@ return packer.startup(function(use)
     use {"alker0/chezmoi.vim"}
 
     -- development settings for lua files under nvim root
-    use {
-        "folke/neodev.nvim",
-        config = function() require "configs.neodev" end,
-    }
+    -- setup() is done in ../configs/cmp.lua:208, before sumneko_lua gets setup
+    use { "folke/neodev.nvim" }
 
     -- nice completion of xhtml tags
     use { "tpope/vim-ragtag" }

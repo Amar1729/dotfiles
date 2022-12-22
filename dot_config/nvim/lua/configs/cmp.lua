@@ -195,6 +195,24 @@ function vim.lsp.util.open_floating_preview(contents, syntax, fp_opts, ...)
     return orig_util_open_floating_preview(contents, syntax, fp_opts, ...)
 end
 
+-- load neodev only if editing lua/lua.tmpl files under nvim/chezmoi root
+local buffer_file_name = vim.fn.expand("%:p")
+if buffer_file_name:match('.lua$') or buffer_file_name:match('.lua.tmpl$') then
+    local nvim_parent_dir = vim.fn.resolve(vim.fn.stdpath("config"))
+    local chezmoi_nvim_dir = os.getenv('HOME') .. '/.local/share/chezmoi/dot_config/nvim'
+
+    if (
+        string.sub(buffer_file_name, 1, string.len(nvim_parent_dir)) == nvim_parent_dir
+        or
+        string.sub(buffer_file_name, 1, string.len(chezmoi_nvim_dir)) == chezmoi_nvim_dir
+    ) then
+        local has_lsp_config, neodev = pcall(require, "neodev")
+        if has_lsp_config then
+            neodev.setup()
+        end
+    end
+end
+
 -- Use a loop to conveniently call "setup" on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
