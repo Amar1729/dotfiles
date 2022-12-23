@@ -31,7 +31,7 @@ highlight("TSRepeat",                   { ctermbg = "NONE", ctermfg = 5 })
 highlight("TSOperator",                 { ctermbg = "NONE", ctermfg = 4 })
 
 -- border color for any (mostly LSP) floating windows
-highlight("FloatBorder",                { link = "String" })
+highlight("FloatBorder",                { ctermbg = 0, ctermfg = 2 })
 
 -- nvim-cmp
 -- Color settings for nvim-cmp completion menu items
