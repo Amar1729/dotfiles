@@ -69,15 +69,11 @@ return packer.startup(function(use)
     use {
         "nvim-zh/colorful-winsep.nvim",
         config = function()
-            require("colorful-winsep").setup()
-
-            -- https://github.com/nvim-zh/colorful-winsep.nvim/issues/21
-            vim.cmd [[
-                augroup NvimSeparatorPost
-                    autocmd!
-                    autocmd WinEnter * hi NvimSeparator ctermfg=2
-                augroup END
-            ]]
+            require("colorful-winsep").setup({
+                highlight = {
+                    ctermfg = 2,
+                },
+            })
         end,
     }
 
