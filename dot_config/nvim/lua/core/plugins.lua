@@ -107,6 +107,13 @@ return packer.startup(function(use)
         after = "nvim-treesitter",
     }
 
+    -- display AST, write TS queries for buffer
+    use {
+        "nvim-treesitter/playground",
+        after = "nvim-treesitter",
+    }
+
+
     -- ---- Language-Server Protocol (LSP) plugins + Completions (nvim-cmp)
     -- Note: LSP functionality is built-in to neovim. these plugins simply enhance its ux
     -- Since completion setup is tied closely with LSP, I keep them in the same section.
