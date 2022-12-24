@@ -58,12 +58,11 @@ return packer.startup(function(use)
     -- pywal vim colorscheme
     use {"dylanaraps/wal.vim"}
 
-    -- powerline that works with neovim
+    -- statusline
     use {
-        "vim-airline/vim-airline",
-        config = function() require("configs.airline") end,
+        "nvim-lualine/lualine.nvim",
+        config = function() require("configs.lualine") end,
     }
-    use {"vim-airline/vim-airline-themes"}
 
     -- re-color window split borders
     use {
