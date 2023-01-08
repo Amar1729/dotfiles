@@ -115,6 +115,8 @@ vim.keymap.set("n", "<Esc>", function()
 	vim.cmd.nohlsearch()
 end)
 
+-- chmod current file to executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 
 -- ---- ---- ---- ---- ---- ---- ---- ----
