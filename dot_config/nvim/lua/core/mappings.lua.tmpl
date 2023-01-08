@@ -119,6 +119,9 @@ anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 -- nvim-cmp
 -- gitsigns
 
+-- undotree
+keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "UndotreeToggle" })
+
 -- camelcasemotion
 keymap("", "w", "<Plug>CamelCaseMotion_w")
 keymap("", "b", "<Plug>CamelCaseMotion_b")

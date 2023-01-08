@@ -273,6 +273,9 @@ return packer.startup(function(use)
     -- for surrounding phrases with characters
     use { "tpope/vim-surround" }
 
+    -- undotree visualization/movement
+    use { "mbbill/undotree" }
+
     -- TS-aware commenting
     use {
         "numToStr/Comment.nvim",
