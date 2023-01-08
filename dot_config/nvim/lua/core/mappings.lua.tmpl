@@ -61,9 +61,6 @@ keymap("n", "<leader>b", "<cmd>bn | bd #<CR>")
 -- similar
 -- nmap <leader>b <C-o> \| :bd # <CR>
 
--- clear highlight matches from find
-keymap("n", "<leader><space>", "<cmd>noh<cr>")
-
 -- for exiting nvim terminal mode
 keymap("t", "<Esc>", "<C-\\><C-n>")
 
@@ -108,6 +105,16 @@ anoremenu PopUp.Diagnostic :lua vim.diagnostic.open_float()<CR>
 anoremenu PopUp.Rename :lua vim.lsp.buf.rename()<CR>
 anoremenu PopUp.TypeDefinition :lua vim.lsp.buf.type_definition()<CR>
 ]])
+
+-- clear stuff
+-- https://www.reddit.com/r/neovim/comments/zmu22y/uses_for_escape_in_normal_mode/
+vim.keymap.set("n", "<Esc>", function()
+    -- clear notifications
+	require("notify").dismiss()
+    -- clear highlights
+	vim.cmd.nohlsearch()
+end)
+
 
 
 -- ---- ---- ---- ---- ---- ---- ---- ----
