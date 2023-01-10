@@ -76,6 +76,52 @@ return packer.startup(function(use)
         end,
     }
 
+    -- experiment with noice
+    use {
+        "folke/noice.nvim",
+        config = function ()
+            require("noice").setup({
+                routes = {
+                    -- {
+                    --     -- notify (macro) recording messages
+                    --     view = "notify",
+                    --     filter = { event = "msg_showmode", find = "recording @" },
+                    -- },
+                    {
+                        -- hide buf written messages
+                        filter = {
+                            event = "msg_show",
+                            kind = "",
+                            find = "written",
+                        },
+                        opts = { skip = true },
+                    },
+                    {
+                        -- shut up i'm not using termguicolors until i figure out wal.vim
+                        filter = {
+                            find = "Opacity changes require termguicolors to be set.",
+                        },
+                        opts = { skip = true },
+                    },
+                },
+                lsp = {
+                    signature = {
+                        enabled = false,
+                    },
+                },
+                presets = {
+                    command_palette = true,
+                    long_message_to_split = true,
+                    lsp_doc_border = true,
+                },
+            })
+        end,
+        requires = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+    }
+
 
     -- ---- Tree-Sitter
     -- ---- ---- ---- ---- ---- ----
