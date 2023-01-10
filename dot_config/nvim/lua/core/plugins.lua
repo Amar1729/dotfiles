@@ -367,6 +367,29 @@ return packer.startup(function(use)
         config = function() require "configs.treesj" end,
     }
 
+    -- c-a/c-x for time/dates
+    use {
+        "tpope/vim-speeddating"
+    }
+
+    -- c-a/c-x for common strings (true/false, yes/no, colors)
+    use {
+        "nat-418/boole.nvim",
+        config = function()
+            require("boole").setup({
+                mappings = {
+                    increment = "<C-a>",
+                    decrement = "<C-x>",
+                },
+                additions = {
+                    -- full month names, full day names, day abbrevs handled by boole
+                    { "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" },
+                    { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
+                },
+            })
+        end,
+    }
+
 
     -- ---- Language-specific syntax support, completions:
     -- ---- ---- ---- ---- ---- ----
