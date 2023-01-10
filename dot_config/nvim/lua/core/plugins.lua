@@ -143,6 +143,24 @@ return packer.startup(function(use)
         after = "nvim-treesitter",
     }
 
+    -- more textobjects
+    use {
+        "echasnovski/mini.ai",
+        config = function()
+            require("mini.ai").setup()
+        end,
+    }
+
+    -- more textobjects
+    use {
+        "chrisgrieser/nvim-various-textobjs",
+        config = function()
+            require("various-textobjs").setup({
+                useDefaultKeymaps = true,
+            })
+        end,
+    }
+
     use {
         "https://git.sr.ht/~p00f/nvim-ts-rainbow/",
         after = "nvim-treesitter",
