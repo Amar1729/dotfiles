@@ -145,6 +145,11 @@ vim.keymap.set({"o", "x"}, "iw", "<Plug>CamelCaseMotion_iw")
 vim.keymap.set({"o", "x"}, "ib", "<Plug>CamelCaseMotion_ib")
 vim.keymap.set({"o", "x"}, "ie", "<Plug>CamelCaseMotion_ie")
 
+-- conceal
+vim.keymap.set("n", "<leader>tc", function()
+    require("conceal").toggle_conceal()
+end, { silent = true, desc = "toggle conceal" })
+
 -- telescope
 
 -- try to find git_files; otherwise fall back to regular find_files

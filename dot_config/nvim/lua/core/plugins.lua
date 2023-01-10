@@ -172,6 +172,19 @@ return packer.startup(function(use)
         after = "nvim-treesitter",
     }
 
+    -- conceal (horizontally fold) keywords
+    use {
+        "Jxstxs/conceal.nvim",
+        requires = "nvim-treesitter/nvim-treesitter",
+        config = function()
+            -- default: lua and python are enabled (and a few c keywords)
+            require("conceal").setup({})
+
+            -- run this whenever i change queries
+            -- require("conceal").generate_conceals()
+        end,
+    }
+
 
     -- ---- Language-Server Protocol (LSP) plugins + Completions (nvim-cmp)
     -- Note: LSP functionality is built-in to neovim. these plugins simply enhance its ux
