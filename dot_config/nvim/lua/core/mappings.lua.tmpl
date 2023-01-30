@@ -180,3 +180,16 @@ keymap("n", "#", "", {
         hlslens.start()
     end,
 })
+
+-- dadbod
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "sql", "mysql", "plsql" },
+    callback = function()
+        -- for some reason, vim.keymap.set doesn't work?
+        -- vim.keymap.set("v", "<leader>D", "<cmd>DB<cr>", { silent = true, buffer = true })
+        vim.cmd [[ vnoremap <leader>D :DB<CR> ]]
+    end,
+})
+
+-- dadbod-ui
+vim.keymap.set("n", "<leader>D", "<cmd>DBUI<CR>", global_opts)

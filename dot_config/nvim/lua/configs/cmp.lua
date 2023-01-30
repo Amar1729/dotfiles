@@ -47,6 +47,7 @@ local kind_icons = {
     Event = "  ",
     Operator = "  ",
     TypeParameter = "  ",
+    DataBase = "  ",
 }
 
 cmp.setup({
@@ -104,18 +105,27 @@ cmp.setup({
 
     formatting = {
         format = function(entry, vim_item)
-            -- Kind icons
-            -- Concatenate the icons with the name of the item kind
-            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-            -- Source
-            vim_item.menu = ({
+            local kind_menu = {
                 path = "[Path]",
                 buffer = "[Buffer]",
                 nvim_lsp = "[LSP]",
                 luasnip = "[luasnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[LaTeX]",
-            })[entry.source.name]
+            }
+
+            -- README says it marks completion items, but it's not showing up for me
+            kind_menu["vim-dadbod-completion"] = "[DB]"
+
+            if entry.source.name == "vim-dadbod-completion" then
+                vim_item.kind = "DataBase"
+            end
+
+            -- Kind icons
+            -- Concatenate the icons with the name of the item kind
+            vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+            -- Source
+            vim_item.menu = kind_menu[entry.source.name]
             return vim_item
         end
     }
@@ -137,6 +147,20 @@ cmp.setup.cmdline(":", {
         { name = "cmdline" }
     }),
     mapping = map.preset.cmdline({}),
+})
+
+-- Ensure we still have buffer completion in SQL files opened without DBUI
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "sql", "mysql", "plsql" },
+    callback = function()
+        cmp.setup.buffer({
+            sources = {
+                { name = "vim-dadbod-completion" },
+                { name = "buffer" },
+                { name = "luasnip" },
+            }
+        })
+    end,
 })
 
 -- Setup lspconfig.

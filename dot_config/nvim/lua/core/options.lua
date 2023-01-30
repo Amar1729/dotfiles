@@ -8,6 +8,9 @@ vim.cmd.colorscheme("wal")
 local options = {
     g = {
         mapleader = ",",
+
+        -- vim-dadbod-ui
+        db_ui_tmp_query_location = '~/.cache/nvim/queries/',
     },
 
     opt = {

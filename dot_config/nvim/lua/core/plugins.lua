@@ -420,6 +420,11 @@ return packer.startup(function(use)
     -- setup() is done in ../configs/cmp.lua:208, before sumneko_lua gets setup
     use { "folke/neodev.nvim" }
 
+    -- database access
+    use { "tpope/vim-dadbod" }
+    use { "kristijanhusak/vim-dadbod-ui" }
+    use { "kristijanhusak/vim-dadbod-completion" }
+
     -- nice completion of xhtml tags
     use { "tpope/vim-ragtag" }
 
