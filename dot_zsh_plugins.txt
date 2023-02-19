@@ -43,11 +43,8 @@ spwhitt/nix-zsh-completions kind:fpath
 # fish-like command suggestions
 zsh-users/zsh-autosuggestions
 
-# put this here
-amar1729/chunkwm-zsh-completions kind:fpath
-
 # macOS window manager
-amar1729/yabai-zsh-completions kind:fpath
+Amar1729/yabai-zsh-completions kind:fpath path:src
 
 # simple custom completions (tmux-a)
 https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
