@@ -249,7 +249,7 @@ local servers = {
     -- ruby
     "solargraph",
     -- lua
-    "sumneko_lua",
+    "lua_ls",
     -- java
         -- needs custom flags
         -- "java_language_server",
