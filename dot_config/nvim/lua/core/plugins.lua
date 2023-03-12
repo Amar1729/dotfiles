@@ -395,6 +395,18 @@ return packer.startup(function(use)
         end,
     }
 
+    -- handy docstring generator
+    use {
+        "danymat/neogen",
+        requires = "nvim-treesitter/nvim-treesitter",
+        config = function ()
+            require("neogen").setup({
+                -- can't quite get the snippets to expand properly right now...
+                -- snippet_engine = "luasnip",
+            })
+        end,
+    }
+
 
     -- ---- Language-specific syntax support, completions:
     -- ---- ---- ---- ---- ---- ----
