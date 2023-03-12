@@ -353,6 +353,11 @@ return packer.startup(function(use)
     -- undotree visualization/movement
     use { "mbbill/undotree" }
 
+    -- TS structural search and replace
+    use {
+        "cshuaimin/ssr.nvim",
+    }
+
     -- TS-aware commenting
     use {
         "numToStr/Comment.nvim",
