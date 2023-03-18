@@ -445,7 +445,7 @@ return packer.startup(function(use)
     use {"alker0/chezmoi.vim"}
 
     -- development settings for lua files under nvim root
-    -- setup() is done in ../configs/cmp.lua:208, before sumneko_lua gets setup
+    -- setup() is done in ../configs/cmp.lua:228, before lua_lsp gets setup
     use { "folke/neodev.nvim" }
 
     -- database access

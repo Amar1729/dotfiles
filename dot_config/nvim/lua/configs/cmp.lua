@@ -219,22 +219,25 @@ function vim.lsp.util.open_floating_preview(contents, syntax, fp_opts, ...)
     return orig_util_open_floating_preview(contents, syntax, fp_opts, ...)
 end
 
--- load neodev only if editing lua/lua.tmpl files under nvim/chezmoi root
-local buffer_file_name = vim.fn.expand("%:p")
-if buffer_file_name:match('.lua$') or buffer_file_name:match('.lua.tmpl$') then
-    local nvim_parent_dir = vim.fn.resolve(vim.fn.stdpath("config"))
-    local chezmoi_nvim_dir = os.getenv('HOME') .. '/.local/share/chezmoi/dot_config/nvim'
-
-    if (
-        string.sub(buffer_file_name, 1, string.len(nvim_parent_dir)) == nvim_parent_dir
-        or
-        string.sub(buffer_file_name, 1, string.len(chezmoi_nvim_dir)) == chezmoi_nvim_dir
-    ) then
-        local has_lsp_config, neodev = pcall(require, "neodev")
-        if has_lsp_config then
-            neodev.setup()
-        end
-    end
+-- load neodev only if editing lua/lua.tmpl files under nvim/chezmoi/packer root
+local has_lsp_config, neodev = pcall(require, "neodev")
+if has_lsp_config then
+    neodev.setup({
+        override = function(root_dir, library)
+            local util = require("neodev.util")
+            if (
+                util.has_file(root_dir, ".local/share/chezmoi/")
+                or
+                util.has_file(root_dir, "pack/packer")
+                -- neodev will implicitly set up for nvim config dir:
+                -- or
+                -- util.is_nvim_config()
+            ) then
+                library.enabled = true
+                library.plugins = true
+            end
+        end,
+    })
 end
 
 -- Use a loop to conveniently call "setup" on multiple servers and
