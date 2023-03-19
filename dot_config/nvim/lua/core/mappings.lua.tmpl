@@ -15,37 +15,6 @@ end
 -- ---- Vanilla keybindings
 -- ---- ---- ---- ---- ---- ---- ---- ----
 
--- copy to / paste from clipboard
--- mac uses * register, linux uses + register
-{{ if (eq .chezmoi.os "darwin") -}}
-keymap("v", "<leader>y", '"*y')
-keymap("n", "<leader>Y", '"*yg_')
-keymap("n", "<leader>y", '"*y')
-keymap("n", "<leader>yy", '"*yy')
-
-keymap("n", "<leader>p", '"*p')
-keymap("n", "<leader>P", '"*P')
-keymap("v", "<leader>p", '"*p')
-keymap("v", "<leader>P", '"*P')
-{{ else if (eq .chezmoi.os "linux") -}}
-keymap("v", "<leader>y", '"+y')
-keymap("n", "<leader>Y", '"+yg_')
-keymap("n", "<leader>y", '"+y')
-keymap("n", "<leader>yy", '"+yy')
-
--- paste from system: clipboard
-keymap("n", "<leader>p", '"+p')
-keymap("n", "<leader>P", '"+P')
-keymap("v", "<leader>p", '"+p')
-keymap("v", "<leader>P", '"+P')
-
--- paste from system: clipboard
-keymap("n", "<leader><C-p>", '"*p')
-keymap("n", "<leader><C-P>", '"*P')
-keymap("v", "<leader><C-p>", '"*p')
-keymap("v", "<leader><C-P>", '"*P')
-{{- end }}
-
 -- Remove all trailing whitespace (takes a second)
 keymap("n", "<leader>w", "<cmd>let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>")
 

@@ -50,6 +50,10 @@ local options = {
         -- cursorlineopt=both (line and number) is too much
         cursorline = true,
         cursorlineopt = "number",
+
+        -- use system clipboard for + / * registers
+        -- see autocmds for how clipboard is actually managed.
+        -- clipboard = "unnamedplus",
     },
 }
 
