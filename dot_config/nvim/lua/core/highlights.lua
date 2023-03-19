@@ -25,10 +25,10 @@ highlight("PmenuThumb",                 { ctermfg = 7, ctermbg = 7, bg = "grey" 
 
 -- nvim-treesitter
 -- wal colorscheme: https://github.com/dylanaraps/wal.vim/pull/34/files
-highlight("TSInclude",                  { ctermbg = "NONE", ctermfg = 5 })
-highlight("TSNamespace",                { ctermbg = "NONE", ctermfg = 4 })
-highlight("TSRepeat",                   { ctermbg = "NONE", ctermfg = 5 })
-highlight("TSOperator",                 { ctermbg = "NONE", ctermfg = 4 })
+highlight("TSInclude",                  { ctermbg = "NONE", ctermfg = 5, bg = "NONE", fg = 5 })
+highlight("TSNamespace",                { ctermbg = "NONE", ctermfg = 4, bg = "NONE", fg = 4 })
+highlight("TSRepeat",                   { ctermbg = "NONE", ctermfg = 5, bg = "NONE", fg = 5 })
+highlight("TSOperator",                 { ctermbg = "NONE", ctermfg = 4, bg = "NONE", fg = 4 })
 
 -- border color for any (mostly LSP) floating windows
 highlight("FloatBorder",                { ctermbg = 0, ctermfg = 2 })
