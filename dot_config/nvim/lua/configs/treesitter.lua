@@ -3,7 +3,7 @@
 require("nvim-treesitter.configs").setup {
     -- "all"  | {"list of languages"}
     ensure_installed = "all",
-    ignore_install = { "phpdoc", "php" },
+    ignore_install = { "phpdoc", "php", "t32" },
     sync_install = false,
 
     highlight = {
@@ -105,5 +105,12 @@ require("nvim-treesitter.configs").setup {
             goto_node = "<cr>",
             show_help = "?",
         },
+    },
+
+    -- lint playground queries
+    query_linter = {
+        enable = true,
+        use_virtual_text = true,
+        lint_events = { "InsertLeave" },
     },
 }
