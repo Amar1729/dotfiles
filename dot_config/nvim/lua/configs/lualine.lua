@@ -7,6 +7,7 @@ custom_pywal.normal.b.bg = 0
 -- ---- customize some functions for display
 local mode_map = {
     ['n'] = 'normie',
+    ['s'] = 'do >',
     ['i'] = 'hardcore hacking',
     ['R'] = 'swappity swip',
     ['v'] = 'look',
@@ -14,6 +15,7 @@ local mode_map = {
     [''] = 'block look',
     ['c'] = 'commando',
     ['t'] = 'powershell',
+    ['nt'] = 'powershell ...',
 }
 
 local has_multiple_buffers = function ()
@@ -102,6 +104,8 @@ require("lualine").setup {
             {
                 -- show buffers if we have > 1
                 'buffers',
+                -- default max length (2/3) too short
+                max_length = vim.o.columns * 95 / 100,
                 cond = has_multiple_buffers,
             }
         },
