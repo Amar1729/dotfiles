@@ -164,6 +164,14 @@ keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 keymap("n", "<c-f>", "<cmd>Telescope live_grep<CR>")
 keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
 
+-- ssr
+vim.keymap.set(
+    { "n", "x" },
+    "<leader>sr",
+    function() require("ssr").open() end,
+    { desc = "Structural Replace" }
+)
+
 -- hlslens
 local hlslens = require('hlslens')
 
