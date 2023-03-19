@@ -37,8 +37,11 @@ keymap("t", "<Esc>", "<C-\\><C-n>")
 keymap("n", "<space>", "za")
 
 -- center search results
+-- */# searches are centered below, in hlslens keybinds
 keymap("n", "n", "nzz")
 keymap("n", "N", "Nzz")
+keymap("n", "<C-d>", "<C-d>zz")
+keymap("n", "<C-u>", "<C-u>zz")
 
 -- LSP (note lsp is built-in functionality)
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
@@ -146,14 +149,14 @@ local hlslens = require('hlslens')
 
 keymap("n", "*", "", {
     callback = function()
-        vim.fn.execute("normal! *N")
+        vim.fn.execute("normal! *Nzz")
         hlslens.start()
     end,
 })
 
 keymap("n", "#", "", {
     callback = function()
-        vim.fn.execute("normal! #N")
+        vim.fn.execute("normal! #Nzz")
         hlslens.start()
     end,
 })
