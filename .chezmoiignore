@@ -33,6 +33,7 @@ Library/
 .config/rofi
 .config/scripts/lock.sh
 .config/xresources
+.config/ruff
 .nvidia-xinitrc
 .urxvt
 .Xmodmap
