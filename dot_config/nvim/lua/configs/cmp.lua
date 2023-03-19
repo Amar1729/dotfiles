@@ -62,20 +62,18 @@ cmp.setup({
     -- and: https://github.com/hrsh7th/nvim-cmp/commit/93cf84f7deb2bdb640ffbb1d2f8d6d412a7aa558
     -- TODO - in light of this removal, this bindings could probably be cleaned up in the future.
     mapping = map.preset.insert({
-        ["<C-b>"] = map(map.scroll_docs(-4), { "i", "c" }),
-        ["<C-f>"] = map(map.scroll_docs(4), { "i", "c" }),
+        ["<C-u>"] = map(map.scroll_docs(-4), { "i", "c" }),
+        ["<C-d>"] = map(map.scroll_docs(4), { "i", "c" }),
         ["<C-Space>"] = map(map.complete(), { "i", "c" }),
         ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
         ["<C-e>"] = map({
             i = map.abort(),
             c = map.close(),
         }),
-        ["<CR>"] = map.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = map.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
         ["<C-j>"] = map(function (fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
+            if luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
             elseif has_words_before() then
                 cmp.complete()
@@ -85,9 +83,7 @@ cmp.setup({
         end, { "i", "s", "c" }),
 
         ["<C-h>"] = map(function (fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
+            if luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
                 fallback()
