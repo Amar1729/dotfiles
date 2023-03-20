@@ -123,8 +123,8 @@ cmd("DiagnosticChanged",
 cmd("BufWritePost",
     {
         pattern = os.getenv('HOME') .. "/.local/share/chezmoi/*",
-        -- :p resolves full path of file
-        command = "!chezmoi apply --source-path <afile>:p",
+        -- :p resolves full path of file, :S does shell escape
+        command = "!chezmoi apply --source-path <afile>:p:S",
     }
 )
 
