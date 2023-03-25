@@ -76,6 +76,16 @@ return packer.startup(function(use)
         end,
     }
 
+    -- nicer vim.ui.{input,select} (helpful when using noice, which changes UI a lot)
+    use {
+        "stevearc/dressing.nvim",
+        config = function ()
+            require("dressing").setup({
+                input = { enabled = false },
+            })
+        end
+    }
+
     -- experiment with noice
     use {
         "folke/noice.nvim",
