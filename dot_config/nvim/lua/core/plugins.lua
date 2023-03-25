@@ -359,7 +359,12 @@ return packer.startup(function(use)
     -- ---- ---- ---- ---- ---- ----
 
     -- for surrounding phrases with characters
-    use { "tpope/vim-surround" }
+    use {
+        "kylechui/nvim-surround",
+        config = function ()
+            require("nvim-surround").setup()
+        end
+    }
 
     -- undotree visualization/movement
     use { "mbbill/undotree" }
