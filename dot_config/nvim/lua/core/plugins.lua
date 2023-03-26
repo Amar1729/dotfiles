@@ -242,6 +242,21 @@ return packer.startup(function(use)
     use { "saadparwaiz1/cmp_luasnip" }
     use { "rafamadriz/friendly-snippets" }
 
+    -- skeleton files for common fts
+    use {
+        "cvigilv/esqueleto.nvim",
+        config = function ()
+            require("esqueleto").setup({
+                directories = { "~/.config/nvim/templates/" },
+                patterns = {
+                    "LICENSE",
+                    "python",
+                    "sh",
+                },
+            })
+        end,
+    }
+
     -- auto-popup signature_help while in insert mode inside a method's param list
     use {
         "ray-x/lsp_signature.nvim",

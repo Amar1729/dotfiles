@@ -80,21 +80,6 @@ cmd("BufWinLeave",
 )
 
 
-local group_templates = group("Templates", opts)
-local make_template_cmd = function(pattern, ext)
-    cmd("BufNewFile",
-        {
-            group = group_templates,
-            pattern = pattern,
-            command = "0r " .. vim.fn.stdpath("config") .. "/templates/skeleton." .. ext
-        }
-    )
-end
-
-make_template_cmd("*.py", "py")
-make_template_cmd("*.sh", "bash")
-
-
 -- ---- ---- ---- ---- ---- ---- ---- ----
 -- ---- Plugin-provided autocmds
 -- ---- ---- ---- ---- ---- ---- ---- ----
