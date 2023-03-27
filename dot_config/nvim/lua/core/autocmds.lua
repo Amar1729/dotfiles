@@ -84,16 +84,6 @@ cmd("BufWinLeave",
 -- ---- Plugin-provided autocmds
 -- ---- ---- ---- ---- ---- ---- ---- ----
 
--- re-compile upon updates to plugin configuration
-local group_packer = group("PackerUserConfig", opts)
-cmd("BufWritePost",
-    {
-        group = group_packer,
-        pattern = "plugins.lua",
-        command = "source <afile> | PackerCompile",
-    }
-)
-
 -- update quickfix
 -- in addition to nvim-cmp []d bindings for moving, can still use []q from
 -- vim-unimpaired if that's more comfortable (see mappings)

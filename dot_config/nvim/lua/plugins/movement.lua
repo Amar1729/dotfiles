@@ -1,0 +1,60 @@
+-- ---- Movement
+
+return {
+  -- many consistent bindings for movement and simple manipulations
+  "tpope/vim-unimpaired",
+
+  -- tmux/vim interop
+  "christoomey/vim-tmux-navigator",
+
+  -- jump through CamelCase, snake_case words better
+  "bkad/CamelCaseMotion",
+
+  -- digraph-based search through visible buffer
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+
+  -- multi-line f/t
+  {
+    "ggandor/flit.nvim",
+    opts = {
+      labeled_modes = "n",
+      special_keys = {
+        repeat_search = { "<Enter>" },
+      },
+      opts = {
+        special_keys = {
+          repeat_search = { "<Enter>" },
+        }
+      },
+    },
+  },
+
+  -- actions from a distance, using leap
+  {
+    "ggandor/leap-spooky.nvim",
+    opts = { paste_on_remote_yank = true },
+  },
+
+  -- cool searching
+  {
+    "kevinhwang91/nvim-hlslens",
+    keys = {
+      "n",
+      "N",
+      "*",
+      "#",
+      "/",
+      "?",
+    },
+    opts = {
+      calm_down = false,
+      nearest_only = true,
+      virt_priority = 10,
+    },
+  },
+}

@@ -145,19 +145,17 @@ vim.keymap.set(
 )
 
 -- hlslens
-local hlslens = require('hlslens')
-
 keymap("n", "*", "", {
     callback = function()
         vim.fn.execute("normal! *Nzz")
-        hlslens.start()
+        require'hlslens'.start()
     end,
 })
 
 keymap("n", "#", "", {
     callback = function()
         vim.fn.execute("normal! #Nzz")
-        hlslens.start()
+        require'hlslens'.start()
     end,
 })
 
