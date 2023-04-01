@@ -75,6 +75,10 @@ return {
   -- skeleton files for common fts
   {
     "cvigilv/esqueleto.nvim",
+    -- require dressing (nicer wrapper for vim.ui.select)
+    -- but only when creating a new file
+    dependencies = { "dressing.nvim" },
+    event = { "BufNewFile" },
     opts = {
       directories = { "~/.config/nvim/templates/" },
       patterns = {
