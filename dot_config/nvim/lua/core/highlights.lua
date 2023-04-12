@@ -23,6 +23,10 @@ highlight("PmenuThumb",                 { ctermfg = 7, ctermbg = 7, bg = "grey" 
 -- ---- Plugin-provided highlights
 -- ---- ---- ---- ---- ---- ---- ---- ----
 
+-- noice
+-- by default these are linked to NonText, which is black text on a dark bg
+highlight("NoiceLspProgressTitle",      { link = "String" })
+
 -- nvim-treesitter
 -- wal colorscheme: https://github.com/dylanaraps/wal.vim/pull/34/files
 highlight("TSInclude",                  { ctermbg = "NONE", ctermfg = 5, bg = "NONE", fg = 5 })
