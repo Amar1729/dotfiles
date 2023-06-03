@@ -49,7 +49,32 @@ fi
 # firefox minimal style
 {{ if (eq .chezmoi.os "darwin") -}}
 (
-    open -a Firefox
+    # most of the following commands are "|| true": assume if they fail then the
+    # target state is up to date.
+    # TODO: add --branch "ref" to the git clone commands
+    mkdir -p ~/.config/mozilla/
+    git clone https://github.com/Amar1729/minimal-functional-fox \
+        ~/.config/mozilla/chrome || true
+
+    if git clone https://github.com/MrOtherGuy/firefox-csshacks \
+        ~/.config/mozilla/firefox-csshacks; then
+
+        # if successfully cloned this (i.e. if it wasn't already there) checkout to a known hash
+        pushd ~/.config/mozilla/firefox-csshacks \
+            && git checkout 9276283311f46a146d1ea97a47041f3b3edce0a5 \
+            && popd
+    fi
+
+    # no -f: don't bother overwriting if the file's already there
+    ln -sv ~/.config/mozilla/firefox-csshacks/chrome/autohide_sidebar.css \
+        ~/.config/mozilla/chrome/userChrome-sidebery.css || true
+
+    sed -i'' -e "s|:HOME:|$HOME|" ~/.config/mozilla/chrome/userChrome.css
+
+    # if Firefox profiles don't exist yet (right after app install), then launch ffox once
+    if [[ ! -d "$HOME/Library/Application Support/Firefox/Profiles" ]]; then
+        open -a Firefox
+    fi
     for profile in "$HOME/Library/Application Support/Firefox/Profiles"/*.default-*; do
         ln -sfv "$HOME/.config/mozilla/chrome" "$profile"
     done
