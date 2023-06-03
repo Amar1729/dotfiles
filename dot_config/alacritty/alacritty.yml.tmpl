@@ -10,6 +10,9 @@
   # available, otherwise `xterm-256color` is used.
   #TERM: xterm-256color
 
+env:
+  TERM: xterm-256color
+
 window:
   padding:
     x: 30
@@ -128,6 +131,11 @@ key_bindings:
   - { key: Comma,    mods: Alt,     chars: "\x1b,"                           }
   - { key: Period,   mods: Alt,     chars: "\x1b."                           }
   - { key: Slash,    mods: Alt,     chars: "\x1b/"                           }
+
+  # map these so i can map them in vim
+  - { key: Return,  mods: Shift,    chars: "\x1b[13;2u"                      }
+  - { key: Return,  mods: Control,  chars: "\x1b[13;5u"                      }
+  - { key: Tab,     mods: Control,  chars: "\x1b[27;5;9~"                    }
 
   - { key: A,        mods: Alt,     chars: "\x1ba"                           }
   - { key: B,        mods: Alt,     chars: "\x1bb"                           }
