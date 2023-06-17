@@ -133,6 +133,10 @@ else
 	compinit -C
 fi
 
+# NOTE: reordering compinit calls seems to have broken how _pass completion is loaded
+source ${HOMEBREW_PREFIX}/share/zsh/site-functions/_pass 2>/dev/null
+compdef _pass pass
+
 # omz conflicts with common user alias mcd
 compdef -d mcd
 
