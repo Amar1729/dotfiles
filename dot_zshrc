@@ -165,6 +165,9 @@ copy-and-kill-whole-line () {
 zle -N copy-and-kill-whole-line
 bindkey "^U" copy-and-kill-whole-line
 
+# shift line by one space (helpful for avoiding history)
+bindkey -s "^[>" '^e^a ^e'
+
 # for hardcore scripting: surround line with $()
 bindkey -s "^[o" '^a$(^e)^a'
 
