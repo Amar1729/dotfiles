@@ -28,7 +28,7 @@ Tarrasch/zsh-bd
 
 # ranking of directories
 #export _Z_DATA="$HOME/.cache/z"
-rupa/z
+agkozak/zsh-z
 
 # include a notification for long-running commands or nonzero return codes
 # make sure to install terminal-notifier (Mac) or notify-send (Linux)

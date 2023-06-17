@@ -133,6 +133,7 @@ else
 	compinit -C
 fi
 
+compdef _zshz ${ZSHZ_CMD:-${_Z_CMD:-z}}
 # NOTE: reordering compinit calls seems to have broken how _pass completion is loaded
 source ${HOMEBREW_PREFIX}/share/zsh/site-functions/_pass 2>/dev/null
 compdef _pass pass
