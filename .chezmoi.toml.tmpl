@@ -1,58 +1,27 @@
-{{- $email := get . "email" -}}
-{{- if not $email -}}
-{{-   $email := promptString "email" -}}
-{{- end -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $git_user := promptStringOnce . "git_user" "Git User" -}}
+{{- $work := promptBoolOnce . "work" "work" -}}
 
-{{- $git_user := get . "git_user" -}}
-{{- if not $git_user -}}
-{{-   $git_user := promptString "git_user" -}}
-{{- end -}}
-
-{{- $work := get . "work" -}}
-{{- if not $work -}}
-{{-   $work := promptBool "work computer" -}}
-{{- end -}}
-
-{{- $server_shortname := get . "server_shortname" -}}
-{{- if not $server_shortname -}}
-{{-   $server_shortname := promptString "personal server shortname" -}}
-{{- end -}}
-
-{{- $server_name := get . "server_name" -}}
-{{- if not $server_name -}}
-{{-   $server_name := promptString "personal server fqdn" -}}
-{{- end -}}
-
-{{- $server_port := get . "server_port" -}}
-{{- if not $server_port -}}
-{{-   $server_port := promptInt "personal server port" -}}
-{{- end -}}
+{{- $server_shortname := promptStringOnce . "server_shortname" "Server (shortname)" -}}
+{{- $server_name := promptStringOnce . "server_name" "Server FQDN" -}}
+{{- $server_port := promptIntOnce . "server_port" "Server Port" -}}
 
 [data]
+    encryption = "gpg"
+
     email = {{ $email | quote }}
     git_user = {{ $git_user | quote }}
     work = {{ $work }}
     server_shortname = {{ $server_shortname | quote }}
     server_name = {{ $server_name | quote }}
     server_port = {{ $server_port }}
-
-{{- if .work }}
-{{- $imap_user := get . "imap_user" -}}
-{{- if not $imap_user -}}
-{{-     $imap_user := promptString "imap_user" }}
-{{- end }}
-
-{{- $imap_folder := get . "imap_folder" -}}
-{{- if not $imap_folder -}}
-{{-   $imap_folder := promptString "imap_folder" }}
-{{- end }}
-
+{{ if $work }}
+{{- $imap_user := promptStringOnce . "imap_user" "imap_user" }}
+{{- $imap_folder := promptStringOnce . "imap_folder" "imap_folder" }}
     imap_user = {{ $imap_user | quote }}
     imap_folder = {{ $imap_folder | quote }}
     work_mattermost = ""
 {{- end }}
-
-    encryption = "gpg"
 
 [gpg]
     recipient = "Amar Paul"
