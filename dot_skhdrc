@@ -8,7 +8,8 @@ tree < 0x35 ; default
 cmd - 9 : skhd --text "amar.paul16@gmail.com"
 cmd - 0 : skhd --text "amar.paul@jhuapl.edu"
 
-default, tree < cmd - 0x35 : skhd --reload
+# use escape to reload skhd
+default, tree < cmd - 0x35 : skhd --restart-service
 tree < cmd - 0x35 ; default
 
 rcmd + shift - 3
