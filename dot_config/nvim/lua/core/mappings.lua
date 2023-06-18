@@ -18,17 +18,19 @@ end
 -- Remove all trailing whitespace (takes a second)
 keymap("n", "<leader>w", "<cmd>let _s=@/<Bar>:%s/\\s\\+$//e<Bar>:let @/=_s<Bar><CR>")
 
--- force kill terminal buffers
-keymap("n", "<leader>d", "<cmd>bd!<CR>")
+-- move to prev buffer and kill the previous one
+-- (keeps window layout if the closed buffer isn't in other windows)
+vim.keymap.set("n", "<leader>b", function ()
+    local curbuf = vim.api.nvim_get_current_buf()
 
--- move to next buffer and kill the previous one (good for keeping window layout)
--- shift and close previously-open buffer
-keymap("n", "<leader>b", "<cmd>bn | bd #<CR>")
--- TODO: improve these buf close bindings
--- ASSUMES that the previous jump is in a different buffer
--- i normally use this as closing a buffer opened as a result of jump-to-def or
--- similar
--- nmap <leader>b <C-o> \| :bd # <CR>
+    if vim.fn.bufnr("#") > 0 then
+        vim.cmd.execute([["normal! \<C-o>"]])
+    else
+        vim.api.nvim_command("bprev")
+    end
+
+    vim.api.nvim_buf_delete(curbuf, { force = true })
+end)
 
 -- for exiting nvim terminal mode
 keymap("t", "<Esc>", "<C-\\><C-n>")
