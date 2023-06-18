@@ -3,12 +3,6 @@ README.md
 .config/simple-rc
 .config/packages
 
-{{- if not .work }}
-
-.config/matterhorn
-
-{{- end }}
-
 {{- if ne .chezmoi.os "darwin" }}
 
 Library/
