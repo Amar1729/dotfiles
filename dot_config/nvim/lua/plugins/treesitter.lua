@@ -6,6 +6,12 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function() require "configs.treesitter" end,
+    dependencies = {
+      {
+        "IndianBoy42/tree-sitter-just",
+        config = true,
+      },
+    },
   },
 
   "nvim-treesitter/nvim-treesitter-context",

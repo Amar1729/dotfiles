@@ -1,5 +1,8 @@
 -- tree-sitter
 
+-- for compiling TS grammar for justfiles
+require("nvim-treesitter.install").compilers = { "gcc-11" }
+
 require("nvim-treesitter.configs").setup {
     -- "all"  | {"list of languages"}
     ensure_installed = "all",
