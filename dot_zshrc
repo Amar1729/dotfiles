@@ -14,9 +14,6 @@ autoload -Uz compinit
 # we're going to default to untracking these (speed up creation of new shells)
 export DISABLE_UNTRACKED_FILES_DIRTY=true
 
-# use async for autosuggestions
-export ZSH_AUTOSUGGEST_USE_ASYNC=1
-
 # plugins: moving to antibody from antigen
 ANTIBODY_HOME="$(antibody home)"
 DISABLE_AUTO_UPDATE="true"
@@ -28,6 +25,14 @@ export _Z_DATA="$HOME/.cache/z"
 # statically load plugins. generate with:
 # antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
 source ~/.zsh_plugins.zsh
+
+# remove forward-char, vi-forward-char from accept choices, use as partial instead
+export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
+    end-of-line
+    vi-end-of-line
+    vi-add-eol
+)
+ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(forward-char vi-forward-char)
 
 # User configuration
 
