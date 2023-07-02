@@ -180,6 +180,8 @@ bindkey "^U" copy-and-kill-whole-line
 
 # shift line by one space (helpful for avoiding history)
 bindkey -s "^[>" '^e^a ^e'
+# delete space at the beginning of line (helpful after debugging a command)
+bindkey -s "^[<" '^a^[[3~^e'
 
 # for hardcore scripting: surround line with $()
 bindkey -s "^[o" '^a$(^e)^a'
