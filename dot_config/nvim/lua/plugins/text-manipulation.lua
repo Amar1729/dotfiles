@@ -1,4 +1,5 @@
 -- ---- Text Manipulation
+-- plugins roughly ordered in terms of how "important" they are to every-day use
 
 return {
   -- for surrounding phrases with characters
@@ -6,6 +7,12 @@ return {
   {
     "kylechui/nvim-surround",
     config = true,
+  },
+
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {},
   },
 
   -- undotree visualization/movement
