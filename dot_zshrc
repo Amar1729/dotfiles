@@ -156,10 +156,16 @@ zmodload zsh/complist
 # use ^Xa to expand aliases
 
 # very common commands
-bindkey -s '^[l' 'll\n'
-bindkey -s '^[ ' 'clear\n'
-bindkey -s '^[h' 'cd ..\n'
-bindkey -s '^[k' 'cd -\n'
+bindkey -s '^[l'       'll\n'
+bindkey -s '^[ '       'clear\n'
+bindkey -s '^[h'       'cd ..\n'
+bindkey -s '^[^[h'     'bd 2\n'
+bindkey -s '^[^[^[h'   'bd 3\n'
+bindkey -s '^[^[^[^[h' 'bd 4\n'
+bindkey -s '^[k'       ' cd -\n'
+bindkey -s '^[^[k'     ' cd -2\n'
+bindkey -s '^[^[^[k'   ' cd -3\n'
+bindkey -s '^[^[^[^[k' ' cd -4\n'
 
 # alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
 # insert-first-word () { zle insert-last-word -- -1 1 }
