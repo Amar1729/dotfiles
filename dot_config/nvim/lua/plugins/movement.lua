@@ -15,6 +15,10 @@ return {
     "ggandor/leap.nvim",
     config = function()
       require("leap").add_default_mappings()
+
+      require("leap").add_repeat_mappings(";", "\\", {
+        relative_directions = false,
+      })
     end,
   },
 
@@ -37,7 +41,10 @@ return {
   -- actions from a distance, using leap
   {
     "ggandor/leap-spooky.nvim",
-    opts = { paste_on_remote_yank = true },
+    opts = {
+      prefix = true,
+      paste_on_remote_yank = true,
+    },
   },
 
   -- cool searching
