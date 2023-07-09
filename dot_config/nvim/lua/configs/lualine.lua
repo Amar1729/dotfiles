@@ -105,7 +105,7 @@ require("lualine").setup {
                 -- show buffers if we have > 1
                 'buffers',
                 -- default max length (2/3) too short
-                max_length = vim.o.columns * 95 / 100,
+                max_length = function () return vim.o.columns * 95 / 100 end,
                 cond = has_multiple_buffers,
             }
         },
