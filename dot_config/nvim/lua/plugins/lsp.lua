@@ -30,11 +30,8 @@ return {
         },
       },
       {
-        -- ensure this is only loaded once nvim-cmp is up
+        -- completion candidates for nvim-cmp
         "hrsh7th/cmp-nvim-lsp",
-        cond = function ()
-            return (require("lazy.core.config").plugins["nvim-cmp"] ~= nil)
-        end,
       },
     },
     config = function ()
@@ -62,7 +59,6 @@ return {
     "hrsh7th/nvim-cmp",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
