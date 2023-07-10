@@ -27,6 +27,13 @@ return {
   -- more textobjects
   {
     "chrisgrieser/nvim-various-textobjs",
+    -- not a dependency for functionality: used for opening a gx link in browser but i use this only for the quick-opening of links for gx
+    dependencies = {
+      {
+        "axieax/urlview.nvim",
+        opts = { default_action = "system" },
+      },
+    },
     opts = { useDefaultKeymaps = true },
   },
 
