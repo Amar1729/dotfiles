@@ -5,6 +5,7 @@ vim.opt.completeopt = "menu,menuone,noselect"
 local cmp = require("cmp")
 local map = cmp.mapping
 local luasnip = require("luasnip")
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 local t = function (str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -174,3 +175,8 @@ vim.diagnostic.config({
     virtual_text = false,
     severity_sort = true,
 })
+
+cmp.event:on(
+  "confirm_done",
+  cmp_autopairs.on_confirm_done()
+)
