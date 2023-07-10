@@ -24,6 +24,9 @@ local on_attach = function(client, bufnr)
     buf_keymap("n", "<space>ca", vim.lsp.buf.code_action)
     buf_keymap("n", "gr", vim.lsp.buf.references)
     buf_keymap("n", "<space>f", function() vim.lsp.buf.format { async = true } end)
+
+    -- for lvimuser/lsp-inlayhints.nvim
+    require("lsp-inlayhints").on_attach(client, bufnr)
 end
 
 -- restrain a language server (in the case that i"m using multiple for same language)

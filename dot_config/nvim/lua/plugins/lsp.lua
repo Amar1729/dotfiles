@@ -33,6 +33,19 @@ return {
         -- completion candidates for nvim-cmp
         "hrsh7th/cmp-nvim-lsp",
       },
+      -- provide virtual text inline type hints
+      {
+        "lvimuser/lsp-inlayhints.nvim",
+        -- config = true,
+        opts = {
+          inlay_hints = {
+            type_hints = {
+              prefix = "<= ",
+            },
+            highlight = "Comment",
+          },
+        },
+      },
     },
     config = function ()
         require("configs.lspconfig")
