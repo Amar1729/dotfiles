@@ -12,7 +12,30 @@ return {
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
-    opts = {},
+    config = function ()
+      local autopairs = require("nvim-autopairs")
+      local Rule = require("nvim-autopairs.rule")
+      local cond = require("nvim-autopairs.conds")
+
+      autopairs.setup({})
+
+      autopairs.add_rules {
+        -- autopair<>
+        -- all languages? or just xml/langs w/ <> generics?
+        Rule("<", ">")
+          :with_pair(cond.before_regex("%a+"))
+          :with_move(function (opts)
+            return opts.char == ">"
+          end),
+        -- autopair||  <-- this one might be buggy? oh well
+        Rule("|", "|", "rust")
+          -- match letters or open parens
+          :with_pair(cond.before_regex("[%a(]+"))
+          :with_move(function (opts)
+            return opts.char == "|"
+          end),
+      }
+    end,
   },
 
   -- undotree visualization/movement
