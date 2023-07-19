@@ -1,0 +1,31 @@
+# https://atuin.sh/docs/config/
+# i use the defaults for most keys
+
+## address of the sync server
+sync_address = "http://192.168.0.101:8888"
+
+## prevent commands matching any of these regexes from being written to history.
+## https://docs.rs/regex/latest/regex/#syntax
+## these settings are separate from zshaddhistory, right?
+history_filter = [
+  # common shell commands that don't need to be saved
+  # use z for hopping around dirs (unless we cd to a #rare path?)
+  "^cd -",
+  "^cd \\.\\.",
+  "^cd$",
+  "^bd",
+  "^z$",
+  "^clear$",
+  "^ls$",
+  "^ll$",
+
+  # don't care about full-resolved source-type cmds
+  "^source \"",
+  "^source /",
+  "^emulate /",
+  "^/Users",
+  "^/home",
+
+  # "sensitive" commands
+  "^pass",
+]

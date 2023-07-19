@@ -77,7 +77,7 @@ HISTFILESIZE=1000000
 HISTSIZE=10000000           # number of history lines kept internally
 SAVEHIST=10000000           # max number of history lines saved
 setopt APPEND_HISTORY       # history appends to existing file
-setopt HIST_REDUCE_BLANKS   # trim multiple insgnificant blanks in history
+setopt HIST_REDUCE_BLANKS   # trim multiple insignificant blanks in history
 setopt HIST_IGNORE_ALL_DUPS # ignore ALL duplicates (even if not immediately previous)
 setopt histignoredups       # ignore duplicates during search
 
@@ -96,6 +96,13 @@ zshaddhistory () {
 	if whence ${${(z)1}[1]} >| /dev/null; then
 		# blacklist certain commands from history
 		if [[ ${${(z)1}[1]} =~ "^(pass|z)$" ]]; then
+			return 1
+		elif [[ ${${(z)1}[1]} == "source" ]] && [[ ${${(z)1}[2]} =~ "^[/\"]" ]]; then
+			return 1
+		elif [[ ${${(z)1}[1]} == "emulate" ]] && [[ ${${(z)1}[2]} =~ "^/" ]]; then
+			return 1
+		elif [[ ${${(z)1}[1]} =~ "^/Users" ]] || [[ ${${(z)1}[1]} =~ "^/home" ]]; then
+			# don't add any command that uses realpath to a non-system file
 			return 1
 		fi
 	else

@@ -52,3 +52,6 @@ https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
 # my own theme
 #https://gist.github.com/Amar1729/fe38d56118d1211aff3638c95bc238a8 amar
 https://gist.github.com/Amar1729/80a6df13b218c6a47c01f48b5bef309c # amar_simple
+
+# synced shell history with atuin
+ellie/atuin branch:main path:atuin.plugin.zsh

@@ -13,6 +13,7 @@ Another benefit is that all files can be managed in one branch, using `chezmoi`'
 
 ## Miscellaneous
 
+* [atuin](https://atuin.sh)
 * [fzf](https://github.com/junegunn/fzf)
 * [fd](https://github.com/sharkdp/fd)
 * [ripgrep](https://github.com/BurntSushi/ripgrep)
@@ -37,6 +38,7 @@ Another benefit is that all files can be managed in one branch, using `chezmoi`'
 
 ## Shell
 
+* `atuin` for syncing/backing up shell history, as well as granular searching of history
 * [`.zshrc`](./dot_zshrc)
 * [`.zsh_plugins.txt`](./dot_zsh_plugins.txt)
 * [`.profile`](./dot_profile)
