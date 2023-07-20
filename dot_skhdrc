@@ -18,9 +18,11 @@ rcmd + shift - 3
 # take a screenshot and try to recognize text
 rcmd + shift - 6 : ~/.bin/ocr
 
-# ignore outlook for this command (send email) but don't blacklist it for other things (ctrl - number)
-cmd - return [
+# lcmd is always open new terminal; pass through rcmd+return on some apps that have bindings for it.
+lcmd - return : if ! alacritty msg create-window; then open -a /Applications/Alacritty.app; fi
+rcmd - return [
     "Microsoft Outlook"     ~
+    "Code"                  ~
     *                       : if ! alacritty msg create-window; then open -a /Applications/Alacritty.app; fi
 ]
 
