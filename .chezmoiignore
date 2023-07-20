@@ -12,7 +12,6 @@ Library/
 .config/ubersicht
 .chunkwmrc
 .skhdrc
-.xinitrc_darwin
 .yabairc
 
 {{ else if ne .chezmoi.os "linux" }}
@@ -32,7 +31,7 @@ Library/
 .urxvt
 .Xmodmap
 .Xresources
-.xinitrc_linux
+.xinitrc
 .xprofile
 
 {{ end }}
