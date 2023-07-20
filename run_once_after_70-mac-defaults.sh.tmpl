@@ -52,6 +52,10 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
 # Trackpad > Scroll & Zoom > Scroll direction: Natural
 defaults write -g com.apple.swipescrolldirection -bool false
 
+# Trackpad > Point & Click > Tap to click
+defaults -currentHost write -g com.apple.mouse.tapBehavior 1
+defaults write com.apple.AppleMultiTouchTrackpad Clicking '1'
+
 # Trackpad > More Gestures > Swipe between pages: swipe with three fingers
 # this doesnt totally work?
 # defaults write -g AppleEnableSwipeNavigateWithScrolls -bool false
@@ -75,13 +79,19 @@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Select Previous
 # firefox
 defaults write org.mozilla.firefox NSUserKeyEquivalents -dict-add "History" '@y'
 
+# vscode
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
 {{ if .work -}}
 # outlook
 defaults write com.microsoft.Outlook NSUserKeyEquivalents -dict-add Calendar '$\U2192'
 defaults write com.microsoft.Outlook NSUserKeyEquivalents -dict-add Mail '$\U2190'
-defaults write com.microsoft.Outlook NSUserKeyEquivalents -dict-add "Next Week" '\U2192'
-defaults write com.microsoft.Outlook NSUserKeyEquivalents -dict-add "Previous Week" '\U2190'
 {{- end }}
+
+# restart everything necessary
+pkill -u $(whoami) -f /System/Applications/System\ Preferences.app/Contents/MacOS/System\ Preferences
+killall SystemUIServer
+killall Finder
 
 # ---- ----
 {{- end }}
