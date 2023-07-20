@@ -41,6 +41,7 @@ set -g default-terminal "screen-256color"	# 256 color tmux
 set -g history-limit 100000					# scrollback buffer
 set -sg escape-time 0						# No delay for escape key press
 set -g focus-events on						# for nvim autoread
+set -sa terminal-features ',screen-256color:RGB'	# for nvim termcolors
 
 setw -g aggressive-resize on
 
