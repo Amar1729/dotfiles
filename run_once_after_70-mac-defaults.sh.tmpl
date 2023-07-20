@@ -16,6 +16,10 @@ defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
 defaults write com.apple.dock no-bouncing -bool TRUE
 sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticDownload -bool NO
 
+# make arm macOS not choke out in certain xforwarding situations
+# https://github.com/XQuartz/XQuartz/issues/31
+defaults write org.xquartz.X11 enable_render_extension 0
+
 # disable things like screenshot/empty trash sound
 defaults write -g com.apple.sound.uiaudio.enabled -int 0
 
