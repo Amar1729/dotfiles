@@ -82,4 +82,10 @@ yabai -m rule --add app="Ghidra" title="Ghidra*" manage=off
 yabai -m rule --add app="Approve" title="Approve" manage=off
 yabai -m rule --add app="Microsoft Remote Desktop" manage=off
 
+# whenever a PiP window is opened, center it on its parent
+yabai -m signal --add \
+    label="Resize Firefox PiP windows to match parent" event=window_created \
+    app="Firefox" title="Picture-in-Picture" \
+    action="$HOME/.bin/yabai-resize-pip $"'YABAI_WINDOW_ID'
+
 echo "yabai configuration loaded.."
