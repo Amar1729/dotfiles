@@ -27,7 +27,7 @@ yabai -m config right_padding                5
 yabai -m config window_gap                   5
 
 # "monocle" mode for space 1
-~/.bin/yabai-monocle 1
+yabai -m config --space 1 layout             stack
 
 # borders are timing out oddly (being redrawn behind app windows?) for me.
 # these signals to toggle borders off/on on window change seem to resolve issue.
