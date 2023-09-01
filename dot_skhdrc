@@ -1,5 +1,10 @@
+# white
 :: default
+    : yabai -m config active_window_border_color 0xffebdbb2
+
+# red
 :: tree
+    : yabai -m config active_window_border_color 0xccd75f5f
 
 ctrl - f ; tree
 tree < ctrl - f -> ; default
