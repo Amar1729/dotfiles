@@ -19,6 +19,8 @@ history_filter = [
   "^ls$",
   "^ll$",
 
+  "^builtin",
+
   # don't care about full-resolved source-type cmds
   "^source \"",
   "^source /",

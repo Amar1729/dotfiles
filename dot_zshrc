@@ -104,6 +104,8 @@ zshaddhistory () {
 		elif [[ ${${(z)1}[1]} =~ "^/Users" ]] || [[ ${${(z)1}[1]} =~ "^/home" ]]; then
 			# don't add any command that uses realpath to a non-system file
 			return 1
+		elif [[ ${${(z)1}[1]} == "builtin" ]]; then
+			return 1
 		fi
 	else
 		return 1
