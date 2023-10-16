@@ -22,9 +22,17 @@ __pycache__/
 *.eggs
 .tox
 .mypy_cache
+.pyre
+.pdm-python
+dist/
 .coverage
 htmlcov/
 *.hdf5
+
+# java
+.factorypath
+*.class
+.sdkmanrc
 
 # Object files
 *.o
@@ -32,6 +40,8 @@ htmlcov/
 *.so
 .ctags
 tags
+target/
+# build/
 
 # ide stuff :/
 .idea
