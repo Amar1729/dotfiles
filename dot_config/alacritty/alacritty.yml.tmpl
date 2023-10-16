@@ -39,7 +39,7 @@ font:
   normal:
     # family: Fantasque Sans Mono Nerd
     family: FantasqueSansMono Nerd Font Mono
-    # family: Iosevka
+    # family: Iosevka Nerd Font Mono
 
   # Point size
   {{ if (eq .chezmoi.os "darwin") -}}
@@ -48,8 +48,16 @@ font:
   size: 8.0
   {{- end }}
 
+  # underline ("undercurl"?) is slightly too high on text. make it a bit lower.
+  offset:
+    y: 4
+  glyph_offset:
+    y: 3
+
   # Thin stroke font rendering (retina displays, macOS only)
-  use_thin_strokes: true
+  # use_thin_strokes no longer a setting: could update default AppleFontSmoothing
+  # (haven't tested this yet)
+  # defaults -currentHost write -g AppleFontSmoothing -int 0
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -95,9 +103,6 @@ selection:
 # Live config reload (changes require restart)
 live_config_reload: true
 
-# Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
-
 key_bindings:
   # (Windows/Linux only)
   - { key: V,        mods: Control|Shift, action: Paste            }
@@ -110,6 +115,7 @@ key_bindings:
 {{- end }}
 
   # (macOS only)
+  - { key: Q,        mods: Control,       chars: "\x11"            }
   - { key: Equals,   mods: Shift|Command, action: IncreaseFontSize }
   - { key: Minus,    mods: Command,       action: DecreaseFontSize }
 
