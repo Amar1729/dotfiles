@@ -28,6 +28,9 @@ history_filter = [
   "^/Users",
   "^/home",
 
+  # searching?
+  "^brew search",
+
   # "sensitive" commands
   "^pass",
 ]
