@@ -105,20 +105,6 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- undotree
 keymap("n", "<leader>u", "<cmd>UndotreeToggle<CR>", { desc = "UndotreeToggle" })
 
--- camelcasemotion
-keymap("", "w", "<Plug>CamelCaseMotion_w")
-keymap("", "b", "<Plug>CamelCaseMotion_b")
-keymap("", "e", "<Plug>CamelCaseMotion_e")
-keymap("", "ge", "<Plug>CamelCaseMotion_ge")
-vim.keymap.del("s", "w")
-vim.keymap.del("s", "b")
-vim.keymap.del("s", "e")
-vim.keymap.del("s", "ge")
-
-vim.keymap.set({"o", "x"}, "iw", "<Plug>CamelCaseMotion_iw")
-vim.keymap.set({"o", "x"}, "ib", "<Plug>CamelCaseMotion_ib")
-vim.keymap.set({"o", "x"}, "ie", "<Plug>CamelCaseMotion_ie")
-
 -- conceal
 vim.keymap.set("n", "<leader>tc", function()
     require("conceal").toggle_conceal()

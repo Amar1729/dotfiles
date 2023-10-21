@@ -7,8 +7,32 @@ return {
   -- tmux/vim interop
   "christoomey/vim-tmux-navigator",
 
-  -- jump through CamelCase, snake_case words better
-  "bkad/CamelCaseMotion",
+  -- move through CamelCase, snake_case words better
+  {
+    "chrisgrieser/nvim-spider",
+    keys = {
+      {
+        "w",
+        "<cmd>lua require('spider').motion('w')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "e",
+        "<cmd>lua require('spider').motion('e')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "b",
+        "<cmd>lua require('spider').motion('b')<CR>",
+        mode = { "n", "o", "x" },
+      },
+      {
+        "ge",
+        "<cmd>lua require('spider').motion('ge')<CR>",
+        mode = { "n", "o", "x" },
+      },
+    },
+  },
 
   -- digraph-based search through visible buffer
   {
