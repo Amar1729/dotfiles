@@ -1,18 +1,17 @@
 # Amar Paul's zshrc
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export TERM="xterm-256color"
 export EDITOR="nvim"
 
 # Load all stock functions (from $fpath files) called below.
 autoload -Uz compinit
-
-# disable 'git status' looking for untracked files in my zsh prompt
-# (i would like this to be configurable on the fly somehow)
-# has to exported before loading plugins
-# double-check this: i'm actually not sure if this works with my theme currently
-
-# we're going to default to untracking these (speed up creation of new shells)
-export DISABLE_UNTRACKED_FILES_DIRTY=true
 
 # plugins: moving to antibody from antigen
 ANTIBODY_HOME="$(antibody home)"
@@ -114,26 +113,10 @@ zshaddhistory () {
 
 # auto-source virtualenvs
 chpwd_venv () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
-chpwd_git_size () {
-	if GIT=$(git rev-parse --git-dir 2>/dev/null); then
-		SIZE=$(du -s "${GIT}" | awk '{print $1}')
-
-		if [[ $SIZE -gt 2000000 ]]; then
-			export DISABLE_UNTRACKED_FILES_DIRTY=true
-		else
-			export DISABLE_UNTRACKED_FILES_DIRTY=false
-		fi
-	fi
-}
 
 chpwd () {
 	chpwd_venv
-	chpwd_git_size
 }
-
-# newlines before and after command output
-precmd () { print '' }
-preexec () { print '' }
 
 # some custom completions, and make sure $fpath gets loaded properly
 fpath+=~/.zsh/completions
@@ -227,3 +210,6 @@ bindkey "^ " autosuggest-execute
 # dynamic colors with (a wrapper for) pywal!
 #(wp -r &)
 (cat $HOME/.cache/wal/sequences &)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
