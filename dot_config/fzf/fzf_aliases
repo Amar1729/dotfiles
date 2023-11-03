@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env zsh
 
 # put some fzf-related overrides here too
 export FZF_DEFAULT_COMMAND='fd -I --ignore-file ~/.gitignore_global --type file --color=always'
