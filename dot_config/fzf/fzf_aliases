@@ -120,8 +120,21 @@ fgst () {
 
     header="$(git -c color.status=always status -uno --short --branch | head -n1)"
 
-    command git -c color.status=always status -uno --short |
-        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} \
+    # remove any files that already have been accepted into LBUFFER
+    # zsh: parameter expansion
+    current=( ${=@} )
+
+    OUTPUT=$(command git diff --name-only)
+    for word in $current; do
+        if [[ -f "$word" ]]; then
+            # disgusting, sorry...
+            OUTPUT=$(grep -Fv "$word" <<< $OUTPUT)
+        fi
+    done
+
+    # command git -c color.status=always status -uno --short |
+    command echo "$OUTPUT" |
+        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-90%} \
             --reverse \
             $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" \
             fzf -m --preview="git diff --color=always {-1}" --header="$header" |
@@ -135,7 +148,7 @@ if [[ $SHELL == *"zsh" ]]; then
     zle -N fzf-gh-widget
     bindkey '^G^G' fzf-gh-widget
 
-    fzf-git-status-widget () { local result="$(fgst)"; zle reset-prompt; LBUFFER+="$result"; }
+    fzf-git-status-widget () { local result="$(fgst $LBUFFER)"; zle reset-prompt; LBUFFER+="$result"; }
     zle -N fzf-git-status-widget
     bindkey '^G^S' fzf-git-status-widget
 fi
