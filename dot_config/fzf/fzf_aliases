@@ -101,7 +101,7 @@ _fzf_complete_git_post() {
     sed -e 's/^[^a-z0-9]*//' | awk '{print $1}'
 }
 
-gh () {
+f_git_hist () {
     # fuzzy search commits from `git log`
     git rev-parse --is-inside-work-tree > /dev/null 2>&1 || return
 
@@ -131,7 +131,7 @@ fgst () {
 }
 
 if [[ $SHELL == *"zsh" ]]; then
-    fzf-gh-widget () { local result="$(gh)"; zle reset-prompt; LBUFFER+="$result" ; }
+    fzf-gh-widget () { local result="$(f_git_hist)"; zle reset-prompt; LBUFFER+="$result" ; }
     zle -N fzf-gh-widget
     bindkey '^G^G' fzf-gh-widget
 
