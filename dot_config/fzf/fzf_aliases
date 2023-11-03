@@ -120,27 +120,55 @@ fgst () {
 
     header="$(git -c color.status=always status -uno --short --branch | head -n1)"
 
+    local include_untracked=0
+    if [[ "$1" == "--fzf-alias-include-untracked" ]]; then
+        include_untracked=1
+        shift
+    fi
+
     # remove any files that already have been accepted into LBUFFER
     # zsh: parameter expansion
     current=( ${=@} )
 
-    OUTPUT=$(command git diff --name-only)
+    local output
+    # output of these commands is specifically not wrapped in quotes
+    if [[ $include_untracked -eq 0 ]]; then
+        output=$(command git -c color.status=always status --short -uno)
+    else
+        output=$(command git -c color.status=always status --short -uall)
+    fi
+
     for word in $current; do
         if [[ -f "$word" ]]; then
             # disgusting, sorry...
-            OUTPUT=$(grep -Fv "$word" <<< $OUTPUT)
+            output=$(grep -Fv "$word" <<< $output)
         fi
     done
 
-    # command git -c color.status=always status -uno --short |
-    command echo "$OUTPUT" |
-        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-90%} \
+    local preview_cmd
+    if [[ $include_untracked -eq 0 ]]; then
+        # note that this preview_cmd will not show staged changes. should i figure out some kind of fallback?
+        # i could do something like this, but then i'm always only showing staged or unstaged changes in a file that might have both.
+        # is there a way to toggle?
+        # preview_cmd='git diff --exit-code --color=always {-1} && git diff --staged --color=always {-1}'
+        # there is a way from within fzf to toggle/cycle --preview by using --bind 'keybind:preview:new preview cmd'
+        # however this only cycles through for the selection entry. not sure if there's a good way to cycle the preview
+        # for that invocation of fzf.
+        # For now, adding a toggle to `git diff --staged` so I at least have that available.
+        preview_cmd='git diff --color=always {-1}'
+    else
+        preview_cmd='bat --style=changes --color=always --file-name={-1} {-1}'
+    fi
+
+    command echo "$output" |
+        FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-98%} \
             --reverse \
             $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" \
-            fzf -m --preview="git diff --color=always {-1}" --header="$header" |
+            fzf -m --cycle --border none --preview="$preview_cmd" --preview-window border-none --header="$header" \
+              --bind 'ctrl-g:preview:git diff --staged --color=always {-1}' |
         while read -r item; do
-        echo "$item" | awk '{print $NF}'
-    done
+            echo "$item" | awk '{print $NF}'
+        done
 }
 
 if [[ $SHELL == *"zsh" ]]; then
@@ -151,6 +179,10 @@ if [[ $SHELL == *"zsh" ]]; then
     fzf-git-status-widget () { local result="$(fgst $LBUFFER)"; zle reset-prompt; LBUFFER+="$result"; }
     zle -N fzf-git-status-widget
     bindkey '^G^S' fzf-git-status-widget
+
+    fzf-git-untracked-widget () { local result="$(fgst --fzf-alias-include-untracked $LBUFFER)"; zle reset-prompt; LBUFFER+="$result"; }
+    zle -N fzf-git-untracked-widget
+    bindkey '^G^U' fzf-git-untracked-widget
 fi
 
 
