@@ -121,7 +121,7 @@ end
 
 vim.keymap.set("n", "<c-p>", project_files)
 keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
-keymap("n", "<c-f>", "<cmd>Telescope live_grep<CR>")
+keymap("n", "<c-f>", "<cmd>Telescope egrepify<CR>")
 keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
 
 -- ssr

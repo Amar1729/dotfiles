@@ -28,10 +28,12 @@ telescope.setup {
     },
 
     pickers = {
-        live_grep = {
+        git_files = {
             mappings = {
                 i = { ["<Tab>"] = actions.to_fuzzy_refine }
             }
         }
     }
 }
+
+telescope.load_extension("egrepify")

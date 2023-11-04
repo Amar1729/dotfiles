@@ -20,6 +20,13 @@ return {
         end,
       },
 
+      -- much better alternative to fuzzy-picker
+      -- essentially a wrapper over ripgrep, that allows for simple fuzzy searching and file extension filtering.
+      {
+        "fdschmidt93/telescope-egrepify.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+      },
+
       -- slightly faster compiled fzf
       {
         "nvim-telescope/telescope-fzf-native.nvim",
