@@ -32,9 +32,6 @@ vim.keymap.set("n", "<leader>b", function ()
     vim.api.nvim_buf_delete(curbuf, { force = true })
 end)
 
--- for exiting nvim terminal mode
-keymap("t", "<Esc>", "<C-\\><C-n>")
-
 -- center search results
 -- */# searches are centered below, in hlslens keybinds
 keymap("n", "n", "nzz")

@@ -46,6 +46,39 @@ cmd({ "FocusGained", "VimEnter" },
     }
 )
 
+-- terminal behavior
+local group_term = group("TerminalBehavior", opts)
+cmd("TermOpen",
+    {
+        group = group_term,
+        pattern = { "*" },
+        command = "setlocal nospell listchars= nonumber norelativenumber nowrap winfixheight winfixwidth noruler noshowmode",
+    }
+)
+cmd("TermOpen",
+    {
+        group = group_term,
+        pattern = { "*" },
+        command = "startinsert",
+    }
+)
+cmd("TermClose",
+    {
+        group = group_term,
+        pattern = { "*" },
+        command = "set showmode ruler",
+    }
+)
+-- i always forget how to get out of terminal mode, because i use it infrequently.
+-- remind me what the mapping is to exit.
+cmd("TermEnter",
+    {
+        group = group_term,
+        pattern = { "*" },
+        command = "echo 'escape: <c-\\><c-n>'",
+    }
+)
+
 -- save view, restore on open
 local group_view = group("SaveView", opts)
 cmd("BufWinLeave",
