@@ -35,9 +35,6 @@ end)
 -- for exiting nvim terminal mode
 keymap("t", "<Esc>", "<C-\\><C-n>")
 
--- toggle folds with space
-keymap("n", "<space>", "za")
-
 -- center search results
 -- */# searches are centered below, in hlslens keybinds
 keymap("n", "n", "nzz")

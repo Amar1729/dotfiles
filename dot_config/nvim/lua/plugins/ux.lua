@@ -56,4 +56,12 @@ return {
 
   -- use git from inside vim (e.g. `:Git commit`)
   "tpope/vim-fugitive",
+
+  -- better dealing with folds
+  -- TODO: maybe set foldmethod to something else if i'm going to use this?
+  {
+    "chrisgrieser/nvim-origami",
+    event = "BufReadPost", -- later or on keypress would prevent saving folds
+    opts = true, -- needed even when using default config
+  },
 }
