@@ -79,6 +79,19 @@ cmd("TermEnter",
     }
 )
 
+-- EASYQUIT: quit help docs with just q
+cmd("FileType",
+    {
+        pattern = { "help" },
+        callback = function()
+            vim.api.nvim_buf_set_keymap(
+                0, "n", "q", ":q<CR>",
+                { noremap = true, silent = true }
+            )
+        end,
+    }
+)
+
 -- save view, restore on open
 local group_view = group("SaveView", opts)
 cmd("BufWinLeave",
