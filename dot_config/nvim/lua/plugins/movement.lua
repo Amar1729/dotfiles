@@ -88,4 +88,14 @@ return {
       virt_priority = 10,
     },
   },
+
+  -- easier movement through locations
+  {
+    "cbochs/portal.nvim",
+    config = function () require("configs.portal") end,
+    dependencies = {
+      "cbochs/grapple.nvim",
+      "ThePrimeagen/harpoon",
+    },
+  },
 }
