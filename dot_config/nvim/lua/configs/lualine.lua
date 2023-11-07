@@ -80,6 +80,18 @@ require("lualine").setup {
                 "diagnostics",
                 on_click = function() vim.diagnostic.setloclist() end,
             },
+            {
+                function ()
+                    local bookmark = " "
+                    if require("grapple").exists() then
+                        return bookmark .. require("grapple").key()
+                    end
+                    return bookmark
+                end,
+                -- cond = require("grapple").exists,
+                cond = function () return pcall(require, "grapple") end,
+                on_click = function() require("grapple").popup_tags() end,
+            },
         },
         lualine_x = {
             {
