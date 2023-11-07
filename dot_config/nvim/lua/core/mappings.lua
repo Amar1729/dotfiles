@@ -181,3 +181,11 @@ vim.keymap.set("n", "gx", function ()
     local openCommand = string.format ("%s '%s' >/dev/null 2>&1", opener, url)
     os.execute(openCommand)
 end, {desc = "Smart URL Opener"})
+
+-- syntax-surfer-tree
+-- Note: my bindings for tree sitter already include an init-selection, so i don't have to bind STSSelectCurrentNode
+vim.keymap.set("x", "J", "<cmd>STSSelectNextSiblingNode<CR>", global_opts)
+vim.keymap.set("x", "K", "<cmd>STSSelectPrevSiblingNode<CR>", global_opts)
+vim.keymap.set("x", "H", "<cmd>STSSelectParentNode<CR>", global_opts)
+-- this will override the various-textobjs bind for URLs
+vim.keymap.set("x", "L", "<cmd>STSSelectChildNode<CR>", global_opts)

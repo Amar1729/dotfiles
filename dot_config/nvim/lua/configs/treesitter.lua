@@ -15,13 +15,15 @@ require("nvim-treesitter.configs").setup {
         additional_vim_regex_highlighting = false,
     },
 
+    -- Note: i use another plugin (currently, syntax-tree-surfer) for moving through nodes once
+    -- a selection has been started.
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "<M-n>",
-            node_incremental = "<M-n>",
+            init_selection = "<C-Space>",
+            node_incremental = "<C-Space>",
             scope_incremental = "<M-p>",
-            node_decremental = "<M-i>",
+            node_decremental = "<BS>",
         }
     },
 

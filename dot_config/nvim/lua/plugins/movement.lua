@@ -34,6 +34,13 @@ return {
     },
   },
 
+  -- movement over treesitter nodes.
+  -- very experimental, but seems promising.
+  {
+    "ziontee113/syntax-tree-surfer",
+    config = true,
+  },
+
   -- digraph-based search through visible buffer
   {
     "ggandor/leap.nvim",
