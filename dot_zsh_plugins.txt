@@ -54,3 +54,6 @@ romkatv/powerlevel10k
 
 # synced shell history with atuin
 ellie/atuin branch:main path:atuin.plugin.zsh
+
+# lazy-load commands
+qoomon/zsh-lazyload

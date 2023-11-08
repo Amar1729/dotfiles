@@ -124,16 +124,9 @@ pathmunge "$HOME/.local/rubygems" "after"
 
 # java helper script (manage sdks)
 export SDKMAN_DIR="$HOME/.sdkman"
-# https://gist.github.com/Amar1729/294c6e310b191405bf8fceb72e96b399 for explanation
-sdk () {
-    # "metaprogramming" lol - source init if sdk currently looks like this sdk function
-    # (i.e. lazy-load)
-    if [[ "$(which sdk | wc -l)" -le 10 ]]; then
-        unset -f sdk
-        source "$SDKMAN_DIR/bin/sdkman-init.sh"
-    fi
-    sdk "$@"
-}
+if [[ "$SHELL" =~ "zsh" ]] && command -v lazyload >/dev/null; then
+    lazyload sdk -- 'source "$SDKMAN_DIR/bin/sdkman-init.sh"'
+fi
 
 # add calibre cli
 pathmunge "/Applications/calibre.app/Contents/MacOS/" "after"

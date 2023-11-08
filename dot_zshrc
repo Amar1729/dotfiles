@@ -113,9 +113,11 @@ zshaddhistory () {
 
 # auto-source virtualenvs
 chpwd_venv () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_sdk () { [[ -r ./.sdkmanrc ]] && command -v sdk >/dev/null && sdk env }
 
 chpwd () {
 	chpwd_venv
+	chpwd_sdk
 }
 
 # some custom completions, and make sure $fpath gets loaded properly
@@ -206,6 +208,8 @@ bindkey -M menuselect "j" vi-down-line-or-history
 
 # plugin-specific
 bindkey "^ " autosuggest-execute
+
+export SHELL=$(which zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
