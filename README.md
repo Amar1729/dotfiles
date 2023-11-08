@@ -56,18 +56,16 @@ I also use a repository of small scripts I write myself: [bin](https://github.co
 
 
 ## Terminal Emulator
+* [kitty](https://github.com/kovidgoyal/kitty)
 * [alacritty](https://github.com/alacritty/alacritty/)
 
 
 ## Workflow
 
-* [nvim config](./dot_config/nvim)
-* [`.tmux.conf`](./dot_tmux.conf.tmpl)
-* [`.gitconfig`](./dot_gitconfig.tmpl)
-
-* [Neovim](https://github.com/neovim/neovim)
-  * Plugin Manager: [packer](https://github.com/wbthomason/packer.nvim)
-* [Tmux](https://github.com/tmux/tmux)
+* [Neovim](https://github.com/neovim/neovim), with [my config](./dot_config/nvim)
+  * Plugin manager: [lazy](https://github.com/folke/lazy.nvim)
+* [Tmux](https://github.com/tmux/tmux), with my [`.tmux.conf`](./dot_tmux.conf.tmpl)
+* Git, with my [`.gitconfig`](./dot_gitconfig.tmpl)
 * [Pass](https://www.passwordstore.org/) for password management
 
 
