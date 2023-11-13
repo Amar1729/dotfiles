@@ -19,28 +19,43 @@ local mode_map = {
 }
 
 local has_multiple_buffers = function ()
-    local len = 0
-    for buffer = 1, vim.fn.bufnr('$') do
-        if vim.fn.buflisted(buffer) == 1 then
-            len = len + 1
-
-            -- early exit if we have more than 1 buffer
-            if len > 1 then
-                break
-            end
-        end
+  local found = false
+  for buffer = 1, vim.fn.bufnr('$') do
+    if vim.fn.buflisted(buffer) == 1 then
+      -- early exit if we've already found a buffer (i.e. have more than 1)
+      if found == true then return found end
+      found = true
     end
-
-    -- i'm sure it's inefficient to set this on every check
-    -- is there a better way to re-hide the tabline if i close out buffers?
-    if len < 2 then
-        vim.cmd [[ set showtabline=1 ]]
-        return false
-    else
-        vim.cmd [[ set showtabline=2 ]]
-        return true
-    end
+  end
+  return false
 end
+
+local set_tabline = function ()
+  if has_multiple_buffers() then
+    vim.opt.showtabline = 2
+  else
+    vim.opt.showtabline = 1
+  end
+end
+
+-- TODO: for some reason, the bufenter event doesn't seem to happen until after a buffer
+-- gets unloaded (???). so, the tabline won't go away until after some other buffer event
+-- happens, eg a help page or a command
+-- hacky solution for now by also proccing this cmd on CmdlineEnter, and i just type ':<Esc>'
+-- after closing buffers down to only 1.
+--
+-- also, it seems like cmp-cmd is a buffer, so can i filter on stuff like that?
+-- i guess it doesn't really matter cause that's not a visible buffer
+-- but it causes this autocmd to run more often, which may be unwanted
+vim.api.nvim_create_autocmd({
+  -- events that should hide tabline
+  "CmdlineEnter", "BufEnter", "BufDelete",
+  -- events that might create multiple buffers (show tabline)
+  "VimEnter", "BufNew",
+}, {
+  pattern = "*",
+  callback = set_tabline,
+})
 
 -- ---- setup
 require("lualine").setup {
@@ -119,7 +134,7 @@ require("lualine").setup {
                 -- default max length (2/3) too short
                 max_length = function () return vim.o.columns * 95 / 100 end,
                 cond = has_multiple_buffers,
-            }
+            },
         },
         lualine_z = {
             {
