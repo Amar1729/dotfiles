@@ -48,8 +48,9 @@ return {
       },
     },
     config = function ()
-        require("configs.lspconfig")
-    end
+      require("configs.lsp.view")
+      require("configs.lsp.servers").setup()
+    end,
   },
 
   -- use vscode snips from friendly-snippets
