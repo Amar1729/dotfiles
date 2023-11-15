@@ -25,6 +25,8 @@ function M.setup()
     -- java
     -- needs custom flags
     -- "java_language_server",
+    -- use nvim-jdtls plugin for java support instead
+    -- "jdtls",
     -- c/c++
     -- ccls/clangd both rely on JSON compilation databases
     -- requires running `bear -- <build cmd>` first
@@ -65,13 +67,6 @@ function M.setup()
       },
     },
   })
-
-  -- java
-  lspconfig.java_language_server.setup {
-    on_attach = on_attach,
-    -- TODO - should this line be templated/checked for which OS?
-    cmd = { os.getenv("HOME") .. "/.cache/java-language-server/dist/lang_server_mac.sh" },
-  }
 end
 
 return M

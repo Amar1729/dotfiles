@@ -64,4 +64,10 @@ return {
     "PProvost/vim-ps1",
     ft = { "ps1" },
   },
+
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+    config = function () require("configs.jdtls") end,
+  },
 }
