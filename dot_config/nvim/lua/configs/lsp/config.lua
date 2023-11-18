@@ -25,7 +25,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap("n", "<space>ca", vim.lsp.buf.code_action, "LSP: Code action")
 
     -- built-in LSP / telescope / glance ?
-    keymap("n", "gr", vim.lsp.buf.references, "LSP: Find references")
+    keymap("n", "gR", "<CMD>Glance references<CR>", "LSP: Glance references")
+    keymap("n", "gr", function() require("telescope.builtin").lsp_references() end, "LSP: Find references")
 
     keymap("n", "<space>f", function() vim.lsp.buf.format { async = true } end, "LSP: Format")
 

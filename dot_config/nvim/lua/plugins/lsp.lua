@@ -104,4 +104,17 @@ return {
     "ray-x/lsp_signature.nvim",
     opts = { bind = true },
   },
+
+  -- LSP-based previews, jumping
+  {
+    "DNLHC/glance.nvim",
+    opts = {
+      preview_win_opts = {
+        relativenumber = false,
+      },
+      border = {
+        enable = true,
+      }
+    },
+  },
 }
