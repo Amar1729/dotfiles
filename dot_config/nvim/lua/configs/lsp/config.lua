@@ -6,24 +6,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
   callback = function (ev)
     vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
-    local opts = { noremap=true, silent=true, buffer=ev.buf }
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set("n", "<space>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, opts)
+    local keymap = function (mode, key, cb, desc)
+      local opts = vim.tbl_deep_extend("force", { noremap=true, silent=true, buffer=ev.buf }, { desc = desc })
+      vim.keymap.set(mode, key, cb, opts)
+    end
+
+    keymap("n", "gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+    keymap("n", "gd", vim.lsp.buf.definition, "LSP: Go to definition")
+    keymap("n", "K", vim.lsp.buf.hover, "LSP: Hover documentation")
+    keymap("n", "gi", vim.lsp.buf.implementation, "LSP: Go to implementation")
+    keymap("n", "<space>wa", vim.lsp.buf.add_workspace_folder, "LSP: Add workspace folder")
+    keymap("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, "LSP: Remove workspace folder")
+    keymap("n", "<space>wl", function()
+      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+    end, "LSP: List workspace folders")
+    keymap("n", "<space>D", vim.lsp.buf.type_definition, "LSP: Show type definition")
+    keymap("n", "<space>rn", vim.lsp.buf.rename, "LSP: Rename symbol")
+    keymap("n", "<space>ca", vim.lsp.buf.code_action, "LSP: Code action")
 
     -- built-in LSP / telescope / glance ?
-    vim.keymap.set("n", "gr", vim.lsp.buf.references)
+    keymap("n", "gr", vim.lsp.buf.references, "LSP: Find references")
 
-    vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format { async = true } end, opts)
+    keymap("n", "<space>f", function() vim.lsp.buf.format { async = true } end, "LSP: Format")
 
     -- for lvimuser/lsp-inlayhints.nvim
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
