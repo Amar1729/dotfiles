@@ -52,6 +52,9 @@ local options = {
         -- use system clipboard for + / * registers
         -- see autocmds for how clipboard is actually managed.
         -- clipboard = "unnamedplus",
+
+        -- use conceal.nvim to hide keywords
+        conceallevel = 2,
     },
 }
 
