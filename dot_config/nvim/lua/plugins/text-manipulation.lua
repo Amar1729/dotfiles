@@ -67,10 +67,12 @@ return {
         increment = "<C-a>",
         decrement = "<C-x>",
       },
-      additions = {
+      allow_caps_additions = {
         -- full month names, full day names, day abbrevs handled by boole
         { "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec" },
-        { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" },
+
+        -- English numbers
+        { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero" },
       },
     },
   },
