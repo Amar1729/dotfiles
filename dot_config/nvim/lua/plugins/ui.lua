@@ -36,9 +36,26 @@ return {
     "folke/noice.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
+      {
+        "rcarriga/nvim-notify",
+        opts = {
+          -- override notify to use my settings for floating windows.
+          on_open = function (win)
+            local config = vim.api.nvim_win_get_config(win)
+            config.border = "single"
+            vim.api.nvim_win_set_config(win, config)
+          end,
+        },
+      },
     },
     opts = {
+      views = {
+        -- use square borders for noice dialogs
+        cmdline_popup = { border = { style = "single" } },
+        hover = { border = { style = "single" } },
+        popupmenu = { border = { style = "single" } },
+      },
+
       routes = {
         {
           -- hide buf written messages
