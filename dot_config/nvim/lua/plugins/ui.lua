@@ -14,6 +14,19 @@ return {
     config = function() require("configs.lualine") end,
   },
 
+  -- use oil instead for file exploration?
+  {
+    "stevearc/oil.nvim",
+    opts = {
+      default_file_explorer = true,
+      columns = {
+        "icon",
+        "size",
+      }
+    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
   -- re-color window split borders
   {
     "nvim-zh/colorful-winsep.nvim",
