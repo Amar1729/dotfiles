@@ -21,6 +21,7 @@ require("nvim-treesitter.configs").setup {
       "groovy",
       "hjson",
       "html",
+      "http",
       "java",
       "javascript",
       "jq",
