@@ -88,4 +88,26 @@ return {
       })
     end,
   },
+
+  -- auto-convert strings to/from f-strings/template strings
+  {
+    "chrisgrieser/nvim-puppeteer",
+    dependencies = "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    ft = { "python", "javascript", "typescript" },
+  },
+
+  -- highlight things that change between undos
+  {
+    "tzachar/highlight-undo.nvim",
+    opts = {
+      duration = 800,
+      undo = {
+        hlgroup = "Normal",
+      },
+      redo = {
+        hlgroup = "Normal",
+      },
+    },
+  },
 }
