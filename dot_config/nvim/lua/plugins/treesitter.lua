@@ -34,7 +34,10 @@ return {
         opts = { default_action = "system" },
       },
     },
-    opts = { useDefaultKeymaps = true },
+    opts = {
+      useDefaultKeymaps = true,
+      disabledKeymaps = { "r" },
+    },
   },
 
   -- pair highlighting
