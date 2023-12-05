@@ -10,8 +10,22 @@ return {
   },
 
   {
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    branch = "v0.6",
+    enabled = true,
+    opts = {
+      { "<", ">", ft = { "rust" } },
+      { "|", "|", ft = { "rust" } },
+    },
+  },
+
+  {
+    -- this plugin can't seem to do rust || very well.
+    -- also, it doesn't auto-do mirrored spaces between pairs.
     "windwp/nvim-autopairs",
     event = "InsertEnter",
+    enabled = false,
     config = function ()
       local autopairs = require("nvim-autopairs")
       local Rule = require("nvim-autopairs.rule")
