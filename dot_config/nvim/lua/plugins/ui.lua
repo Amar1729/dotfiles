@@ -88,4 +88,12 @@ return {
       },
     },
   },
+
+  -- animation of common actions (cursor movement, scroll, window open/close/resize)
+  {
+    "echasnovski/mini.animate",
+    opts = {
+      scroll = { enable = false },
+    },
+  },
 }
