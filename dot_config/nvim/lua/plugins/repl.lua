@@ -10,4 +10,12 @@ return {
     ft = { "http" },
     opts = true,
   },
+
+  -- silent conversion of notebooks to flat text
+  {
+    "goerz/jupytext.vim",
+    init = function ()
+      vim.g.jupytext_fmt = "md"
+    end,
+  },
 }
