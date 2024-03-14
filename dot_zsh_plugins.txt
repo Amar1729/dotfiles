@@ -57,3 +57,6 @@ ellie/atuin branch:main path:atuin.plugin.zsh
 
 # lazy-load commands
 qoomon/zsh-lazyload
+
+# fuzzy wrappers for git
+wfxr/forgit

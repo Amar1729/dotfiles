@@ -1,3 +1,4 @@
+# vim:fileencoding=utf-8:foldmethod=marker
 # Amar Paul's zshrc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -24,6 +25,29 @@ export _Z_DATA="$HOME/.cache/z"
 # statically load plugins. generate with:
 # antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.zsh
 source ~/.zsh_plugins.zsh
+
+# plugin settings: {{{
+
+# forgit: {{{
+
+# set forgit operations that show a graph to show top-down instead of bottom-up
+export FORGIT_LOG_FZF_OPTS="--reverse"
+export FORGIT_REBASE_FZF_OPTS="--reverse"
+export FORGIT_REVERT_COMMIT_FZF_OPTS="--reverse"
+export FORGIT_FIXUP_FZF_OPTS="--reverse"
+export FORGIT_CHECKOUT_COMMIT_FZF_OPTS="--reverse"
+
+# order branches in `gcb` by last committed date
+export FORGIT_CHECKOUT_BRANCH_BRANCH_GIT_OPTS='--sort=-committerdate'
+
+# temporary, for remembering forgit aliases:
+echo_forgit_aliases () {
+    perl -ne 'print if /``` bash/../^```$/' < $ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-wfxr-SLASH-forgit/README.md | grep '^forgit'
+}
+
+# }}}
+
+# }}}
 
 # remove forward-char, vi-forward-char from accept choices, use as partial instead
 export ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(
