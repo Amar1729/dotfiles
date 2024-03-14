@@ -4,8 +4,17 @@ local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = vim.fn.expand("$HOME") .. "/.cache/nvim/jdtls/" .. project_name
 
 -- TODO: maybe glob this for os and arch?
-local version = "org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar"
-local jdtsl_platform = "mac_arm"
+-- see: brew --prefix
+local install_path = '/opt/homebrew/opt/jdtls/libexec/'
+local jdtls_platform = "mac_arm"
+
+local plugin_path = install_path .. 'plugins'
+local config_path = install_path .. 'config_' .. jdtls_platform
+
+-- TODO: make this robust if >1 or 0 matches are found
+local jar_path = vim.fs.find(function(name, path)
+  return name:match('org.eclipse.equinox.launcher_.*.jar$')
+end, {limit = 1, type = 'file', path = plugin_path})[1]
 
 require("jdtls").start_or_attach({
   cmd = {
@@ -22,12 +31,11 @@ require("jdtls").start_or_attach({
     "--add-opens", "java.base/java.util=ALL-UNNAMED",
     "--add-opens", "java.base/java.lang=ALL-UNNAMED",
 
-    -- brew --prefix
     "-jar",
-    "/opt/homebrew/opt/jdtls/libexec/plugins/" .. version,
+    jar_path,
 
     "-configuration",
-    "/opt/homebrew/opt/jdtls/libexec/config_" .. jdtsl_platform,
+    config_path,
 
     "-data",
     workspace_dir,
