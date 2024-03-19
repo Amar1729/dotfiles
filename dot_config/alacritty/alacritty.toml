@@ -48,6 +48,9 @@ y = 3
 [font.normal]
 family = "FantasqueSansMono Nerd Font Mono"
 
+[font.italic]
+family = "Fantasque Sans Mono"
+
 [font.offset]
 y = 4
 #: }}}
