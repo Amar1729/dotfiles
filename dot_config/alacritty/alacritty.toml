@@ -19,7 +19,7 @@ multiplier = 3
 [window]
 decorations = "none"
 dynamic_padding = false
-opacity = 0.8
+opacity = 0.9
 option_as_alt = "OnlyLeft"  # need this for alt+<key> bindings to work?
 
 [window.padding]
