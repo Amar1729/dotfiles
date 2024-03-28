@@ -39,6 +39,8 @@ require("nvim-treesitter.configs").setup {
       "perl",
       "puppet",
       "python",
+      -- for ts playground (:InspectTree)
+      "query",
       "regex",  -- ??
       "rst",
       "ruby",
@@ -46,6 +48,7 @@ require("nvim-treesitter.configs").setup {
       "sql",
       "toml",
       "typescript",
+      "vimdoc",
       "yaml",
     },
     -- ignore_install = { "d", "julia", "phpdoc", "php", "t32" },
