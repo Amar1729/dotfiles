@@ -134,7 +134,7 @@ require("nvim-treesitter.configs").setup {
         extended_mode = true,
     },
 
-    -- provided by nvim-treesitter/playground
+    -- built-in (:Inspect, :InspectTree, and :EditQuery)
     playground = {
         enable = true,
         disable = {},

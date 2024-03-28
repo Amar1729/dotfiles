@@ -48,12 +48,6 @@ return {
     -- TODO: doesn't update <> or || pairs (e.g. for rust)
   },
 
-  -- display AST, write TS queries for buffer
-  {
-    "nvim-treesitter/playground",
-    cmd = { "TSPlayGround", "TSPlayGroundToggle" },
-  },
-
   -- conceal (horizontally fold) keywords
   {
     "Jxstxs/conceal.nvim",
