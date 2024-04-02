@@ -87,6 +87,20 @@ return {
     },
   },
 
+  -- advanced git search: fuzzily find/compare file/selection against git history
+  {
+    -- all these plugins are configured above
+    "aaronhallaert/advanced-git-search.nvim",
+    dependencies = {
+      -- depends on this for its picker UI
+      "nvim-telescope/telescope.nvim",
+      -- depends on this for some internal git operations
+      "tpope/vim-fugitive",
+      -- optionally depends on this for diff view
+      "sindrets/diffview.nvim",
+    },
+  },
+
   -- better dealing with folds
   -- TODO: maybe set foldmethod to something else if i'm going to use this?
   {
