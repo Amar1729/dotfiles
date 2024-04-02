@@ -55,7 +55,37 @@ return {
   },
 
   -- use git from inside vim (e.g. `:Git commit`)
-  "tpope/vim-fugitive",
+  {
+    "tpope/vim-fugitive",
+
+    -- telescope disables Netrw, which is required by GBrowse.
+    -- here, we define our own Browse command.
+    init = function ()
+      vim.api.nvim_create_user_command(
+        "Browse",
+        function (opts)
+          -- NOTE: should be "xdg-open" on Linux.
+          vim.fn.system { "open", opts.fargs[1] }
+        end,
+        { nargs = 1 }
+      )
+    end,
+
+    dependencies = {
+      -- gbrowse: github provider (among other things?)
+      "tpope/vim-rhubarb",
+
+      -- gbrowse: gitlab provider
+      {
+        "shumphrey/fugitive-gitlab.vim",
+        init = function ()
+          vim.g.fugitive_gitlab_domains = {
+            ["ssh://gitlab.institution.edu"] = "https://gitlab.institution.edu",
+          }
+        end,
+      },
+    },
+  },
 
   -- better dealing with folds
   -- TODO: maybe set foldmethod to something else if i'm going to use this?
