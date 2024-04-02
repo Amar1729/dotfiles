@@ -24,7 +24,11 @@ telescope.setup {
             },
         },
 
-        extensions = { fzf },
+        extensions = {
+            -- i dont think this needs to be specified?
+            -- fzf,
+            -- fzf = {},
+        },
     },
 
     pickers = {
@@ -36,4 +40,5 @@ telescope.setup {
     }
 }
 
+telescope.load_extension("fzf")
 telescope.load_extension("egrepify")
