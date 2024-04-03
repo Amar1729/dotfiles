@@ -104,6 +104,17 @@ return {
     },
   },
 
+  -- auto-saves yanked text, and offers viewing+selection of previous yanks.
+  {
+    "AckslD/nvim-neoclip.lua",
+    opts = {
+      enable_persistent_history = true,
+    },
+    dependencies = {
+      "kkharji/sqlite.lua",
+    },
+  },
+
   -- better dealing with folds
   -- TODO: maybe set foldmethod to something else if i'm going to use this?
   {
