@@ -37,6 +37,9 @@ return {
           require("telescope").load_extension("fzf")
         end
       },
+
+      -- jump across edit locations
+      "bloznelis/before.nvim",
     },
     config = function() require "configs.telescope" end,
   },
