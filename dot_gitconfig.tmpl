@@ -105,8 +105,23 @@
 	required = true
 
 [diff]
-	tool = vimdiff
+	# AST-based diff tool.
+	# tool = diffsitter
+	# AST-based diff tool, that seems a bit more robust.
+	tool = difftastic
 	submodule = log
+
+[difftool]
+	prompt = false
+
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+
+[difftool "diffsitter"]
+	cmd = diffsitter --color=on "$LOCAL" "$REMOTE"
+
+[difftool "nvim"]
+	cmd = nvim -d "$LOCAL" "$REMOTE"
 
 [pull]
 	ff = only
