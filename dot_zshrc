@@ -189,6 +189,7 @@ function __fuzzy-dh () {
     # but i'm not sure how that plays from within a function?
 }
 bindkey -s '^[^[k'     ' cd $(__fuzzy-dh)\n'
+bindkey -s '^[g'       'git st\n'
 
 # alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
 # insert-first-word () { zle insert-last-word -- -1 1 }
