@@ -181,9 +181,14 @@ bindkey -s '^[^[h'     'bd 2\n'
 bindkey -s '^[^[^[h'   'bd 3\n'
 bindkey -s '^[^[^[^[h' 'bd 4\n'
 bindkey -s '^[k'       ' cd -\n'
-bindkey -s '^[^[k'     ' cd -2\n'
-bindkey -s '^[^[^[k'   ' cd -3\n'
-bindkey -s '^[^[^[^[k' ' cd -4\n'
+function __fuzzy-dh () {
+    local result="$(dirs -v | fzf --reverse --cycle +m --header='dirs -v' | while read -r item; do echo "$item" | awk '{print $2}'; done)"
+    # replace ~ with value of $HOME
+    echo "${result/#\~/$HOME}"
+    # possible TODO: i actually want to bind <enter> to immediately cd to a given result,
+    # but i'm not sure how that plays from within a function?
+}
+bindkey -s '^[^[k'     ' cd $(__fuzzy-dh)\n'
 
 # alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
 # insert-first-word () { zle insert-last-word -- -1 1 }
