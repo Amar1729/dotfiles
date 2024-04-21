@@ -28,6 +28,8 @@ telescope.setup {
             -- i dont think this needs to be specified?
             -- fzf,
             -- fzf = {},
+
+            advanced_git_search = {},
         },
     },
 
@@ -44,3 +46,4 @@ telescope.load_extension("fzf")
 telescope.load_extension("egrepify")
 telescope.load_extension("before")
 telescope.load_extension("neoclip")
+telescope.load_extension("advanced_git_search")

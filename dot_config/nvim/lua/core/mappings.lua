@@ -118,9 +118,6 @@ keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 keymap("n", "<c-f>", "<cmd>Telescope egrepify<CR>")
 keymap("n", "<Tab>", "<cmd>Telescope buffers<CR>")
 
--- related to telescope, since it has a fuzzy picker:
-keymap("n", "<Esc>g", "<cmd>AdvancedGitSearch<CR>")
-
 -- ssr
 vim.keymap.set(
     { "n", "x" },
