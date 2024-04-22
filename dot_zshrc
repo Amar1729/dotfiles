@@ -28,6 +28,21 @@ source ~/.zsh_plugins.zsh
 
 # plugin settings: {{{
 
+# atuin: {{{
+
+# previously, i used a hard-coded replacement of the atuin init script to set the following:
+# - if something has already been typed ($BUFFER is non-empty), use --search-mode=prefix
+# - only if cwd != $HOME, use --filter-mode=directory
+# however, i didn't feel like tracking and fixing the init script with each release
+# (also, i tend NOT to actually use atuin search all that frequently anyway)
+# atuin init zsh -> piped to:
+#     sed -e '/SC2048/a [[ -n $BUFFER ]] && argv+=--search-mode=prefix'
+#     sed -e '/SC204/a [[ "$(pwd)" != $HOME ]] && argv+=--filter-mode=directory'
+eval "$(ATUIN_NOBIND=true atuin init zsh)"
+bindkey '^p' atuin-search
+
+# }}}
+
 # forgit: {{{
 
 # set forgit operations that show a graph to show top-down instead of bottom-up

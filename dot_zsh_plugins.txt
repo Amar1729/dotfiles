@@ -52,9 +52,6 @@ https://gist.github.com/Amar1729/6b0008cf065872a49ceff674a85363bd kind:fpath
 # theme
 romkatv/powerlevel10k
 
-# synced shell history with atuin
-ellie/atuin branch:main path:atuin.plugin.zsh
-
 # lazy-load commands
 qoomon/zsh-lazyload
 
