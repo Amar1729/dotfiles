@@ -151,7 +151,14 @@ zshaddhistory () {
 }
 
 # auto-source virtualenvs
-chpwd_venv () { [[ -r ./venv/bin/activate ]] && source ./venv/bin/activate }
+chpwd_venv () {
+    # prefer .venv to venv, but support both
+    if [[ -r ./.venv/bin/activate ]]; then
+        source ./.venv/bin/activate 
+    elif [[ -r ./venv/bin/activate ]]; then
+        source ./venv/bin/activate 
+    fi
+}
 chpwd_sdk () { [[ -r ./.sdkmanrc ]] && command -v sdk >/dev/null && sdk env }
 
 chpwd () {
