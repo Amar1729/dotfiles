@@ -1,8 +1,8 @@
 # don't bother with fiddling, just select ALL errors.
 # select = ["E", "F", "C90", "I", "N", "ICN"]
-select = ["ALL"]
+lint.select = ["ALL"]
 
-ignore = [
+lint.ignore = [
   "ANN101",    # Missing type annotation for `self` in method
   "ERA001",    # Found commented-out code
   "D100",      # missing docstring in public module
@@ -13,13 +13,17 @@ ignore = [
 
 line-length = 100
 
-[per-file-ignores]
+[lint.per-file-ignores]
 "test_*.py" = [
   "D103",      # Missing docstring in public function
   "ANN201",    # Missing return type annotation for public function `{}`
   "INP001",    # File `{}` is part of an implicit namespace package. Add an `__init__.py`.
   "S101",      # Use of `assert` detected
   "PLR2004",   # Magic value used in comparison, consider replacing 526 with a constant variable
+]
+
+"__init__.py" = [
+  "F401",      # imported but unused
 ]
 
 # can i make this set noexpandtab for this file?
