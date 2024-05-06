@@ -163,6 +163,13 @@ chpwd () {
 fpath+=~/.zsh/completions
 fpath+=${HOMEBREW_PREFIX}/share/zsh/site-functions
 
+# case- and hyphen-insensitive matching
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+
+# load completions after complist is done?
 # https://gist.github.com/ctechols/ca1035271ad134841284
 # (if we modify fpath ourselves, compinit should be done AFTER)
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
@@ -178,12 +185,6 @@ compdef _pass pass
 
 # omz conflicts with common user alias mcd
 compdef -d mcd
-
-# case- and hyphen-insensitive matching
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
-
-zstyle ':completion:*' menu select
-zmodload zsh/complist
 
 # bindkey mappings, custom functions, and notes
 # use ^Xa to expand aliases
