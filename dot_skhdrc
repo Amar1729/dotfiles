@@ -1,10 +1,12 @@
 # white
 :: default
-    : yabai -m config active_window_border_color 0xffebdbb2
+    : yabai -m config active_window_border_color 0xffebdbb2 ; \
+      ~/.config/ubersicht/widgets/simple-bar/lib/scripts/yabai-set-mode.sh "default"
 
 # red
 :: tree
-    : yabai -m config active_window_border_color 0xccd75f5f
+    : yabai -m config active_window_border_color 0xccd75f5f ; \
+      ~/.config/ubersicht/widgets/simple-bar/lib/scripts/yabai-set-mode.sh "tree" blue
 
 ctrl - f ; tree
 tree < ctrl - f -> ; default
