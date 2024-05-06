@@ -37,8 +37,12 @@ cmd + alt + ctrl - l : ~/.bin/lock
 
 # cycle - IGNORE floating windows
 lalt - n : yabai -m query --windows --space \
-    | jq -sr 'add | map(select((.["is-floating"] == false) and (.["is-minimized"] == false))) | sort_by(.frame.x, .frame.y, .id) | reverse' \
-    | python3 -c "import sys, json; j = json.loads(sys.stdin.read()); i = next(filter(lambda e: e[1]['has-focus'], enumerate(j)), (0, {}))[0]; print(j[i-1]['id'])" \
+    | jq -sr 'add | map(select((.["is-floating"] == false) and (.["is-minimized"] == false))) | sort_by(.frame.x, .frame.y, .["stack-index"], .id) | reverse | nth(map(.["has-focus"] == true) | index(true) - 1) | .id' \
+    | xargs -I{} yabai -m window --focus {}
+
+# cycle backward (especially helpful for stacks)
+lalt + shift - n : yabai -m query --windows --space \
+    | jq -sr 'add | map(select((.["is-floating"] == false) and (.["is-minimized"] == false))) | sort_by(.frame.x, .frame.y, .["stack-index"], .id) | nth(map(.["has-focus"] == true) | index(true) - 1) | .id' \
     | xargs -I{} yabai -m window --focus {}
 
 # cycle WITHOUT ignoring floating windows
@@ -90,6 +94,7 @@ lcmd + ctrl - h     : yabai -m window --insert west
 lcmd + ctrl - j     : yabai -m window --insert south
 lcmd + ctrl - k     : yabai -m window --insert north
 lcmd + ctrl - l     : yabai -m window --insert east
+lcmd + ctrl - o     : yabai -m window --insert stack
 
 # move around floating windows
 cmd + shift - left  : yabai -m window --move rel:-30:0
@@ -149,6 +154,15 @@ tree < h : skhd --key "ctrl - f"; skhd --text "¯\_(ツ)_/¯"
 tree < v : skhd --key "ctrl - f"; ~/.bin/codify
 
 # change layout of desktop
-tree < b : yabai -m space --layout bsp; ~/.bin/yabai-monocle --rm curr; skhd --key "ctrl - f"
-tree < shift - f : yabai -m space --layout float; ~/.bin/yabai-monocle --rm curr; skhd --key "ctrl - f"
-tree < m : ~/.bin/yabai-monocle curr; skhd --key "ctrl - f"
+tree < b :          yabai -m space --layout bsp     ; skhd --key "ctrl - f"
+tree < shift - f :  yabai -m space --layout float   ; skhd --key "ctrl - f"
+tree < m :          yabai -m space --layout stack   ; skhd --key "ctrl - f"
+
+# 0x2C is '/', so shift - 0x2C is '?'
+tree < shift - 0x2C : osascript -e "display notification \"b / shift-f / m\" with title \"tree\""
+
+# stack windows
+tree < left  : yabai -m window --stack west         ; skhd --key "ctrl - f"
+tree < down  : yabai -m window --stack south        ; skhd --key "ctrl - f"
+tree < up    : yabai -m window --stack north        ; skhd --key "ctrl - f"
+tree < right : yabai -m window --stack east         ; skhd --key "ctrl - f"
