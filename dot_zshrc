@@ -202,6 +202,7 @@ fi
 # use ^Xa to expand aliases
 
 # very common commands
+# TODO: i want to turn these into widgets that check content of LBUFFER, so that they're only typed on empty lines?
 bindkey -s '^[l'       'll\n'
 bindkey -s '^[ '       'clear\n'
 bindkey -s '^[h'       'cd ..\n'
@@ -210,13 +211,16 @@ bindkey -s '^[^[^[h'   'bd 3\n'
 bindkey -s '^[^[^[^[h' 'bd 4\n'
 bindkey -s '^[k'       ' cd -\n'
 function __fuzzy-dh () {
-    local result="$(dirs -v | fzf --reverse --cycle +m --header='dirs -v' | while read -r item; do echo "$item" | awk '{print $2}'; done)"
+    set -o pipefail
+    if ! result="$(dirs -v | fzf --reverse --cycle +m --header='dirs -v' | while read -r item; do echo "$item" | awk '{print $2}'; done)"; then
+        return 1
+    fi
     # replace ~ with value of $HOME
     echo "${result/#\~/$HOME}"
     # possible TODO: i actually want to bind <enter> to immediately cd to a given result,
     # but i'm not sure how that plays from within a function?
 }
-bindkey -s '^[^[k'     ' cd $(__fuzzy-dh)\n'
+bindkey -s '^[^[k'     ' _FZF_DIRS_TARGET=$(__fuzzy-dh) && cd ${_FZF_DIRS_TARGET}\n'
 bindkey -s '^[g'       'git st\n'
 
 # alt+, mirrors alt+. (insertion of command from last line vs insertion of last arg from last cmd)
