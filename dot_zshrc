@@ -193,6 +193,11 @@ compdef _pass pass
 # omz conflicts with common user alias mcd
 compdef -d mcd
 
+# completions for zpy (for some reason it they don't get added to fpath...?)
+if command -v .zpy_expose_funcs >/dev/null; then
+    .zpy_expose_funcs
+fi
+
 # bindkey mappings, custom functions, and notes
 # use ^Xa to expand aliases
 

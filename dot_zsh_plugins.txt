@@ -57,3 +57,6 @@ qoomon/zsh-lazyload
 
 # fuzzy wrappers for git
 wfxr/forgit
+
+# wrapper (fuzzy/tab completion) for python tooling
+andydecleyre/zpy
