@@ -256,5 +256,16 @@ bindkey "^ " autosuggest-execute
 
 export SHELL=$(which zsh)
 
+# make the pass completion provider faster (should i put this in a different file?)
+# Copied the _pass_complete_entries_helper func from the pass' formula's definition here:
+#   $(brew --prefix)/share/zsh/site-functions/_pass (from pass formula)
+_pass_complete_entries_helper () {
+    local IFS=$'\n'
+    local prefix
+    zstyle -s ":completion:${curcontext}:" prefix prefix || prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+    # modified from _pass's original one-liner (using `find`)
+    _values -C 'passwords' ${$(fd . "$prefix" -e gpg -X echo {//}/{/.} | sed -e "s#${prefix}/\{0,1\}##g" -e 's#\\#\\\\#g' -e 's#:#\\:#g' | tr ' ' '\n'):-""}
+}
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
