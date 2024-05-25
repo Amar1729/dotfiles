@@ -18,6 +18,16 @@ return {
   {
     "stevearc/oil.nvim",
     opts = {
+      keymaps = {
+        ["yp"] = {
+          desc = "Copy filepath to system clipboard",
+          callback = function ()
+            require("oil.actions").copy_entry_path.callback()
+            -- setreg not required i think(?) because i use autocmds for clipboard syncing.
+            -- vim.fn.setreg("+", vim.fn.getreg(vim.v.register))
+          end,
+        },
+      },
       default_file_explorer = true,
       columns = {
         "icon",
