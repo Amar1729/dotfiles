@@ -26,5 +26,11 @@ line-length = 100
   "F401",      # imported but unused
 ]
 
+"*.ipynb" = [
+  "I",         # import order
+  "F401",      # imported but unused
+  "B018",      # useless expression
+]
+
 # can i make this set noexpandtab for this file?
 # vim:tw=78:ts=8:noet:ft=toml:norl:
