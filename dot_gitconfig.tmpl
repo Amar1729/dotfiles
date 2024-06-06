@@ -65,6 +65,9 @@
 	# empty commit - sometimes useful for testing CI
 	fake = commit --allow-empty -m 'empty commit'
 
+	# only use an ignore-revs-file when i want to
+	bblame = blame --ignore-revs-file .git-blame-ignore-revs
+
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
@@ -141,3 +144,12 @@
 
 [merge]
 	conflictStyle = zdiff3
+
+[blame]
+	# is there a way to fallback??
+	# ignoreRevsFile = .git-blame-ignore-revs
+	# mark skipped commits with '?'
+	markIgnoredLines = true
+	# mark skipped unattributable lines with '*'
+	markUnblamableLines = true
+	coloring = highlightRecent
