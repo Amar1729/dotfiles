@@ -14,8 +14,7 @@
 	s = switch
 	ci = commit
 	st = status
-	stb = status -sb
-	stn = status -sb -uno
+	stn = status -uno
 	br = branch
 	m = merge
 	ma = merge --abort
@@ -35,7 +34,7 @@
 	cpa = cherry-pick --abort
 	cpc = cherry-pick --continue
 
-	sts = stash
+	stp = stash push
 	sta = stash apply
 	std = stash drop
 	stl = stash list
@@ -54,12 +53,17 @@
 	histl = log --graph --abbrev-commit --decorate --all \
 		  --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim green)[%an]%C(reset)%n'
 
-    # gitlab/github: pull merge requests
-    lab-mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
-    hub-mr = !sh -c 'git fetch $1 pull/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	# for diffing commits between two branches - don't want `--all` (like `hist` has)
+	db = log --graph --abbrev-commit --decorate --date=short \
+		 --format=format:'%C(bold blue)%h%C(reset) %C(bold cyan)%ad%C(reset) | %C(white)%s%C(reset) %C(dim green)[%an]%C(reset) %C(bold yellow)%d%C(reset)'
 
-    # empty commit - sometimes useful for testing CI
-    fake = commit --allow-empty -m 'empty commit'
+	# gitlab: get merge requests
+	# (using `gh` for github)
+	lab-mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	# hub-mr = !sh -c 'git fetch $1 pull/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
+	# empty commit - sometimes useful for testing CI
+	fake = commit --allow-empty -m 'empty commit'
 
 [core]
 	editor = nvim
