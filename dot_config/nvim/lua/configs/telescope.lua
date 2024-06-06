@@ -5,6 +5,10 @@ local telescope = require("telescope")
 
 telescope.setup {
     defaults = {
+      prompt_prefix = "󰼛 ",
+      selection_caret = "󱞩 ",
+      path_display = { filename_first = { reverse_directories = false } },
+
         -- trim leading space from matches
         vimgrep_arguments = {
             "rg",

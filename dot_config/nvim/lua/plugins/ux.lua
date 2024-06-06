@@ -7,7 +7,7 @@ return {
   -- telescope - arbitrary fuzzy-searching over lists (e.g. buffers or files in workspace)
   {
     "nvim-telescope/telescope.nvim",
-    version = "0.1.x",
+    -- version = "0.1.x",
     cmd = "Telescope",
     dependencies = {
       "nvim-lua/plenary.nvim",
