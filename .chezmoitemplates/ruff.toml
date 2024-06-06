@@ -5,8 +5,12 @@ lint.select = ["ALL"]
 lint.ignore = [
   "ANN101",    # Missing type annotation for `self` in method
   "ERA001",    # Found commented-out code
+  "COM812",    # missing trailing commas (conflicts with formatter)
   "D100",      # missing docstring in public module
   "D105",      # Missing docstring in magic method
+  "D203",      # one-blank-line-before-class (prefer D212 no-blank-line-before-class)
+  "D213",      # multi-line-summary-second-line (prefer D212 multi-line-summary-first-line)
+  "ISC001",    # single line implicit str concat (conflicts with formatter)
   "T20",       # flake8-print
   "UP006",     # deprecated-collection-type (e.g. use `list` instead of `typing.List`)
 ]
