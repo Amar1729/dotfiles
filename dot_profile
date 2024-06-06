@@ -10,8 +10,9 @@ export EDITOR_LOOK="block"
 
 # GPG_TTY should always be set
 # https://www.gnupg.org/documentation/manuals/gnupg/Invoking-GPG_002dAGENT.html
-GPG_TTY=$(tty)
-export GPG_TTY
+# GPG_TTY=$(tty)
+# powerlevel10k readme recommends doing this instead:?
+export GPG_TTY=$TTY
 # use pinentry-ncurses in terminal, pinentry-mac otherwise
 export PINENTRY_USER_DATA='USE_TTY=1'
 # (may have to reload gpg after updating pinentry programs)
@@ -148,8 +149,28 @@ export SPICETIFY_CONFIG="$HOME/.config/spicetify/"
 if command -v pyenv &>/dev/null; then
     export PYENV_ROOT="$HOME/.pyenv"
     pathmunge "$PYENV_ROOT/bin"
-    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
 fi
+
+# luaver
+if command -v luaver &>/dev/null; then
+    source "$(which luaver)"
+fi
+
+# use neovim provided by version manager "bob"
+pathmunge "$HOME/.local/share/bob/nvim-bin" "after"
+
+# ghidra
+# if there's more than one dir here (there shouldn't be) assume the last one is valid
+for f in /opt/homebrew/Caskroom/ghidra/*/ghidra_*_PUBLIC; do
+    export GHIDRA_HOME="$f"
+done
+
+export GHIDRA_INSTALL_DIR="$GHIDRA_HOME"
+alias analyzeHeadless="$GHIDRA_INSTALL_DIR/support/analyzeHeadless"
+
+# opam configuration
+[[ ! -r "$HOME/.opam/opam-init/init.zsh" ]] || source "$HOME/.opam/opam-init/init.zsh"  > /dev/null 2> /dev/null
 
 # comment out the rest of this, but keep it around?
 : << 'END'
