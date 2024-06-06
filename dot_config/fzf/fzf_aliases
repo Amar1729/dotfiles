@@ -1,7 +1,11 @@
 #! /usr/bin/env zsh
 
+# TODO: consider --bind 'space:jump' for some of the git stuff?
+
 # put some fzf-related overrides here too
-export FZF_DEFAULT_COMMAND='fd -I --ignore-file ~/.gitignore_global --type file --color=always'
+# NOTE: removed "-I" (don't ignore git-ignored files) as they tend to be really noisy.
+# TODO: is there a nice way to one-shot have fzf look for them if i want them to show up?
+export FZF_DEFAULT_COMMAND='fd --ignore-file ~/.gitignore_global --type file --color=always'
 # --color options modified from what pywal generates by default
 export FZF_DEFAULT_OPTS='
     --ansi --bind "ctrl-p:preview-up,ctrl-n:preview-down"
@@ -164,7 +168,7 @@ fgst () {
         FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-98%} \
             --reverse \
             $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" \
-            fzf -m --cycle --border none --preview="$preview_cmd" --preview-window border-none --header="$header" \
+            fzf -1 -m --cycle --border none --preview="$preview_cmd" --preview-window border-none --header="$header" \
               --bind 'ctrl-g:preview:git diff --staged --color=always {-1}' |
         while read -r item; do
             echo "$item" | awk '{print $NF}'
