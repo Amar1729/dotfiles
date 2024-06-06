@@ -98,6 +98,7 @@ cmp.setup({
         { name = "nvim_lsp", keyword_length = 3 },
         { name = "buffer", keyword_length = 3 },
         { name = "luasnip", keyword_length = 2 },
+        { name = "otter" },
     }),
 
     formatting = {
@@ -109,6 +110,7 @@ cmp.setup({
                 luasnip = "[luasnip]",
                 nvim_lua = "[Lua]",
                 latex_symbols = "[LaTeX]",
+                otter = "[otter]",
             }
 
             -- README says it marks completion items, but it's not showing up for me
