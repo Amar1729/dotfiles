@@ -45,6 +45,17 @@ return {
     },
   },
 
+  {
+    "shellRaining/hlchunk.nvim",
+    opts = {
+      -- could modify these if I want to restrain hlchunk from certain languages?
+      -- chunk = { support_filetypes = {}, exclude_filetypes = {} },
+      indent = { enable = false },
+      line_num = { enable = false },
+      blank = { enable = false },
+    },
+  },
+
   -- nicer vim.ui.{input,select} (helpful when using noice, which changes UI a lot)
   {
     "stevearc/dressing.nvim",
@@ -96,6 +107,13 @@ return {
           },
           opts = { skip = true },
         },
+        {
+          -- ignore hlchunk complaining about missing parsers
+          filter = {
+            find = "no parser for",
+          },
+          opts = { skip = true },
+        }
       },
 
       lsp = {
