@@ -1,0 +1,5 @@
+#compdef rr
+
+# link the completion for 'ruff rule' to a custom alias 'rr'.
+
+compdef -e 'words[1]=(ruff rule); (( CURRENT+=1 )); _ruff' rr
