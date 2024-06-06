@@ -284,5 +284,9 @@ _pass_complete_entries_helper () {
     _values -C 'passwords' ${$(fd . "$prefix" -e gpg -X echo {//}/{/.} | sed -e "s#${prefix}/\{0,1\}##g" -e 's#\\#\\\\#g' -e 's#:#\\:#g' | tr ' ' '\n'):-""}
 }
 
+# source completions directly from docker command, since the built-ins are a bit broken.
+# TODO: putting these directly into a file in fpath doesn't seem to work, not sure why.
+source <(docker completion zsh)
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
