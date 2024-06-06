@@ -69,16 +69,6 @@ cmd("TermClose",
         command = "set showmode ruler",
     }
 )
--- i always forget how to get out of terminal mode, because i use it infrequently.
--- remind me what the mapping is to exit.
-cmd("TermEnter",
-    {
-        group = group_term,
-        pattern = { "*" },
-        command = "echo 'escape: <c-\\><c-n>'",
-    }
-)
-
 -- EASYQUIT: quit help docs with just q
 cmd("FileType",
     {

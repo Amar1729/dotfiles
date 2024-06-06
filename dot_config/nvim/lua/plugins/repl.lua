@@ -2,6 +2,16 @@
 
 return {
   {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = {
+      open_mapping = [[<c-\>]]
+      -- TODO: maybe add bindings for sending lines over?
+      -- e.g. python to ipython, or bash lines in markdown
+    },
+  },
+
+  {
     "rest-nvim/rest.nvim",
     dependencies = {
       "nvim-lua/plenary.nvim",
