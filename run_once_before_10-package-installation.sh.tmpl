@@ -46,14 +46,63 @@ fi
 
 yay -S --needed - < "${PKG_DIR}/arch-aur.txt"
 
+{{   else if (eq .chezmoi.osRelease.id "ubuntu") -}}
+# probably a simple install: we're going to install some things manually.
+
+# reference for deleting the apt timer if it's there.
+# sudo -v || true
+# sudo systemctl stop unattended-upgrades
+# sudo systemctl disable apt-daily.timer
+# sudo systemctl disable apt-daily-upgrade.timer
+# sudo apt remove unattended-upgrades || true
+
+sudo apt update
+sudo apt upgrade -yq
+# xclip pass
+sudo apt install -y \
+	zsh curl git wget zip vim \
+	jq fzf fd-find ripgrep pipx
+
+# pip3 install --user pipx poetry
+
+# download bob (version manager for neovim)
+if [[ ! -x $HOME/.local/bin/bob ]]; then
+    mkdir -p $HOME/.local/bin
+    BOB_TAG="$(curl https://api.github.com/repos/MordechaiHadad/bob/releases/latest | jq -r '.tag_name')"
+    wget https://github.com/MordechaiHadad/bob/releases/download/${BOB_TAG}/bob-linux-x86_64-openssl.zip -O /tmp/bob.zip && \
+        unzip -j /tmp/bob.zip -d $HOME/.local/bin && \
+        rm /tmp/bob.zip && \
+        chmod +x $HOME/.local/bin/bob
+fi
+
+# antibody
+# if ! which antibody; then
+#     curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+# fi
+
+if [[ ! -x $HOME/.local/bin/lazygit ]]; then
+    LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | jq -r '.tag_name')
+    curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION#v}_Linux_x86_64.tar.gz"
+    tar xf /tmp/lazygit.tar.gz -C $HOME/.local/bin/
+    rm /tmp/lazygit.tar.gz
+fi
+
 {{-   end }}
 
 {{- end }}
 
+{{ if .work }}
+# on work machines, we have artifactory set:
+pip config set global.index-url "{{ .pypi_artifactory }}"
+{{- end }}
+
 # install pipx pkgs
 # generate with `pipx list|grep package|awk '{print $2}'`
-PIPX_CURRENT="$(pipx list | grep package | awk '{print $2}')"
+if ! PIPX_CURRENT="$(pipx list | grep package | awk '{print $2}'|| true)"; then
+    PIPX_CURRENT=""
+fi
 while read -r pkg || [[ -n "$pkg" ]]; do
+    pkg="$(echo "$pkg" | sed -e 's|.*/||' -e 's|\.git.*||' -e '/pywal/d')"
     if ! grep "^${pkg}$" <<< "$PIPX_CURRENT" &>/dev/null; then
         pipx install --force "$pkg"
     fi

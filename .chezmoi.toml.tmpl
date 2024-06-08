@@ -16,8 +16,10 @@
     server_name = {{ $server_name | quote }}
     server_port = {{ $server_port }}
 {{ if $work }}
+{{- $pypi_artifactory := promptStringOnce . "pypi_artifactory" "PyPI Artifactory" -}}
 {{- $imap_user := promptStringOnce . "imap_user" "imap_user" }}
 {{- $imap_folder := promptStringOnce . "imap_folder" "imap_folder" }}
+    pypi_artifactory = {{ $pypi_artifactory | quote }}
     imap_user = {{ $imap_user | quote }}
     imap_folder = {{ $imap_folder | quote }}
 {{- end }}

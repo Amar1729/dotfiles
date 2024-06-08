@@ -3,11 +3,43 @@ README.md
 .config/simple-rc
 .config/packages
 
+# ignore stuff for a simple provisional system.
+{{- if (and (len .chezmoi.osRelease) (eq .chezmoi.osRelease.id "ubuntu")) }}
+# stuff that requires gpg
+.gist
+.pypirc
+.tokens
+
+# probably a headless server; ignore any GUI stuff.
+.X*
+.config/alacritty
+.config/bspwm
+.config/conky*
+.config/dunst
+.config/kitty
+.config/libinput-gestures.conf
+.config/mozilla
+.config/picom
+.config/polybar
+.config/rofi
+.config/sxhkd
+.config/xresources
+.gnupg
+.nvidia*
+.urxvt
+.xprofile
+
+# ignore some startup scripts
+70-mac*
+80-work-mac.py
+{{ end }}
+
 {{- if ne .chezmoi.os "darwin" }}
 
 Library/
 .config/bspwm/bspwmrc_darwin
 .config/sxhkd/sxhkd_darwin
+.config/karabiner
 .config/iterm2
 .config/ubersicht
 .chunkwmrc
