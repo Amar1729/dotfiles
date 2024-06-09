@@ -1,7 +1,45 @@
 -- ---- Theming and UI changes
 
+---@param name string
+---@param opts table (see nvim_set_hl)
+local update_highlight = function (name, opts)
+  local hl = vim.api.nvim_get_hl(0, { name = name })
+  while hl and hl.link do
+    hl = vim.api.nvim_get_hl(0, { name = hl.link })
+  end
+  hl = vim.tbl_deep_extend("force", hl, opts)
+  vim.api.nvim_set_hl(0, name, hl)
+end
+
 return {
-  "dylanaraps/wal.vim",
+  -- for some reason, setting termguicolors in tmux suks
+	-- so for now i'm "stuck" on making updates to this 8-bit colorscheme
+  {
+    "dylanaraps/wal.vim",
+    lazy = true,
+    init = function ()
+      vim.opt.termguicolors = false
+      vim.cmd.colorscheme("wal")
+
+      -- overrides
+      update_highlight("Comment", { italic = true })
+      update_highlight("DiagnosticVirtualTextOk", { italic = true })
+      update_highlight("DiagnosticVirtualTextHint", { italic = true })
+      update_highlight("DiagnosticVirtualTextInfo", { italic = true })
+      update_highlight("DiagnosticVirtualTextWarn", { italic = true })
+      update_highlight("DiagnosticVirtualTextError", { italic = true })
+
+      -- clear out the defaults from the new default colorscheme
+      -- (I'm sure there's a better way to do this?)
+      -- NVIM v0.10.0-dev-1746+g5651c1ff2
+      -- this is not a great solution because some groups just get cleared back to Normal...
+      update_highlight("@method.call.lua", {})
+      update_highlight("@lsp.type.method.lua", {})
+      update_highlight("@lsp.type.function.lua", {})
+      update_highlight("@method.call.python", {})
+      update_highlight("@method.python", {})
+    end
+  },
 
   -- don't use either of these anymore, but they're nice
   -- {"morhetz/gruvbox"}
