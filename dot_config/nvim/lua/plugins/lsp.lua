@@ -10,23 +10,19 @@ return {
     dependencies = {
       {
         -- development settings for lua files under nvim root
-        -- load neodev only if editing lua/lua.tmpl files under nvim/chezmoi/packer root
-        "folke/neodev.nvim",
+        "folke/lazydev.nvim",
+        ft = "lua",
+        dependencies = {
+          -- this is only for some vim submodules
+          { "Bilal2453/luvit-meta", lazy = true },
+          { "justinsgithub/wezterm-types", lazy = true },
+        },
         opts = {
-          override = function(root_dir, library)
-            local util = require("neodev.util")
-            if (
-              util.has_file(root_dir, ".local/share/chezmoi/")
-              or
-              util.has_file(root_dir, "pack/packer")
-              -- neodev will implicitly set up for nvim config dir:
-              -- or
-              -- util.is_nvim_config()
-            ) then
-              library.enabled = true
-              library.plugins = true
-            end
-          end,
+          -- make sure to remove the .luarc.json, if you've created one from an older luals helper.
+          library = {
+            { path = "luvit-meta/library", words = { "vim%.uv" } },
+            { path = "wezterm-types", mods = { "wezterm" } },
+          },
         },
       },
       {

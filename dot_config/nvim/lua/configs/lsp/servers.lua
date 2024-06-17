@@ -21,7 +21,7 @@ function M.setup()
     -- ruby
     "solargraph",
     -- lua
-    "lua_ls",
+    -- "lua_ls",
     -- java
     -- needs custom flags
     -- "java_language_server",
@@ -47,11 +47,27 @@ function M.setup()
       },
     }
   end
+
   -- python
   lspconfig["pyright"].setup({
     -- disable several capabilities in favor of pylsp
     on_attach = on_attach_restrained,
     capabilities = capabilities,
+  })
+
+  -- lua
+  -- should be mostly configured by lazydev.nvim plugin.
+  lspconfig.lua_ls.setup({
+    capabilities = capabilities,
+    settings = {
+      Lua = {
+        hint = {
+          enable = true,
+          setType = true,
+        },
+        telemetry = { enable = false },
+      },
+    },
   })
 
   lspconfig["pylsp"].setup({
