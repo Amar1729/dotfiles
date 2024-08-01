@@ -45,11 +45,24 @@ return {
   {
     "ggandor/leap.nvim",
     config = function()
-      require("leap").add_default_mappings()
+      -- bidirectional leap from normal mode
+      vim.keymap.set('n',        's', '<Plug>(leap)')
+      vim.keymap.set('n',        'S', '<Plug>(leap-from-window)')
+      vim.keymap.set({'x', 'o'}, 's', '<Plug>(leap-forward)')
+      -- interferes with vim-surround
+      -- vim.keymap.set({'x', 'o'}, 'S', '<Plug>(leap-backward)')
 
-      require("leap").add_repeat_mappings(";", "\\", {
-        relative_directions = false,
-      })
+      -- enter always repeats last search forward, backspace backward.
+      require("leap.user").set_repeat_keys("<enter>", "<backspace>")
+
+      vim.keymap.set({ "n", "x", "o" }, "ga", function ()
+        require("leap.treesitter").select()
+      end, { desc = "Leap over TS Nodes" })
+
+      vim.keymap.set({ "n", "x", "o" }, "gA",
+        'V<cmd>lua require("leap.treesitter").select()<cr>',
+        { desc = "Leap over TS Nodes (linewise)" }
+      )
     end,
   },
 
