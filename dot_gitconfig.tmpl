@@ -71,7 +71,7 @@
 [core]
 	editor = nvim
 	excludesfile = ~/.gitignore_global
-	pager = less -FX
+	pager = less --redraw-on-quit
 	# problem here:
 	# using `less -FX` turns to cat for onepage input (-F), and doesn't send termcap deinit (-X)
 	#	however, the lack of termcap init (-X) means you cant scroll w/ mouse on longer pages
