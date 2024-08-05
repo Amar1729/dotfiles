@@ -55,6 +55,24 @@ return {
       -- enter always repeats last search forward, backspace backward.
       require("leap.user").set_repeat_keys("<enter>", "<backspace>")
 
+      -- spoOky
+      vim.keymap.set({ "n", "x", "o" }, "gs", function ()
+        require("leap.remote").action()
+      end)
+
+      -- auto-paste after spoOky yank
+      vim.api.nvim_create_augroup('LeapRemote', {})
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'RemoteOperationDone',
+        group = 'LeapRemote',
+        callback = function (event)
+          -- Do not paste if some special register was in use.
+          if vim.v.operator == 'y' and event.data.register == '"' then
+            vim.cmd('normal! p')
+          end
+        end,
+      })
+
       vim.keymap.set({ "n", "x", "o" }, "ga", function ()
         require("leap.treesitter").select()
       end, { desc = "Leap over TS Nodes" })
@@ -79,15 +97,6 @@ return {
           repeat_search = { "<Enter>" },
         }
       },
-    },
-  },
-
-  -- actions from a distance, using leap
-  {
-    "ggandor/leap-spooky.nvim",
-    opts = {
-      prefix = true,
-      paste_on_remote_yank = true,
     },
   },
 
